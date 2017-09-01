@@ -128,7 +128,7 @@ class IVRBase(object):
     def update_full_path(self, path, channal_uuid):
         record_fpath = conf.server_url + path
         print 'record_fpath:.....%s....' % record_fpath
-        sql = "update fs_call set full_record_fpath ='{0}' where channal_uuid ='{1}'".format(record_fpath, channal_uuid)
+        # sql = "update fs_call set full_record_fpath ='{0}' where channal_uuid ='{1}'".format(record_fpath, channal_uuid)
         # try:
         #     conn = db_pool.getConn()
         #     cursor = conn.cursor()
@@ -149,8 +149,8 @@ class IVRBase(object):
     def record_chat_run(self, who, text, record_fpath, create_at, call_id, jsonStr):
         record_fpath = conf.server_url+record_fpath
         logger.error('record_fpath:.....%s....'%record_fpath)
-        sql = 'INSERT INTO fs_call_replay(who, text, record_fpath, create_at, call_id,resp_param)VALUES (\'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\',\'{5}\')'.format(
-            who, text, record_fpath, create_at, call_id, jsonStr)
+        # sql = 'INSERT INTO fs_call_replay(who, text, record_fpath, create_at, call_id,resp_param)VALUES (\'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\',\'{5}\')'.format(
+        #     who, text, record_fpath, create_at, call_id, jsonStr)
         # try:
         #     conn = db_pool.getConn()
         #     cursor = conn.cursor()
