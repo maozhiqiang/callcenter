@@ -23,7 +23,25 @@ class RedisClient(object):
     def put(self, item):
         """Put item into the queue."""
         self.__db.rpush(self.key, item)
-# ===========================================================================
+# =======================setcache=============================
+        """
+                Set the value at key ``name`` to ``value``
+
+                ``ex`` sets an expire flag on key ``name`` for ``ex`` seconds.
+
+                ``px`` sets an expire flag on key ``name`` for ``px`` milliseconds.
+
+                ``nx`` if set to True, set the value at key ``name`` to ``value`` if it
+                    does not already exist.
+
+                ``xx`` if set to True, set the value at key ``name`` to ``value`` if it
+                    already exists.
+                """
+
+        # set(self, name, value, ex=None, px=None, nx=False, xx=False)
+        def setCache(self, name, value):
+            self.__db.setex()
+# =======================setcache=============================
 
     def has_name(self,name):
         return self.__db.hexists(self.key,name)

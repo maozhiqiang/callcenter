@@ -6,6 +6,7 @@ import json
 import time
 import FlowHandler
 import datetime
+import Md5Utils
 import VoiceApi as voice_api
 import RedisHandler as redis
 import WebAPI as xunfei_asr
@@ -79,7 +80,7 @@ class IVRBase(object):
             wavfilename = self.converTowav(filename)
             return wavfilename
         else:
-            logger.info('error.......baidu tts error: %d'%r['err_no'])
+            logger.error('error.......baidu tts error: %d'%r['err_no'])
             return None
 
     def converTowav(self, filename):
@@ -117,7 +118,7 @@ class IVRBase(object):
         if dict['successful']:
             for item in dict['info']:
                 text = ''.join(item['output'])
-                logger.error('flow return text %s' % text)
+                logger.debug('flow return text %s' % text)
                 if item['output_resource'] != '':
                     filename = "{0}".format(item['output_resource'])
                     filename = '/home/callcenter/'+filename
@@ -127,8 +128,18 @@ class IVRBase(object):
                     realy_file_path = "/bot_audio/{0}".format(path)
                     self.record_chat_run('bot', text, realy_file_path, create_at, self.fs_call_id, jsonStr)
                 else:
-                    # tts
-                    self.playback_status_voice(text, jsonStr)
+                    ss_key = Md5Utils.get_md5_value(text)
+                    if text == None:
+                        self.bot_flow('')
+                        logger.error(' flow return  output is None ')
+                    elif redis.r.has_name(ss_key):
+                        filename = redis.r.hget(ss_key)
+                        logger.info('...... get-cache ........%s' % filename)
+                        self.session.execute("playback", filename)
+                        realy_file_path = filename.split('recordvoice')
+                        self.record_chat_run('bot', text, realy_file_path[1], create_at, self.fs_call_id, jsonStr)
+                    else:
+                        self.playback_status_voice(text, jsonStr)
                 if item['session_end'] or item['flow_end']:
                     logger.info('-------------flow end-------------')
                     self.session.hangup()
@@ -143,6 +154,9 @@ class IVRBase(object):
         filename = self.get_voice_wav(text, file_out)  # 返回wav文件格式
 
         if filename:
+            key = Md5Utils.get_md5_value(text)
+            logger.info('......setCache....%s' % key)
+            redis.r.hset(key, filename)
             self.session.execute("playback",filename)
             realy_file_path = filename.split('static')
             self.record_chat_run('bot', text, realy_file_path[1], create_at, self.fs_call_id, jsonStr)
