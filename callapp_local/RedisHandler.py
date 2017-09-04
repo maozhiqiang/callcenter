@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 import redis
+import Md5Utils
 import Config as conf
 class RedisClient(object):
     """Simple Queue with Redis Backend"""
@@ -100,22 +101,29 @@ r = RedisClient(conf.REDIS_DB, host=conf.REDIS_HOST, password='aicyber', port=co
 if __name__ == '__main__':
 
 
-    r.hset('uuid--0','15900282168')
-    r.hset('uuid--1', '18002017665')
-    r.hset('uuid--2', '13022297501')
+    # r.hset('uuid--0','15900282168')
+    # r.hset('uuid--1', '18002017665')
+    # r.hset('uuid--2', '13022297501')
+    # # #
+    # # print redis.hgetall()
     # #
-    # print redis.hgetall()
+    # map = r.hgetall()
+    # print type(map), map
+    # for k, v in map.items():
+    #     print k, v
+    #     # redis.hremove(k)
     #
-    map = r.hgetall()
-    print type(map), map
-    for k, v in map.items():
-        print k, v
-        # redis.hremove(k)
-
-        # print redis.hgetall()
-        # print redis.hsize()
-    print r.has_name('uuid--2')
-    print r.hget('uuid--2')
+    #     # print redis.hgetall()
+    #     # print redis.hsize()
+    # print r.has_name('uuid--2')
+    # print r.hget('uuid--2')
+    text = '5566'
+    ss_key = Md5Utils.get_md5_value(text)
+    print ss_key
+    if r.has_name(ss_key):
+        print  "this key is exit"
+        r.hset(ss_key, 'mnt/asr/asr/test_5566.wav')
+        print  r.hget(ss_key)
 
 
 
