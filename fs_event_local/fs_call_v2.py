@@ -33,12 +33,12 @@ def event_processor(event_queue):
         state = event['Channel-Call-State']
         if event_name in ['CHANNEL_CREATE']:
             sql = "update fs_call set call_at = '{0}' where channal_uuid ='{1}'".format(time_at,uuid)
-            logger.info('----CHANNEL_CREATE sql : %s'%sql)
+            logger.info('==============CHANNEL_CREATE sql===============\n : %s'%sql)
             db.runsql(sql)
 
         if event_name in ['CHANNEL_ANSWER']:
             sql = "update fs_call set answer_at = '{0}' where channal_uuid ='{1}'".format(time_at,uuid)
-            logger.info('----CHANNEL_ANSWER sql : %s' % sql)
+            logger.info('==============CHANNEL_ANSWER sql :==============-\n %s' % sql)
             db.runsql(sql)
 
         if event_name in ['CHANNEL_HANGUP']:
@@ -47,7 +47,7 @@ def event_processor(event_queue):
         if event_name in ['CHANNEL_HANGUP_COMPLETE']:
             updatesql = "update fs_call set    call_status='{0}' ,finish_at='{1}',channal_status='{2}' ,channal_detail = '{3}'  where channal_uuid='{4}'".format(
                 'finish', time_at, state, Hangup_Cause, uuid)
-            logger.info('---- CHANNEL_HANGUP_COMPLETE sql : %s' % updatesql)
+            logger.info('==============CHANNEL_HANGUP_COMPLETE sql==============:\n %s' % updatesql)
             db.runsql(updatesql)
 
         logger.info('event_processor: consume event %s from event_queue' % event)
