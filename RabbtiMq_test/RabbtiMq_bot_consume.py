@@ -350,16 +350,17 @@ class DBConsumer(object):
         self.acknowledge_message(basic_deliver.delivery_tag)
 
 def db_writer(dct):
-    if dct['mark'] == 'insert':
+    if dct.has_key('mark') and   dct['mark'] == 'insert':
         sql = 'INSERT INTO fs_call_replay(who, text, record_fpath, create_at, call_id,resp_param)VALUES (\'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\',\'{5}\')'.format(
             dct['who'], dct['text'], dct['record_fpath'], dct['create_at'], dct['call_id'], dct['jsonStr'])
         runsql(sql)
-    elif dct['mark'] == 'update':
+    elif dct.has_key('mark') and dct['mark'] == 'update':
         sql = "update fs_call set full_record_fpath ='{0}' where channal_uuid ='{1}'".format(dict['record_fpath'],dict['channal_uuid'])
         runsql(sql)
     # elif dct['op'] == '...':
     #     pass
     else:
+        print '[dct]....%s'%dct
         LOGGER.info(dct)
 
 def runsql(sql):

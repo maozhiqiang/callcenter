@@ -4,7 +4,7 @@ import psycopg2
 import psycopg2.extras
 import time
 #DATABASE_HOST = "0.0.0.0" #要链接的服务器的IP地址，local-IP
-DATABASE_HOST = "121.42.36.138" #要链接的服务器的IP地址，Server-IP
+DATABASE_HOST = "192.168.0.183" #要链接的服务器的IP地址，Server-IP
 DATABASE_PORT = 5432 #postgresql端口号，安装postgresql时设置的，一般默认是5432
 DATABASE_NAME = "postgres" #数据库名称
 DATABASE_USERNAME = "postgres" #用户名，这里的用户名也是在安装postgresql时设置的，一般默认postgres
@@ -79,7 +79,7 @@ class DBHelper():
 
     def getFlowIdAndAppId(self,number,uuid):
         sql = "select 	call.id,call.cust_name, call.cust_number, call.task_id, task.flow_id from fs_call as  call left join fs_task as task on  task.id =call.task_id where channal_uuid = '{0}' and cust_number = '{1}'"
-        # print 'sql : %s'%sql
+        print 'sql : %s'%sql
         sql = sql.format(uuid,number)
         self.cursor.execute(sql)
         return self.cursor.fetchone()
@@ -122,7 +122,7 @@ if __name__ == '__main__':
 
     # print db.updateTocallstatus('81befead-3b22-4454-a137-518161e80cc5')
     # db.record_chat_sql('bot', '我们楼盘是在南开区，比邻全国重点学府南开大学和天津大学，天拖公交站附近，这边您知道的吧？', '/tmp/15900282168_out_0.wav', '2017-06-24 15:03:23', '2')
-    list = db.getFlowIdAndAppId('15900282168','92b97c3c-1c68-4233-8e9a-528c6e877360')
+    list = db.getFlowIdAndAppId('15900282168','a6ae62b9-b5cd-4e3e-9d1f-f77c8f47ad0c')
     if list is not None:
         print list
         print 'llllllllllllll',list[0]

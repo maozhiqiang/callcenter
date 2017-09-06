@@ -121,7 +121,7 @@ class IVRBase(object):
                 logger.debug('flow return text %s' % text)
                 if item['output_resource'] != '':
                     filename = "{0}".format(item['output_resource'])
-                    filename = '/home/callcenter/'+filename
+                    filename = '/home/callcenter/recordvoice/bot_audio/'+filename
                     logger.info('-------------playback-------------%s' % (filename))
                     self.session.execute("playback", filename)
                     path = filename.split('/')[-1]
