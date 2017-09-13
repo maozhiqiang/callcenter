@@ -1,6 +1,5 @@
 # -*- encoding: utf-8 -*-
 import io
-import os
 import wave
 import json
 import time
@@ -10,13 +9,16 @@ import datetime
 import Config as conf
 import rabbitMQ_produce as rabbitmq
 import VoiceApi as voice_api
+#import VoiceHandler as voice_asr
 import RedisHandler as redis
 from freeswitch import *
 from PsqlUtils import DBHelper
 from LogUtils import Logger
 import WebAPI as xunfei_asr
 from pydub import AudioSegment
+from DBPool import Postgresql_Pool as db_pool
 
+#reload(voice_asr)
 reload(voice_api)
 reload(xunfei_asr)
 reload(redis)
@@ -51,6 +53,7 @@ class IVRBase(object):
         self.flow_id = None
         self.fs_call_id = None
         self.channal_uuid = session.getVariable(b"origination_uuid")
+        # self.caller_number = session.getVariable(b"caller_id_number")
         self.caller_number = None
         self.caller_in_wav = None
         self.caller_out_mp3 = None
@@ -58,25 +61,19 @@ class IVRBase(object):
         self.text = None
         self.record_fpath = None
         self.create_at = None
-        self.human_audio = '/home/callcenter/recordvoice/{0}/human_audio/'
-        self.all_audio = '/home/callcenter/recordvoice/{0}/all_audio/'
-        self.bot_audio = '/home/callcenter/recordvoice/{0}/bot_audio/'
         self.getFlowIdByUUID()
-        self.init_file_path()
 
-    def init_file_path(self):
-        self.human_audio = self.human_audio.format(self.flow_id)
-        self.all_audio = self.all_audio.format(self.flow_id)
-        self.bot_audio = self.bot_audio.format(self.flow_id)
-        logger.debug('root_file ......%s' %self.bot_audio)
-        if not os.path.exists(self.human_audio):
-            os.makedirs(self.human_audio)
-        if not os.path.exists(self.bot_audio):
-            os.makedirs(self.bot_audio)
-        if not os.path.exists(self.all_audio):
-            logger.info('mkdirs ......%s'%self.all_audio)
-            os.makedirs(self.all_audio)
-
+    # def getFlowIdByUUID(self):
+    #     try:
+    #         logger.info('number is %s ... channal_uuid is %s ' % (self.caller_number, self.channal_uuid))
+    #         list = db.getFlowIdAndAppId(self.caller_number, self.channal_uuid)
+    #         self.flow_id = list[4]
+    #         self.fs_call_id = list[0]
+    #         self.__sessionId = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
+    #         #关闭流程
+    #         FlowHandler.closeFlow(self.caller_number, self.channal_uuid)
+    #     except Exception as e:
+    #         logger.error('getFlowIdByUUID except error %s'% e.message)
 
     def getFlowIdByUUID(self):
         try:
@@ -131,17 +128,38 @@ class IVRBase(object):
     def update_full_path(self, path, channal_uuid):
         record_fpath = conf.server_url + path
         print 'record_fpath:.....%s....' % record_fpath
+        # sql = "update fs_call set full_record_fpath ='{0}' where channal_uuid ='{1}'".format(record_fpath, channal_uuid)
+        # try:
+        #     conn = db_pool.getConn()
+        #     cursor = conn.cursor()
+        #     result = cursor.execute(sql)
+        #     conn.commit()
+        #     db_pool.close(cursor, conn)
+        #     logger.info("update full_path result  %s" % str(result))  # 最后插入行的主键ID
+        # except Exception as e:
+        #     logger.error('update_full_path except error is %s'% e.message )
         objdata = {}
         objdata['mark'] = 'update'
         objdata['record_fpath'] = record_fpath
         objdata['channal_uuid'] = channal_uuid
         jsonStr = json.dumps(objdata)
-        # logger.info('------jsonstr-----%s'%jsonStr)
+        logger.info('------jsonstr-----%s'%jsonStr)
         rabbitmq.rabbitmqClint(jsonStr)
 
     def record_chat_run(self, who, text, record_fpath, create_at, call_id, jsonStr):
         record_fpath = conf.server_url+record_fpath
         logger.error('record_fpath:.....%s....'%record_fpath)
+        # sql = 'INSERT INTO fs_call_replay(who, text, record_fpath, create_at, call_id,resp_param)VALUES (\'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\',\'{5}\')'.format(
+        #     who, text, record_fpath, create_at, call_id, jsonStr)
+        # try:
+        #     conn = db_pool.getConn()
+        #     cursor = conn.cursor()
+        #     result = cursor.execute(sql)
+        #     conn.commit()
+        #     db_pool.close(cursor, conn)
+        #     logger.info("record_chat_run  %s" % str(result))  # 最后插入行的主键ID
+        # except Exception as e:
+        #     logger.error('record_chat_run except error is %s'% e.message )
         objdata = {}
         objdata['mark'] = 'insert'
         objdata['who'] =who
@@ -151,7 +169,7 @@ class IVRBase(object):
         objdata['call_id'] =call_id
         objdata['jsonStr'] =jsonStr
         jsonStr = json.dumps(objdata)
-        # logger.info('------jsonstr-----%s' % jsonStr)
+        logger.info('------jsonstr-----%s' % jsonStr)
         rabbitmq.rabbitmqClint(jsonStr)
 
     def bot_flow(self, input):
@@ -167,15 +185,14 @@ class IVRBase(object):
                 logger.error('flow return text %s' % text)
                 if item['output_resource'] != '':
                     filename = "{0}".format(item['output_resource'])
-                    path = self.bot_audio+filename
-                    # filename = '/home/callcenter/recordvoice/{flow_id}/bot_audio/'+filename
+                    filename = '/home/callcenter/recordvoice/bot_audio/'+filename
                     logger.info('-------------playback  %s' % filename)
-                    self.session.execute("playback", path)
-                    realy_file_path = path.split('recordvoice')
-                    self.record_chat_run('bot', text, realy_file_path[1], create_at, self.fs_call_id, jsonStr)
+                    self.session.execute("playback", filename)
+                    path = filename.split('/')[-1]
+                    realy_file_path = "/bot_audio/{0}".format(path)
+                    self.record_chat_run('bot', text, realy_file_path, create_at, self.fs_call_id, jsonStr)
                 else:
-                    ss_flag = self.flow_id+'_'+text
-                    ss_key = Md5Utils.get_md5_value(ss_flag)
+                    ss_key = Md5Utils.get_md5_value(text)
                     if text == None:
                         self.bot_flow('')
                         logger.error(' flow return  output is None ')
@@ -197,11 +214,9 @@ class IVRBase(object):
         create_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         file_out = self.caller_out_mp3.format(self.out_count, self.__sessionId)
         self.out_count += 1
-        filename = self.get_voice_wav(text, file_out)  # 返回wav文件格式 /home/callcenter/recordvoice/{flow_id}/bot_audio/number_out_{0}_{1}.mp3
+        filename = self.get_voice_wav(text, file_out)  # 返回wav文件格式
         if filename:
-            # cache_value = filename.split('')
-            ss_flag = self.flow_id + '_' + text
-            key =Md5Utils.get_md5_value(ss_flag)
+            key =Md5Utils.get_md5_value(text)
             logger.info('......setCache....%s'%key)
             redis.r.hset(key,filename)
             self.session.execute("playback", filename)
@@ -237,21 +252,41 @@ class IVRBase(object):
                     self.bot_flow(input)#需要返回文本信息
                 else:
                     self.bot_flow('')  # 需要返回文本信息
-                    logger.info("......xunfei  asr ....error...........%s"%json.dumps(info))
+                    logger.info("......yun-zhi-sheng  asr ....error...........%s"%json.dumps(info))
             else:
                 logger.info('vad......没有检测到声音')
                 self.bot_flow('')  # 需要返回文本信息
+#--------------------------------bai du  asr --------------------------------------------
+            # if cmp(flag, 'true') != 0:
+            #     startTime = time.time()
+            #     r = voice_api.bc.asr(filename)
+            #     endTime = time.time()
+            #     logger.error("baidu asr time  : %s " % (endTime - startTime))
+            #     if r['err_no'] == 0:#能正确识别出对应文本
+            #         baidu_asr_json = json.dumps(r)
+            #         input = ''.join(r['result'])
+            #         logger.error('baidu asr result ---%s ' % input)
+            #         logger.info('-------filename--------%s\n\n'%filename)
+            #         realy_file_path = filename.split('recordvoice')
+            #         logger.info('-------realy_file_path--------%s\n\n' % realy_file_path[1])
+            #         self.record_chat_run('human', input, realy_file_path[1], create_at, self.fs_call_id, baidu_asr_json)
+            #         self.bot_flow(input)#需要返回文本信息
+            #     else:
+            #         logger.error("......bai du asr ....error...........%s"%r)
+            #         self.bot_flow('')  # 需要返回文本信息
+            # else: # vad录到声音
+            #         logger.info('vad......没有检测到声音')
+            #         self.bot_flow('')  # 需要返回文本信息
 
     def run(self):
         self.session.answer()
         self.session.setVariable("set_audio_level", "write +2")
-        self.caller_in_wav = self.human_audio+'%s_in_{0}_{1}.wav' % self.caller_number
-        self.caller_out_mp3 = self.bot_audio+'%s_out_{0}_{1}.mp3' % self.caller_number
-        self.call_full_wav = self.all_audio+'%s_full_{0}_.wav' % self.caller_number
+        self.caller_in_wav = '/home/callcenter/recordvoice/human_audio/%s_in_{0}_{1}.wav' % self.caller_number
+        self.caller_out_mp3 = '/home/callcenter/recordvoice/bot_audio/%s_out_{0}_{1}.mp3' % self.caller_number
+        self.call_full_wav = '/home/callcenter/recordvoice/all_audio/%s_full_{0}_.wav' % self.caller_number
         full_path = self.call_full_wav.format(self.__sessionId)
         self.session.setVariable("RECORD_STEREO", "true")
         self.session.execute("record_session", full_path)
-        #'/home/callcenter/recordvoice/{0}/all_audio/'
         realy_full_path = full_path.split('recordvoice')
         self.update_full_path(realy_full_path[1], self.channal_uuid)
         while self.session.ready():

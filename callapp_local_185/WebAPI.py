@@ -10,7 +10,7 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 #redis做缓存
-pool = redis.ConnectionPool(host='121.42.36.138', password='aicyber', port=6379)
+pool = redis.ConnectionPool(host='127.0.0.1', password='aicyber', port=6379)
 r = redis.Redis(connection_pool=pool)
 
 class WebApi:

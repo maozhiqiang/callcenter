@@ -9,7 +9,7 @@ logger = Logger()
 
 def rabbitmqClint(content):
     credentials = pika.PlainCredentials('admin', '123123')
-    connection = pika.BlockingConnection(pika.ConnectionParameters('121.42.36.138', 5672, '/', credentials))
+    connection = pika.BlockingConnection(pika.ConnectionParameters('127.0.0.1', 5672, '/', credentials))
     # logger.info('-----rabbitmq ----send conent %s'%content)
     channel = connection.channel()
 
