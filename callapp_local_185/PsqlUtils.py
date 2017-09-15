@@ -127,7 +127,7 @@ class DBHelper():
 if __name__ == '__main__':
 
     db = DBHelper()
-    # db.runsql('select * from fs_call ')
+    db.runsql("update fs_call set call_at = '2017-09-15 09:43:30' where channal_uuid ='c5527110-d1b7-49e2-b149-739012489c74'")
     # rows = db.cursor.fetchall()
     # for col in rows:
     #     print col

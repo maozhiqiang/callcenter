@@ -9,8 +9,8 @@ logger = Logger()
 
 def rabbitmqClint(content):
     credentials = pika.PlainCredentials('admin', '123123')
-    connection = pika.BlockingConnection(pika.ConnectionParameters('127.0.0.1', 5672, '/', credentials))
-    # logger.info('-----rabbitmq ----send conent %s'%content)
+    connection = pika.BlockingConnection(pika.ConnectionParameters('192.168.0.185', 5672, '/', credentials))
+    logger.info('-----rabbitmq ----send conent %s'%content)
     channel = connection.channel()
 
     # 声明queue
@@ -29,5 +29,14 @@ def rabbitmqClint(content):
 if __name__ == '__main__':
     # sql = 'INSERT INTO fs_call_replay(who, text, record_fpath,  call_id,resp_param)VALUES (\'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\')'.format(
     #         45, 454, 454, 454, 4545, 4545)
+    import  json
+    objdata = {}
+    objdata['mark'] = 'update'
+    objdata['record_fpath'] ='111111'
+    objdata['channal_uuid'] = '22222222'
+    jsonStr = json.dumps(objdata)
+    # logger.info('------jsonstr-----%s' % jsonStr)
+    rabbitmqClint(jsonStr)
+
     # rabbitmqClint(sql)
     pass

@@ -35,7 +35,7 @@ REDIS_HOST = '127.0.0.1'
 #======================postgresql================================
 #POSTGRESQL_HOST = "192.168.0.183" #要链接的服务器的IP地址，local-IP
 #POSTGRESQL_HOST = "121.42.36.138" #要链接的服务器的IP地址，Server-IP
-POSTGRESQL_HOST = "127.0.0.1" #要链接的服务器的IP地址，Server-IP
+POSTGRESQL_HOST = "192.168.0.185" #要链接的服务器的IP地址，Server-IP
 POSTGRESQL_PORT = 5432 #postgresql端口号，安装postgresql时设置的，一般默认是5432
 POSTGRESQL_NAME = "postgres" #数据库名称
 POSTGRESQL_USERNAME = "postgres" #用户名，这里的用户名也是在安装postgresql时设置的，一般默认postgres
