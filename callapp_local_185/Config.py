@@ -14,8 +14,8 @@ server_url = "http://127.0.0.1/recordvoice"
 
 #=====================Flow Config start==========================
 #start flow
-flow_host = '123.59.82.44'
-flow_port = 8080
+flow_host = '192.168.0.185'
+flow_port = 9090
 flow_url = "/flow/execute.do"
 #closeflow
 key = 'The nature of the polymer is currently a trade secret'

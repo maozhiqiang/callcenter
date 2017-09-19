@@ -62,7 +62,7 @@ if __name__ == '__main__':
     result = flowHandler('而不是拿冠军了', '15900282168')
     # print  result
     # pass
-    closeFlow('15900282168','a6d24d2d-cebe-4113-9f89-9ce80012d6fc')
+    # closeFlow('15900282168','a6d24d2d-cebe-4113-9f89-9ce80012d6fc')
 
 
 

@@ -20,7 +20,6 @@ logger = Logger()
 con = ESL.ESLconnection(conf.ESL_HOST, conf.ESL_PORT, conf.ESL_PWD)
 _begin_time = time.time()
 _pid = multiprocessing.current_process().pid
-# print '************', multiprocessing.cpu_count()
 #atexit.register
 def bye():
     sec = time.time() - _begin_time
@@ -45,8 +44,6 @@ def event_processor(event_queue, task_queue):
         # 读队列会阻塞进程
         event = event_queue.get()
         time_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-        # if event['channal_uuid'] == None:
-        #     continue
         logger.info('.......event_processor.......''name: %s, uuid: %s' %
                     (event['event_name'], event['channal_uuid']))
 
@@ -65,7 +62,6 @@ def event_processor(event_queue, task_queue):
                                  event['Hangup-Cause'], event['channal_uuid'])
             print '[sql]:..........CHANNEL_HANGUP_COMPLETE....... %s' % sql
             runsql(sql)
-            # uuid出队列
             task_id = event['task_id']
             host_id = event['host_id']
             print 'task_id....',task_id
@@ -74,10 +70,10 @@ def event_processor(event_queue, task_queue):
                     task_queue.remove(int(task_id), event['channal_uuid'])
                 except Exception as e:
                     print e.message
-                # 更新host已用线数
-                sql = chc_host_sql.format(int(host_id))
-                # db.runsql(sql)
-                runsql(sql)
+                logger.info('-------is_test------%s  '%event['is_test'])
+                if event['is_test'] and event['is_test'] != '0':
+                    sql = chc_host_sql.format(int(host_id))
+                    runsql(sql)
                 HttpClientPost(event['channal_uuid'])
 
 def runsql(sql):
@@ -88,7 +84,6 @@ def runsql(sql):
        count = cursor.execute(sql, )
        conn.commit()
        db_pool.close(cursor, conn)
-       # logger.info("----runsql-----",sql)
    except Exception as e:
        logger.info("  runsql ...except error %s"%e.message)
 
@@ -100,7 +95,6 @@ def HttpClientPost(channal_uuid):
         req = urllib2.Request(url)
         data = {'channal_uuid': channal_uuid}
         data = urllib.urlencode(data)
-        # enable cookie
         opener = urllib2.build_opener(urllib2.HTTPCookieProcessor())
         response = opener.open(req, data)
         logger.info('...............Bill result..... %s '%response.read())
@@ -114,7 +108,6 @@ def event_listener(event_queue):
     """事件监听进程，收到事件后将事件加入队列，生成者
     :param call_list:
     :return:
-    
     """
     # standard_event = "CHANNEL_CREATE CHANNEL_ANSWER CHANNEL_HANGUP CHANNEL_HANGUP_COMPLETE"
     if con.connected:
@@ -135,7 +128,7 @@ def event_listener(event_queue):
 
                 if dct['event_name'] in ['CHANNEL_ANSWER', 'CHANNEL_HANGUP_COMPLETE']:
                     dct['call_id'] = e.getHeader("variable_call_id")
-
+                    dct['is_test'] = e.getHeader("variable_is_test")
                     if dct['event_name'] == 'CHANNEL_HANGUP_COMPLETE':
                         dct['Hangup-Cause'] = e.getHeader("Hangup-Cause")
                         dct['task_id'] = e.getHeader("variable_task_id")
@@ -148,7 +141,6 @@ def event_listener(event_queue):
 
     logger.error('.......esl connect error.......')
     sys.exit(-1)
-
 
 def handler(signum, frame):
     pid = multiprocessing.current_process().pid
@@ -168,19 +160,16 @@ def handler(signum, frame):
     time.sleep(2)
     sys.exit(-1)
 
-
 signal.signal(signal.SIGINT, handler)
-
 
 class QueueManager(managers.BaseManager):
     pass
-
 
 if __name__ == '__main__':
 
     QueueManager.register('get_queue')
     # address, authkey 要与run_queue服务的一致
-    m = QueueManager(address=('118.190.166.165', conf.queue_port), authkey=conf.queue_authkey)
+    m = QueueManager(address=('121.42.36.138', conf.queue_port), authkey=conf.queue_authkey)
     #本地
     # m = QueueManager(address=('0.0.0.0', 50000), authkey='aicyberqueue'.encode('utf-8'))
     # print m
@@ -218,13 +207,5 @@ if __name__ == '__main__':
     # proc_event_processor.join()
     # flag = False
     # count = 0
-    # conESL = ESL.ESLconnection('121.42.31.97', 8021, 'Aicyber')
     while True:
-        # if conESL.connected():
-        #     flag = True
-        # count = count +1
-        # # print '[%s  sleep....%s...prepare accept FreeSwitch(ip:%s) event]...ESL connect [ %s ]'% (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()),count,conf.ESL_HOST,flag)
-        # if count == 5 :
-        #     print '\n'
-        #     count = 0
         time.sleep(3)
