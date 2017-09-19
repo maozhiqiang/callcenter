@@ -7,8 +7,6 @@ import time
 import Md5Utils
 import FlowHandler
 import datetime
-import Config as conf
-import rabbitMQ_produce as rabbitmq
 import VoiceApi as voice_api
 import RedisHandler as redis
 from freeswitch import *
@@ -61,6 +59,7 @@ class IVRBase(object):
         self.human_audio = '/home/callcenter/recordvoice/{0}/human_audio/'
         self.all_audio = '/home/callcenter/recordvoice/{0}/all_audio/'
         self.bot_audio = '/home/callcenter/recordvoice/{0}/bot_audio/'
+        self.playbackaudio = None
         self.getFlowIdByUUID()
         self.init_file_path()
 
@@ -79,6 +78,7 @@ class IVRBase(object):
 
 
     def getFlowIdByUUID(self):
+        print ' call init data start........'
         try:
             call_number = db.getNumberById(self.channal_uuid)
             if call_number == None:
@@ -99,6 +99,7 @@ class IVRBase(object):
                 consoleLog("info", "*****FlowHandler.closeFlow!!*****\n\n")
         except Exception as e:
             logger.error('getFlowIdByUUID except error %s' % e.message)
+        print ' call init data end........'
 
     def get_voice_wav(self, text, filename):
         r = voice_api.bc.tts(text, filename)
@@ -129,30 +130,10 @@ class IVRBase(object):
         return wavfilename
 
     def update_full_path(self, path, channal_uuid):
-        record_fpath = conf.server_url + path
-        print 'record_fpath:.....%s....' % record_fpath
-        objdata = {}
-        objdata['mark'] = 'update'
-        objdata['record_fpath'] = record_fpath
-        objdata['channal_uuid'] = channal_uuid
-        jsonStr = json.dumps(objdata)
-        # logger.info('------jsonstr-----%s'%jsonStr)
-        rabbitmq.rabbitmqClint(jsonStr)
+        db.updateFull_record_fpath(path, channal_uuid)
 
     def record_chat_run(self, who, text, record_fpath, create_at, call_id, jsonStr):
-        record_fpath = conf.server_url+record_fpath
-        logger.error('record_fpath:.....%s....'%record_fpath)
-        objdata = {}
-        objdata['mark'] = 'insert'
-        objdata['who'] =who
-        objdata['text'] =text
-        objdata['record_fpath'] =record_fpath
-        objdata['create_at'] =create_at
-        objdata['call_id'] =call_id
-        objdata['jsonStr'] =jsonStr
-        jsonStr = json.dumps(objdata)
-        # logger.info('------jsonstr-----%s' % jsonStr)
-        rabbitmq.rabbitmqClint(jsonStr)
+        db.record_chat_sql(who, text, record_fpath, create_at, call_id, jsonStr)
 
     def bot_flow(self, input):
         startTime = time.time()
@@ -170,9 +151,12 @@ class IVRBase(object):
                     path = self.bot_audio+filename
                     # filename = '/home/callcenter/recordvoice/{flow_id}/bot_audio/'+filename
                     logger.info('-------------playback  %s' % filename)
-                    self.session.execute("playback", path)
+                    # 放音文件路径
+                    self.playbackaudio = path
+                    # self.session.execute("playback", path)
                     realy_file_path = path.split('recordvoice')
                     self.record_chat_run('bot', text, realy_file_path[1], create_at, self.fs_call_id, jsonStr)
+                    self.IVR_app()
                 else:
                     ss_flag = self.flow_id+'_'+text
                     ss_key = Md5Utils.get_md5_value(ss_flag)
@@ -182,9 +166,12 @@ class IVRBase(object):
                     elif redis.r.has_name(ss_key):
                         filename = redis.r.hget(ss_key)
                         logger.info('...... get-cache ........%s' % filename)
-                        self.session.execute("playback", filename)
+                        # 放音文件路径
+                        self.playbackaudio = filename
+                        # self.session.execute("playback", filename)
                         realy_file_path = filename.split('recordvoice')
                         self.record_chat_run('bot', text, realy_file_path[1], create_at, self.fs_call_id, jsonStr)
+                        self.IVR_app()
                     else:
                         self.playback_status_voice(text, jsonStr)
                 if item['session_end'] or item['flow_end']:
@@ -197,16 +184,20 @@ class IVRBase(object):
         create_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         file_out = self.caller_out_mp3.format(self.out_count, self.__sessionId)
         self.out_count += 1
-        filename = self.get_voice_wav(text, file_out)  # 返回wav文件格式 /home/callcenter/recordvoice/{flow_id}/bot_audio/number_out_{0}_{1}.mp3
+        # 返回wav文件格式 /home/callcenter/recordvoice/{flow_id}/bot_audio/number_out_{0}_{1}.mp3
+        filename = self.get_voice_wav(text, file_out)
         if filename:
             # cache_value = filename.split('')
             ss_flag = self.flow_id + '_' + text
             key =Md5Utils.get_md5_value(ss_flag)
             logger.info('......setCache....%s'%key)
             redis.r.hset(key,filename)
-            self.session.execute("playback", filename)
+            # 放音文件路径
+            self.playbackaudio = filename
+            # self.session.execute("playback", filename)
             realy_file_path = filename.split('recordvoice')
             self.record_chat_run('bot', text, realy_file_path[1], create_at, self.fs_call_id, jsonStr)
+            self.IVR_app()
         else:
             logger.info('error.......system error: err_no')
             self.session.hangup()
@@ -217,7 +208,11 @@ class IVRBase(object):
             create_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
             filename = self.caller_in_wav.format(self.in_count, self.__sessionId)
             self.in_count += 1
-            cmd = "{0} 4000".format(filename)
+            #<recordfile> [<timeout_ms>] [max_recording_time_ms] [<pause_dur>] [playfile] [play_retry]
+            #/mnt/asr/r1.wav 3000 10000 5 /mnt/asr/welcome.wav 0
+            cmd = "{0} 4000 10000 5 {1} 0".format(filename,self.playbackaudio,)
+            consoleLog("info", "excute vad cmd  %s!! \n\n" % cmd)
+            # cmd = "{0} 4000".format(filename)
             self.session.execute("vad", cmd)
             endTime = time.time()
             logger.error("vad  time  : %s " % (endTime - startTime))
@@ -256,7 +251,7 @@ class IVRBase(object):
         self.update_full_path(realy_full_path[1], self.channal_uuid)
         while self.session.ready():
             self.bot_flow('你好')
-            self.IVR_app()
+            # self.IVR_app()
 
 def handler(session, args):
     session.setHangupHook(hangup_hook)

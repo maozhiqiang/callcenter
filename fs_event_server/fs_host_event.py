@@ -180,7 +180,7 @@ if __name__ == '__main__':
 
     QueueManager.register('get_queue')
     # address, authkey 要与run_queue服务的一致
-    m = QueueManager(address=(conf.queue_ip, conf.queue_port), authkey=conf.queue_authkey)
+    m = QueueManager(address=('118.190.166.165', conf.queue_port), authkey=conf.queue_authkey)
     #本地
     # m = QueueManager(address=('0.0.0.0', 50000), authkey='aicyberqueue'.encode('utf-8'))
     # print m
