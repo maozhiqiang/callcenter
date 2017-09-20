@@ -7,9 +7,11 @@ from functools import wraps
 from flask import g, request, redirect, url_for
 
 from werkzeug.contrib.cache import SimpleCache
+
 cache = SimpleCache()
 
-#缓存服务器
+
+# 缓存服务器
 def cached(timeout=5 * 60, key='view/%s'):
     def decorator(f):
         @wraps(f)
@@ -21,15 +23,21 @@ def cached(timeout=5 * 60, key='view/%s'):
             rv = f(*args, **kwargs)
             cache.set(cache_key, rv, timeout=timeout)
             return rv
+
         return decorated_function
+
     return decorator
+
+
 """
 This is a python style.
- 
+
 @参数验证
 eg:
 @require('phone','password')
 """
+
+
 def require(*required_args):
     def decorator(func):
         @functools.wraps(func)
@@ -38,7 +46,9 @@ def require(*required_args):
                 if arg not in request.json:
                     return flask.jsonify(code=400, msg='参数不正确')
             return func(*args, **kw)
+
         return wrapper
+
     return decorator
 
 
