@@ -82,7 +82,7 @@ class DBHelper():
 
     def getFlowIdAndAppId(self,number,uuid):
         sql = "select 	call.id,call.cust_name, call.cust_number, call.task_id, task.flow_id from fs_call as  call left join fs_task as task on  task.id =call.task_id where channal_uuid = '{0}' and cust_number = '{1}'"
-        # print 'sql : %s'%sql
+        print 'sql : %s'%sql
         sql = sql.format(uuid,number)
         self.cursor.execute(sql)
         return self.cursor.fetchone()
@@ -93,6 +93,7 @@ class DBHelper():
         self.cursor.execute(sql)
         print 'sql :', sql
         result = self.cursor.fetchone()
+        print  'excute  sql  result ',result
         if result is not None:
             self.result = result[0]
         else:

@@ -61,6 +61,7 @@ class IVRBase(object):
         self.human_audio = '/home/callcenter/recordvoice/{0}/human_audio/'
         self.all_audio = '/home/callcenter/recordvoice/{0}/all_audio/'
         self.bot_audio = '/home/callcenter/recordvoice/{0}/bot_audio/'
+        self.checkCallNumber()
         self.getFlowIdByUUID()
         self.init_file_path()
 
@@ -77,15 +78,29 @@ class IVRBase(object):
             logger.info('mkdirs ......%s'%self.all_audio)
             os.makedirs(self.all_audio)
 
-
-    def getFlowIdByUUID(self):
+    def checkCallNumber(self):
         try:
             call_number = db.getNumberById(self.channal_uuid)
             if call_number == None:
                 print '无效的手机号，channal_uuid %s' % self.channal_uuid
                 self.session.hangup()
+                return
             else:
                 self.caller_number = call_number
+        except Exception as e:
+            logger.error('getFlowIdByUUID except error %s' % e.message)
+            self.session.hangup()
+            return
+
+
+    def getFlowIdByUUID(self):
+        try:
+            # call_number = db.getNumberById(self.channal_uuid)
+            # if call_number == None:
+            #     print '无效的手机号，channal_uuid %s' % self.channal_uuid
+            #     self.session.hangup()
+            # else:
+            #     self.caller_number = call_number
             logger.info('number is %s ... channal_uuid is %s ' % (self.caller_number, self.channal_uuid))
             list = db.getFlowIdAndAppId(self.caller_number, self.channal_uuid)
             if list == None:

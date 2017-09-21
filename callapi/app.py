@@ -1,9 +1,8 @@
 # -*- encoding: utf-8 -*-
 
-from utils import *
-
 from flask import Flask
 
+from callapi.common.utils import *
 
 app = Flask(__name__)
 
