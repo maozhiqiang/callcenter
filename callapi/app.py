@@ -1,10 +1,9 @@
 # -*- encoding: utf-8 -*-
 import base64
 import config
-from flask import Flask,jsonify
-from callapi.common.utils import *
-import callapi.handler.WebAPI as xunfei_asr
-import callapi.handler.FlowHandler as flow
+from flask import Flask,jsonify,request
+from callapi.handler import WebAPI as xunfei_asr
+from callapi.handler import  FlowHandler as flow
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://dbname:MrVg+X1ZwS4RiCh9@120.25.102.84:3306/db1'
@@ -14,19 +13,19 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy(app)
 
 
-@app.route('/hello')
+@app.route('/')
 def hello():
     return 'Hello World'
 
-@app.route('/user/register', methods=['POST'])
-@require('phone','password')
-def customer_register():
-    if request.method['GET']:
-        print 'error'
-
-    print  "wahaha"
-    ss = "wahaha"
-    return ss
+# @app.route('/user/register', methods=['POST'])
+# @require('phone','password')
+# def customer_register():
+#     if request.method['GET']:
+#         print 'error'
+#
+#     print  "wahaha"
+#     ss = "wahaha"
+#     return ss
 
 #上传分段录音，返回分段录音语音识别结果 and  分段录音存储的路径
 @app.route('/call/api/upload/asr/', methods=['POST','GET'])

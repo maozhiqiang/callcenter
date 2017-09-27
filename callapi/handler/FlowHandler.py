@@ -3,8 +3,8 @@ import httplib
 import json
 import callapi.config as Config
 import callapi.common.Md5Utils as md5
-from callapi.common.LogUtils import Logger
-logger = Logger()
+# from callapi.common.LogUtils import Logger
+# logger = Logger()
 #开始流程
 def flowHandler(input,userId,flowId='a599d36c4c7a71ddcc1bc7259a15ac3a'):
     secret = md5.get_sha1_value(flowId + Config.key + userId)
@@ -20,13 +20,13 @@ def flowHandler(input,userId,flowId='a599d36c4c7a71ddcc1bc7259a15ac3a'):
             jsonStr = response.read()
             dict = json.loads(jsonStr)
             result = dict
-            logger.debug('Flow return ----------%s' % dict)
+            print 'Flow return ----------%s' % dict
         else:
             result = {'successful': False, 'message': 'httpclient error'}
-            logger.debug('.......httpClient error status : %s'%response.status)
+            print('.......httpClient error status : %s'%response.status)
     except Exception, e:
         result = {'successful': False, 'message': 'httpclient exception'}
-        logger.debug('.......httpClient exception error  : %s' % e)
+        print('.......httpClient exception error  : %s' % e)
     finally:
         if httpClient:
             httpClient.close()
@@ -45,11 +45,11 @@ def closeFlow(userId,flowId):
         if response.status == 200:
             jsonStr = response.read()
             dict = json.loads(jsonStr)
-            logger.debug('Flow close return ----------%s' % dict)
+            print('Flow close return ----------%s' % dict)
         else:
-            logger.debug('.......httpClient error status : %s' % response.status)
+            print('.......httpClient error status : %s' % response.status)
     except Exception, e:
-        logger.debug('.......httpClient exception error  : %s' % e)
+        print('.......httpClient exception error  : %s' % e)
     finally:
         if httpClient:
             httpClient.close()
