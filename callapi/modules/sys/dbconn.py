@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 import orm
+from orm import Base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session,sessionmaker
 
@@ -9,6 +10,16 @@ engine = create_engine(db_connect_string,encoding='utf8', max_overflow=5,pool_si
 SessionType = scoped_session(sessionmaker(bind=engine,expire_on_commit=False))
 
 orm.Base.metadata.create_all(engine)
+'''
+Base.metadata.drop_all(bind=engine)
+Base.metadata.create_all(bind=engine)
+
+Session = sessionmaker(bind=engine)
+session = Session()
+
+session.add_all([User(name=username) for username in ('xiaoming', 'wanglang', 'lilei')])
+session.commit()
+'''
 
 def GetSession():
     return SessionType
