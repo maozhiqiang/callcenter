@@ -36,3 +36,4 @@ def humanize_bytes(bytesize, precision=2):
 
 
 get_file_path = partial(os.path.join, HERE, UPLOAD_FOLDER)
+print get_file_path

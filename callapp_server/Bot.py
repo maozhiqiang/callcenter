@@ -232,7 +232,8 @@ class IVRBase(object):
             create_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
             filename = self.caller_in_wav.format(self.in_count, self.__sessionId)
             self.in_count += 1
-            cmd = "{0} 4000".format(filename)
+            cmd = "100 400 {0} 4000 10000 100".format(filename)
+            #cmd = "{0} 4000".format(filename)
             self.session.execute("vad", cmd)
             endTime = time.time()
             logger.error("vad  time  : %s " % (endTime - startTime))
@@ -251,10 +252,14 @@ class IVRBase(object):
                     self.record_chat_run('human', input, realy_file_path[1], create_at, self.fs_call_id, json.dumps(info))
                     self.bot_flow(input)#需要返回文本信息
                 else:
+                    realy_file_path = filename.split('recordvoice')
+                    self.record_chat_run('human', '', realy_file_path[1], create_at, self.fs_call_id,
+                                         json.dumps(info))
                     self.bot_flow('')  # 需要返回文本信息
                     logger.info("......xunfei  asr ....error...........%s"%json.dumps(info))
             else:
                 logger.info('vad......没有检测到声音')
+                self.record_chat_run('human', '', '', create_at, self.fs_call_id, 'vad 没有检测到声音')
                 self.bot_flow('')  # 需要返回文本信息
 
     def run(self):

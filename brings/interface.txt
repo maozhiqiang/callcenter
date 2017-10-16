@@ -1,0 +1,38 @@
+# -*- encoding: utf-8 -*-
+
+上传录音接口
+http://<121.42.31.97>:8081/upload/<flowId>
+ ip： 现在默认为121.42.31.97,前端可以动态获取（这个ip 是freeswitch所在服务器的ip）
+ flowId 上传录音的流程Id
+ input name为file[]
+
+ 下面有个例子，可以参考
+      <form action="upload/55667788" method="post" enctype="multipart/form-data">
+        <input type="file" multiple="" name="file[]" class="span3" /><br />
+        <input type="submit" value="Upload"  class="span2">
+      </form>
+
+接口返回
+{
+  "data": {
+    "filenames": [
+      "http://121.42.31.97/recordvoice/55667788/bot_audio/99.mp3",
+      "http://121.42.31.97/recordvoice/55667788/bot_audio/98.mp3"
+    ],
+    "upfails": [
+      "2.mp4"
+    ]
+  },
+  "msg": "\u64cd\u4f5c\u6210\u529f",
+  "success": true
+}
+参数说明：
+success ：接口成功true/失败false
+msg：消息说明
+data：上传后返回对应数据
+        filenames：上传成功的数据
+        upfails：不被允许的文件类型
+上传文件的类型 mp3  wav  png  jpg
+
+
+

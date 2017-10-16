@@ -21,8 +21,10 @@ ESL_HOST = '121.42.31.97'
 ESL_PORT = 8021
 ESL_PWD = 'Aicyber'
 
-#====================扣费==================
-server_url = 'http://121.42.36.138:8000/api/finance/minute/update/'
+#====================扣费 云上==================
+#server_url = 'http://121.42.36.138:8000/api/finance/minute/update/'
+#====================扣费 local==================
+server_url = 'http://192.168.0.183:8000/api/finance/minute/update/'
 
 
 

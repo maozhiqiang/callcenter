@@ -30,6 +30,7 @@ def setup():
 @app.before_request
 def before_request():
     g.user = get_current_user()
+    print '----------',g.user
 
 
 @app.teardown_appcontext
@@ -60,6 +61,8 @@ def reverse_filter(s):
 @app.route('/users')
 def user_view():
     users = User.query.all()
+    for user in users:
+        print user.name
     return render_template('chapter3/section4/user.html', users=users)
 
 

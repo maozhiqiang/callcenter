@@ -30,7 +30,7 @@ class WebApi:
 
         x_par_base64 = base64.b64encode(self.xpar.encode(encoding="utf-8")).strip('\n')
         headers = {"X-Par": x_par_base64}
-        conn = httplib.HTTPConnection("openapi.openspeech.cn")
+        conn = httplib.HTTPConnection("116.213.69.195")
         conn.request(method="GET",url=self.requrl,headers = headers)
         response = conn.getresponse()
         res= response.read().decode('utf-8')
@@ -59,7 +59,7 @@ class WebApi:
         file_data.close()
         Xpar = "YXBwaWQ9NTk1ZGEwYWE="
         headers = {"Content-Type": "binary", "X-Par": Xpar}
-        conn = httplib.HTTPConnection("openapi.openspeech.cn")
+        conn = httplib.HTTPConnection("116.213.69.195")
         conn.request(method="POST", url=requrl, body=body_base64,headers=headers)
         response = conn.getresponse()
         res = response.read().decode('utf-8')

@@ -65,6 +65,8 @@ def event_processor(event_queue, task_queue):
             task_id = event['task_id']
             host_id = event['host_id']
             print 'task_id....',task_id
+            cmd = 'uuid_kill {0}'.format(event['channal_uuid'])
+            con.bgapi(cmd)
             if task_id != None:
                 try:
                     task_queue.remove(int(task_id), event['channal_uuid'])
@@ -100,7 +102,7 @@ def HttpClientPost(channal_uuid):
         logger.info('...............Bill result..... %s '%response.read())
         return response.read()
     except Exception as err:
-        logger.error(" api/finance/bill/update/ .....error ...%s"%err)
+        logger.error(" api/finance/minute/update/ .....error ...%s"%err)
         return None
 
 
@@ -125,7 +127,7 @@ def event_listener(event_queue):
                 dct['channal_uuid'] = e.getHeader("unique-id")
                 dct['call_number'] = e.getHeader("Caller-Destination-Number")
                 dct['Channel-Call-State'] = e.getHeader("Channel-Call-State")
-
+                print 'test---------------event_name : %s\n\n'%e.getHeader("Event-Name")
                 if dct['event_name'] in ['CHANNEL_ANSWER', 'CHANNEL_HANGUP_COMPLETE']:
                     dct['call_id'] = e.getHeader("variable_call_id")
                     dct['is_test'] = e.getHeader("variable_is_test")

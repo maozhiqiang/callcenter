@@ -210,7 +210,9 @@ class IVRBase(object):
             self.in_count += 1
             #<recordfile> [<timeout_ms>] [max_recording_time_ms] [<pause_dur>] [playfile] [play_retry]
             #/mnt/asr/r1.wav 3000 10000 5 /mnt/asr/welcome.wav 0
-            cmd = "{0} 4000 10000 5 {1} 0".format(filename,self.playbackaudio,)
+#<min_speak_ms> <min_pause_ms> <recordfile> [<max_waiting_ms>] [<max_recording_ms>] [<gain>] [<playfile>] [<play_retry>]
+            #cmd = "300 500 {0} 4000 10000 200".format(filename)
+            cmd = "100 400 {0} 4000 10000 0 {1} 0".format(filename,self.playbackaudio,)
             consoleLog("info", "excute vad cmd  %s!! \n\n" % cmd)
             # cmd = "{0} 4000".format(filename)
             self.session.execute("vad", cmd)

@@ -3,7 +3,7 @@ from __future__ import absolute_import
 
 from celery.utils.log import get_task_logger
 
-from proj.celery import app
+from proj.celery_ import app
 
 logger = get_task_logger(__name__)
 
