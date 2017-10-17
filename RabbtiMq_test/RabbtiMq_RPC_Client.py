@@ -38,10 +38,10 @@ class FibonacciRpcClient(object):
             # print("no msg……")
             # time.sleep(0.5)
         # 收到消息就调用on_response
-        return int(self.response)
-
+        # return int(self.response)
+        return self.response
 if __name__ == '__main__':
     fibonacci_rpc = FibonacciRpcClient()
-    print(" [x] Requesting fib(7)")
-    response = fibonacci_rpc.call(7)
+    print(" [x] Requesting fib(5)")
+    response = fibonacci_rpc.call(2)
     print(" [.] Got %r" % response)

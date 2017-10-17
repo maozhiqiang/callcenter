@@ -14,8 +14,8 @@ def fib(n):
 def on_request(ch, method, props, body):
     n = int(body)
     print(" [.] fib(%s)" % n)
-    response = fib(n)
-
+    #response = fib(n)
+    response = 'token........'+str(n)
     ch.basic_publish(
             exchange='',  # 把执行结果发回给客户端
             routing_key=props.reply_to,  # 客户端要求返回想用的queue
