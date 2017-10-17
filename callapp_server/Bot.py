@@ -192,8 +192,9 @@ class IVRBase(object):
                     ss_flag = self.flow_id+'_'+text
                     ss_key = Md5Utils.get_md5_value(ss_flag)
                     if text == None:
-                        self.bot_flow('')
                         logger.error(' flow return  output is None ')
+                        self.record_chat_run('bot', '', '', create_at, self.fs_call_id, jsonStr)
+                        self.bot_flow('')
                     elif redis.r.has_name(ss_key):
                         filename = redis.r.hget(ss_key)
                         logger.info('...... get-cache ........%s' % filename)
