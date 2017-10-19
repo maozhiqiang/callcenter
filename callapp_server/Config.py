@@ -27,8 +27,8 @@ AI_key = 'QOROS'
 #========================redis ==================================
 REDIS_DB = 'cache'
 REDIS_PORT = 6379
-#REDIS_HOST = '121.42.36.138'
-REDIS_HOST = '192.168.0.183'
+REDIS_HOST = '121.42.36.138'
+#REDIS_HOST = '192.168.0.183'
 
 #======================postgresql================================
 #POSTGRESQL_HOST = "192.168.0.183" #要链接的服务器的IP地址，local-IP
@@ -43,3 +43,7 @@ rabbitmq_server = '121.42.36.138'
 rabbtimq_port = 5672
 rabbitmq_user = 'admin'
 rabbit_password = '123123'
+
+#======================xunfei asr ================================
+#XUNFEI_URL = '117.121.21.146'
+XUNFEI_URL = 'openapi.openspeech.cn'

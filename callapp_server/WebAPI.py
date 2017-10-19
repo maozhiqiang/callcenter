@@ -2,6 +2,7 @@
 import time
 import redis
 import json
+import Config as conf
 import base64
 import httplib
 from pydub import AudioSegment
@@ -10,7 +11,7 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 #redis做缓存
-pool = redis.ConnectionPool(host='121.42.36.138', password='aicyber', port=6379)
+pool = redis.ConnectionPool(host=conf.REDIS_HOST, password='aicyber', port=6379)
 r = redis.Redis(connection_pool=pool)
 
 class WebApi:
@@ -31,7 +32,8 @@ class WebApi:
         x_par_base64 = base64.b64encode(self.xpar.encode(encoding="utf-8")).strip('\n')
         headers = {"X-Par": x_par_base64}
         #conn = httplib.HTTPConnection("openapi.openspeech.cn")
-        conn = httplib.HTTPConnection("117.121.21.146")
+        #conn = httplib.HTTPConnection("117.121.21.146")
+        conn = httplib.HTTPConnection(conf.XUNFEI_URL)
         conn.request(method="GET",url=self.requrl,headers = headers)
         response = conn.getresponse()
         res= response.read().decode('utf-8')
@@ -62,8 +64,9 @@ class WebApi:
         #print '-------------2----------------'
         Xpar = "YXBwaWQ9NTk1ZGEwYWE="
         headers = {"Content-Type": "binary", "X-Par": Xpar}
-        conn = httplib.HTTPConnection("117.121.21.146")
-        #conn = httplib.HTTPConnection("openapi.openspeech.cn")
+        # conn = httplib.HTTPConnection("openapi.openspeech.cn")
+        #conn = httplib.HTTPConnection("117.121.21.146")
+        conn = httplib.HTTPConnection(conf.XUNFEI_URL)
         conn.request(method="POST", url=requrl, body=body_base64,headers=headers)
         #print '-------------3----------------'
         response = conn.getresponse()
