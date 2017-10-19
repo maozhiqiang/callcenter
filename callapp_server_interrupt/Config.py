@@ -48,3 +48,16 @@ rabbitmq_server = '121.42.36.138'
 rabbtimq_port = 5672
 rabbitmq_user = 'admin'
 rabbit_password = '123123'
+
+#======================xunfei asr ================================
+#XUNFEI_URL = '117.121.21.146'
+XUNFEI_URL = 'openapi.openspeech.cn'
+
+
+
+
+
+
+
+
+
