@@ -137,9 +137,9 @@ class IVRBase(object):
         f.setnframes(l)
         f.writeframes(raw_data)
         f.close()
-        cmd = 'sox   ' + wavfilename + '  -r 8000 -c 1 -e signe ' + wavfilename
-        out = commands.getoutput(cmd)
-        logger.info(' cmd  ===>> 16000 wav to 8000 wav %s' % out)
+        # cmd = 'sox   ' + wavfilename + '  -r 8000 -c 1 -e signe ' + wavfilename
+        # out = commands.getoutput(cmd)
+        # logger.info(' cmd  ===>> 16000 wav to 8000 wav %s' % out)
         return wavfilename
 
     def update_full_path(self, path, channal_uuid):
@@ -244,6 +244,7 @@ class IVRBase(object):
                 # cmd = "100 400 {0} 4000 10000 100".format(filename)
                 # cmd = "{0} 4000".format(filename)
                 self.session.execute("vad", cmd)
+                self.playbackaudio = ''
                 endTime = time.time()
                 logger.error("vad  time  : %s " % (endTime - startTime))
             except Exception as e:
