@@ -8,7 +8,7 @@ sys.setdefaultencoding('utf8')
 
 #=================服务器 info=====================================
 server="121.42.31.97"
-server_url = "http://121.42.31.97/recordvoice"
+server_url = ""
 #=====================Flow Config start==========================
 #start flow
 flow_host = '123.59.82.44'
