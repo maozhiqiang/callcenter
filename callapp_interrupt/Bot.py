@@ -54,6 +54,7 @@ class IVRBase(object):
         self.caller_out_mp3 = None
         self.call_full_wav = None
         self.text = None
+        self.is_hangup = False
         self.record_fpath = None
         self.create_at = None
         self.human_audio = '/home/callcenter/recordvoice/{0}/human_audio/'
@@ -156,10 +157,14 @@ class IVRBase(object):
                     # self.session.execute("playback", path)
                     realy_file_path = path.split('recordvoice')
                     self.record_chat_run('bot', text, realy_file_path[1], create_at, self.fs_call_id, jsonStr)
+                    if item['session_end'] or item['flow_end']:
+                        self.is_hangup = True
                     self.IVR_app()
                 else:
                     ss_flag = self.flow_id+'_'+text
                     ss_key = Md5Utils.get_md5_value(ss_flag)
+                    if item['session_end'] or item['flow_end']:
+                        self.is_hangup = True
                     if text == None:
                         self.bot_flow('')
                         logger.error(' flow return  output is None ')
@@ -174,8 +179,8 @@ class IVRBase(object):
                         self.IVR_app()
                     else:
                         self.playback_status_voice(text, jsonStr)
-                if item['session_end'] or item['flow_end']:
-                    self.session.hangup()
+                # if item['session_end'] or item['flow_end']:
+                #     self.session.hangup()
         else:
             logger.info('error.......Flow error: err_no   %s'%jsonStr)
             self.session.hangup()
@@ -220,6 +225,9 @@ class IVRBase(object):
             logger.error("vad  time  : %s " % (endTime - startTime))
             flag = self.session.getVariable(b"vad_timeout")
             logger.error('record file .....%s'%filename)
+            if self.is_hangup :
+                logger.error('......... self.is_hangup is True .........')
+                self.session.hangup()
 #--------------------------------xunfei   asr --------------------------------------------
             if cmp(flag, 'true') != 0:
                 startTime = time.time()

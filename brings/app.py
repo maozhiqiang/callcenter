@@ -1,10 +1,13 @@
 # coding=utf-8
 import os
 from flask import g
+from flask_cors import CORS
 from flask import Flask, render_template, request, redirect, jsonify,url_for, send_from_directory
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__ ,template_folder='template')
+CORS(app)
+
 
 FULL_AUDIO = None
 path = '/home/callcenter/recordvoice/{0}/bot_audio'
@@ -29,11 +32,16 @@ def upload(flowId):
             return jsonify({'success': False, 'message': u'流程ID不能为空','data':None})
         wave_path =path.format(flowId)
         verify_path(wave_path)
-        template_ = 'http://121.42.31.97/recordvoice/{0}/bot_audio/{1}'
+        #http://121.42.31.97/recordvoice/899f04f0fef39dab0fbf975d171856d6/bot_audio/ed0e45ed55b552a978d655efc0fa2d31.wav
+        template_ = 'http://121.42.36.138/recordvoice/{0}/bot_audio/{1}'
         print ' .... wave_path .... %s'%wave_path
         for file in uploaded_files:
             filename = secure_filename(file.filename)
             if file and allowed_file(file.filename):
+                #判断文件是否已存在
+                if os.path.exists(os.path.join(wave_path, filename)):
+                   print '..............remove............'
+                   os.remove(os.path.join(wave_path, filename))
                 file.save(os.path.join(wave_path, filename))
                 realypath = template_.format(flowId,filename)
                 print '.... realypath .... %s'%realypath
@@ -58,4 +66,4 @@ def uploaded_file(flowId,filename):
     return send_from_directory(realypath, filename)
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0",port=int("8000"),debug=True)
+    app.run(host="0.0.0.0",port=int("8081"),debug=True)

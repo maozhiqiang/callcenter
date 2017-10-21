@@ -8,7 +8,7 @@ from  PsqlUtils import DBHelper
 db = DBHelper()
 logger = Logger()
 #开始流程
-def flowHandler(input,userId,flowId='a599d36c4c7a71ddcc1bc7259a15ac3a'):
+def flowHandler(input,userId,flowId='899f04f0fef39dab0fbf975d171856d6'):
     secret = md5.get_sha1_value(flowId + Config.key + userId)
     httpClient = None
     try:

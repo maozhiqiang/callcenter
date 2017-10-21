@@ -11,7 +11,7 @@ DATABASE_USERNAME = "postgres" #用户名，这里的用户名也是在安装pos
 DATABASE_PASSWORD = "z8asuidn" #链接数据库服务器的密码，安装时设置，安装完毕后可以修改的
 
 #====================QueueManager===============
-queue_ip = '121.42.36.138'
+queue_ip = '192.168.0.183'
 queue_port = 50000
 queue_authkey = 'aicyberqueue'
 

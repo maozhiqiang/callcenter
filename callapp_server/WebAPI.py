@@ -32,8 +32,8 @@ class WebApi:
         x_par_base64 = base64.b64encode(self.xpar.encode(encoding="utf-8")).strip('\n')
         headers = {"X-Par": x_par_base64}
         #conn = httplib.HTTPConnection("openapi.openspeech.cn")
-        #conn = httplib.HTTPConnection("117.121.21.146")
-        conn = httplib.HTTPConnection(conf.XUNFEI_URL)
+        conn = httplib.HTTPConnection("117.121.21.146")
+        #conn = httplib.HTTPConnection(conf.XUNFEI_URL)
         conn.request(method="GET",url=self.requrl,headers = headers)
         response = conn.getresponse()
         res= response.read().decode('utf-8')
@@ -65,8 +65,8 @@ class WebApi:
         Xpar = "YXBwaWQ9NTk1ZGEwYWE="
         headers = {"Content-Type": "binary", "X-Par": Xpar}
         # conn = httplib.HTTPConnection("openapi.openspeech.cn")
-        #conn = httplib.HTTPConnection("117.121.21.146")
-        conn = httplib.HTTPConnection(conf.XUNFEI_URL)
+        conn = httplib.HTTPConnection("117.121.21.146")
+        #conn = httplib.HTTPConnection(conf.XUNFEI_URL)
         conn.request(method="POST", url=requrl, body=body_base64,headers=headers)
         #print '-------------3----------------'
         response = conn.getresponse()
@@ -88,7 +88,8 @@ if __name__ == "__main__":
 
     bdr = WebApi()
     start = time.time()
-    result = bdr.getText('/mnt/asr/asr/15900282168_in_4_20170810113514.wav' )    ### 音频文件路径
+    # result = bdr.getText('/mnt/asr/asr/15900282168_in_4_20170810113514.wav' )    ### 音频文件路径
+    result = bdr.getText('/mnt/鼎鼎_vad/shang_voice/013672004641_in_8_20171019180909.wav')  ### 音频文件路径
     end = time.time()
     print end-start
 
