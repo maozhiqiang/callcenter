@@ -65,10 +65,11 @@ def event_processor(event_queue, task_queue):
             task_id = event['task_id']
             host_id = event['host_id']
             print 'task_id....',task_id
-            cmd = 'uuid_kill {0}'.format(event['channal_uuid'])
-            con.bgapi(cmd)
+            # cmd = 'uuid_kill {0}'.format(event['channal_uuid'])
+            # con.bgapi(cmd)
             if task_id != None:
                 try:
+                    logger.info('-------remove-task_id--channal_uid---%s  ' % event['channal_uuid'])
                     task_queue.remove(int(task_id), event['channal_uuid'])
                 except Exception as e:
                     print e.message
