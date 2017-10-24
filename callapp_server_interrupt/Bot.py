@@ -143,7 +143,8 @@ class IVRBase(object):
         return wavfilename
 
     def update_full_path(self, path, channal_uuid):
-        record_fpath = conf.server_url + path
+        #record_fpath = conf.server_url + path
+        record_fpath = path
         print 'record_fpath:.....%s....' % record_fpath
         objdata = {}
         objdata['mark'] = 'update'
@@ -154,7 +155,8 @@ class IVRBase(object):
         rabbitmq.rabbitmqClint(jsonStr)
 
     def record_chat_run(self, who, text, record_fpath, create_at, call_id, jsonStr):
-        record_fpath = conf.server_url+record_fpath
+        #record_fpath = conf.server_url+record_fpath
+        record_fpath = record_fpath
         logger.error('record_fpath:.....%s....'%record_fpath)
         objdata = {}
         objdata['mark'] = 'insert'
