@@ -149,7 +149,7 @@ class IVRBase(object):
 
     def update_full_path(self, path, channal_uuid):
         record_fpath = conf.server_url + path
-        print 'record_fpath:.....%s....' % record_fpath
+        print 'record_fpath:(update).....%s....' % record_fpath
         objdata = {}
         objdata['mark'] = 'update'
         objdata['record_fpath'] = record_fpath
@@ -160,7 +160,7 @@ class IVRBase(object):
 
     def record_chat_run(self, who, text, record_fpath, create_at, call_id, jsonStr):
         record_fpath = conf.server_url+record_fpath
-        logger.error('record_fpath:.....%s....'%record_fpath)
+        logger.error('record_fpath(record):.....%s....'%record_fpath)
         objdata = {}
         objdata['mark'] = 'insert'
         objdata['who'] =who
