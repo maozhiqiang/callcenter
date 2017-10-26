@@ -10,7 +10,7 @@ except ImportError:
     codecs = None
 
 log_dir = "/usr/local/freeswitch/scripts/logs"
-log_name = "applog"
+log_name = "gz_apps"
 
 _logger_init_lock = threading.Lock()
 
