@@ -76,7 +76,6 @@ class IVRBase(object):
         if not os.path.exists(self.all_audio):
             os.makedirs(self.all_audio)
 
-
     def converTowav(self, filename):
         arr = filename.split('.')
         wavfilename = arr[0] + '.wav'
@@ -100,10 +99,10 @@ class IVRBase(object):
         if not status:
             status = self.status
         filename = self.init_voice+'callIn.mp3'
-        print 'filename ...',filename
         r = voice_api.bc.tts(self.STATUS_MAP[status], filename)
         if r == 0:
-            return filename
+            filename_wav = self.converTowav(filename)
+            return filename_wav
         else:
             consoleLog('error', 'baidu tts error: %d' % r['err_no'])
             return None
@@ -113,7 +112,8 @@ class IVRBase(object):
         self.out_count += 1
         r = voice_api.bc.tts(text, filename)
         if r == 0:
-            self.session.execute("playback", filename)
+            filename_wav = self.converTowav(filename)
+            self.session.execute("playback", filename_wav)
         else:
             consoleLog('error', 'baidu tts error: %d' % r['err_no'])
             self.session.hangup()
