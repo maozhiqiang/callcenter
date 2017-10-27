@@ -12,7 +12,8 @@ import time
 import Config as conf
 import multiprocessing
 from multiprocessing import managers
-from DBPool import Postgresql_Pool as db_pool
+#from DBPool import Postgresql_Pool as db_pool
+import DBhandler as db
 from LogUtils import Logger
 
 logger = Logger()
@@ -50,18 +51,18 @@ def event_processor(event_queue):
         if event['event_name'] == 'CHANNEL_CREATE':
             sql = cc_sql.format(time_at, event['channal_uuid'])
             logger.info('[sql]:........CHANNEL_CREATE........ %s'%sql)
-            runsql(sql)
+            db.run_sql(sql)
 
         elif event['event_name'] == 'CHANNEL_ANSWER':
             sql = ca_sql.format(time_at, event['channal_uuid'])
             logger.info('[sql]:.........CHANNEL_ANSWER...... %s' % sql)
-            runsql(sql)
+            db.run_sql(sql)
 
         elif event['event_name'] == 'CHANNEL_HANGUP_COMPLETE':
             sql = chc_sql.format('finish', time_at, event['Channel-Call-State'],
                                  event['Hangup-Cause'], event['channal_uuid'])
             logger.info('[sql]:..........CHANNEL_HANGUP_COMPLETE....... %s' % sql)
-            runsql(sql)
+            db.run_sql(sql)
             task_id = event['task_id']
             host_id = event['host_id']
             logger.info('task_id....%s'%task_id)
@@ -70,19 +71,20 @@ def event_processor(event_queue):
                 if event['is_test'] and event['is_test'] != '0':
                     sql = chc_host_sql.format(int(host_id))
                     logger.info('[execute sql]...%s'%sql)
-                    runsql(sql)
+                    db.run_sql(sql)
                 HttpClientPost(event['channal_uuid'])
 
-def runsql(sql):
-   logger.info('[sql]....%s'%sql)
-   try:
-       conn = db_pool.getConn()
-       cursor = conn.cursor()
-       count = cursor.execute(sql, )
-       conn.commit()
-       db_pool.close(cursor, conn)
-   except Exception as e:
-       logger.info("  runsql ...except error %s"%e.message)
+# def runsql(sql):
+#    logger.info('[sql]....%s'%sql)
+#    try:
+#        conn = db_pool.getConn()
+#        cursor = conn.cursor()
+#        count = cursor.execute(sql, )
+#        print 'ciunt',count
+#        conn.commit()
+#        db_pool.close(cursor, conn)
+#    except Exception as e:
+#        logger.info("  runsql ...except error %s"%e.message)
 
 def HttpClientPost(channal_uuid):
     try:
@@ -177,5 +179,6 @@ if __name__ == '__main__':
     proc_event_processor.start()
     print '[fs_event_server ....start.....]'
     while True:
-        print '[fs_event_server ....start.....]'
+        # print '[fs_event_server ....start.....]'
         time.sleep(3)
+

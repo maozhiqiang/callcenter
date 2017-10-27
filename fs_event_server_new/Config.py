@@ -17,14 +17,14 @@ queue_authkey = 'aicyberqueue'
 
 #====================ESL  Config==================
 
-ESL_HOST = '121.42.31.97'
+ESL_HOST = '10.163.250.207'#121.42.31.97
 ESL_PORT = 8021
 ESL_PWD = 'Aicyber'
 
 #====================扣费 云上==================
-#server_url = 'http://121.42.36.138:8000/api/finance/minute/update/'
+server_url = 'http://121.42.36.138:8000/api/finance/minute/update/'
 #====================扣费 local==================
-server_url = 'http://192.168.0.183:8000/api/finance/minute/update/'
+#server_url = 'http://192.168.0.183:8000/api/finance/minute/update/'
 
 
 

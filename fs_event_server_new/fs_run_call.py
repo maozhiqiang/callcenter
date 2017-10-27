@@ -13,7 +13,7 @@ get_host_sql = " select * from fs_host "
 get_call_sql = " select * from view_call_running "
 get_free_line_sql = " select (line_num-line_use) as rec from fs_host where id ={0} "
 chc_host_sql = " update fs_host set line_use = line_use + 1 where id = {0}"
-update_call_sql = " update fs_call set call_status = 'calling ' where channal_uuid = '{0}' "
+update_call_sql = " update fs_call set call_status = 'calling' where channal_uuid = '{0}' "
 
 #freeswitch 呼叫代理
 class Proxy(object):

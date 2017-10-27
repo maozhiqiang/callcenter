@@ -5,7 +5,7 @@ from LogUtils import Logger
 logger = Logger()
 
 def run_sql(sql):
-    #logger.info('[sql]....%s' % sql)
+    logger.info('[sql]....%s' % sql)
     try:
         conn = db_pool.getConn()
         cursor = conn.cursor()
@@ -16,7 +16,7 @@ def run_sql(sql):
         logger.info("  runsql ...except error %s" % e.message)
 
 def update_sql(sql):
-    #logger.info('[sql]....%s' % sql)
+    logger.info('[sql]....%s' % sql)
     try:
         conn = db_pool.getConn()
         cursor = conn.cursor()
@@ -27,7 +27,7 @@ def update_sql(sql):
         logger.info("  update_sql ...except error %s" % e.message)
 
 def get_one_sql(sql):
-    #logger.info('[sql]....%s' % sql)
+    logger.info('[sql]....%s' % sql)
     try:
         conn = db_pool.getConn()
         cursor = conn.cursor()
@@ -52,8 +52,8 @@ def get_all_sql(sql):
     except Exception as e:
         logger.info("  get_all_sql ...except error %s" % e.message)
 
-if __name__ == '__main__':
-    sql = "select * from fs_host"
-    result = get_all_sql(sql)
-    print  result
+# if __name__ == '__main__':
+#     sql = "select * from fs_host"
+#     result = get_all_sql(sql)
+#     print  result
 
