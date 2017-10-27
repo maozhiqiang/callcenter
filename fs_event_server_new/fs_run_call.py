@@ -77,19 +77,24 @@ class CallManager(object):
     #初始化，加载host
     def __init__(self):
         self.proxy_factory = ProxyFactory()
-        self.list_num =0
+        self.flg = True
     #执行轮询进程，获取要拨打的电话号码
     def process(self):
-        if self.list_num == 0:
+        if self.flg:
+            print '[ self.flg == %s   ]'%self.flg
             list_call_number = db.get_all_sql(get_call_sql)
-            self.list_num = len(list_call_number)
             time_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-            print ('[ %s   list_call_number count is ....%s]'%(time_at,self.list_num))
+            print '[....list_call_number.....%s]'%len(list_call_number)
+            if len(list_call_number) > 0:
+                self.flg = False
+                logger.debug('[ %s   list_call_number count is ....%s.....flg....%s]'%(time_at,self.list_num,self.flg))
             for item in list_call_number:
                 self.list_num = self.list_num-1
                 print ('[ for in -- self.list_num is ].....%s'%self.list_num)
                 host_id = item[8]
                 self.prepare_call(item,host_id)
+            self.flg = True
+
 
     def prepare_call(self, item, host_id):
         res, pof = self.proxy_factory.get_proxy(host_id)

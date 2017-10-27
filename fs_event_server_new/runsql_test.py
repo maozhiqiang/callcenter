@@ -31,5 +31,6 @@ def runsql(sql):
        logger.info("  runsql ...except error %s"%e.message)
 
 if __name__ == '__main__':
-    sql = 'update fs_host set line_use = line_use - 1 where id = 5'
-    runsql(sql)
+    # sql = 'update fs_host set line_use = line_use - 1 where id = 5'
+    # runsql(sql)
+    pass
