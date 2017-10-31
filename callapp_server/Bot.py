@@ -142,9 +142,9 @@ class IVRBase(object):
         f.setnframes(l)
         f.writeframes(raw_data)
         f.close()
-        cmd = 'sox   '+ wavfilename + '  -r 8000 -c 1 -e signe '+wavfilename+''
-        out = commands.getoutput(cmd)
-        logger.info(' cmd  ===>> 16000 wav to 8000 wav %s'%out)
+        # cmd = 'sox   '+ wavfilename + '  -r 8000 -c 1 -e signe '+wavfilename+''
+        # out = commands.getoutput(cmd)
+        # logger.info(' cmd  ===>> 16000 wav to 8000 wav %s'%out)
         return wavfilename
 
     def update_full_path(self, path, channal_uuid):

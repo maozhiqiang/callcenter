@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 import redis
+import Md5Utils
 import Config as conf
 class RedisClient(object):
     """Simple Queue with Redis Backend"""
@@ -39,7 +40,7 @@ class RedisClient(object):
             """
     #set(self, name, value, ex=None, px=None, nx=False, xx=False)
     def setCache(self,name,value):
-        self.__db.setex()
+        self.__db.setex(name,value)
 
     # def getCache(self,name):
     #     self.__db.get(s)
@@ -99,11 +100,15 @@ class RedisClient(object):
         item_list = self.__db.lrange(self.key, 0, queueSize)
         return item_list
 print '---REDIS_DB---',conf.REDIS_DB
-r = RedisClient(conf.REDIS_DB, host=conf.REDIS_HOST, password='aicyber', port=conf.REDIS_PORT, db=0)
+print '---redis_host--',conf.REDIS_HOST
+r = RedisClient(conf.REDIS_DB, host='127.0.0.1', password='aicyber', port=conf.REDIS_PORT, db=0)
 if __name__ == '__main__':
+    ss_flag = '85f235e449606ad09e07e2f49fd2ebce' + '_' + '我们楼盘是津南区，比邻天嘉湖大道4A级景区，南八里台镇政府附近，这边您知道的吧？'
+    key = Md5Utils.get_md5_value(ss_flag)
+    print '****',key
+    r.hset(key,'我们楼盘是津南区，比邻天嘉湖大道4A级景区，南八里台镇政府附近，这边您知道的吧？')
+    print '****'
 
-
-    # r.hset('uuid--0','15900282168')
     # r.hset('uuid--1', '18002017665')
     # r.hset('uuid--2', '13022297501')
     # # #
@@ -123,7 +128,7 @@ if __name__ == '__main__':
     print '==================================='
 
     # r.setCache('name','value132')
-    print r.hget('name')
+    print r.hget('uuid--0')
 
 
 
