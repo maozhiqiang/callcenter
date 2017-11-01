@@ -132,7 +132,8 @@ class IVRBase(object):
         data = fp.read()
         fp.close()
         aud = io.BytesIO(data)
-        sound = AudioSegment.from_file(aud, format='mp3')
+        #sound = AudioSegment.from_file(aud, format='mp3')
+        sound = AudioSegment.from_mp3(aud)
         raw_data = sound._data
         l = len(raw_data)
         f = wave.open(wavfilename, 'wb')
