@@ -16,6 +16,8 @@ flow_url = "/flow/execute.do"
 key = 'The nature of the polymer is currently a trade secret'
 flow_close_url = "/flow/close.do"
 
+
+flow_id = '899f04f0fef39dab0fbf975d171856d6'
 #=====================Baidu Asr start  ===========================
 
 

@@ -7,7 +7,10 @@ import wave
 import voice_api
 import datetime
 import AI_chat
+import Md5Utils
+import Config as conf
 import WebAPI as xunfei_asr
+import RedisHandler as redis
 import  FlowHandler
 from pydub import AudioSegment
 from LogUtils import Logger
@@ -51,22 +54,23 @@ class IVRBase(object):
         self.caller_out_mp3 = None
         self.call_full_wav = None
         self.text = None
+        self.flow_id = conf.flow_id
         self.record_fpath = None
         self.create_at = None
         self.status = status
         self.init_voice = '/home/callcenter/recordvoice/callIn/{0}/'
-        self.human_audio = '/home/callcenter/recordvoice/callIn/human_audio/'
-        self.all_audio = '/home/callcenter/recordvoice/callIn/all_audio/'
-        self.bot_audio = '/home/callcenter/recordvoice/callIn/bot_audio/'
+        self.human_audio = '/home/callcenter/recordvoice/callIn/{0}/human_audio/'
+        self.all_audio = '/home/callcenter/recordvoice/callIn/{0}/all_audio/'
+        self.bot_audio = '/home/callcenter/recordvoice/callIn/{0}/bot_audio/'
         self.init_file_path()
 
     def init_file_path(self):
 
         self.__sessionId = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
         self.init_voice =self.init_voice.format(self.status)
-        self.human_audio = self.human_audio.format(self.__sessionId)
-        self.all_audio = self.all_audio.format(self.__sessionId)
-        self.bot_audio = self.bot_audio.format(self.__sessionId)
+        self.human_audio = self.human_audio.format(self.flow_id)
+        self.all_audio = self.all_audio.format(self.flow_id)
+        self.bot_audio = self.bot_audio.format(self.flow_id)
 
         if not os.path.exists(self.init_voice):
             os.makedirs(self.init_voice)
@@ -77,6 +81,16 @@ class IVRBase(object):
         if not os.path.exists(self.all_audio):
             os.makedirs(self.all_audio)
 
+    def get_voice_wav(self, text, filename):
+        r = voice_api.bc.tts(text, filename)
+        if r == 0:
+            wavfilename = self.converTowav(filename)
+            return wavfilename
+        else:
+            self.session.hangup()
+            logger.info('error.......baidu tts error: %d'%r['err_no'])
+            return None
+
     def converTowav(self, filename):
         arr = filename.split('.')
         wavfilename = arr[0] + '.wav'
@@ -84,7 +98,8 @@ class IVRBase(object):
         data = fp.read()
         fp.close()
         aud = io.BytesIO(data)
-        sound = AudioSegment.from_file(aud, format='mp3')
+        #sound = AudioSegment.from_file(aud, format='mp3')
+        sound = AudioSegment.from_mp3(aud)
         raw_data = sound._data
         l = len(raw_data)
         f = wave.open(wavfilename, 'wb')
@@ -96,17 +111,20 @@ class IVRBase(object):
         f.close()
         return wavfilename
 
-    def get_voice(self, status=None):
-        if not status:
-            status = self.status
-        filename = self.init_voice+'callIn.mp3'
-        r = voice_api.bc.tts(self.STATUS_MAP[status], filename)
-        if r == 0:
-            filename_wav = self.converTowav(filename)
-            return filename_wav
+    def playback_status_voice(self, text, jsonStr):
+        file_out = self.caller_out_mp3.format(self.out_count, self.__sessionId)
+        self.out_count += 1
+        # file_out 返回wav文件格式 /home/callcenter/recordvoice/{flow_id}/bot_audio/number_out_{0}_{1}.mp3
+        filename = self.get_voice_wav(text,file_out)
+        if filename:
+            ss_flag = self.flow_id + '_' + text
+            key = Md5Utils.get_md5_value(ss_flag)
+            logger.info('......setCache....%s' % key)
+            redis.r.hset(key, filename)
+            self.session.execute("playback", filename)
         else:
-            consoleLog('error', 'baidu tts error: %d' % r['err_no'])
-            return None
+            logger.info('error.......system error: err_no')
+            self.session.hangup()
 
     def playback_tts_voice(self, text):
         filename = self.caller_out_mp3.format(self.out_count, self.__sessionId)
@@ -121,25 +139,50 @@ class IVRBase(object):
             self.session.hangup()
 
     def bot_flow(self,input):
-        flowInfo = FlowHandler.flowHandler(input,self.caller_number)
-
+        dict = FlowHandler.flowHandler(input,self.caller_number)
+        jsonStr = json.dumps(dict)
+        if dict['successful']:
+            for item in dict['info']:
+                text = ''.join(item['output'])
+                logger.error('flow return text %s' % text)
+                if item['output_resource'] != '':
+                    filename = "{0}".format(item['output_resource'])
+                    path = self.bot_audio + filename
+                    logger.info('-------------playback  %s' % filename)
+                    self.session.execute("playback", path)
+                else:
+                    ss_flag = self.flow_id + '_' + text
+                    ss_key = Md5Utils.get_md5_value(ss_flag)
+                    if text == None:
+                        logger.error(' flow return  output is None ')
+                        self.session.hangup()
+                    elif redis.r.has_name(ss_key):
+                        filename = redis.r.hget(ss_key)
+                        logger.info('...... get-cache ........%s' % filename)
+                        self.session.execute("playback", filename)
+                    else:
+                        logger.info('...... start  ........')
+                        self.playback_status_voice(text, jsonStr)
+                if item['session_end'] or item['flow_end']:
+                    self.session.hangup()
+        else:
+            logger.info('error.......Flow error: err_no   %s' % jsonStr)
+            self.session.hangup()
 
     def IVR_app(self):
         while self.session.ready():
             startTime = time.time()
-            create_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
             filename = self.caller_in_wav.format(self.in_count, self.__sessionId)
             self.in_count += 1
             cmd = "100 400 {0} 4000 10000 100".format(filename)
             try:
                 self.session.execute("vad", cmd)
             except Exception as e:
-                print e.message
+                print 'vad error .... ',e.message
             endTime = time.time()
             logger.error("vad  time  : %s " % (endTime - startTime))
             flag = self.session.getVariable(b"vad_timeout")
             logger.error('record file .....%s' % filename)
-            # --------------------------------xunfei   asr --------------------------------------------
             if cmp(flag, 'true') != 0:
                 startTime = time.time()
                 info = xunfei_asr.vc.getText(filename)
@@ -148,16 +191,13 @@ class IVRBase(object):
                 if info['ret'] == 0:
                     input = ''.join(info['result'])
                     logger.error('xunfei asr result ---%s ' % input)
-                    info = AI_chat.passive_chat(input)
-                    self.playback_tts_voice(info)
+                    self.bot_flow(input)  # 需要返回文本信息
                 else:
-                    info = AI_chat.passive_chat('')
-                    self.playback_tts_voice(info)
+                    self.bot_flow('')  # 需要返回文本信息
                     logger.info("......xunfei  asr ....error...........%s" % json.dumps(info))
             else:
                 logger.info('vad......没有检测到声音')
-                info = AI_chat.passive_chat('')
-                self.playback_tts_voice(info)
+                self.bot_flow('')  # 需要返回文本信息
 
     def run(self):
         self.session.answer()
@@ -170,7 +210,7 @@ class IVRBase(object):
         self.session.execute("record_session", full_path)
         while self.session.ready():
             if self.status == 'banks_call':
-
+                self.bot_flow('你好')
                 self.IVR_app()
             elif self.status == 'exit':
                 self.session.hangup()

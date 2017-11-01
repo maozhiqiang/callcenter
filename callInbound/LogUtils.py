@@ -138,4 +138,4 @@ def error(msg):
 if __name__ == '__main__':
     logger = Logger()
     sss= '99999999999999wqeqweqweqwe999'
-    logger.info("................"+sss)
+    logger.debug("................"+sss)

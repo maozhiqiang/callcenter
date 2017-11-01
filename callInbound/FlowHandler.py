@@ -35,8 +35,7 @@ def flowHandler(input,userId,flowId='899f04f0fef39dab0fbf975d171856d6'):
     return result
 #结束刘海曾
 def closeFlow(userId,channal_uuid):
-    list = db.getFlowIdAndAppId(userId,channal_uuid)
-    flowId = list[4]
+    flowId = Config.flow_id
     secret = md5.get_sha1_value(flowId + Config.key + userId)
     httpClient = None
     try:
