@@ -189,13 +189,13 @@ class IVRBase(object):
                 if info['ret'] == 0:
                     input = ''.join(info['result'])
                     logger.debug('xunfei asr result ---%s ' % input)
-                    self.bot_flow(input)  # 需要返回文本信息
+                    self.bot_flow(input)
                 else:
-                    self.bot_flow('')  # 需要返回文本信息
+                    self.bot_flow('')
                     logger.debug("......xunfei  asr ....error...........%s" % json.dumps(info))
             else:
-                logger.info('vad......没有检测到声音')
-                self.bot_flow('')  # 需要返回文本信息
+                logger.debug('vad......没有检测到声音')
+                self.bot_flow('')
 
     def run(self):
         self.session.answer()
