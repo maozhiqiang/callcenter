@@ -8,6 +8,7 @@ import voice_api
 import datetime
 import AI_chat
 import WebAPI as xunfei_asr
+import  FlowHandler
 from pydub import AudioSegment
 from LogUtils import Logger
 from freeswitch import *
@@ -119,6 +120,10 @@ class IVRBase(object):
             consoleLog('error', 'baidu tts error: %d' % r['err_no'])
             self.session.hangup()
 
+    def bot_flow(self,input):
+        flowInfo = FlowHandler.flowHandler(input,self.caller_number)
+
+
     def IVR_app(self):
         while self.session.ready():
             startTime = time.time()
@@ -165,9 +170,7 @@ class IVRBase(object):
         self.session.execute("record_session", full_path)
         while self.session.ready():
             if self.status == 'banks_call':
-                filename = self.get_voice()
-                self.session.execute("playback", filename)
-                self.status = 'trans_bot'
+
                 self.IVR_app()
             elif self.status == 'exit':
                 self.session.hangup()

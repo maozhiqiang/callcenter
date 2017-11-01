@@ -4,8 +4,8 @@ import json
 import Config
 import Md5Utils as md5
 from LogUtils import Logger
-from  PsqlUtils import DBHelper
-db = DBHelper()
+#from  PsqlUtils import DBHelper
+#db = DBHelper()
 logger = Logger()
 #开始流程
 def flowHandler(input,userId,flowId='899f04f0fef39dab0fbf975d171856d6'):
