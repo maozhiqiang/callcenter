@@ -4,18 +4,16 @@ import os
 import json
 import time
 import wave
-import voice_api
 import datetime
-import AI_chat
 import Md5Utils
+import voice_api
+import  FlowHandler
 import Config as conf
 import WebAPI as xunfei_asr
 import RedisHandler as redis
-import  FlowHandler
 from pydub import AudioSegment
 from LogUtils import Logger
 from freeswitch import *
-import subprocess
 reload(voice_api)
 reload(xunfei_asr)
 logger = Logger()
@@ -48,7 +46,6 @@ class IVRBase(object):
         self.out_count = 0
         self.__sessionId = None
         self.channal_uuid = session.getVariable(b"origination_uuid")
-        # self.caller_number = None
         self.caller_number = self.session.getVariable("caller_id_number")
         self.caller_in_wav = None
         self.caller_out_mp3 = None
@@ -80,6 +77,7 @@ class IVRBase(object):
             os.makedirs(self.bot_audio)
         if not os.path.exists(self.all_audio):
             os.makedirs(self.all_audio)
+        FlowHandler.closeFlow(self.caller_number, self.channal_uuid)
 
     def get_voice_wav(self, text, filename):
         r = voice_api.bc.tts(text, filename)
