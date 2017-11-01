@@ -86,7 +86,7 @@ class IVRBase(object):
             return wavfilename
         else:
             self.session.hangup()
-            logger.info('error.......baidu tts error: %d'%r['err_no'])
+            logger.debug('error.......baidu tts error: %d'%r['err_no'])
             return None
 
     def converTowav(self, filename):
@@ -117,11 +117,11 @@ class IVRBase(object):
         if filename:
             ss_flag = self.flow_id + '_' + text
             key = Md5Utils.get_md5_value(ss_flag)
-            logger.info('......setCache....%s' % key)
+            logger.debug('......setCache....%s' % key)
             redis.r.hset(key, filename)
             self.session.execute("playback", filename)
         else:
-            logger.info('error.......system error: err_no')
+            logger.debug('error.......system error: err_no')
             self.session.hangup()
 
     def playback_tts_voice(self, text):
@@ -146,25 +146,25 @@ class IVRBase(object):
                 if item['output_resource'] != '':
                     filename = "{0}".format(item['output_resource'])
                     path = self.bot_audio + filename
-                    logger.info('-------------playback  %s' % filename)
+                    logger.debug('-------------playback  %s' % filename)
                     self.session.execute("playback", path)
                 else:
                     ss_flag = self.flow_id + '_' + text
                     ss_key = Md5Utils.get_md5_value(ss_flag)
                     if text == None:
-                        logger.error(' flow return  output is None ')
+                        logger.debug(' flow return  output is None ')
                         self.session.hangup()
                     elif redis.r.has_name(ss_key):
                         filename = redis.r.hget(ss_key)
-                        logger.info('...... get-cache ........%s' % filename)
+                        logger.debug('...... get-cache ........%s' % filename)
                         self.session.execute("playback", filename)
                     else:
-                        logger.info('...... start  ........')
+                        logger.debug('...... start  ........')
                         self.playback_status_voice(text, jsonStr)
                 if item['session_end'] or item['flow_end']:
                     self.session.hangup()
         else:
-            logger.info('error.......Flow error: err_no   %s' % jsonStr)
+            logger.debug('error.......Flow error: err_no   %s' % jsonStr)
             self.session.hangup()
 
     def IVR_app(self):
@@ -178,21 +178,21 @@ class IVRBase(object):
             except Exception as e:
                 print 'vad error .... ',e.message
             endTime = time.time()
-            logger.error("vad  time  : %s " % (endTime - startTime))
+            logger.debug("vad  time  : %s " % (endTime - startTime))
             flag = self.session.getVariable(b"vad_timeout")
-            logger.error('record file .....%s' % filename)
+            logger.debug('record file .....%s' % filename)
             if cmp(flag, 'true') != 0:
                 startTime = time.time()
                 info = xunfei_asr.vc.getText(filename)
                 endTime = time.time()
-                logger.error("xunfei asr time  : %s " % (endTime - startTime))
+                logger.debug("xunfei asr time  : %s " % (endTime - startTime))
                 if info['ret'] == 0:
                     input = ''.join(info['result'])
-                    logger.error('xunfei asr result ---%s ' % input)
+                    logger.debug('xunfei asr result ---%s ' % input)
                     self.bot_flow(input)  # 需要返回文本信息
                 else:
                     self.bot_flow('')  # 需要返回文本信息
-                    logger.info("......xunfei  asr ....error...........%s" % json.dumps(info))
+                    logger.debug("......xunfei  asr ....error...........%s" % json.dumps(info))
             else:
                 logger.info('vad......没有检测到声音')
                 self.bot_flow('')  # 需要返回文本信息
