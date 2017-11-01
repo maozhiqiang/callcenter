@@ -11,7 +11,7 @@ sys.setdefaultencoding('utf8')
 #server_url = "http://192.168.0.183/recordvoice"
 
 server="121.42.31.97"
-server_url = "http://121.42.31.97/recordvoice"
+server_url = ''#"http://121.42.31.97/recordvoice"
 
 #=====================Flow Config start==========================
 #start flow
@@ -31,8 +31,9 @@ AI_key = 'QOROS'
 #========================redis ==================================
 REDIS_DB = 'cache'
 REDIS_PORT = 6379
-#REDIS_HOST = '121.42.36.138'
-REDIS_HOST = '192.168.0.183'
+#REDIS_HOST = '10.165.51.223'#'121.42.36.138'
+#REDIS_HOST = '10.31.92.12'#''118.190.166.134
+REDIS_HOST = '127.0.0.1'#'localhost'
 
 #======================postgresql================================
 #POSTGRESQL_HOST = "192.168.0.183" #要链接的服务器的IP地址，local-IP
