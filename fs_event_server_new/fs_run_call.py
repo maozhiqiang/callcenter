@@ -14,7 +14,7 @@ get_call_sql = " select * from view_call_running "
 get_free_line_sql = " select (line_num-line_use) as rec from fs_host where id ={0} "
 chc_host_sql = " update fs_host set line_use = line_use + 1 where id = {0}"
 update_call_sql = " update fs_call set call_status = 'calling' where channal_uuid = '{0}' "
-
+ahq_host_sql = " select * from fs_host where id = {0}  "
 #freeswitch 呼叫代理
 class Proxy(object):
     def __init__(self, host):
@@ -77,14 +77,18 @@ class CallManager(object):
     #初始化，加载host
     def __init__(self):
         self.proxy_factory = ProxyFactory()
+        self.list_num = 0
         self.flg = True
     #执行轮询进程，获取要拨打的电话号码
     def process(self):
         if self.flg:
-            print '[ self.flg == %s   ]'%self.flg
+            #line_info = db.get_all_sql(ahq_host_sql)
+            # if
+            print '[ ...... self.flg == %s   and pre query list_number_ing .....  ]'%self.flg
             list_call_number = db.get_all_sql(get_call_sql)
             time_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
             print '[....list_call_number.....%s]'%len(list_call_number)
+            self.list_num = len(list_call_number)
             if len(list_call_number) > 0:
                 self.flg = False
                 logger.debug('[ %s   list_call_number count is ....%s.....flg....%s]'%(time_at,self.list_num,self.flg))
