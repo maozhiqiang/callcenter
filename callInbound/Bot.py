@@ -148,6 +148,8 @@ class IVRBase(object):
                     path = self.bot_audio + filename
                     logger.debug('-------------playback  %s' % filename)
                     self.session.execute("playback", path)
+                    if item['session_end'] or item['flow_end']:
+                        self.session.hangup()
                 else:
                     ss_flag = self.flow_id + '_' + text
                     ss_key = Md5Utils.get_md5_value(ss_flag)
@@ -158,11 +160,14 @@ class IVRBase(object):
                         filename = redis.r.hget(ss_key)
                         logger.debug('...... get-cache ........%s' % filename)
                         self.session.execute("playback", filename)
+                        if item['session_end'] or item['flow_end']:
+                            self.session.hangup()
                     else:
                         logger.debug('...... start  ........')
                         self.playback_status_voice(text, jsonStr)
-                if item['session_end'] or item['flow_end']:
-                    self.session.hangup()
+                        if item['session_end'] or item['flow_end']:
+                            self.session.hangup()
+
         else:
             logger.debug('error.......Flow error: err_no   %s' % jsonStr)
             self.session.hangup()
