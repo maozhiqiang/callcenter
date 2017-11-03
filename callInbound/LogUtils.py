@@ -10,7 +10,7 @@ except ImportError:
     codecs = None
 
 log_dir = "./logs"
-log_name = "callInbound_apps"
+log_name = "applog_callIn"
 
 _logger_init_lock = threading.Lock()
 
@@ -139,4 +139,3 @@ if __name__ == '__main__':
     logger = Logger()
     sss= '99999999999999wqeqweqweqwe999'
     logger.info("................"+sss)
-    logger.debug("................" + sss)
