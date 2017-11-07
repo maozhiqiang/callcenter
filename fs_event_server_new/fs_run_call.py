@@ -36,17 +36,17 @@ class Proxy(object):
         number = str(item[1])
         is_success = self.fs_api(uuid=uuid, number=number, task_id=task_id, call_id=call_id,
                                  host_id=self.host_id, gateway=self.gateway)
-        logger.info('[  call is_success = %s ]'%is_success)
+        logger.error('[  call is_success = %s ]'%is_success)
         if is_success:
             try:
                 db.update_sql(update_call_sql.format(uuid))
-                logger.info('[ update_call_sql .....] : %s ' % update_call_sql.format(uuid))
+                logger.error('[ update_call_sql .....] : %s ' % update_call_sql.format(uuid))
                 db.update_sql(chc_host_sql.format(self.host_id))
-                logger.info('[ chc_host_sql .....] : %s ' % chc_host_sql.format(self.host_id))
+                logger.error('[ chc_host_sql .....] : %s ' % chc_host_sql.format(self.host_id))
             except Exception as e:
-                logger.info( '[ Exception is %s] '%e.message)
+                logger.error( '[ Exception is %s] '%e.message)
         else:
-            logger.info('self.bgapi.....retrun %s'%is_success)
+            logger.error('self.bgapi.....retrun %s'%is_success)
 
     def fs_api(self, uuid, number, task_id, call_id, host_id, gateway):
         if not gateway:
@@ -57,8 +57,11 @@ class Proxy(object):
                            'origination_uuid=%s,task_id=%s,call_id=%s,host_id=%s,is_test=%s' % \
                            (uuid, task_id, call_id, host_id, '1')
             command = "originate {%s}%s/%s &python(callappv2.Bot)" % (channel_vars, gateway, number)
-            logger.info('Invoke fs api:\n%s' % command)
-            self.conn.bgapi(command)
+            logger.error('Invoke fs api:\n%s' % command)
+            ss = self.conn.bgapi(command)
+            print ss.serialize('json')
+            jsonss = ss.getHeader('_body')
+            logger.error(jsonss)
             return True
         else:
             return False
