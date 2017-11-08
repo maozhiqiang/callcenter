@@ -23,7 +23,8 @@ class Proxy(object):
         self.port = host[3]
         self.area = host[1]
         self.passowrd = str(host[5])
-        self.gateway = "sofia/gateway/gw1"
+        # self.gateway = "sofia/gateway/gw1"
+        self.gateway = str(host[4])
         self.line_max = host[6]
         self.conn = ESL.ESLconnection(self.ip, self.port, self.passowrd)
         conn_status = 'success' if self.conn.connected else 'fail'
