@@ -4,7 +4,6 @@ import os
 import wave
 import json
 import time
-import commands
 import Md5Utils
 import FlowHandler
 import datetime

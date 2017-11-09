@@ -59,10 +59,10 @@ def closeFlow(userId,channal_uuid):
             httpClient.close()
 
 if __name__ == '__main__':
-    result = flowHandler('你好', '15900282168')
+    # result = flowHandler('你好', '15900282168')
     # print  result
     # pass
-    # closeFlow('15900282168','a6d24d2d-cebe-4113-9f89-9ce80012d6fc')
+    closeFlow('15900282168','7267307c-c95e-4879-89e6-b0dbb50a6c25')
 
 
 
