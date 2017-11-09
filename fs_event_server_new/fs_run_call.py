@@ -13,7 +13,7 @@ get_host_sql = " select * from fs_host "
 get_call_sql = " select * from view_call_running "
 get_free_line_sql = " select (line_num-line_use) as rec from fs_host where id ={0} "
 chc_host_sql = " update fs_host set line_use = line_use + 1 where id = {0}"
-update_call_sql = " update fs_call set call_status = 'calling' where channal_uuid = '{0}' "
+#update_call_sql = " update fs_call set call_status = 'calling' where channal_uuid = '{0}' "
 ahq_host_sql = " select * from fs_host where id = {0}  "
 #freeswitch 呼叫代理
 class Proxy(object):
@@ -23,8 +23,7 @@ class Proxy(object):
         self.port = host[3]
         self.area = host[1]
         self.passowrd = str(host[5])
-        # self.gateway = "sofia/gateway/gw1"
-        self.gateway = str(host[4])
+        self.gateway = "sofia/gateway/gw1"
         self.line_max = host[6]
         self.conn = ESL.ESLconnection(self.ip, self.port, self.passowrd)
         conn_status = 'success' if self.conn.connected else 'fail'
@@ -38,16 +37,6 @@ class Proxy(object):
         is_success = self.fs_api(uuid=uuid, number=number, task_id=task_id, call_id=call_id,
                                  host_id=self.host_id, gateway=self.gateway)
         logger.error('[  call is_success = %s ]'%is_success)
-        if is_success:
-            try:
-                db.update_sql(update_call_sql.format(uuid))
-                logger.error('[ update_call_sql .....] : %s ' % update_call_sql.format(uuid))
-                db.update_sql(chc_host_sql.format(self.host_id))
-                logger.error('[ chc_host_sql .....] : %s ' % chc_host_sql.format(self.host_id))
-            except Exception as e:
-                logger.error( '[ Exception is %s] '%e.message)
-        else:
-            logger.error('self.bgapi.....retrun %s'%is_success)
 
     def fs_api(self, uuid, number, task_id, call_id, host_id, gateway):
         if not gateway:
@@ -60,9 +49,7 @@ class Proxy(object):
             command = "originate {%s}%s/%s &python(callappv2.Bot)" % (channel_vars, gateway, number)
             logger.error('Invoke fs api:\n%s' % command)
             ss = self.conn.bgapi(command)
-            print ss.serialize('json')
-            jsonss = ss.getHeader('_body')
-            logger.error(jsonss)
+            logger.info(ss.serialize('json'))
             return True
         else:
             return False

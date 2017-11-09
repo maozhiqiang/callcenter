@@ -26,16 +26,23 @@ def bye():
     sec = time.time() - _begin_time
     print 'bye, program run %d second.' % sec
 
+#监听事件 create 时更新call_status = calling
+update_call_sql = " update fs_call set call_status = 'calling' where channal_uuid = '{0}' "
 
-cc_sql = "update fs_call set call_at = '{0}' where channal_uuid ='{1}'"
-
+#监听事件 更新呼叫时间
+cc_sql = "update fs_call set call_at = '{0}',call_status = 'calling'  where channal_uuid ='{1}'"
+#监听事件 更新应答时间
 ca_sql = "update fs_call set answer_at = '{0}' where channal_uuid ='{1}'"
-
+#监听事件 更新hangup事件
 chc_sql = "update fs_call set call_status='{0}'," \
           " finish_at='{1}', channal_status='{2}'," \
           " channal_detail='{3}' " \
           "where channal_uuid='{4}'"
 
+#监听到CHANNEL_CREATE 事件后 已用线路数加一
+chc_update_line = 'update fs_host set line_use = line_use + 1 where id = {0}'
+
+#挂机后已用线路数减一
 chc_host_sql = "update fs_host set line_use = line_use - 1 where id = {0}"
 
 #根据channal_uuid 查询当前电话开始时间 挂机时间 任务ID 用户id
@@ -51,13 +58,14 @@ def event_processor(event_queue):
         # 读队列会阻塞进程
         event = event_queue.get()
         time_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-        logger.info('.......event_processor.......''name: %s, uuid: %s' %
-                    (event['event_name'], event['channal_uuid']))
-
         if event['event_name'] == 'CHANNEL_CREATE':
             sql = cc_sql.format(time_at, event['channal_uuid'])
             logger.info('[sql]:........CHANNEL_CREATE........ %s'%sql)
             db.run_sql(sql)
+            #更新fs_host 线路数+1
+            host_sql = chc_update_line.format(event['host_id'])
+            logger.info('[sql]:........CHANNEL_CREATE.. table...host line+1...... %s' % sql)
+            db.update_sql(host_sql)
 
         elif event['event_name'] == 'CHANNEL_ANSWER':
             sql = ca_sql.format(time_at, event['channal_uuid'])
@@ -78,7 +86,7 @@ def event_processor(event_queue):
                     sql = chc_host_sql.format(int(host_id))
                     logger.info('[execute sql]...%s'%sql)
                     db.run_sql(sql)
-                    deduction_fee(event['channal_uuid'])
+                    HttpClientPost(event['channal_uuid'])
 
 def is_valid_date(str):
     '''判断是否是一个有效的日期字符串'''
@@ -176,7 +184,7 @@ def event_listener(event_queue):
                 if dct['channal_uuid'] == None:
                     continue
                 event_queue.put(dct)
-                logger.info('.......event_listener.......name: %s, uuid: %s, number: %s,task_id:' %
+                logger.info('.......event_listener.......name: %s, uuid: %s, number: %s,' %
                             (dct['event_name'], dct['channal_uuid'], dct['call_number']))
 
     logger.error('.......esl connect error.......')
