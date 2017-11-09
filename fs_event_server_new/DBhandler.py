@@ -13,7 +13,7 @@ def run_sql(sql):
         conn.commit()
         db_pool.close(cursor, conn)
     except Exception as e:
-        logger.info("  runsql ...except error %s" % e.message)
+        print("  runsql ...except error %s" % e.message)
 
 def update_sql(sql):
     logger.info('[sql]....%s' % sql)
@@ -24,7 +24,7 @@ def update_sql(sql):
         conn.commit()
         db_pool.close(cursor, conn)
     except Exception as e:
-        logger.info("  update_sql ...except error %s" % e.message)
+        print  ("  update_sql ...except error %s" % e.message)
 
 def get_one_sql(sql):
     logger.info('[sql]....%s' % sql)
@@ -37,7 +37,7 @@ def get_one_sql(sql):
         db_pool.close(cursor, conn)
         return  result
     except Exception as e:
-        logger.info("  get_one_sql ...except error %s" % e.message)
+        print   ("  get_one_sql ...except error %s" % e.message)
 
 def get_all_sql(sql):
     #logger.info('[get_all_sql]....%s' % sql)
@@ -50,7 +50,7 @@ def get_all_sql(sql):
         db_pool.close(cursor, conn)
         return list
     except Exception as e:
-        logger.info("  get_all_sql ...except error %s" % e.message)
+        print ("  get_all_sql ...except error %s" % e.message)
 
 def is_valid_date(str):
   '''判断是否是一个有效的日期字符串'''

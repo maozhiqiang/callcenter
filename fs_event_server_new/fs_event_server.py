@@ -27,7 +27,7 @@ def bye():
     print 'bye, program run %d second.' % sec
 
 #监听事件 create 时更新call_status = calling
-update_call_sql = " update fs_call set call_status = 'calling' where channal_uuid = '{0}' "
+#update_call_sql = " update fs_call set call_status = 'calling' where channal_uuid = '{0}' "
 
 #监听事件 更新呼叫时间
 cc_sql = "update fs_call set call_at = '{0}',call_status = 'calling'  where channal_uuid ='{1}'"
@@ -82,11 +82,11 @@ def event_processor(event_queue):
             logger.info('task_id....%s'%task_id)
             if task_id != None:
                 logger.info('-------is_test------%s  '%event['is_test'])
-                if event['is_test'] and event['is_test'] != '0':
-                    sql = chc_host_sql.format(int(host_id))
-                    logger.info('[execute sql]...%s'%sql)
-                    db.run_sql(sql)
-                    HttpClientPost(event['channal_uuid'])
+                # if event['is_test'] and event['is_test'] != '0':
+                sql = chc_host_sql.format(int(host_id))
+                logger.info('[execute sql]...%s'%sql)
+                db.run_sql(sql)
+                HttpClientPost(event['channal_uuid'])
 
 def is_valid_date(str):
     '''判断是否是一个有效的日期字符串'''
@@ -173,6 +173,7 @@ def event_listener(event_queue):
                 dct['channal_uuid'] = e.getHeader("unique-id")
                 dct['call_number'] = e.getHeader("Caller-Destination-Number")
                 dct['Channel-Call-State'] = e.getHeader("Channel-Call-State")
+                dct['host_id'] = e.getHeader("variable_host_id")
                 # print 'test---------------event_name : %s\n\n'%e.getHeader("Event-Name")
                 if dct['event_name'] in ['CHANNEL_ANSWER', 'CHANNEL_HANGUP_COMPLETE']:
                     dct['call_id'] = e.getHeader("variable_call_id")
@@ -180,7 +181,6 @@ def event_listener(event_queue):
                     if dct['event_name'] == 'CHANNEL_HANGUP_COMPLETE':
                         dct['Hangup-Cause'] = e.getHeader("Hangup-Cause")
                         dct['task_id'] = e.getHeader("variable_task_id")
-                        dct['host_id'] = e.getHeader("variable_host_id")
                 if dct['channal_uuid'] == None:
                     continue
                 event_queue.put(dct)
