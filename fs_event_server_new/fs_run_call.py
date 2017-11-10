@@ -34,22 +34,26 @@ class Proxy(object):
         call_id = item[0]
         uuid = str(item[2])
         number = str(item[1])
-        is_success = self.fs_api(uuid=uuid, number=number, task_id=task_id, call_id=call_id,
+        flow_id = str(item[5])
+        is_success = self.fs_api(uuid=uuid, number=number, task_id=task_id, flow_id=flow_id, call_id=call_id,
                                  host_id=self.host_id, gateway=self.gateway)
         logger.error('[  call is_success = %s ]'%is_success)
 
-    def fs_api(self, uuid, number, task_id, call_id, host_id, gateway):
+    def fs_api(self, uuid, number, task_id, flow_id,call_id, host_id, gateway):
         if not gateway:
             gateway = 'sofia/gateway/gw1'
         if self.conn.connected:
             # 设置通道变量task_id,call_id 处理挂断事件时，从task_id对应的队列中去掉uuid
             channel_vars = 'ignore_early_media=true,absolute_codec_string=g729,' \
-                           'origination_uuid=%s,task_id=%s,call_id=%s,host_id=%s,is_test=%s' % \
-                           (uuid, task_id, call_id, host_id, '1')
-            command = "originate {%s}%s/%s &python(callappv2.Bot)" % (channel_vars, gateway, number)
+                           'origination_uuid=%s,task_id=%s,flow_id=%s,call_id=%s,host_id=%s,is_test=%s' % \
+                           (uuid, task_id, flow_id,call_id, host_id, '1')
+            command = "originate {%s}%s/%s &python(callappv2.Bot)ss" % (channel_vars, gateway, number)
             logger.error('Invoke fs api:\n%s' % command)
             ss = self.conn.bgapi(command)
-            logger.info(ss.serialize('json'))
+            try:
+                logger.info(ss.serialize('json'))
+            except Exception as e:
+                print 'eror',e.message
             return True
         else:
             return False
