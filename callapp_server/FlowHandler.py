@@ -34,9 +34,9 @@ def flowHandler(input,userId,flowId='899f04f0fef39dab0fbf975d171856d6'):
             httpClient.close()
     return result
 #结束刘海曾
-def closeFlow(userId,channal_uuid):
-    list = db.getFlowIdAndAppId(userId,channal_uuid)
-    flowId = list[4]
+def closeFlow(userId,flowId,channal_uuid):
+    # list = db.getFlowIdAndAppId(userId,channal_uuid)
+    # flowId = list[4]
     secret = md5.get_sha1_value(flowId + Config.key + userId)
     httpClient = None
     try:
@@ -59,10 +59,11 @@ def closeFlow(userId,channal_uuid):
             httpClient.close()
 
 if __name__ == '__main__':
+    pass
     # result = flowHandler('你好', '15900282168')
     # print  result
     # pass
-    closeFlow('15900282168','7267307c-c95e-4879-89e6-b0dbb50a6c25')
+    # closeFlow('15900282168','7267307c-c95e-4879-89e6-b0dbb50a6c25')
 
 
 

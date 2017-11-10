@@ -29,7 +29,7 @@ def hangup_hook(session, what):
     channal_uuid = session.getVariable(b"origination_uuid")
     number = session.getVariable(b"caller_id_number")
     consoleLog("info", "hangup hook for %s!! \n\n" % number)
-    FlowHandler.closeFlow(number, channal_uuid)  # 挂断电话后结束此次会话流程
+    # FlowHandler.closeFlow(number, channal_uuid)  # 挂断电话后结束此次会话流程
     logger.info(".....关闭流程.......")
     return
 
@@ -48,7 +48,8 @@ class IVRBase(object):
         self.out_count = 0
         self.loopTimes = 0
         self.__sessionId = None
-        self.flow_id = None
+        self.flow_id = session.getVariable(b"flow_id")
+        print  '*-*-*-*-*-*-*-___-',self.flow_id
         self.fs_call_id = None
         self.channal_uuid = session.getVariable(b"origination_uuid")
         self.caller_number = None
@@ -87,33 +88,28 @@ class IVRBase(object):
                 return
             else:
                 self.caller_number = call_number
+                FlowHandler.closeFlow(self.caller_number,self.flow_id, self.channal_uuid)
+                consoleLog("info", "*****FlowHandler.closeFlow!!*****\n\n")
         except Exception as e:
             logger.error('getFlowIdByUUID except error %s' % e.message)
             self.session.hangup()
             return
 
-
-    def getFlowIdByUUID(self):
-        try:
-            # call_number = db.getNumberById(self.channal_uuid)
-            # if call_number == None:
-            #     print '无效的手机号，channal_uuid %s' % self.channal_uuid
-            #     self.session.hangup()
-            # else:
-            #     self.caller_number = call_number
-            logger.info('number is %s ... channal_uuid is %s ' % (self.caller_number, self.channal_uuid))
-            list = db.getFlowIdAndAppId(self.caller_number, self.channal_uuid)
-            if list == None:
-                self.session.hangup()
-                consoleLog("info", "hangup hook for list is %s!!\n\n" % list)
-            else:
-                self.flow_id = list[4]
-                self.fs_call_id = list[0]
-                self.__sessionId = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
-                FlowHandler.closeFlow(self.caller_number, self.channal_uuid)
-                consoleLog("info", "*****FlowHandler.closeFlow!!*****\n\n")
-        except Exception as e:
-            logger.error('getFlowIdByUUID except error %s' % e.message)
+    # def getFlowIdByUUID(self):
+    #     try:
+    #         logger.info('number is %s ... channal_uuid is %s ' % (self.caller_number, self.channal_uuid))
+    #         list = db.getFlowIdAndAppId(self.caller_number, self.channal_uuid)
+    #         if list == None:
+    #             self.session.hangup()
+    #             consoleLog("info", "hangup hook for list is %s!!\n\n" % list)
+    #         else:
+    #             self.s = list[4]
+    #             self.fs_call_id = list[0]
+    #             self.__sessionId = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
+    #             FlowHandler.closeFlow(self.caller_number, self.channal_uuid)
+    #             consoleLog("info", "*****FlowHandler.closeFlow!!*****\n\n")
+    #     except Exception as e:
+    #         logger.error('getFlowIdByUUID except error %s' % e.message)
 
     def get_voice_wav(self, text, filename):
         r = voice_api.bc.tts(text, filename)
@@ -142,9 +138,6 @@ class IVRBase(object):
         f.setnframes(l)
         f.writeframes(raw_data)
         f.close()
-        # cmd = 'sox   '+ wavfilename + '  -r 8000 -c 1 -e signe '+wavfilename+''
-        # out = commands.getoutput(cmd)
-        # logger.info(' cmd  ===>> 16000 wav to 8000 wav %s'%out)
         return wavfilename
 
     def update_full_path(self, path, channal_uuid):

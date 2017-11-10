@@ -24,7 +24,7 @@ class Postgresql_Pool(object):
         @return MySQLdb.connection
         """
         if Postgresql_Pool.__pool is None:
-            Postgresql_Pool.__pool = PooledDB(creator=psycopg2, mincached=5, maxcached=2000,
+            Postgresql_Pool.__pool = PooledDB(creator=psycopg2, mincached=2, maxcached=20,
                                         host=DATABASE_HOST, port=DATABASE_PORT, user=DATABASE_USERNAME,
                                               password=DATABASE_PASSWORD,
                                               database=DATABASE_NAME)
