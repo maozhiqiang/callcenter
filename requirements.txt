@@ -3,4 +3,9 @@ redis==2.10.5
 psycopg2
 pika
 swig
+DBUtils
 python-ESL
+pydub
+apt-add-repository ppa:mc3man/trusty-media
+apt-get update
+apt-get install ffmpeg
