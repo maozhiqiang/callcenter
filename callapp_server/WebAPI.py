@@ -74,7 +74,7 @@ if __name__ == "__main__":
     # for num in range(4):
     start = time.time()
     # result = bdr.getText('/mnt/asr/asr/15900282168_in_4_20170810113514.wav' )    ### 音频文件路径
-    result = bdr.getText('/mnt/LOG/1212/13905747728_in_2_20171031193336.wav')  ### 音频文件路径
+    result = bdr.getText('/mnt/asr/testqwqw/18522611368_in_1_20171110104327.wav')  ### 音频文件路径
     end = time.time()
     print end-start
 
