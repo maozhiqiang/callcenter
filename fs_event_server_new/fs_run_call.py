@@ -47,7 +47,7 @@ class Proxy(object):
             channel_vars = 'ignore_early_media=true,absolute_codec_string=g729,' \
                            'origination_uuid=%s,task_id=%s,flow_id=%s,call_id=%s,host_id=%s,is_test=%s' % \
                            (uuid, task_id, flow_id,call_id, host_id, '1')
-            command = "originate {%s}%s/%s &python(callappv2.Bot)ss" % (channel_vars, gateway, number)
+            command = "originate {%s}%s/%s &python(callappv2.Bot)" % (channel_vars, gateway, number)
             logger.error('Invoke fs api:\n%s' % command)
             self.conn.bgapi(command)
             try:

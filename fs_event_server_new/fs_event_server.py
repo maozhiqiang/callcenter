@@ -52,6 +52,8 @@ chc_call_info = sql = "select  fs_call.answer_at,fs_call.finish_at,fs_call.task_
 chc_call_update = " update fs_call set call_minute = {0} where channal_uuid = '{1}' "
 #更新用户剩余分钟数
 chc_user_minute = " update fs_user set call_minute = call_minute - {0} where id = {1} "
+
+
 def event_processor(event_queue):
     """事件处理进程，消费者"""
     while 1:
