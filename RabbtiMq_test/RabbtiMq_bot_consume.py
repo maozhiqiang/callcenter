@@ -350,6 +350,7 @@ class DBConsumer(object):
         self.acknowledge_message(basic_deliver.delivery_tag)
 
 def db_writer(dct):
+    print  dct
     if dct.has_key('mark') and   dct['mark'] == 'insert':
         sql = 'INSERT INTO fs_call_replay(who, text, record_fpath, create_at, call_id,resp_param)VALUES (\'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\',\'{5}\')'.format(
             dct['who'], dct['text'], dct['record_fpath'], dct['create_at'], dct['call_id'], dct['jsonStr'])

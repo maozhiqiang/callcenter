@@ -1,7 +1,9 @@
 
-ucloud账号
+#===========================ucloud账号=====================================
 8406152@qq.com
 wcn810714
+#=========================================================================
+freeswitch 配置多用户
 
 #===========================网易云音乐=======================================
 netease-cloud-music
@@ -32,7 +34,7 @@ CPU： 1核    内存：2 GB
 root
 ubuntu330M
 
-callcenter 远程连接密码228996
+callcenter 远程连接密码228996s
 
 121.42.36.138(公)
 10.165.51.223(内)
@@ -314,6 +316,34 @@ ab -n 1 -c 1 -p f:/postdata.txt -T application/x-www-form-urlencoded "http://127
 -h 显示使用方法
 -k 发送keep-alive指令到服务器端
 =============================================================================================================================================
+
+
+select * from fs_call where call_status = 'calltry' and task_id =118;
+
+update fs_call set call_status = 'wait' where task_id = 118 and call_status = 'calltry'
+
+select * from fs_call where task_id = 123 limit 500
+
+============================最新技术===========================================================================================================
+kafka
+dubbo
+rest
+Solr
+============================ubuntu postgresql================================================================================================
+ucloud freeswitch : 106.75.47.65  ubuntu   ubuntu330M/aicyber123456
+
+postgresql: psql -U root -h 10.9.90.133 call  password:z8asuidnaicyber
+
+
+
+
+
+
+
+
+
+
+
 
 
 

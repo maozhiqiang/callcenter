@@ -11,7 +11,7 @@ import WebAPI as xunfei_asr
 from pydub import AudioSegment
 from LogUtils import Logger
 from freeswitch import *
-
+import subprocess
 reload(voice_api)
 reload(xunfei_asr)
 logger = Logger()
@@ -95,6 +95,17 @@ class IVRBase(object):
         f.close()
         return wavfilename
 
+    # def converTowav(self, filename):
+    #     arr = filename.split('.')
+    #     wavfilename = arr[0] + '.wav'
+    #     print 'wavfilename :', wavfilename
+    #     cmd = 'lame --decode   ' + filename + ' ' + wavfilename
+    #     print '[ cmd is %s]' % cmd
+    #     p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    #     for line in p.stdout.readlines():
+    #         print line,
+    #     return wavfilename
+
     def get_voice(self, status=None):
         if not status:
             status = self.status
@@ -113,6 +124,7 @@ class IVRBase(object):
         r = voice_api.bc.tts(text, filename)
         if r == 0:
             filename_wav = self.converTowav(filename)
+            consoleLog("info", "playback.....filename .... " + filename_wav + "\n")
             self.session.execute("playback", filename_wav)
         else:
             consoleLog('error', 'baidu tts error: %d' % r['err_no'])

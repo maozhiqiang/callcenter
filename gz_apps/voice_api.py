@@ -30,8 +30,8 @@ class BaiduVoiceClient(object):
         return self.token_cache[0]
 
     def tts(self, text, filename):
-        print 'text :  ',text
-        print 'filename :  ', filename
+        # print 'text :  ',text
+        # print 'filename :  ', filename
         params = {
             'tex': text,
             'lan': 'zh',

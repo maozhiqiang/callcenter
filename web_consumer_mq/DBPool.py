@@ -27,7 +27,7 @@ class Postgresql_Pool(object):
         """
         logger.info('postgresql connect host .....   %s'%DATABASE_HOST)
         if Postgresql_Pool.__pool is None:
-            Postgresql_Pool.__pool = PooledDB(creator=psycopg2, mincached=5, maxcached=2000,
+            Postgresql_Pool.__pool = PooledDB(creator=psycopg2, mincached=2, maxcached=5,
                                         host=DATABASE_HOST, port=DATABASE_PORT, user=DATABASE_USERNAME,
                                               password=DATABASE_PASSWORD,
                                               database=DATABASE_NAME)

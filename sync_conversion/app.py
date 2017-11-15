@@ -1,8 +1,9 @@
 # -*- encoding: utf-8 -*-
 
+import commands
 from flask import Flask
 app = Flask(__name__)
-app.config.from_object('config')
+# app.config.from_object('config')
 #app.config.from_object('yourapplication.default_settings')
 
 
@@ -25,17 +26,23 @@ def show_user_profile(username):
 
 @app.route('/post/<int:post_id>')
 def show_post(post_id):
-    #
     # show the post with the given id, the id is an integer
     return 'Post %d' % post_id
+'''
+执行cmd命令 ，把16000wav 转MP3
+sudo apt-get install lame
+sudo apt-get install libsox-fmt-mp3
+sudo apt-get install sox
 
-#app.
-
+'''
+@app.route('/synconver/<filename>')
+def sync_convertowav(filename):
+    print  filename
+    # arr = filename.split('.')
+    # wavfilename = arr[0] + '.wav'
+    # cmd = 'sox %s -r 8000 -c 1 %s'%(filename,wavfilename)
+    # result =commands.getoutput("date")
+    # print '.....result ......',result
+    return 'User1212 %s' % filename
 if __name__ == '__main__':
-    full_list = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t']
-    indices = [int(round(i * 5)) for i in range(32 + 1)]
-    sublists = [full_list[indices[i]:indices[i + 1]] for i in range(32)]
-    print indices
-    print sublists
-    # print indices
-    # app.run()
+    app.run()

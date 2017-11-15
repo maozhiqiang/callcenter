@@ -54,22 +54,17 @@ class WebApi:
             r.setex("token", token, 7200)
             print 'redis cache  set token  %s'%token
             token = r.get("token")
-        #print '-------------0----------------'
         requrl = "http://openapi.openspeech.cn/webapi/iat.do?svc=iat&token="+ str(token)+"&aue=raw&ent=sms16k&auf=audio/L16;rate=16000"
         file_data = open(wav16file, 'rb')
-        #print '-------------1----------------'
         body_base64 = base64.b64encode(file_data.read())
         file_data.close()
-        #print '-------------2----------------'
         Xpar = "YXBwaWQ9NTk1ZGEwYWE="
         headers = {"Content-Type": "binary", "X-Par": Xpar}
         #conn = httplib.HTTPConnection("117.121.21.146")
         #conn = httplib.HTTPConnection("openapi.openspeech.cn")
         conn = httplib.HTTPConnection(conf.XUNFEI_URL)
         conn.request(method="POST", url=requrl, body=body_base64,headers=headers)
-        #print '-------------3----------------'
         response = conn.getresponse()
-        #print '-------------1----------------'
         res = response.read().decode('utf-8')
         body_base64_decode = base64.b64decode(res.encode(encoding="utf-8")).decode()
         print"body_base64decode : {}".format(body_base64_decode)
@@ -87,7 +82,8 @@ if __name__ == "__main__":
 
     bdr = WebApi()
     start = time.time()
-    result = bdr.getText('/mnt/asr/asr/15900282168_in_4_20170810113514.wav' )    ### 音频文件路径
+    # result = bdr.getText('/mnt/asr/asr/15900282168_in_4_20170810113514.wav' )    ### 音频文件路径
+    result = bdr.getText('/mnt/asr/testqwqw/18522611368_in_1_20171110104327.wav')  ### 音频文件路径
     end = time.time()
     print end-start
 
