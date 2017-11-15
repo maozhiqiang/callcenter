@@ -86,14 +86,14 @@ def event_processor(event_queue):
             if task_id != None:
                 try:
                     sql = fs_task_sql.format(int(task_id))
-                    logger.info('[ sql :----> call hangup_complete execute] :%s ' % sql)
+                    logger.info('[ sql1 :----> call hangup_complete execute] :%s ' % sql)
                     db.update_sql(sql)
-                    logger.info('[ sql :----> fs_host line_use - 1 ]%s ' % sql)
                     sql2 = chc_host_sql.format(int(host_id))
+                    logger.info('[ sql2 :----> fs_host line_use - 1 ]%s ' % sql2)
                     db.update_sql(sql2)
                     sql3 = chc_sql.format('finish', time_at, event['Channel-Call-State'],
                                          event['Hangup-Cause'], event['channal_uuid'])
-                    logger.info('[sql]:..........CHANNEL_HANGUP_COMPLETE....... %s' % sql)
+                    logger.info('[sql3 :..........CHANNEL_HANGUP_COMPLETE....... ]%s' % sql3)
                     db.update_sql(sql3)
                     HttpClientPost(event['channal_uuid'])
                 except Exception as e:
