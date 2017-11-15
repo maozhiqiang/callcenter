@@ -56,7 +56,7 @@ chc_user_minute = " update fs_user set call_minute = call_minute - {0} where id 
 
 #============================update fs_event_sql===============================================
 #fs_task 电话挂机时 fs_task call_finish +1
-fs_task_sql = ' update fs_task set call_finish = call_finish + 1  where task_id = {0} '
+fs_task_sql = ' update fs_task set call_finish = call_finish + 1  where id = {0} '
 
 def event_processor(event_queue):
     """事件处理进程，消费者"""
@@ -91,6 +91,10 @@ def event_processor(event_queue):
                     logger.info('[ sql :----> fs_host line_use - 1 ]%s ' % sql)
                     sql2 = chc_host_sql.format(int(host_id))
                     db.update_sql(sql2)
+                    sql3 = chc_sql.format('finish', time_at, event['Channel-Call-State'],
+                                         event['Hangup-Cause'], event['channal_uuid'])
+                    logger.info('[sql]:..........CHANNEL_HANGUP_COMPLETE....... %s' % sql)
+                    db.update_sql(sql3)
                     HttpClientPost(event['channal_uuid'])
                 except Exception as e:
                     logger.info('hangup_complete execute sql error %s ' % e)
