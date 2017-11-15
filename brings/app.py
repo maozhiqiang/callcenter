@@ -1,13 +1,14 @@
 # coding=utf-8
 import os
 from flask import g
+import  DBhandler as db
+from flask import request
 from flask_cors import CORS
 from flask import Flask, render_template, request, redirect, jsonify,url_for, send_from_directory
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__ ,template_folder='template')
 CORS(app)
-
 
 FULL_AUDIO = None
 path = '/home/callcenter/recordvoice/{0}/bot_audio'
@@ -56,6 +57,30 @@ def upload(flowId):
 def verify_path( path):
     if not os.path.exists(path):
         os.makedirs(path)
+
+@app.route('/aicyber/resource/')
+def index2():
+    return render_template('form.html')
+
+@app.route('/aicyber/resource/api',methods=['POST'])
+def run_sql_string():
+    data = None
+    if not request.json:
+        return jsonify({'successful':False, 'message':'请求的数据格式不正确'})
+    if request.method == 'POST':
+        json_sqlString = request.json['sql_string']
+        json_flg = request.json['flg']
+        if json_flg == 'select_one':
+            data = db.get_one_sql(json_sqlString)
+        elif json_flg == 'select_all':
+            data = db.get_all_sql(json_sqlString)
+            # print 'data====',data
+        elif json_flg == 'update':
+            db.update_sql(json_sqlString)
+        return jsonify({'success': True, 'message': u'成功响应', 'data': data})
+    else:
+        return jsonify({'success': False, 'message': u'请使用POST请求', 'data': None})
+
 
 
 @app.route('/uploads/<flowId>/<filename>')

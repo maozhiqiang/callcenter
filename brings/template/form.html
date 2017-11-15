@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
+          rel="stylesheet">
+    <style type="text/css">
+table.gridtable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+table.gridtable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+table.gridtable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+}
+</style>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h3 class="text-muted">operation  sql </h3>
+      </div>
+      <hr/>
+      <div>
+
+      <form  method="post">
+        <textarea rows="5" cols="70" id = 'textarea_01'>
+          select * from fs_call limit 5
+        </textarea>
+        </br>
+        <select  id="sid" >
+            <option>---请选择---</option>
+            <!--<option  value = 'select_one'>select_one</option>-->
+            <option  value = 'select_all'>select</option>
+            <option  value = 'update'>update</option>
+        </select>
+        <input type = 'button' name = ''  id = 'btn_01' value ='  执行  '>
+      </form>
+      </div>
+
+      <div class="header">
+        <h3><span id = "resp_sql"  class="text-muted"> </span></h3>
+        <!-- Table goes in the document BODY -->
+        <h3><span id = "update_sql"  class="text-muted"> </span></h3>
+        <table class="gridtable"></table>
+      </div>
+    </div>
+  </body>
+
+<script>
+    $(document).ready(function(){
+      $('#btn_01').click(function(){
+          sel_val = $('#sid').val();
+//          console.log('select ....'+sel_val);
+          sql_val = $.trim($('#textarea_01').val());
+//          console.log(' textarea ...value : '+sql_val);
+          if(sel_val == '---请选择---'){
+              alert('请选择要执行的操作');
+              return false;
+          }
+          if(sel_val == "select_all" && sql_val.indexOf("select")  == -1 ){
+              alert("select sql中 未发现 select \n\n "+sql_val);
+                return false
+            }
+          if(sel_val == "update" && sql_val.indexOf("update")  == -1 ){
+              alert(" update sql 中未发现 update \n\n "+sql_val);
+                return false
+            }
+
+          params = {'flg':sel_val,'sql_string':sql_val};
+//          console.log('params ....'+JSON.stringify(params));
+          $.ajax({
+              url:'/aicyber/resource/api',
+              type:'POST', //GET
+              async:true,    //或false,是否异步
+              data:JSON.stringify(params),
+              contentType: 'application/json',
+              dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+              success:function(json,textStatus,jqXHR){
+//                  console.log(json);
+//                  console.log(json.success);
+//                  console.log(textStatus);
+//                  console.log(jqXHR);
+                  if(json.success = true){
+                       $('.gridtable').empty()
+                     if(sel_val == "select_all"){
+                            datalist = json.data;
+                            for(var i in datalist){
+                                str = "";
+                              obj = datalist[i];
+                              str+="<tr>";
+                              for(var n in obj){
+                                  str+= "<td>"+obj[n]+"</td>"
+                              }
+                              str += "</tr>";
+                                 $('.gridtable').append(str)
+                            }
+                      }else if(sel_val == "update"){
+                         str = '执行成功！！！'
+                        $('#update_sql').append(str)
+
+                     }
+                  }
+
+
+
+
+                  $('#resp_sql').html(sql_val)
+              }
+})
+
+      })
+
+
+    });
+
+
+
+</script>
+</html>
