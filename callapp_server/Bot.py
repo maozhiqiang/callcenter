@@ -80,6 +80,7 @@ class IVRBase(object):
 
     def closedFlow(self):
         try:
+            print '------*%s**%s*****%s-----'%(self.caller_number,self.flow_id, self.channal_uuid)
             FlowHandler.closeFlow(self.caller_number,self.flow_id, self.channal_uuid)
             consoleLog("info", "*****FlowHandler.closeFlow!!*****\n\n")
         except Exception as e:

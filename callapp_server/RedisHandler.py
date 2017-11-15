@@ -11,7 +11,7 @@ class RedisClient(object):
         self.__db = redis.Redis(**redis_kwargs)
         # self.__db.flushdb()
         self.key = '%s:%s' % (namespace, name)
-        print '...redis...key: %s' % self.key
+        # print '...redis...key: %s' % self.key
 
     def qsize(self):
         """Return the approximate size of the queue."""
@@ -99,7 +99,7 @@ class RedisClient(object):
     def get_value_list(self, queueSize):
         item_list = self.__db.lrange(self.key, 0, queueSize)
         return item_list
-print '---REDIS_DB---',conf.REDIS_DB
+# print '---REDIS_DB---',conf.REDIS_DB
 print '---redis_host--',conf.REDIS_HOST
 r = RedisClient(conf.REDIS_DB, host='127.0.0.1', password='aicyber', port=conf.REDIS_PORT, db=0)
 if __name__ == '__main__':
