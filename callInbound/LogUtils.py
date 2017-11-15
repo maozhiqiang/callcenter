@@ -9,7 +9,7 @@ try:
 except ImportError:
     codecs = None
 
-log_dir = "./logs"
+log_dir = "/usr/local/freeswitch/scripts/logs"
 log_name = "applog_callIn"
 
 _logger_init_lock = threading.Lock()
@@ -139,3 +139,4 @@ if __name__ == '__main__':
     logger = Logger()
     sss= '99999999999999wqeqweqweqwe999'
     logger.info("................"+sss)
+    logger.warn('9989898989')
