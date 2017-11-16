@@ -6,9 +6,19 @@ from flask import request
 from flask_cors import CORS
 from flask import Flask, render_template, request, redirect, jsonify,url_for, send_from_directory
 from werkzeug.utils import secure_filename
-
+import Config as config
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
+import models.UserModel as models
 app = Flask(__name__ ,template_folder='template')
 CORS(app)
+
+
+#====================================创建引擎===================================
+engine = create_engine(config.MYSQL_SERVER_URI, encoding='utf8', max_overflow=5)
+#====================================创建表单===================================
+models.Base.metadata.create_all(engine)
+
 
 FULL_AUDIO = None
 path = '/home/callcenter/recordvoice/{0}/bot_audio'
@@ -18,7 +28,7 @@ app.config['ALLOWED_EXTENSIONS'] = set(['mp3', 'wav','png','jpg'])
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
-
+#====================================== 上传服务=================================
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -58,6 +68,14 @@ def verify_path( path):
     if not os.path.exists(path):
         os.makedirs(path)
 
+@app.route('/uploads/<flowId>/<filename>')
+def uploaded_file(flowId,filename):
+    template_ = 'http://121.42.31.97/recordvoice/{0}/bot_audio/'
+    realypath = template_.format(flowId)
+    print ' .... realypath ....%s'%realypath
+    return send_from_directory(realypath, filename)
+
+#=================================================ORM 服务===========================================================
 @app.route('/aicyber/resource/')
 def index2():
     return render_template('form.html')
@@ -83,12 +101,7 @@ def run_sql_string():
 
 
 
-@app.route('/uploads/<flowId>/<filename>')
-def uploaded_file(flowId,filename):
-    template_ = 'http://121.42.31.97/recordvoice/{0}/bot_audio/'
-    realypath = template_.format(flowId)
-    print ' .... realypath ....%s'%realypath
-    return send_from_directory(realypath, filename)
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0",port=int("8081"),debug=True)
