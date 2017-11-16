@@ -1,11 +1,9 @@
 # -*- coding: UTF-8 -*-
 import time
 from DBPool import Postgresql_Pool as db_pool
-from LogUtils import Logger
-logger = Logger()
+
 
 def run_sql(sql):
-    logger.info('[sql]....%s' % sql)
     try:
         conn = db_pool.getConn()
         cursor = conn.cursor()
@@ -16,7 +14,6 @@ def run_sql(sql):
         print("  runsql ...except error %s" % e.message)
 
 def update_sql(sql):
-    logger.info('[sql]....%s' % sql)
     try:
         conn = db_pool.getConn()
         cursor = conn.cursor()
@@ -27,7 +24,6 @@ def update_sql(sql):
         print  ("  update_sql ...except error %s" % e.message)
 
 def get_one_sql(sql):
-    logger.info('[sql]....%s' % sql)
     try:
         conn = db_pool.getConn()
         cursor = conn.cursor()
@@ -40,7 +36,6 @@ def get_one_sql(sql):
         print   ("  get_one_sql ...except error %s" % e.message)
 
 def get_all_sql(sql):
-    #logger.info('[get_all_sql]....%s' % sql)
     try:
         conn = db_pool.getConn()
         cursor = conn.cursor()
