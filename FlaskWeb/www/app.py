@@ -37,12 +37,15 @@ def index2():
 def login():
     name = request.form.get('username')
     pwd = request.form.get('password')
+    print '------0------'
     user = session.query(User).filter_by( username = name).first()
-    print user.username
-    print user.confirm_password(pwd)
-    if user.confirm_password(pwd):
-        print '----------confirm_password------------',user.confirm_password(pwd)
-        return redirect(url_for('index2'))
+    print '------1------'
+    if user != None:
+        print user.username
+        print user.confirm_password(pwd)
+        if user.confirm_password(pwd):
+            print '----------confirm_password------------',user.confirm_password(pwd)
+            return redirect(url_for('index2'))
     return redirect(url_for('loginIndex'))
 
 @app.route('/aicyber/resource/api',methods=['POST'])
@@ -70,10 +73,11 @@ def run_sql_string():
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0",port=int("8081"),debug=True)
-    # u = User.query.filter(User.name == 'admin').first()
+    # u = session.query(User).filter_by(username = 'admin').first().delete()
     # print u
-    #
-    # u = User('admin', '123')
+    # u2 = session.query(User.id==27).one()
+    # print u2
+    # u = User('admin1', '123')
     # session.add(u)
     # session.commit()
     # print u.generate_token()
