@@ -37,16 +37,16 @@ class WebApi:
     def getText(self,file):
         # wav16file = self.converTowav(file)
         token = r.get("token")
-        print '.....redis ......token',token
+        # print '.....redis ......token',token
         if token == None:
             token = self.getToken()
             r.setex("token", token, 7200)
             print 'redis cache  set token  %s'%token
             token = r.get("token")
-        #requrl = "http://openapi.openspeech.cn/webapi/iat.do?svc=iat&token="+ str(token)+"&aue=raw&ent=sms16k&auf=audio/L16;rate=16000"
-        requrl = "http://openapi.openspeech.cn/webapi/iat.do?svc=iat&token=" + str(token) + "&aue=raw&ent=sms16k&auf=audio/L16;rate=8000"
+        # requrl = "http://openapi.openspeech.cn/webapi/iat.do?svc=iat&token="+ str(token)+"&aue=raw&ent=sms16k&auf=audio/L16;rate=16000"
+        requrl = "http://openapi.openspeech.cn/webapi/iat.do?svc=iat&token=" + str(token) + "&aue=raw&ent=sms8k&auf=audio/L16;rate=8000"
         file_data = open(file, 'rb')
-        body_base64 = base64.b64encode(file_data.read())
+        body_base64 = base64.standard_b64encode(file_data.read())
         file_data.close()
         Xpar = "YXBwaWQ9NTk1ZGEwYWE="
         headers = {"Content-Type": "binary", "X-Par": Xpar}
@@ -55,7 +55,7 @@ class WebApi:
         response = conn.getresponse()
         res = response.read().decode('utf-8')
         body_base64_decode = base64.b64decode(res.encode(encoding="utf-8")).decode()
-        print"body_base64decode : {}".format(body_base64_decode)
+        # print"body_base64decode : {}".format(body_base64_decode)
         info = json.loads(body_base64_decode)
         return info
 
@@ -67,17 +67,29 @@ class WebApi:
         seg.export(wavfilename, format="wav")
         return wavfilename
 
+def eachFile(filepath):
+    import os
+    pathDir =  os.listdir(filepath)
+    for allDir in pathDir:
+        child = os.path.join('%s%s' % (filepath, allDir))
+        print child.decode('gbk') # .decode('gbk')是解决中文显示乱码问题
+        result = bdr.getText(child.decode('gbk'))  ### 音频文件路径
+        if result['ret'] == 0:
+             print '---------------',result['result']
+
 vc = WebApi()
 if __name__ == "__main__":
-
+    import  glob
     bdr = WebApi()
     # for num in range(4):
-    start = time.time()
+    # start = time.time()
+    # eachFile('/mnt/aicyber_voice/8k/')
+    # file =glob()
     # result = bdr.getText('/mnt/asr/asr/15900282168_in_4_20170810113514.wav' )    ### 音频文件路径
-    result = bdr.getText('/mnt/asr/testqwqw/18522611368_in_1_20171110104327.wav')  ### 音频文件路径
-    end = time.time()
-    print end-start
-
-    if result['ret'] == 0:
-        print '---------------',result['result']
+    # result = bdr.getText('/mnt/aicyber_voice/13699110742_in_8_20171119105302.wav')  ### 音频文件路径
+    # end = time.time()
+    # print end-start
+    #
+    # if result['ret'] == 0:
+    #     print '---------------',result['result']
 
