@@ -18,26 +18,27 @@ ahq_host_sql = " select * from fs_host where id = {0}  "
 #freeswitch 呼叫代理
 class Proxy(object):
     def __init__(self, host):
-        self.host_id = host[0]
-        self.line_name = host[1]
-        self.province = host[2]
-        self.city = host[3]
-        self.ip = str(host[4])
-        self.port = host[5]
-        self.gateway = str(host[6])
+        self.host_id = host.id
+        self.line_name = host.line_name
+        self.province = host.province
+        self.city = host.city
+        self.ip = str(host.ip)
+        self.port = host.port
+        self.gateway = str(host.relay_account)
         print '[ gateway ----> %s ] '% self.gateway
-        self.password = str(host[7])
-        self.line_max = host[9]
+        self.password = str(host.relay_password)
+        self.line_max = host.line_num
         self.conn = ESL.ESLconnection(self.ip, self.port, self.password)
+        print '%s  conn.connected %s'%(self.ip,self.conn.connected)
         conn_status = 'success' if self.conn.connected else 'fail'
-        print('Connect fs host: %s at %s:%d，%s' % (self.passowrd, self.ip, self.port, conn_status))
+        print('Connect fs host: %s at %s:%d，%s' % (self.password, self.ip, self.port, conn_status))
 
     def call(self, item):
-        task_id = item[3]
-        call_id = item[0]
-        uuid = str(item[2])
-        number = str(item[1])
-        flow_id = str(item[5])
+        task_id = item.task_id
+        call_id = item.id
+        uuid = str(item.channal_uuid)
+        number = str(item.cust_number)
+        flow_id = str(item.flow_id)
         is_success = self.fs_api(uuid=uuid, number=number, task_id=task_id, flow_id=flow_id, call_id=call_id,
                                  host_id=self.host_id, gateway=self.gateway)
         logger.error('[  call is_success = %s ]'%is_success)
@@ -89,7 +90,7 @@ class CallManager(object):
             for item in list_call_number:
                 self.list_num = self.list_num-1
                 print ('[ for in -- self.list_num is ].....%s'%self.list_num)
-                host_id = item[7]
+                host_id = item.host_id
                 self.prepare_call(item,host_id)
             self.flg = True
 
@@ -115,8 +116,8 @@ class ProxyFactory(object):
         self.load_proxy()
 
     def load_proxy(self):
-        list_host =db.get_all_sql(get_host_sql)
-        for host in list_host:#循环 host列表
+        list_host_class =db.get_all_sql(get_host_sql)
+        for host in list_host_class:#循环 host列表
             proxy = Proxy(host)
             self.proxy_list.append(proxy)
 

@@ -7,7 +7,7 @@ from LogUtils import Logger
 logger = Logger()
 
 def run_sql(sql):
-    logger.info('[sql]....%s' % sql)
+    logger.info('[sql__run]....%s' % sql)
     try:
         conn = db_pool.getConn()
         cursor = conn.cursor()
@@ -18,7 +18,7 @@ def run_sql(sql):
         print("  runsql ...except error %s" % e.message)
 
 def update_sql(sql):
-    logger.info('[sql]....%s' % sql)
+    logger.info('[sql__update]....%s' % sql)
     try:
         conn = db_pool.getConn()
         cursor = conn.cursor()
@@ -29,7 +29,7 @@ def update_sql(sql):
         print  ("  update_sql ...except error %s" % e.message)
 
 def get_one_sql(sql):
-    logger.info('[sql]....%s' % sql)
+    logger.info('[sql__get_one]....%s' % sql)
     try:
         conn = db_pool.getConn()
         cursor = conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor)
@@ -72,8 +72,19 @@ if __name__ == '__main__':
     # print info
     #
     sql = 'select * from fs_host'
-    result = get_one_sql(sql)
-    print  result
+    result = get_all_sql(sql)
+    print  len(result)
+
+    for item in result:
+        print item.city
+        print 50*'--'
+        # for key in item.items():
+        #     print key[0]+':'+str(key[1])
+
+
+
+
+
     # print  '\n'
     # print '接通时间',result[0]
     # print '挂机时间',result[1]

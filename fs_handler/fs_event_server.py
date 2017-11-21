@@ -67,10 +67,10 @@ def event_processor(event_queue):
         if event['event_name'] == 'CHANNEL_CREATE':
             sql = cc_sql.format(time_at, event['channal_uuid'])
             logger.info('[sql]:........CHANNEL_CREATE........ %s'%sql)
-            db.run_sql(sql)
+            db.update_sql(sql)
             #更新fs_host 线路数+1
             host_sql = chc_update_line.format(event['host_id'])
-            logger.info('[sql]:........CHANNEL_CREATE.. table...host line+1...... %s' % sql)
+            logger.info('[sql]:........CHANNEL_CREATE.. table...host line+1...... %s' % host_sql)
             db.update_sql(host_sql)
 
         elif event['event_name'] == 'CHANNEL_ANSWER':
