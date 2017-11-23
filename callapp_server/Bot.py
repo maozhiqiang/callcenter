@@ -207,7 +207,7 @@ class IVRBase(object):
             create_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
             filename = self.caller_in_wav.format(self.in_count, self.__sessionId)
             self.in_count += 1
-            cmd = "200 600 {0} 6000 10000 100".format(filename)
+            cmd = "200 600 {0} 6000 10000 0".format(filename)
             #cmd = "{0} 4000".format(filename)
             self.session.execute("vad", cmd)
             endTime = time.time()

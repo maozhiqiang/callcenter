@@ -43,8 +43,8 @@ class WebApi:
             r.setex("token", token, 7200)
             print 'redis cache  set token  %s'%token
             token = r.get("token")
-        # requrl = "http://openapi.openspeech.cn/webapi/iat.do?svc=iat&token="+ str(token)+"&aue=raw&ent=sms16k&auf=audio/L16;rate=16000"
-        requrl = "http://openapi.openspeech.cn/webapi/iat.do?svc=iat&token=" + str(token) + "&aue=raw&ent=sms8k&auf=audio/L16;rate=8000"
+        requrl = "http://openapi.openspeech.cn/webapi/iat.do?svc=iat&token="+ str(token)+"&aue=raw&ent=sms16k&auf=audio/L16;rate=16000"
+        # requrl = "http://openapi.openspeech.cn/webapi/asr.do?svc=iat&token=" + str(token) + "&aue=raw&ent=sms8k&auf=audio/L16;rate=8000"
         file_data = open(file, 'rb')
         body_base64 = base64.standard_b64encode(file_data.read())
         file_data.close()
@@ -82,14 +82,14 @@ if __name__ == "__main__":
     import  glob
     bdr = WebApi()
     # for num in range(4):
-    # start = time.time()
+    start = time.time()
     # eachFile('/mnt/aicyber_voice/8k/')
     # file =glob()
     # result = bdr.getText('/mnt/asr/asr/15900282168_in_4_20170810113514.wav' )    ### 音频文件路径
-    # result = bdr.getText('/mnt/aicyber_voice/13699110742_in_8_20171119105302.wav')  ### 音频文件路径
-    # end = time.time()
-    # print end-start
-    #
-    # if result['ret'] == 0:
-    #     print '---------------',result['result']
+    result = bdr.getText('/mnt/LOG/777.wav')  ### 音频文件路径
+    end = time.time()
+    print end-start
+
+    if result['ret'] == 0:
+        print '---------------',result['result']
 

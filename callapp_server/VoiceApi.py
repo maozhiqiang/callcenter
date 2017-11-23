@@ -29,6 +29,7 @@ class BaiduVoiceClient(object):
         return self.token_cache[0]
 
     def tts(self, text, filename):
+        print self.get_token()
         params = {
             'tex': text,
             'lan': 'zh',
@@ -78,10 +79,8 @@ if __name__ == "__main__":
     import  time
     start = time.time()
     s = "欢迎您的来电，呼叫人工请按 2，呼叫智能客服请按 3，重复收听请按 0!"
-    r = bc.tts(s, '/tmp/11_test_tts.wav')
-    end = time.time()
-    print r
-    print (end -start)
+    # r = bc.tts(s, '/tmp/11_test_tts.wav')
+
     # #--------
     # import time
     # for num in range(5):
@@ -94,6 +93,9 @@ if __name__ == "__main__":
     #     print (end-start)
     # #--------
     #a-b
-    # file = './11.05_12.6.wav'
-    # r = bc.asr(file)
-    # print r['result'][0]
+    file = '/mnt/LOG/15900282168_in_4_20171120180818.wav'
+    r = bc.asr(file)
+    print r['result'][0]
+    end = time.time()
+    # print r
+    print (end - start)
