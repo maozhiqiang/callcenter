@@ -4,9 +4,8 @@ import json
 import Config
 import Md5Utils as md5
 from LogUtils import Logger
-from  PsqlUtils import DBHelper
-db = DBHelper()
 logger = Logger()
+print '[ flow url : %s]'%Config.flow_host
 #开始流程
 def flowHandler(input,userId,flowId='899f04f0fef39dab0fbf975d171856d6'):
     secret = md5.get_sha1_value(flowId + Config.key + userId)
@@ -60,8 +59,8 @@ def closeFlow(userId,flowId,channal_uuid):
 
 if __name__ == '__main__':
     pass
-    # result = flowHandler('你好', '15900282168')
-    # print  result
+    result = flowHandler('你好', '15900282168')
+    print  result
     # pass
     # closeFlow('15900282168','7267307c-c95e-4879-89e6-b0dbb50a6c25')
 

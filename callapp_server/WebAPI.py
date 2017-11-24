@@ -37,7 +37,7 @@ class WebApi:
     def getText(self,file):
         # wav16file = self.converTowav(file)
         token = r.get("token")
-        # print '.....redis ......token',token
+        print '.....redis ......token',token
         if token == None:
             token = self.getToken()
             r.setex("token", token, 7200)
@@ -85,8 +85,8 @@ if __name__ == "__main__":
     start = time.time()
     # eachFile('/mnt/aicyber_voice/8k/')
     # file =glob()
-    # result = bdr.getText('/mnt/asr/asr/15900282168_in_4_20170810113514.wav' )    ### 音频文件路径
-    result = bdr.getText('/mnt/LOG/777.wav')  ### 音频文件路径
+    result = bdr.getText('/mnt/asr/asr/15900282168_in_4_20170810113514.wav' )    ### 音频文件路径
+    # result = bdr.getText('/mnt/LOG/777.wav')  ### 音频文件路径
     end = time.time()
     print end-start
 

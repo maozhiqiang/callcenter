@@ -128,16 +128,16 @@ class IVRBase(object):
     def update_full_path(self, path, channal_uuid):
         record_fpath = conf.server_url + path
         print 'record_fpath:.....%s....' % record_fpath
-        # sql = "update fs_call set full_record_fpath ='{0}' where channal_uuid ='{1}'".format(record_fpath, channal_uuid)
-        # try:
-        #     conn = db_pool.getConn()
-        #     cursor = conn.cursor()
-        #     result = cursor.execute(sql)
-        #     conn.commit()
-        #     db_pool.close(cursor, conn)
-        #     logger.info("update full_path result  %s" % str(result))  # 最后插入行的主键ID
-        # except Exception as e:
-        #     logger.error('update_full_path except error is %s'% e.message )
+        sql = "update fs_call set full_record_fpath ='{0}' where channal_uuid ='{1}'".format(record_fpath, channal_uuid)
+        try:
+            conn = db_pool.getConn()
+            cursor = conn.cursor()
+            result = cursor.execute(sql)
+            conn.commit()
+            db_pool.close(cursor, conn)
+            logger.info("update full_path result  %s" % str(result))  # 最后插入行的主键ID
+        except Exception as e:
+            logger.error('update_full_path except error is %s'% e.message )
         objdata = {}
         objdata['mark'] = 'update'
         objdata['record_fpath'] = record_fpath

@@ -11,7 +11,7 @@ logger = Logger()
 def rabbitmqClint(content):
     credentials = pika.PlainCredentials('admin', '123123')
     connection = pika.BlockingConnection(pika.ConnectionParameters(conf.rabbitmq_server, 5672, '/', credentials))
-    # logger.info('-----rabbitmq ----send conent %s'%content)
+    logger.info('-----rabbitmq ----send conent %s'%content)
     channel = connection.channel()
 
     # 声明queue
@@ -28,7 +28,7 @@ def rabbitmqClint(content):
     # print(" [x] Sent '%s' "%content)
     connection.close()
 if __name__ == '__main__':
-    # sql = 'INSERT INTO fs_call_replay(who, text, record_fpath,  call_id,resp_param)VALUES (\'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\')'.format(
-    #         45, 454, 454, 454, 4545, 4545)
-    # rabbitmqClint(sql)
+    sql = 'INSERT INTO fs_call_replay(who, text, record_fpath,  call_id,resp_param)VALUES (\'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\')'.format(
+            45, 454, 454, 454, 4545, 4545)
+    rabbitmqClint(sql)
     pass
