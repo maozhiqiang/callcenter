@@ -85,11 +85,11 @@ if __name__ == "__main__":
     start = time.time()
     # eachFile('/mnt/aicyber_voice/8k/')
     # file =glob()
-    result = bdr.getText('/mnt/asr/asr/15900282168_in_4_20170810113514.wav' )    ### 音频文件路径
-    # result = bdr.getText('/mnt/LOG/777.wav')  ### 音频文件路径
+    # result = bdr.getText('/mnt/asr/asr/15900282168_in_4_20170810113514.wav' )    ### 音频文件路径
+    result = bdr.getText('/mnt/asr/asr/15522696116_in_2_20171127154429.wav')  ### 音频文件路径
     end = time.time()
     print end-start
-
+    print result
     if result['ret'] == 0:
         print '---------------',result['result']
 

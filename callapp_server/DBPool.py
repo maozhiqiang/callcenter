@@ -1,7 +1,8 @@
 # -*- encoding: utf-8 -*-
 import psycopg2
 import psycopg2.extras
-import Config as conf
+#import Config as conf
+import  tools.config as conf
 DATABASE_HOST = conf.POSTGRESQL_HOST
 DATABASE_PORT = conf.POSTGRESQL_PORT
 DATABASE_NAME = conf.POSTGRESQL_NAME

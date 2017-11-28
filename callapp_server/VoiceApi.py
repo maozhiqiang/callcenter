@@ -93,7 +93,7 @@ if __name__ == "__main__":
     #     print (end-start)
     # #--------
     #a-b
-    file = '/mnt/LOG/15900282168_in_4_20171120180818.wav'
+    file = '/mnt/asr/asr/18522611368_in_5_20171101153938.wav'
     r = bc.asr(file)
     print r['result'][0]
     end = time.time()

@@ -3,9 +3,10 @@ import httplib
 import json
 import Config
 import Md5Utils as md5
+from tools import config
 from LogUtils import Logger
 logger = Logger()
-print '[ flow url : %s]'%Config.flow_host
+#print '[ flow url : %s]'%Config.flow_host
 #开始流程
 def flowHandler(input,userId,flowId='899f04f0fef39dab0fbf975d171856d6'):
     secret = md5.get_sha1_value(flowId + Config.key + userId)
@@ -14,8 +15,10 @@ def flowHandler(input,userId,flowId='899f04f0fef39dab0fbf975d171856d6'):
         values = {'secret': secret, 'flow_id': flowId, 'user_id': userId, 'input': input}
         params = json.dumps(values)
         headers = {"Content-type": "application/json"}
-        httpClient = httplib.HTTPConnection(Config.flow_host, Config.flow_port, timeout=30)
-        httpClient.request("POST", Config.flow_url, params, headers)
+        # httpClient = httplib.HTTPConnection(Config.flow_host, Config.flow_port, timeout=30)
+        # httpClient.request("POST", Config.flow_url, params, headers)
+        httpClient = httplib.HTTPConnection(config.flow_host, config.flow_port, timeout=30)
+        httpClient.request("POST", config.flow_url, params, headers)
         response = httpClient.getresponse()
         if response.status == 200:
             jsonStr = response.read()
@@ -32,18 +35,18 @@ def flowHandler(input,userId,flowId='899f04f0fef39dab0fbf975d171856d6'):
         if httpClient:
             httpClient.close()
     return result
-#结束刘海曾
+#结束当前电话
 def closeFlow(userId,flowId,channal_uuid):
-    # list = db.getFlowIdAndAppId(userId,channal_uuid)
-    # flowId = list[4]
     secret = md5.get_sha1_value(flowId + Config.key + userId)
     httpClient = None
     try:
         values = {'secret': secret, 'flow_id': flowId, 'user_id': userId}
         params = json.dumps(values)
         headers = {"Content-type": "application/json"}
-        httpClient = httplib.HTTPConnection(Config.flow_host, Config.flow_port, timeout=30)
-        httpClient.request("POST", Config.flow_close_url, params, headers)
+        # httpClient = httplib.HTTPConnection(Config.flow_host, Config.flow_port, timeout=30)
+        # httpClient.request("POST", Config.flow_close_url, params, headers)
+        httpClient = httplib.HTTPConnection(config.flow_host, config.flow_port, timeout=30)
+        httpClient.request("POST", config.flow_url, params, headers)
         response = httpClient.getresponse()
         if response.status == 200:
             jsonStr = response.read()
@@ -60,7 +63,7 @@ def closeFlow(userId,flowId,channal_uuid):
 if __name__ == '__main__':
     pass
     result = flowHandler('你好', '15900282168')
-    print  result
+    # print  result
     # pass
     # closeFlow('15900282168','7267307c-c95e-4879-89e6-b0dbb50a6c25')
 

@@ -11,7 +11,7 @@ server="121.42.31.97"
 server_url = ""
 #=====================Flow Config start==========================
 #start flow
-flow_host = '123.59.82.44'
+flow_host = '106.75.61.164'
 flow_port = 8080
 flow_url = "/flow/execute.do"
 #closeflow
@@ -29,7 +29,7 @@ REDIS_DB = 'cache'
 REDIS_PORT = 6379
 #REDIS_HOST = '10.165.51.223'#'121.42.36.138'
 # REDIS_HOST = '10.31.92.12'#''118.190.166.134
-REDIS_HOST = '118.190.166.165'#'localhost'
+REDIS_HOST = '192.168.0.183'#'localhost'
 
 #======================postgresql================================
 #POSTGRESQL_HOST = "192.168.0.183" #要链接的服务器的IP地址，local-IP
