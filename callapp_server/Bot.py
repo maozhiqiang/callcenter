@@ -7,12 +7,10 @@ import time
 import Md5Utils
 import FlowHandler
 import datetime
-import Config as conf
 import rabbitMQ_produce as rabbitmq
 import VoiceApi as voice_api
 import RedisHandler as redis
 from freeswitch import *
-from PsqlUtils import DBHelper
 from LogUtils import Logger
 import WebAPI as xunfei_asr
 from pydub import AudioSegment
@@ -20,17 +18,11 @@ from pydub import AudioSegment
 reload(voice_api)
 reload(xunfei_asr)
 reload(redis)
-
-db = DBHelper()
 logger = Logger()
 
 def hangup_hook(session, what):
-    consoleLog("info", "hangup hook for %s!!\n\n" % what)
-    channal_uuid = session.getVariable(b"origination_uuid")
     number = session.getVariable(b"caller_id_number")
     consoleLog("info", "hangup hook for %s!! \n\n" % number)
-    # FlowHandler.closeFlow(number, channal_uuid)  # 挂断电话后结束此次会话流程
-    logger.info(".....关闭流程.......")
     return
 
 def input_callback(session, what, obj):
@@ -80,7 +72,7 @@ class IVRBase(object):
 
     def closedFlow(self):
         try:
-            print '------*%s**%s*****%s-----'%(self.caller_number,self.flow_id, self.channal_uuid)
+            print '---caller_number---*%s*flow_id*%s***channal_uuid**%s-----'%(self.caller_number,self.flow_id, self.channal_uuid)
             FlowHandler.closeFlow(self.caller_number,self.flow_id, self.channal_uuid)
             consoleLog("info", "*****FlowHandler.closeFlow!!*****\n\n")
         except Exception as e:
@@ -117,8 +109,7 @@ class IVRBase(object):
         f.close()
         return wavfilename
 
-    def update_full_path(self, path, channal_uuid):
-        record_fpath = conf.server_url + path
+    def update_full_path(self, record_fpath, channal_uuid):
         print 'record_fpath:(update).....%s....' % record_fpath
         objdata = {}
         objdata['mark'] = 'update'
@@ -129,7 +120,6 @@ class IVRBase(object):
         rabbitmq.rabbitmqClint(jsonStr)
 
     def record_chat_run(self, who, text, record_fpath, create_at, call_id, jsonStr):
-        record_fpath = conf.server_url+record_fpath
         logger.error('record_fpath(record):.....%s....'%record_fpath)
         objdata = {}
         objdata['mark'] = 'insert'
@@ -187,9 +177,8 @@ class IVRBase(object):
         create_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         file_out = self.caller_out_mp3.format(self.out_count, self.__sessionId)
         self.out_count += 1
-        filename = self.get_voice_wav(text, file_out)  # 返回wav文件格式 /home/callcenter/recordvoice/{flow_id}/bot_audio/number_out_{0}_{1}.mp3
+        filename = self.get_voice_wav(text, file_out)
         if filename:
-            # cache_value = filename.split('')
             ss_flag = self.flow_id + '_' + text
             key =Md5Utils.get_md5_value(ss_flag)
             logger.info('......setCache....%s'%key)
@@ -208,7 +197,6 @@ class IVRBase(object):
             filename = self.caller_in_wav.format(self.in_count, self.__sessionId)
             self.in_count += 1
             cmd = "200 600 {0} 6000 10000 0".format(filename)
-            #cmd = "{0} 4000".format(filename)
             self.session.execute("vad", cmd)
             endTime = time.time()
             logger.error("vad  time  : %s " % (endTime - startTime))
