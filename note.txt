@@ -225,6 +225,8 @@ daiwei198229
 
 28554401 293695jqrcs 中继线
 
+115.29.208.158  账号28554401--28554404 密码 293695jqrcs
+
 sofia profile external rescan reloadxml
 
 freeswitch -nonat -nc
@@ -334,13 +336,30 @@ ucloud freeswitch : 106.75.47.65  ubuntu   ubuntu330M/aicyber123456
 
 postgresql: psql -U root -h 10.9.90.133 call  password:z8asuidnaicyber
 
+#===================================VAD  参数说明==========================================================================================
+5 参数修改说明
 
+cmd = "200 600 {0} 6000 10000 100".format(filename)
 
+<min_speak_ms> <min_pause_ms> <recordfile> [<max_waiting_ms>] [max_recording_ms] [playfile] [play_retry]
+min_speak_ms  检测到声音多久就认为开始说话
+min_pause_ms 检测到静音多久就认为说话停止
+recordfile 录音文件名
+max_waiting_ms 最大等待时间，就是多久没检测到声音就退出。
+max_recording_ms 最大录音长途
+playfile 放音文件，不需要放音可以不设置这个参数。
+play_retry 重播次数， 不重播设置0
 
+通道变量
+vad_param_error 参数错误，最少需要 <min_speak_ms> <min_pause_ms> <recordfile> 3个参数
+vad_max_recording_time 录音时间超过 max_recording_ms ，说话还没停止。
+vad_timeout 等待超过 max_waiting_ms  还没开始说话
+vad_createrecordfile_error 创建录音文件失败
 
+#===============================宁波 中继线============================================================================================
 
-
-
+全国         01011028  VITEST    121.43.157.110  5060  30线
+南京线打江苏  02511028  VITEST    121.43.157.110  5060   30线
 
 
 
