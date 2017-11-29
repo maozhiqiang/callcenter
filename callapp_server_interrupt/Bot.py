@@ -4,7 +4,6 @@ import os
 import wave
 import json
 import time
-import commands
 import Md5Utils
 import FlowHandler
 import datetime
@@ -26,13 +25,8 @@ db = DBHelper()
 logger = Logger()
 
 def hangup_hook(session, what):
-    consoleLog("info", "hangup hook for %s!!\n\n" % what)
-    channal_uuid = session.getVariable(b"origination_uuid")
     number = session.getVariable(b"caller_id_number")
     consoleLog("info", "hangup hook for %s!! \n\n" % number)
-    logger.error('---------channal_uuid  %s  --------- number %s'%(channal_uuid,number))
-    # FlowHandler.closeFlow(number, channal_uuid)  # 挂断电话后结束此次会话流程
-    # logger.info(".....关闭流程.......")
     return
 
 def input_callback(session, what, obj):
