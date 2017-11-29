@@ -57,53 +57,33 @@ class IVRBase(object):
         self.human_audio = '/home/callcenter/recordvoice/{0}/human_audio/'
         self.all_audio = '/home/callcenter/recordvoice/{0}/all_audio/'
         self.bot_audio = '/home/callcenter/recordvoice/{0}/bot_audio/'
-        self.checkCallNumber()
         self.playbackaudio = None
-        self.getFlowIdByUUID()
         self.init_file_path()
 
     def init_file_path(self):
+        self.__sessionId = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
         self.human_audio = self.human_audio.format(self.flow_id)
         self.all_audio = self.all_audio.format(self.flow_id)
         self.bot_audio = self.bot_audio.format(self.flow_id)
-        logger.debug('root_file ......%s' %self.bot_audio)
+        logger.debug('root_file ......%s' % self.bot_audio)
         if not os.path.exists(self.human_audio):
             os.makedirs(self.human_audio)
         if not os.path.exists(self.bot_audio):
             os.makedirs(self.bot_audio)
         if not os.path.exists(self.all_audio):
-            logger.info('mkdirs ......%s'%self.all_audio)
+            logger.info('mkdirs ......%s' % self.all_audio)
             os.makedirs(self.all_audio)
 
-    def checkCallNumber(self):
+    def closedFlow(self):
         try:
-            call_number = db.getNumberById(self.channal_uuid)
-            if call_number == None:
-                logger.error('无效的手机号，channal_uuid %s' % self.channal_uuid)
-                self.session.hangup()
-                return
-            else:
-                self.caller_number = call_number
+            print '---caller_number---*%s*flow_id*%s***channal_uuid**%s-----' % (
+            self.caller_number, self.flow_id, self.channal_uuid)
+            FlowHandler.closeFlow(self.caller_number, self.flow_id, self.channal_uuid)
+            consoleLog("info", "*****FlowHandler.closeFlow!!*****\n\n")
         except Exception as e:
-            logger.error('getFlowIdByUUID except error %s' % e.message)
+            logger.error('FlowHandler.closeFlow!! except error %s' % e.message)
             self.session.hangup()
             return
-
-    def getFlowIdByUUID(self):
-        try:
-            logger.info('number is %s ... channal_uuid is %s ' % (self.caller_number, self.channal_uuid))
-            list = db.getFlowIdAndAppId(self.caller_number, self.channal_uuid)
-            if list == None:
-                self.session.hangup()
-                consoleLog("info", "hangup hook for list is %s!!\n\n" % list)
-            else:
-                self.flow_id = list[4]
-                self.fs_call_id = list[0]
-                self.__sessionId = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
-                FlowHandler.closeFlow(self.caller_number, self.channal_uuid)
-                consoleLog("info", "*****FlowHandler.closeFlow!!*****\n\n")
-        except Exception as e:
-            logger.error('getFlowIdByUUID except error %s' % e.message)
 
     def get_voice_wav(self, text, filename):
         r = voice_api.bc.tts(text, filename)
