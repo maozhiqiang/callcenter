@@ -7,12 +7,10 @@ import time
 import Md5Utils
 import FlowHandler
 import datetime
-import Config as conf
 import rabbitMQ_produce as rabbitmq
 import VoiceApi as voice_api
 import RedisHandler as redis
 from freeswitch import *
-from PsqlUtils import DBHelper
 from LogUtils import Logger
 import WebAPI as xunfei_asr
 from pydub import AudioSegment
@@ -21,7 +19,6 @@ reload(voice_api)
 reload(xunfei_asr)
 reload(redis)
 
-db = DBHelper()
 logger = Logger()
 
 def hangup_hook(session, what):
