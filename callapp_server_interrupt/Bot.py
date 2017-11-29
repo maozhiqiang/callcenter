@@ -101,7 +101,7 @@ class IVRBase(object):
         data = fp.read()
         fp.close()
         aud = io.BytesIO(data)
-        sound = AudioSegment.from_file(aud, format='mp3')
+        sound = AudioSegment.from_mp3(aud)
         raw_data = sound._data
         l = len(raw_data)
         f = wave.open(wavfilename, 'wb')
@@ -111,13 +111,9 @@ class IVRBase(object):
         f.setnframes(l)
         f.writeframes(raw_data)
         f.close()
-        # cmd = 'sox   ' + wavfilename + '  -r 8000 -c 1 -e signe ' + wavfilename
-        # out = commands.getoutput(cmd)
-        # logger.info(' cmd  ===>> 16000 wav to 8000 wav %s' % out)
         return wavfilename
 
     def update_full_path(self, path, channal_uuid):
-        #record_fpath = conf.server_url + path
         record_fpath = path
         print 'record_fpath:.....%s....' % record_fpath
         objdata = {}
@@ -129,7 +125,6 @@ class IVRBase(object):
         rabbitmq.rabbitmqClint(jsonStr)
 
     def record_chat_run(self, who, text, record_fpath, create_at, call_id, jsonStr):
-        #record_fpath = conf.server_url+record_fpath
         record_fpath = record_fpath
         logger.error('record_fpath:.....%s....'%record_fpath)
         objdata = {}
@@ -158,7 +153,6 @@ class IVRBase(object):
                 if item['output_resource'] != '':
                     filename = "{0}".format(item['output_resource'])
                     path = self.bot_audio+filename
-                    # # filename = '/home/callcenter/recordvoice/{flow_id}/bot_audio/'+filename
                     logger.info('-------------playback  %s' % filename)
                     self.playbackaudio = path # 放音文件路径
                     realy_file_path = path.split('recordvoice')
@@ -192,7 +186,6 @@ class IVRBase(object):
         create_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         file_out = self.caller_out_mp3.format(self.out_count, self.__sessionId)
         self.out_count += 1
-        # 返回wav文件格式 /home/callcenter/recordvoice/{flow_id}/bot_audio/number_out_{0}_{1}.mp3
         filename = self.get_voice_wav(text, file_out)
         if filename:
             ss_flag = self.flow_id + '_' + text
@@ -214,11 +207,9 @@ class IVRBase(object):
                 create_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
                 filename = self.caller_in_wav.format(self.in_count, self.__sessionId)
                 self.in_count += 1
-                #playback_wav = '/home/callcenter/recordvoice/467cbf8a418b3e98386f0c4d552e3f37/bot_audio/42.wav'
-                cmd = "100 400 {0} 4000 10000 0 {1} 0".format(filename, self.playbackaudio )
+                cmd = "200 400 {0} 4000 10000 0 {1} 0".format(filename, self.playbackaudio )
                 consoleLog("info", "excute vad cmd  %s!! \n\n" % cmd)
                 # cmd = "100 400 {0} 4000 10000 100".format(filename)
-                # cmd = "{0} 4000".format(filename)
                 self.session.execute("vad", cmd)
                 self.playbackaudio = ''
                 endTime = time.time()
