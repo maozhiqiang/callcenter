@@ -12,4 +12,4 @@ MYSQL_SERVER_DATABASE='mytest'
 MYSQL_SERVER_USERNAME='root'
 MYSQL_SERVER_PASSWORD='mysql'
 MYSQL_SERVER_CHARSET = "utf8"
-MYSQL_SERVER_URI='mysql+pymysql://root:mysql@127.0.0.1:3306/mytest'
+MYSQL_SERVER_URI='mysql+pymysql://root:Aicyber201415926@123.59.82.44:4040/flask_db?charset=utf8'

@@ -1,5 +1,6 @@
 # coding=utf-8
-
+import sys
+sys.path.append('..')
 import config
 import Models
 from Models import User
@@ -25,13 +26,13 @@ session = scoped_session(session_factory)
 Models.Base.metadata.create_all(engine)
 
 
-@app.route('/aicyber/resource/index',methods=['GET'])
+@app.route('/',methods=['GET'])
 def loginIndex():
     return render_template('login.html')
 
 @app.route('/aicyber/resource')
 def index2():
-    return render_template('form.html')
+    return render_template('Tables.html')
 
 @app.route('/aicyber/resource/login',methods=['POST'])
 def login():
@@ -39,13 +40,14 @@ def login():
     pwd = request.form.get('password')
     print '------0------'
     user = session.query(User).filter_by( username = name).first()
-    print '------1------'
+    print '------1------',user
     if user != None:
         print user.username
         print user.confirm_password(pwd)
         if user.confirm_password(pwd):
             print '----------confirm_password------------',user.confirm_password(pwd)
             return redirect(url_for('index2'))
+
     return redirect(url_for('loginIndex'))
 
 @app.route('/aicyber/resource/api',methods=['POST'])
