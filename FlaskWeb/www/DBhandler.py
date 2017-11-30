@@ -1,5 +1,7 @@
 # -*- coding: UTF-8 -*-
 import time
+import psycopg2
+import psycopg2.extras
 from DBPool import Postgresql_Pool as db_pool
 
 
@@ -38,7 +40,7 @@ def get_one_sql(sql):
 def get_all_sql(sql):
     try:
         conn = db_pool.getConn()
-        cursor = conn.cursor()
+        cursor = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
         count = cursor.execute(sql, )
         conn.commit()
         list = cursor.fetchall()  # 获取所有数据

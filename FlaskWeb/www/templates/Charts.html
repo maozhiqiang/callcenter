@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Tables | Tables</title>
+    <title>Charts | Charts</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,9 +30,10 @@
             <a href="#" data-toggle="dropdown" data-step="1" data-intro="&lt;b&gt;Many styles&lt;/b&gt; and &lt;b&gt;colors&lt;/b&gt; be created for you. Let choose one and enjoy it!"
                 data-position="left" class="btn-theme-setting"><i class="fa fa-cog"></i></a>
             <div class="content-theme-setting">
-                <select id="sid" class="form-control">
-                    <option value = 'select_all'  selected="selected">SELECT</option>
-                    <option value = 'update' >UPDATE</option>
+                <select id="list-style" class="form-control">
+                    <option value="style1">Flat Squared style</option>
+                    <option value="style2">Flat Rounded style</option>
+                    <option value="style3" selected="selected">Flat Border style</option>
                 </select>
             </div>
         </div>
@@ -82,6 +83,38 @@
                 </ul>
             </div>
         </nav>
+            <!--BEGIN MODAL CONFIG PORTLET-->
+            <div id="modal-config" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">
+                                &times;</button>
+                            <h4 class="modal-title">
+                                Modal title</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend et nisl eget
+                                porta. Curabitur elementum sem molestie nisl varius, eget tempus odio molestie.
+                                Nunc vehicula sem arcu, eu pulvinar neque cursus ac. Aliquam ultricies lobortis
+                                magna et aliquam. Vestibulum egestas eu urna sed ultricies. Nullam pulvinar dolor
+                                vitae quam dictum condimentum. Integer a sodales elit, eu pulvinar leo. Nunc nec
+                                aliquam nisi, a mollis neque. Ut vel felis quis tellus hendrerit placerat. Vivamus
+                                vel nisl non magna feugiat dignissim sed ut nibh. Nulla elementum, est a pretium
+                                hendrerit, arcu risus luctus augue, mattis aliquet orci ligula eget massa. Sed ut
+                                ultricies felis.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" data-dismiss="modal" class="btn btn-default">
+                                Close</button>
+                            <button type="button" class="btn btn-primary">
+                                Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--END MODAL CONFIG PORTLET-->
         </div>
         <!--END TOPBAR-->
         <div id="wrapper">
@@ -95,7 +128,7 @@
                     <li><a href="/templates/dashboard.html"><i class="fa fa-tachometer fa-fw">
                         <div class="icon-bg bg-orange"></div>
                     </i><span class="menu-title">Dashboard</span></a></li>
-                    <li><a href="/templates/Layout.html"><i class="fa fa-desktop fa-fw">
+                    <li><a href="Layout.html"><i class="fa fa-desktop fa-fw">
                         <div class="icon-bg bg-pink"></div>
                     </i><span class="menu-title">Layouts</span></a>
                        
@@ -110,7 +143,7 @@
                     </i><span class="menu-title">Forms</span></a>
                       
                     </li>
-                    <li class="active"><a href="/templates/Tables.html"><i class="fa fa-th-list fa-fw">
+                    <li><a href="/templates/Tables.html"><i class="fa fa-th-list fa-fw">
                         <div class="icon-bg bg-blue"></div>
                     </i><span class="menu-title">Tables</span></a>
                           
@@ -140,7 +173,7 @@
                     </i><span class="menu-title">Email</span></a>
                       
                     </li>
-                    <li><a href="/templates/Charts.html"><i class="fa fa-bar-chart-o fa-fw">
+                    <li class="active"><a href="/templates/Charts.html"><i class="fa fa-bar-chart-o fa-fw">
                         <div class="icon-bg bg-orange"></div>
                     </i><span class="menu-title">Charts</span></a>
                        
@@ -158,61 +191,121 @@
                 <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                     <div class="page-header pull-left">
                         <div class="page-title">
-                            Tables</div>
+                            Charts</div>
                     </div>
                     <ol class="breadcrumb page-breadcrumb pull-right">
-                        <li><i class="fa fa-home"></i>&nbsp;<a href="/templates/dashboard.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li class="hidden"><a href="#">Tables</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li class="active">Tables</li>
+                        <li><i class="fa fa-home"></i>&nbsp;<a href="dashboard.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li class="hidden"><a href="#">Charts</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li class="active">Charts</li>
                     </ol>
                     <div class="clearfix">
                     </div>
                 </div>
                 <!--END TITLE & BREADCRUMB PAGE-->
-
                 <!--BEGIN CONTENT-->
                 <div class="page-content">
                     <div id="tab-general">
                         <div class="row mbl">
                             <div class="col-lg-12">
-
+                                
                                             <div class="col-md-12">
                                                 <div id="area-chart-spline" style="width: 100%; height: 300px; display: none;">
-                                                    999999999999
                                                 </div>
                                             </div>
+                                
                             </div>
 
                             <div class="col-lg-12">
-                            <div class="row">
-                    <div class="col-lg-6" style="">
-                        <div class="panel panel-yellow">
-                            <div class="panel-heading">Table Data</div>
-                            <div class="panel-body">
-                                <div class="form-group">
-                                                        <label for="inputMessage" class="control-label">
-                                                            INPUT SQL</label><textarea rows="5" class="form-control" id = 'textarea_01'  placeholder=" SELECT  * FROM FS_CALL ">
-                                    select * from fs_call limit 5
-                                </textarea></div>
-                                                    <div class="form-group mbn">
-                                                        <div class="checkbox">
-                                                             <button type="submit" class="btn btn-green btn-block btn-finish-sub">Finish</button>
-                                                        </div>
-                                                    </div>
+                              
+                                    
+                              <div class="row">
+                    <div class="col-lg-6">
+                        <div class="portlet box">
+                            <div class="portlet-header">
+                                <div class="caption">Line Chart</div>
+                                <div class="tools"><i class="fa fa-chevron-up"></i><i data-toggle="modal" data-target="#modal-config" class="fa fa-cog"></i><i class="fa fa-refresh"></i><i class="fa fa-times"></i></div>
+                            </div>
+                            <div class="portlet-body">
+                                <div id="line-chart" style="width: 100%; height:300px"></div>
+                            </div>
+                        </div>
+                        <div class="portlet box">
+                            <div class="portlet-header">
+                                <div class="caption">Bar Chart</div>
+                                <div class="tools"><i class="fa fa-chevron-up"></i><i data-toggle="modal" data-target="#modal-config" class="fa fa-cog"></i><i class="fa fa-refresh"></i><i class="fa fa-times"></i></div>
+                            </div>
+                            <div class="portlet-body">
+                                <div id="bar-chart" style="width: 100%; height:300px"></div>
+                            </div>
+                        </div>
+                        <div class="portlet box">
+                            <div class="portlet-header">
+                                <div class="caption">Area Chart</div>
+                                <div class="tools"><i class="fa fa-chevron-up"></i><i data-toggle="modal" data-target="#modal-config" class="fa fa-cog"></i><i class="fa fa-refresh"></i><i class="fa fa-times"></i></div>
+                            </div>
+                            <div class="portlet-body">
+                                <div id="area-chart" style="width: 100%; height:300px"></div>
+                            </div>
+                        </div>
+                        <div class="portlet box">
+                            <div class="portlet-header">
+                                <div class="caption">Pie Chart</div>
+                                <div class="tools"><i class="fa fa-chevron-up"></i><i data-toggle="modal" data-target="#modal-config" class="fa fa-cog"></i><i class="fa fa-refresh"></i><i class="fa fa-times"></i></div>
+                            </div>
+                            <div class="portlet-body">
+                                <div id="pie-chart" style="width: 100%; height:300px"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="portlet box">
+                            <div class="portlet-header">
+                                <div class="caption">Line Chart - Spline</div>
+                                <div class="tools"><i class="fa fa-chevron-up"></i><i data-toggle="modal" data-target="#modal-config" class="fa fa-cog"></i><i class="fa fa-refresh"></i><i class="fa fa-times"></i></div>
+                            </div>
+                            <div class="portlet-body">
+                                <div id="line-chart-spline" style="width: 100%; height:300px"></div>
+                            </div>
+                        </div>
+                        <div class="portlet box">
+                            <div class="portlet-header">
+                                <div class="caption">Bar Chart - Stack</div>
+                                <div class="tools"><i class="fa fa-chevron-up"></i><i data-toggle="modal" data-target="#modal-config" class="fa fa-cog"></i><i class="fa fa-refresh"></i><i class="fa fa-times"></i></div>
+                            </div>
+                            <div class="portlet-body"><h4 class="block-heading">Bar Chart - Stack</h4>
 
+                                <div id="bar-chart-stack" style="width: 100%; height:300px"></div>
                             </div>
                         </div>
-                        <div class="panel panel-green">
-                            <div class="panel-heading">Bordered Table</div>
-                            <div class="panel-body">
-                                <table class="table table-hover table-bordered">
-                                    <thead id = "btn-header"></thead>
-                                    <tbody id = "btn-tbody"><tr><td>暂无数据</td></tr></tbody>
-                                </table>
+                        <div class="portlet box">
+                            <div class="portlet-header">
+                                <div class="caption">Area Chart - Spline</div>
+                                <div class="tools"><i class="fa fa-chevron-up"></i><i data-toggle="modal" data-target="#modal-config" class="fa fa-cog"></i><i class="fa fa-refresh"></i><i class="fa fa-times"></i></div>
+                            </div>
+                            <div class="portlet-body">
+                                <div id="Div1" style="width: 100%; height:300px"></div>
                             </div>
                         </div>
+                        <div class="portlet box">
+                            <div class="portlet-header">
+                                <div class="caption">Percentiles Chart</div>
+                                <div class="tools"><i class="fa fa-chevron-up"></i><i data-toggle="modal" data-target="#modal-config" class="fa fa-cog"></i><i class="fa fa-refresh"></i><i class="fa fa-times"></i></div>
+                            </div>
+                            <div class="portlet-body">
+                                <div id="percentiles-chart" style="width: 100%; height:300px"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                            </div>
+                 
+                 
+
+
+                              
+                                </div>
+                                
+                            
+                     
                             
                         </div>
                     </div>
@@ -254,80 +347,19 @@
     <script src="/static/script/jquery.flot.stack.js"></script>
     <script src="/static/script/jquery.flot.spline.js"></script>
     <script src="/static/script/zabuto_calendar.min.js"></script>
+
     <script src="/static/script/index.js"></script>
     <!--LOADING SCRIPTS FOR CHARTS-->
-    <!--<script src="/static/script/highcharts.js"></script>-->
-    <!--<script src="/static/script/data.js"></script>-->
-    <!--<script src="/static/script/drilldown.js"></script>-->
-    <!--<script src="/static/script/exporting.js"></script>-->
-    <!--<script src="/static/script/highcharts-more.js"></script>-->
-    <!--<script src="/static/script/charts-highchart-pie.js"></script>-->
-    <!--<script src="/static/script/charts-highchart-more.js"></script>-->
+    <script src="/static/script/highcharts.js"></script>
+    <script src="/static/script/data.js"></script>
+    <script src="/static/script/drilldown.js"></script>
+    <script src="/static/script/exporting.js"></script>
+    <script src="/static/script/highcharts-more.js"></script>
+    <script src="/static/script/charts-highchart-pie.js"></script>
+    <script src="/static/script/charts-highchart-more.js"></script>
+    <script src="/static/script/charts-flotchart.js"></script>
     <!--CORE JAVASCRIPT-->
     <script src="/static/script/main.js"></script>
-    <script>
-    $(document).ready(function(){
-      $('.btn-finish-sub').click(function(){
-          sel_val = $('#sid').val();
-          sql_val = $.trim($('#textarea_01').val());
-          if(sel_val == '---请选择---'){
-              alert('请选择要执行的操作');
-              return false;
-          }
-          if(sel_val == "select_all" && sql_val.indexOf("select")  == -1 ){
-              alert("select sql中 未发现 select \n\n "+sql_val);
-                return false
-            }
-          if(sel_val == "update" && sql_val.indexOf("update")  == -1 ){
-              alert(" update sql 中未发现 update \n\n "+sql_val);
-                return false
-            }
-          params = {'flg':sel_val,'sql_string':sql_val};
-          $.ajax({
-              url:'/aicyber/resource/api',
-              type:'POST', //GET
-              async:true,    //或false,是否异步
-              data:JSON.stringify(params),
-              contentType: 'application/json',
-              dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
-              success:function(json,textStatus,jqXHR){
-                  console.log(json.length);
-                  if(json.status = 200){
-                      $('#btn-tbody').empty();
-                      $('#btn-header').empty();
-                     if(sel_val == "select_all"){
-                            datalist = json.data;
-                            console.log(json);
-                            for(var i in json){
-                                str = "";
-                              obj = json[i];
-                                 strheader = "<tr>";
-                                 strbody = "<tr>";
-                                 $.each(obj, function (n, value) {
-                                       strheader+="<th>" +n+"</th>";
-                                       strbody += "<td>" + value + "</td>";
-                                   });
-                                 strheader += "</tr>";
-                                  strbody  += "</tr>";
-                                 if(i==0){
-                                     $('#btn-header').append(strheader)
-                                 }
-                                 $('#btn-tbody').append(strbody)
-                            }
-                      }else if(sel_val == "update"){
-                         str = '执行成功！！！';
-                        $('#update_sql').append(str)
-
-                     }
-                  }
-                  $('#resp_sql').html(sql_val)
-              }
-})
-      })
-    });
-
-
-
-</script>
+    
 </body>
 </html>

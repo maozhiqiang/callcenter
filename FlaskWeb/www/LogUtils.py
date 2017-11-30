@@ -10,7 +10,7 @@ except ImportError:
     codecs = None
 
 log_dir = "./log"
-log_name = "applog-brings"
+log_name = "applog-flask"
 
 _logger_init_lock = threading.Lock()
 
