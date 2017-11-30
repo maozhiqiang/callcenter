@@ -42,6 +42,9 @@ class User(Base,UserMixin):
     def password(self, password):
         self.password_hash = generate_password_hash(password)
 
+    def getPassWord_hash(self):
+        return self.password_hash
+
     def confirm_password(self, password):
         return check_password_hash(self.password_hash, password)
 

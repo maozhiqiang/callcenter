@@ -92,11 +92,17 @@ def run_sql_string():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0",port=int("8081"),debug=True)
+    # app.run(host="0.0.0.0",port=int("8081"),debug=True)
     # u = session.query(User).filter_by(username = 'admin').first().delete()
     # print u
     # u2 = session.query(User.id==27).one()
     # print u2
+    u  = User('admin123','aicyber_ubuntu330M.')
+    print u.getPassWord_hash()
+    u = session.query(User).filter_by(username='admin123').update({'username':'admin1','password_hash':u.getPassWord_hash()})
+    print '--*-*- ',u
+    session.commit()
+
     # u = User('admin1', '123')
     # session.add(u)
     # session.commit()
