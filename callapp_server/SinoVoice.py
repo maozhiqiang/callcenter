@@ -8,6 +8,7 @@
 import time
 import json
 import httplib
+from pydub import AudioSegment
 
 def md5(str):
     import hashlib
@@ -20,8 +21,8 @@ class Transaction(object):
         self.custom_timers = {}
         self.devkey = '3fcafa0ce5601914e25e6a516d5126d3'
         self.x_app_key = '245d54fe'
-        # self.x_task_config = 'capkey=asr.cloud.freetalk,audioformat=pcm8k16bit,domain=telecom'
-        self.x_task_config = 'capkey=asr.cloud.freetalk,audioformat=pcm16k16bit,domain=common'
+        self.x_task_config = 'capkey=asr.cloud.freetalk,audioformat=pcm8k16bit,domain=telecom'
+        # self.x_task_config = 'capkey=asr.cloud.freetalk,audioformat=pcm16k16bit,domain=common'
         self.x_sdk_version = '5.0'
         self.content_type = 'application/json;charset=utf-8'
         self.x_result_format = 'json'
@@ -58,9 +59,16 @@ class Transaction(object):
             result['ret'] = 1
             result['result'] = None
         return result
+    def converTowav(self, filename):
+        arr = filename.split('.')
+        wavfilename = arr[0] + '.wav'
+        seg = AudioSegment.from_wav(filename)
+        seg = seg.set_frame_rate(16000)
+        seg.export(wavfilename, format="wav")
+        return wavfilename
 trans = Transaction()
 if __name__ == '__main__':
     pass
     # file_wav = '/mnt/asr/asr/13821917127_in_4_20171127150608.wav'
-    file_wav = '/home/whc/下载/13566359103_in_6_20171123154530.wav'
+    file_wav = '/home/callcenter/recordvoice/human_audio/15900282168_in_1_20170814161359.wav'
     print trans.asr_text(file_wav)
