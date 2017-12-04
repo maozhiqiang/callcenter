@@ -40,10 +40,10 @@ class IVRBase(object):
         self.in_count = 0
         self.out_count = 0
         self.__sessionId = None
-        self.flow_id = None
-        self.fs_call_id = None
+        self.flow_id = session.getVariable(b"flow_id")
+        self.fs_call_id = session.getVariable(b"call_id")
         self.channal_uuid = session.getVariable(b"origination_uuid")
-        self.caller_number = None
+        self.caller_number = session.getVariable(b"caller_id_number")
         self.caller_in_wav = None
         self.caller_out_mp3 = None
         self.call_full_wav = None
@@ -55,6 +55,7 @@ class IVRBase(object):
         self.all_audio = '/home/callcenter/recordvoice/{0}/all_audio/'
         self.bot_audio = '/home/callcenter/recordvoice/{0}/bot_audio/'
         self.playbackaudio = None
+        self.closedFlow()
         self.init_file_path()
 
     def init_file_path(self):
@@ -137,9 +138,11 @@ class IVRBase(object):
         rabbitmq.rabbitmqClint(jsonStr)
 
     def bot_flow(self, input):
+        print '---------2--------------------'
         startTime = time.time()
         create_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         dict = FlowHandler.flowHandler(input, self.caller_number, self.flow_id)
+        print '---------3--------------------'
         endTime = time.time()
         logger.error('Flow time .........: %s'%(endTime - startTime))
         jsonStr = json.dumps(dict)
@@ -242,6 +245,7 @@ class IVRBase(object):
                 self.bot_flow('')  # 需要返回文本信息
 
     def run(self):
+        print '---------0--------------------'
         self.session.answer()
         self.session.setVariable("set_audio_level", "write +2")
         self.caller_in_wav = self.human_audio+'%s_in_{0}_{1}.wav' % self.caller_number
@@ -254,6 +258,7 @@ class IVRBase(object):
         realy_full_path = full_path.split('recordvoice')
         self.update_full_path(realy_full_path[1], self.channal_uuid)
         while self.session.ready():
+            print '---------1--------------------'
             self.bot_flow('你好')
             # self.IVR_app()
 
