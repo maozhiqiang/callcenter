@@ -9,17 +9,17 @@ from LogUtils import Logger
 logger = Logger()
 
 def rabbitmqClint(content):
-    credentials = pika.PlainCredentials('admin', '123123')
+    credentials = pika.PlainCredentials(conf.rabbitmq_user, conf.rabbit_password)
     connection = pika.BlockingConnection(pika.ConnectionParameters(conf.rabbitmq_server, 5672, '/', credentials))
     logger.info('-----rabbitmq ----send conent %s'%content)
     channel = connection.channel()
 
     # 声明queue
-    channel.queue_declare(queue='durable',durable=True)
+    channel.queue_declare(queue=conf.rabbtimq_queue,durable=True)
 
     # n RabbitMQ a message can never be sent directly to the queue, it always needs to go through an exchange.
     channel.basic_publish(exchange='',
-                          routing_key='durable',
+                          routing_key=conf.rabbtimq_queue,
                           body=content,
                           properties=pika.BasicProperties(
                               delivery_mode=2,  # make message persistent

@@ -40,10 +40,12 @@ POSTGRESQL_USERNAME = "postgres" #用户名，这里的用户名也是在安装p
 POSTGRESQL_PASSWORD = "z8asuidn" #链接数据库服务器的密码，安装时设置，安装完毕后可以修改的
 
 #====================rebbitmq=====================================
-rabbitmq_server = '118.190.166.165'
+rabbitmq_server = '127.0.0.1'
 rabbtimq_port = 5672
 rabbitmq_user = 'admin'
 rabbit_password = '123123'
+rabbtimq_queue = 'call_api'
+#rabbtimq_queue = 'durable'
 
 #======================xunfei asr ================================
 XUNFEI_URL = '117.121.21.146'
