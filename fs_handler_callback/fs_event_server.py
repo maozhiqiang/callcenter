@@ -9,6 +9,8 @@ import atexit
 import signal
 import sys
 import time
+import  json
+import urllib2
 import Config as conf
 import multiprocessing
 from multiprocessing import managers
@@ -78,18 +80,17 @@ def event_processor(event_queue):
         elif event['event_name'] == 'CHANNEL_ANSWER':
             sql = ca_sql.format(time_at, event['channal_uuid'])
             logger.info('[sql]:.........CHANNEL_ANSWER...... %s' % sql)
-            db.run_sql(sql)
+            # db.run_sql(sql)
 
         elif event['event_name'] == 'CHANNEL_HANGUP_COMPLETE':
-            task_id = event['task_id']
+            call_back = event['call_back']
             host_id = event['host_id']
-            logger.info('[ task_id----> %s ]' % int(task_id))
+            user_id = event['user_id']
+            call_id = event['call_id']
+            logger.info('[ call_back----> %s ,user_id---->%s, call_id---->%s]' % (call_back,user_id,call_id))
             logger.info('[ is_test----> %s  ]'% event['is_test'])
-            if task_id != None:
+            if call_back != None and call_back == 'true':
                 try:
-                    sql = fs_task_sql.format(int(task_id))
-                    logger.info('[ sql1 :----> call hangup_complete execute] :%s ' % sql)
-                    db.update_sql(sql)
                     sql2 = chc_host_sql.format(int(host_id))
                     logger.info('[ sql2 :----> fs_host line_use - 1 ]%s ' % sql2)
                     db.update_sql(sql2)
@@ -97,14 +98,10 @@ def event_processor(event_queue):
                                          event['Hangup-Cause'], event['channal_uuid'])
                     logger.info('[sql3 :..........CHANNEL_HANGUP_COMPLETE....... ]%s' % sql3)
                     db.update_sql(sql3)
-                    HttpClientPost(event['channal_uuid'])
+                    #回调函数
+                    callback_aliyun(event['channal_uuid'],user_id,call_id)
                 except Exception as e:
                     logger.info('hangup_complete execute sql error %s ' % e)
-'''
-    对接阿里云回调函数
-
-
-'''
 #-----------------------fs_handler_callback---------------------------------------
 
 fs_callback_sql =  " select * from fs_call where channal_uuid ='{0}' "
@@ -112,6 +109,7 @@ fs_callback_sqllist = " select who,text,create_at from fs_call_replay " \
                       " where call_id = {0} ORDER BY create_at "
 
 fs_callback_host = " select * from fs_user where id  =  {0} "
+
 def callback_aliyun(channal_uuid,user_id,call_id):
     data_obj = {}
     success = True
@@ -149,9 +147,8 @@ def callback_aliyun(channal_uuid,user_id,call_id):
     data_obj['success'] = success
     data_obj['data'] = params
     data_obj['error'] =error
+    logger.info('body_data------->%'%json.dumps(data_obj))
     try:
-        import  json
-        import urllib2
         req = urllib2.Request(callback_url, json.dumps(data_obj))  # 需要是json格式的参数
         req.add_header('Content-Type', 'application/json')  # 要非常注意这行代码的写法
         response = urllib2.urlopen(req)
@@ -246,13 +243,15 @@ def event_listener(event_queue):
                 dct['call_number'] = e.getHeader("Caller-Destination-Number")
                 dct['Channel-Call-State'] = e.getHeader("Channel-Call-State")
                 dct['host_id'] = e.getHeader("variable_host_id")
+                dct['call_back'] = e.getHeader("variable_call_back")
+                print '*********call_back is ************ %s' % dct['call_back']
                 # print 'test---------------event_name : %s\n\n'%e.getHeader("Event-Name")
-                if dct['event_name'] in ['CHANNEL_ANSWER', 'CHANNEL_HANGUP_COMPLETE']:
+                if dct['event_name'] in ['CHANNEL_ANSWER', 'CHANNEL_HANGUP_COMPLETE'] and dct['call_back'] =='true':
+                    logger.info('*-*-*-*-*-1111111111111111111*-*-*-')
                     dct['call_id'] = e.getHeader("variable_call_id")
                     dct['is_test'] = e.getHeader("variable_is_test")
                     if dct['event_name'] == 'CHANNEL_HANGUP_COMPLETE':
                         dct['Hangup-Cause'] = e.getHeader("Hangup-Cause")
-                        dct['task_id'] = e.getHeader("variable_task_id")
                 if dct['channal_uuid'] == None:
                     continue
                 event_queue.put(dct)
