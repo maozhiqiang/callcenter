@@ -198,11 +198,12 @@ def event_listener(event_queue):
                     if dct['event_name'] == 'CHANNEL_HANGUP_COMPLETE':
                         dct['Hangup-Cause'] = e.getHeader("Hangup-Cause")
                         dct['task_id'] = e.getHeader("variable_task_id")
+                    event_queue.put(dct)
+                    logger.info('.......event_listener.......name: %s, uuid: %s, number: %s,' %
+                                (dct['event_name'], dct['channal_uuid'], dct['call_number']))
                 if dct['channal_uuid'] == None:
                     continue
-                event_queue.put(dct)
-                logger.info('.......event_listener.......name: %s, uuid: %s, number: %s,' %
-                            (dct['event_name'], dct['channal_uuid'], dct['call_number']))
+
 
     logger.error('.......esl connect error.......')
     sys.exit(-1)
