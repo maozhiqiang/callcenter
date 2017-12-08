@@ -68,40 +68,42 @@ def event_processor(event_queue):
         # 读队列会阻塞进程
         event = event_queue.get()
         time_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-        if event['event_name'] == 'CHANNEL_CREATE':
-            sql = cc_sql.format(time_at, event['channal_uuid'])
-            logger.info('[sql]:........CHANNEL_CREATE........ %s'%sql)
-            db.update_sql(sql)
-            #更新fs_host 线路数+1
-            host_sql = chc_update_line.format(event['host_id'])
-            logger.info('[sql]:........CHANNEL_CREATE.. table...host line+1...... %s' % host_sql)
-            db.update_sql(host_sql)
+        if event['call_back'] != None:
+            if event['event_name'] == 'CHANNEL_CREATE':
+                sql = cc_sql.format(time_at, event['channal_uuid'])
+                logger.info('[sql]:........CHANNEL_CREATE........ %s' % sql)
+                db.update_sql(sql)
+                #更新fs_host 线路数+1
+                host_sql = chc_update_line.format(event['host_id'])
+                logger.info('[sql]:........CHANNEL_CREATE.. table...host line+1...... %s' % host_sql)
+                db.update_sql(host_sql)
+            elif event['event_name'] == 'CHANNEL_ANSWER':
+                sql = ca_sql.format(time_at, event['channal_uuid'])
+                logger.info('[sql]:.........CHANNEL_ANSWER...... %s' % sql)
+                db.run_sql(sql)
+            elif event['event_name'] == 'CHANNEL_HANGUP_COMPLETE':
+                call_back = event['call_back']
+                host_id = event['host_id']
+                user_id = event['user_id']
+                call_id = event['call_id']
+                logger.info('[ call_back----> %s ,user_id---->%s, call_id---->%s]' % (call_back, user_id, call_id))
+                logger.info('[ is_test----> %s  ]' % event['is_test'])
+                if call_back != None and call_back == 'true':
+                    try:
+                        sql2 = chc_host_sql.format(int(host_id))
+                        logger.info('[ sql2 :----> fs_host line_use - 1 ]%s ' % sql2)
+                        db.update_sql(sql2)
+                        sql3 = chc_sql.format('finish', time_at, event['Channel-Call-State'],
+                                              event['Hangup-Cause'], event['channal_uuid'])
+                        logger.info('[sql3 :..........CHANNEL_HANGUP_COMPLETE....... ]%s' % sql3)
+                        db.update_sql(sql3)
+                        # 回调函数
+                        callback_aliyun(event['channal_uuid'], user_id, call_id)
+                    except Exception as e:
+                        logger.info('hangup_complete execute sql error %s ' % e)
+        else:
+            print '[ ***** curent event is not platform ***** ]'
 
-        elif event['event_name'] == 'CHANNEL_ANSWER':
-            sql = ca_sql.format(time_at, event['channal_uuid'])
-            logger.info('[sql]:.........CHANNEL_ANSWER...... %s' % sql)
-            # db.run_sql(sql)
-
-        elif event['event_name'] == 'CHANNEL_HANGUP_COMPLETE':
-            call_back = event['call_back']
-            host_id = event['host_id']
-            user_id = event['user_id']
-            call_id = event['call_id']
-            logger.info('[ call_back----> %s ,user_id---->%s, call_id---->%s]' % (call_back,user_id,call_id))
-            logger.info('[ is_test----> %s  ]'% event['is_test'])
-            if call_back != None and call_back == 'true':
-                try:
-                    sql2 = chc_host_sql.format(int(host_id))
-                    logger.info('[ sql2 :----> fs_host line_use - 1 ]%s ' % sql2)
-                    db.update_sql(sql2)
-                    sql3 = chc_sql.format('finish', time_at, event['Channel-Call-State'],
-                                         event['Hangup-Cause'], event['channal_uuid'])
-                    logger.info('[sql3 :..........CHANNEL_HANGUP_COMPLETE....... ]%s' % sql3)
-                    db.update_sql(sql3)
-                    #回调函数
-                    callback_aliyun(event['channal_uuid'],user_id,call_id)
-                except Exception as e:
-                    logger.info('hangup_complete execute sql error %s ' % e)
 #-----------------------fs_handler_callback---------------------------------------
 
 fs_callback_sql =  " select * from fs_call where channal_uuid ='{0}' "
@@ -244,19 +246,22 @@ def event_listener(event_queue):
                 dct['Channel-Call-State'] = e.getHeader("Channel-Call-State")
                 dct['host_id'] = e.getHeader("variable_host_id")
                 dct['call_back'] = e.getHeader("variable_call_back")
-                print '*********call_back is ************ %s' % dct['call_back']
+                # print '*********call_back is ************ %s' % dct['call_back']
                 # print 'test---------------event_name : %s\n\n'%e.getHeader("Event-Name")
                 if dct['event_name'] in ['CHANNEL_ANSWER', 'CHANNEL_HANGUP_COMPLETE'] and dct['call_back'] =='true':
                     logger.info('*-*-*-*-*-1111111111111111111*-*-*-')
                     dct['call_id'] = e.getHeader("variable_call_id")
                     dct['is_test'] = e.getHeader("variable_is_test")
+                    dct['user_id'] = e.getHeader("variable_user_id")
                     if dct['event_name'] == 'CHANNEL_HANGUP_COMPLETE':
                         dct['Hangup-Cause'] = e.getHeader("Hangup-Cause")
+
+                    event_queue.put(dct)
+                    logger.info('.......event_listener.......name: %s, uuid: %s, number: %s,' %
+                                (dct['event_name'], dct['channal_uuid'], dct['call_number']))
                 if dct['channal_uuid'] == None:
                     continue
-                event_queue.put(dct)
-                logger.info('.......event_listener.......name: %s, uuid: %s, number: %s,' %
-                            (dct['event_name'], dct['channal_uuid'], dct['call_number']))
+
 
     logger.error('.......esl connect error.......')
     sys.exit(-1)
