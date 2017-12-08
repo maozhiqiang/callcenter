@@ -10,17 +10,17 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 logger = Logger()
 
-credentials = pika.PlainCredentials('admin','123123')
+credentials = pika.PlainCredentials(conf.MQ_USERNAME,conf.MQ_PWD)
 connection = pika.BlockingConnection(pika.ConnectionParameters(
     conf.MQ_URL,5672,'/',credentials))
 channel = connection.channel()
 
-channel.queue_declare(queue='durable',durable=True)
+channel.queue_declare(queue=conf.MQ_QUEUE,durable=True)
 
 def callback(ch, method, properties, body):
     logger.info(" [x] Received %r\n\n" % body)
     dict = json.loads(body)
-    # print '**********',dict
+    print '**********',dict
     if dict['mark'] == 'insert':
         sql = 'INSERT INTO fs_call_replay(who, text, record_fpath, create_at, call_id,resp_param)VALUES (\'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\',\'{5}\')'.format(
             dict['who'], dict['text'], dict['record_fpath'], dict['create_at'],dict['call_id'] , dict['jsonStr'])
