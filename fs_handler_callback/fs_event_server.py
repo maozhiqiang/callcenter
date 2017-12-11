@@ -128,7 +128,7 @@ fs_callback_sqllist = " select who,text,create_at from fs_call_replay " \
 
 fs_callback_host = " select * from fs_user where id  =  {0} "
 
-fs_update_call_callback = "update fs_call set is_callback = {0} and callback_ct = callback_ct + 1  and callback_at = '{1}'  where channal_uuid = '{2}' "
+fs_update_call_callback = "update fs_call set is_callback = {0} , callback_ct = callback_ct + 1  ,callback_at = '{1}'  where channal_uuid = '{2}' "
 def callback_aliyun(channal_uuid,user_id,call_id):
     data_obj = {}
     success = True
@@ -178,9 +178,14 @@ def callback_aliyun(channal_uuid,user_id,call_id):
         response = urllib2.urlopen(req)
         result = json.loads(response.read())
         print result
-        if result['status'] == 0 :
+        print '[------result -----]',result['status']
+        if result['status'] == 0:
             update_sql = fs_update_call_callback.format(True,time_at,channal_uuid)
             logger.info('[ ------- sql_update_callback ------- is %s]'%update_sql)
+            db.update_sql(update_sql)
+        else:
+            update_sql = fs_update_call_callback.format(False, time_at, channal_uuid)
+            logger.info('[ ------- sql_update_callback ------- is %s]' % update_sql)
             db.update_sql(update_sql)
     except Exception, e:
         print e
