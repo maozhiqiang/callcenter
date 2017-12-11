@@ -123,7 +123,7 @@ def event_processor(event_queue):
 #-----------------------fs_handler_callback---------------------------------------
 
 fs_callback_sql =  " select * from fs_call where channal_uuid ='{0}' "
-fs_callback_sqllist = " select who,text,create_at from fs_call_replay " \
+fs_callback_sqllist = " select who,text,record_fpath,create_at from fs_call_replay " \
                       " where call_id = {0} ORDER BY create_at "
 
 fs_callback_host = " select * from fs_user where id  =  {0} "
