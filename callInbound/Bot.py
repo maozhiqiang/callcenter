@@ -109,7 +109,7 @@ class IVRBase(object):
         f.close()
         return wavfilename
 
-    def gplayback_status_voice(self, text, jsonStr):
+    def playback_status_voice(self, text, jsonStr):
         file_out = self.caller_out_mp3.format(self.out_count, self.__sessionId)
         self.out_count += 1
         # file_out 返回wav文件格式 /home/callcenter/recordvoice/{flow_id}/bot_audio/number_out_{0}_{1}.mp3
@@ -177,7 +177,7 @@ class IVRBase(object):
             startTime = time.time()
             filename = self.caller_in_wav.format(self.in_count, self.__sessionId)
             self.in_count += 1
-            cmd = "100 400 {0} 4000 10000 100".format(filename)
+            cmd = "150 400 {0} 4000 10000 100".format(filename)
             try:
                 self.session.execute("vad", cmd)
             except Exception as e:
