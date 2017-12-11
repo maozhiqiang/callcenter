@@ -14,6 +14,8 @@ import RedisHandler as redis
 from pydub import AudioSegment
 from LogUtils import Logger
 from freeswitch import *
+import SinoVoice as sino_asr
+reload(sino_asr)
 reload(voice_api)
 reload(xunfei_asr)
 logger = Logger()
@@ -186,21 +188,40 @@ class IVRBase(object):
             logger.debug("vad  time  : %s " % (endTime - startTime))
             flag = self.session.getVariable(b"vad_timeout")
             logger.debug('record file .....%s' % filename)
+            #---------------------------------讯飞 语音识别  asr----------------------------
+            # if cmp(flag, 'true') != 0:
+            #     startTime = time.time()
+            #     info = xunfei_asr.vc.getText(filename)
+            #     endTime = time.time()
+            #     logger.debug("xunfei asr time  : %s " % (endTime - startTime))
+            #     if info['ret'] == 0:
+            #         input = ''.join(info['result'])
+            #         logger.debug('xunfei asr result ---%s ' % input)
+            #         self.bot_flow(input)
+            #     else:
+            #         self.bot_flow('')
+            #         logger.debug("......xunfei  asr ....error...........%s" % json.dumps(info))
+            # else:
+            #     logger.debug('vad......没有检测到声音')
+            #     self.bot_flow('')
+            #----------------------------------------捷通华声 asr--------------------------------
             if cmp(flag, 'true') != 0:
                 startTime = time.time()
-                info = xunfei_asr.vc.getText(filename)
+                info = sino_asr.trans.asr_text(filename)
                 endTime = time.time()
-                logger.debug("xunfei asr time  : %s " % (endTime - startTime))
+                logger.error("sino_asr asr time  : %s " % (endTime - startTime))
                 if info['ret'] == 0:
                     input = ''.join(info['result'])
-                    logger.debug('xunfei asr result ---%s ' % input)
-                    self.bot_flow(input)
+                    logger.error('sino_asr asr result ---%s ' % input)
+                    realy_file_path = filename.split('recordvoice')
+                    self.bot_flow(input)  # 需要返回文本信息
                 else:
-                    self.bot_flow('')
-                    logger.debug("......xunfei  asr ....error...........%s" % json.dumps(info))
+                    realy_file_path = filename.split('recordvoice')
+                    self.bot_flow('')  # 需要返回文本信息
+                    logger.error("......sino_asr  asr ....is ERROR...........%s" % json.dumps(info))
             else:
-                logger.debug('vad......没有检测到声音')
-                self.bot_flow('')
+                logger.error('vad......没有检测到声音')
+                self.bot_flow('')  # 需要返回文本信息
 
     def run(self):
         self.session.answer()
