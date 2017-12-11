@@ -32,7 +32,7 @@ def get_one_sql(sql):
     logger.info('[sql__get_one]....%s' % sql)
     try:
         conn = db_pool.getConn()
-        cursor = conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor)
+        cursor = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
         count = cursor.execute(sql, )
         conn.commit()
         result = cursor.fetchone()  # 获取一条数据
@@ -45,7 +45,7 @@ def get_all_sql(sql):
     #logger.info('[get_all_sql]....%s' % sql)
     try:
         conn = db_pool.getConn()
-        cursor = conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor)
+        cursor = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
         count = cursor.execute(sql, )
         conn.commit()
         list = cursor.fetchall()  # 获取所有数据
@@ -71,12 +71,12 @@ if __name__ == '__main__':
     # info = update_sql(sql)
     # print info
     #
-    sql = 'select * from fs_host'
+    sql = 'select * from fs_user where id  =  2'
     result = get_all_sql(sql)
-    print  len(result)
+    # print  result
 
     for item in result:
-        print item.city
+        print item['callback_url']
         print 50*'--'
         # for key in item.items():
         #     print key[0]+':'+str(key[1])

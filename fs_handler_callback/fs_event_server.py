@@ -9,7 +9,9 @@ import atexit
 import signal
 import sys
 import time
-import  json
+import json
+import datetime
+from datetime import date
 import urllib2
 import Config as conf
 import multiprocessing
@@ -23,6 +25,20 @@ logger = Logger()
 con = ESL.ESLconnection(conf.ESL_HOST, conf.ESL_PORT, conf.ESL_PWD)
 _begin_time = time.time()
 _pid = multiprocessing.current_process().pid
+
+
+
+class DateEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, datetime.datetime):
+            return obj.strftime('%Y-%m-%d %H:%M:%S')
+        elif isinstance(obj, date):
+            return obj.strftime("%Y-%m-%d")
+        elif isinstance(obj,time):
+            return obj.strftime("%H:%M:%S")
+        else:
+            return json.JSONEncoder.default(self, obj)
+
 #atexit.register
 def bye():
     sec = time.time() - _begin_time
@@ -112,15 +128,18 @@ fs_callback_sqllist = " select who,text,create_at from fs_call_replay " \
 
 fs_callback_host = " select * from fs_user where id  =  {0} "
 
+fs_update_call_callback = "update fs_call set is_callback = {0} and callback_ct = callback_ct + 1  and callback_at = '{1}'  where channal_uuid = '{2}' "
 def callback_aliyun(channal_uuid,user_id,call_id):
     data_obj = {}
     success = True
     callback_url = None
     error = None
+    print '[ ------0--------]'
     try:
         # 拿call 信息
         ss_sql = fs_callback_sql.format(channal_uuid)
         call_info = db.get_one_sql(ss_sql)
+        print '[ ------1--------%s ]'%call_info
     except Exception as e:
         success = False
         print 'callback_sql1 error .....%s'%e.message
@@ -129,6 +148,7 @@ def callback_aliyun(channal_uuid,user_id,call_id):
         # 拿replay 分段信息
         item_sql = fs_callback_sqllist.format(call_id)
         item_info = db.get_all_sql(item_sql)
+        print '[ ------2--------%s ]' % item_info
     except Exception as e:
         success = False
         print 'callback_sql2 error .....%s' % e.message
@@ -138,7 +158,8 @@ def callback_aliyun(channal_uuid,user_id,call_id):
         # 拿host callback_url信息
         host_sql = fs_callback_host.format(user_id)
         host_info = db.get_one_sql(host_sql)
-        callback_url = host_info.callback_url
+        print '[ ------3-`-------%s ]' % host_info
+        callback_url = host_info['callback_url']
     except Exception as e:
         success = False
         print 'callback_sql3 error .....%s' % e.message
@@ -149,13 +170,18 @@ def callback_aliyun(channal_uuid,user_id,call_id):
     data_obj['success'] = success
     data_obj['data'] = params
     data_obj['error'] =error
-    logger.info('body_data------->%'%json.dumps(data_obj))
+    logger.info('body_data------->%s'%json.dumps(data_obj,cls=DateEncoder))
+    time_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     try:
-        req = urllib2.Request(callback_url, json.dumps(data_obj))  # 需要是json格式的参数
+        req = urllib2.Request(callback_url, json.dumps(data_obj,cls=DateEncoder))  # 需要是json格式的参数
         req.add_header('Content-Type', 'application/json')  # 要非常注意这行代码的写法
         response = urllib2.urlopen(req)
         result = json.loads(response.read())
         print result
+        if result['status'] == 0 :
+            update_sql = fs_update_call_callback.format(True,time_at,channal_uuid)
+            logger.info('[ ------- sql_update_callback ------- is %s]'%update_sql)
+            db.update_sql(update_sql)
     except Exception, e:
         print e
 
@@ -246,10 +272,7 @@ def event_listener(event_queue):
                 dct['Channel-Call-State'] = e.getHeader("Channel-Call-State")
                 dct['host_id'] = e.getHeader("variable_host_id")
                 dct['call_back'] = e.getHeader("variable_call_back")
-                # print '*********call_back is ************ %s' % dct['call_back']
-                # print 'test---------------event_name : %s\n\n'%e.getHeader("Event-Name")
-                if dct['event_name'] in ['CHANNEL_ANSWER', 'CHANNEL_HANGUP_COMPLETE'] and dct['call_back'] =='true':
-                    logger.info('*-*-*-*-*-1111111111111111111*-*-*-')
+                if dct['event_name'] in ['CHANNEL_CREATE','CHANNEL_ANSWER', 'CHANNEL_HANGUP_COMPLETE'] and dct['call_back'] =='true':
                     dct['call_id'] = e.getHeader("variable_call_id")
                     dct['is_test'] = e.getHeader("variable_is_test")
                     dct['user_id'] = e.getHeader("variable_user_id")
