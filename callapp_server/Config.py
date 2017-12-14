@@ -7,7 +7,7 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 
 #=================服务器 info=====================================
-server="121.42.31.97"
+server="http://118.190.166.165:10080/recordvoice"
 server_url = ""
 #=====================Flow Config start==========================
 #start flow

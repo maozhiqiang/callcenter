@@ -10,16 +10,17 @@ logger = Logger()
 
 def rabbitmqClint(content):
     credentials = pika.PlainCredentials(conf.rabbitmq_user, conf.rabbit_password)
-    connection = pika.BlockingConnection(pika.ConnectionParameters(conf.rabbitmq_server, 5672, '/', credentials))
+    connection = pika.BlockingConnection(pika.ConnectionParameters('127.0.0.1', 5672, '/', credentials))
     logger.info('-----rabbitmq ----send conent %s'%content)
     channel = connection.channel()
-
+    channel.exchange_declare(exchange='callexchange', exchange_type='direct')
     # 声明queue
-    channel.queue_declare(queue=conf.rabbtimq_queue,durable=True)
-
+    channel.queue_declare(queue='call_api',durable=True)
+    channel.queue_bind(exchange='callexchange', queue='call_api')
+    print '[--------queue-------]',conf.rabbtimq_queue
     # n RabbitMQ a message can never be sent directly to the queue, it always needs to go through an exchange.
-    channel.basic_publish(exchange='',
-                          routing_key=conf.rabbtimq_queue,
+    channel.basic_publish(exchange='callexchange',
+                          routing_key='call_api',
                           body=content,
                           properties=pika.BasicProperties(
                               delivery_mode=2,  # make message persistent

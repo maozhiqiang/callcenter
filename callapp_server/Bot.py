@@ -7,6 +7,7 @@ import time
 import Md5Utils
 import FlowHandler
 import datetime
+import Config as conf
 import rabbitMQ_produce as rabbitmq
 import VoiceApi as voice_api
 import RedisHandler as redis
@@ -113,7 +114,7 @@ class IVRBase(object):
         print 'record_fpath:(update).....%s....' % record_fpath
         objdata = {}
         objdata['mark'] = 'update'
-        objdata['record_fpath'] = record_fpath
+        objdata['record_fpath'] = conf.server+ record_fpath
         objdata['channal_uuid'] = channal_uuid
         jsonStr = json.dumps(objdata)
         # logger.info('------jsonstr-----%s'%jsonStr)
@@ -125,7 +126,7 @@ class IVRBase(object):
         objdata['mark'] = 'insert'
         objdata['who'] =who
         objdata['text'] =text
-        objdata['record_fpath'] =record_fpath
+        objdata['record_fpath'] =conf.server+ record_fpath
         objdata['create_at'] =create_at
         objdata['call_id'] =call_id
         objdata['jsonStr'] =jsonStr
