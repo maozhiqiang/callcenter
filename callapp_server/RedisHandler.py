@@ -43,7 +43,7 @@ class RedisClient(object):
 # ===========================================================================
 print '---REDIS_DB---',conf.REDIS_DB
 print '---redis_host--',conf.REDIS_HOST
-r = RedisClient(conf.REDIS_DB, host=conf.REDIS_HOST, password='aicyber', port=conf.REDIS_PORT, db=0)
+r = RedisClient(conf.REDIS_DB, host=conf.REDIS_HOST, password=conf.REDIS_PWD, port=conf.REDIS_PORT, db=0)
 if __name__ == '__main__':
 
 

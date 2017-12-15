@@ -29,7 +29,9 @@ REDIS_DB = 'cache'
 REDIS_PORT = 6379
 #REDIS_HOST = '10.165.51.223'#'121.42.36.138'
 # REDIS_HOST = '10.31.92.12'#''118.190.166.134
-REDIS_HOST = '192.168.0.183'#'localhost'
+REDIS_HOST = 'r-2zed20375a600494.redis.rds.aliyuncs.com' #'aliyun'
+REDIS_PWD = 'MyAicyber201415926'
+
 
 #======================postgresql================================
 #POSTGRESQL_HOST = "192.168.0.183" #要链接的服务器的IP地址，local-IP
@@ -45,6 +47,7 @@ rabbtimq_port = 5672
 rabbitmq_user = 'admin'
 rabbit_password = '123123'
 rabbtimq_queue = 'call_api'
+rabbtimq_exchange = 'callexchange'
 #rabbtimq_queue = 'durable'
 
 #======================xunfei asr ================================
