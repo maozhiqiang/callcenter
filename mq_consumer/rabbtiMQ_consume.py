@@ -14,9 +14,10 @@ credentials = pika.PlainCredentials(conf.MQ_USERNAME,conf.MQ_PWD)
 connection = pika.BlockingConnection(pika.ConnectionParameters(
     conf.MQ_URL,5672,'/',credentials))
 channel = connection.channel()
-
-channel.queue_declare(queue=conf.MQ_QUEUE,durable=True)
-
+channel.exchange_declare(exchange='callexchange', exchange_type='direct')
+channel.queue_declare(queue='call_api',durable=True)
+channel.queue_bind(exchange='callexchange', queue='call_api')
+print '[********queue*****]',conf.MQ_QUEUE
 def callback(ch, method, properties, body):
     logger.info(" [x] Received %r\n\n" % body)
     dict = json.loads(body)
@@ -53,7 +54,7 @@ def run_update_sql(sql):
     except Exception as e:
         logger.error('runsql exception error %s '%e)
 
-channel.basic_consume(callback,queue='durable')
+channel.basic_consume(callback,queue=conf.MQ_QUEUE)
 
 print(' [*] Waiting for messages. To exit press CTRL+C')
 channel.start_consuming()
