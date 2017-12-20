@@ -27,8 +27,11 @@ def callback(ch, method, properties, body):
             dict['who'], dict['text'], dict['record_fpath'], dict['create_at'],dict['call_id'] , dict['jsonStr'])
         run_insert_sql(sql)
         logger.info('run_insert_sql.....%s' % sql)
+    elif dict['mark'] == 'user_label':
+        sql =  " update fs_call set cust_tag = '{0}' where channal_uuid ='{1}' ".format(dict['user_label'],dict['channal_uuid'])
+        run_update_sql(sql)
+        print ' run_update_sql.........user_label'
     else:
-        # print '................',dict['record_fpath'],dict['channal_uuid']
         sql = "update fs_call set full_record_fpath ='{0}' where channal_uuid ='{1}'".format(dict['record_fpath'],dict['channal_uuid'] )
         run_update_sql(sql)
         logger.info('run_update_sql.....%s' % sql)
