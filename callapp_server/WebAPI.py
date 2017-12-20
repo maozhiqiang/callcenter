@@ -79,7 +79,6 @@ def eachFile(filepath):
 
 vc = WebApi()
 if __name__ == "__main__":
-    import  glob
     bdr = WebApi()
     # for num in range(4):
     start = time.time()

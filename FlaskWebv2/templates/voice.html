@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+	<!-- start: Meta -->
+	<meta charset="utf-8">
+	<title>Bootstrap Metro Dashboard by Dennis Ji for ARM demo</title>
+	<meta name="description" content="Bootstrap Metro Dashboard">
+	<meta name="author" content="Dennis Ji">
+	<meta name="keyword" content="Metro, Metro UI, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+	<!-- end: Meta -->
+	
+	<!-- start: Mobile Specific -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- end: Mobile Specific -->
+	
+	<!-- start: CSS -->
+	<link id="bootstrap-style" href="./static/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link id="base-style" href="/static/css/style.css" rel="stylesheet">
+	<link id="base-style-responsive" href="/static/css/style-responsive.css" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
+	<!-- end: CSS -->
+	
+
+	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	  	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<link id="ie-style" href="/static/css/ie.css" rel="stylesheet">
+	<![endif]-->
+	
+	<!--[if IE 9]>
+		<link id="ie9style" href="/static/css/ie9.css" rel="stylesheet">
+	<![endif]-->
+		
+	<!-- start: Favicon -->
+	<link rel="shortcut icon" href="/static/img/favicon.ico">
+	<!-- end: Favicon -->
+	
+		
+		
+		
+</head>
+
+<body>
+		<div class="container-fluid-full">
+		<div class="row-fluid">
+
+			<noscript>
+				<div class="alert alert-block span10">
+					<h4 class="alert-heading">Warning!</h4>
+					<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+				</div>
+			</noscript>
+
+			<!-- start: Content -->
+			<div id="content" class="span10">
+
+			<div class="row-fluid sortable">
+				<div class="box span12">
+					<div class="box-header" data-original-title>
+						<h2><i class="halflings-icon white user"></i><span class="break"></span>Element</h2>
+						<div class="box-icon">
+							<a href="#" class="btn-setting"><i class="halflings-icon white wrench"></i></a>
+							<a href="#" class="btn-minimize"><i class="halflings-icon white chevron-up"></i></a>
+							<a href="#" class="btn-close"><i class="halflings-icon white remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+						<table class="table table-striped table-bordered bootstrap-datatable datatable">
+						  <thead>
+							  <tr>
+								  <th>模板</th>
+								  <th>文本替换</th>
+								  <th>音频文件</th>
+								  <th>操作</th>
+							  </tr>
+						  </thead>
+						  <tbody>
+							<tr>
+								<td id = 'val1' class = 'btn-text'>您好</td>
+								<td class="center"><input type ='text'  class= 'btn-iput'/> <select id ='sel1' class = 'btn-sel'><option value = '先生'>先生</option><option id="女士">女士</option></select></td>
+								<td class="center"><input type ='text'  style="width:70%;" id = 'voice' class = 'btn-wav'   value = 'A1.wav,A2.wav'/></td>
+								<td class="center">
+									<a class="btn btn-success" href="#"><i class="btn-cp" >合成</i></a>
+									<a class="btn btn-info" href="#"><i class="">回放</i></a>
+									<!--<a class="btn btn-danger" href="#"><i class="halflings-icon white trash"></i></a>-->
+								</td>
+							</tr>
+
+							<tr>
+								<td class = 'btn-text'>这里是</td>
+								<td class="center"><input type ='text' class= 'btn-iput'  style="width:70%;"/></td>
+								<td class="center"><input type ='text' value = 'A4.wav' class = 'btn-wav' style="width:70%;"/></td>
+								<td class="center">
+									<a class="btn btn-success" href="#"><i class="btn-cp">合成</i></a>
+									<a class="btn btn-info" href="#"><i class="">回放</i></a>
+									<!--<a class="btn btn-danger" href="#"><i class="halflings-icon white trash"></i></a>-->
+								</td>
+							</tr>
+
+                          <tr>
+								<td class = 'btn-text'>您的借款已逾期</td>
+								<td class="center"><input type ='text' value = '' class= 'btn-iput' style="width:70%;"/></td>
+								<td class="center"><input type ='text' value = 'A5.wav' class = 'btn-wav' style="width:70%;"/></td>
+								<td class="center">
+									<a class="btn btn-success" href="#"><i class="btn-cp">合成</i></a>
+									<a class="btn btn-info" href="#"><i class="">回放</i></a>
+									<!--<a class="btn btn-danger" href="#"><i class="halflings-icon white trash"></i></a>-->
+								</td>
+							</tr>
+						  </tbody>
+					  </table>
+					</div>
+				</div><!--/span-->
+
+			</div><!--/row-->
+	</div><!--/.fluid-container-->
+		</div><!--/#content.span10-->
+		</div><!--/fluid-row-->
+
+        <!--<script src="http://code.jquery.com/jquery-1.4.1.js"></script>-->
+		<script src="/static/js/jquery-1.9.1.min.js"></script>
+        <script>
+        $(document).ready(function(){
+          $('.btn-cp').click(function(){
+              alert('开始合成。。。')
+              _this = $(this);
+              console.info($(this).parent().parent().parent().html());
+              val_1 = $(this).parent().parent().parent().find('.btn-text').text();
+              val_2 = $(this).parent().parent().parent().find('.btn-iput').val();
+              sel_1 = $(this).parent().parent().parent().find('.btn-sel').val();
+              voice = $(this).parent().parent().parent().find('.btn-wav').val();
+			  if (sel_1 == "undefined"  || sel_1 == null ){
+			 	 sel_1 =''
+			  }
+              console.log('模板 ： ',val_1,'  ',val_2, ' 下拉值 ' ,sel_1,' 声音文件 ',voice);
+              params = {'templ_':val_1,'text_':val_2,'select_':sel_1,'voice_':voice};
+              $.ajax({
+                  url:'/aicyber/resource/voice/compose/',
+                  type:'POST', //GET
+                  async:true,    //或false,是否异步
+                  data:JSON.stringify(params),
+                  contentType: 'application/json',
+                  dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+                  success:function(json,textStatus,jqXHR){
+                      console.log(json);
+                      alert('合成成功！！！');
+                      var url = '/aicyber/resource/download/';
+                      if(json.success){
+                          console.log('---------- ',url+json.data);
+//                          console.log(_this.parent().parent().parent().find('.btn-info'));
+						  _this.parent().parent().parent().find('.btn-info').attr("href", url+json.data);
+					  }
+
+                  }
+              })
+          })
+        });
+</script>
+</body>
+</html>

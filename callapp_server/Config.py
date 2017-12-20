@@ -10,8 +10,8 @@ sys.setdefaultencoding('utf8')
 server="http://118.190.166.165:10080/recordvoice"
 server_url = ""
 #=====================Flow Config start==========================
-#start flow
-flow_host = '106.75.61.164'
+#start flow 117.50.8.27  106.75.61.164
+flow_host = '117.50.8.27'
 flow_port = 8080
 flow_url = "/flow/execute.do"
 #closeflow
@@ -29,8 +29,9 @@ REDIS_DB = 'cache'
 REDIS_PORT = 6379
 #REDIS_HOST = '10.165.51.223'#'121.42.36.138'
 # REDIS_HOST = '10.31.92.12'#''118.190.166.134
-REDIS_HOST = 'r-2zed20375a600494.redis.rds.aliyuncs.com' #'aliyun'
-REDIS_PWD = 'MyAicyber201415926'
+# REDIS_HOST = 'r-2zed20375a600494.redis.rds.aliyuncs.com' #'aliyun'
+REDIS_HOST = '121.42.36.138' #'aliyun'
+REDIS_PWD = 'aicyber'
 
 
 #======================postgresql================================

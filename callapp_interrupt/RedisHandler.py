@@ -119,7 +119,7 @@ if __name__ == '__main__':
     # print r.hget('uuid--2')
     text = '5566'
     ss_key = Md5Utils.get_md5_value(text)
-    print ss_key
+    print '*/*/*/*  ',ss_key
     if r.has_name(ss_key):
         print  "this key is exit"
         r.hset(ss_key, 'mnt/asr/asr/test_5566.wav')

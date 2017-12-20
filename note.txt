@@ -120,6 +120,8 @@ sudo apt-get install rabbitmq-server
 chkconfig rabbitmq-server on
 service rabbitmq-server stop/start
 
+
+#systemctl status rabbitmq-server.service 查看mq 错误code
 显示队列：rabbitmqctl list_queues
 
 启动：sudo rabbitmq-server start
@@ -174,8 +176,8 @@ djanfo_10244587
 
 执行maven编译：mvn install -Dmaven.test.skip=true
 
-
-bgapi originate {sip_invite_req_uri=sip:15900282168@36.106.189.170}user/1009 &echo
+sofia status profile internal reg
+bgapi originate {sip_invite_req_uri=sip:15900282168@36.106.189.170}user/1019 &&python(callappv2.Bot)
 
 
 <gateway name="gw1"/>
@@ -336,6 +338,10 @@ ucloud freeswitch : 106.75.47.65  ubuntu   ubuntu330M/aicyber123456
 
 postgresql: psql -U root -h 10.9.90.133 call  password:z8asuidnaicyber
 
+
+
+nexus 117.50.9.78
+
 #===================================VAD  参数说明==========================================================================================
 5 参数修改说明
 
@@ -376,7 +382,15 @@ WYTX22000107000 77KDMk4X  221.122.101.27 5060
 
 
 
+#=================================freeswitch  高并发session=================================================================================================
+/usr/local/freeswitch/conf/autoload_configs/switch.conf.xml
 
+param name="sessions-per-second" value="30"/>  把30 改成1000
+
+
+
+#==============================nexus=========
+http://117.50.9.78:8081/nexus
 
 
 

@@ -121,7 +121,7 @@ class IVRBase(object):
         rabbitmq.rabbitmqClint(jsonStr)
 
     def record_chat_run(self, who, text, record_fpath, create_at, call_id, jsonStr):
-        logger.error('record_fpath(record):.....%s....'%record_fpath)
+        print  'record_fpath(record):.....%s....'%record_fpath
         objdata = {}
         objdata['mark'] = 'insert'
         objdata['who'] =who
@@ -134,6 +134,17 @@ class IVRBase(object):
         # logger.info('------jsonstr-----%s' % jsonStr)
         rabbitmq.rabbitmqClint(jsonStr)
 
+    def user_analysis(self,user_label):
+        print '-----user_analysis -------user_label  %s'%user_label
+        objdata = {}
+        objdata['mark'] = 'user_label'
+        objdata['user_label'] = user_label
+        objdata['channal_uuid'] = self.channal_uuid
+        jsonStr = json.dumps(objdata)
+        # logger.info('------jsonstr-----%s'%jsonStr)
+        rabbitmq.rabbitmqClint(jsonStr)
+
+
     def bot_flow(self, input):
         startTime = time.time()
         create_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
@@ -145,6 +156,12 @@ class IVRBase(object):
             for item in dict['info']:
                 text = ''.join(item['output'])
                 logger.error('flow return text %s' % text)
+                #新增 用户意向标签 需要存储数据库
+                user_label = item['user_label']
+                print  ' start.... user_label .... %s'%user_label
+                self.user_analysis(user_label)
+                print  ' end.... user_label .... %s' % user_label
+
                 if item['output_resource'] != '':
                     filename = "{0}".format(item['output_resource'])
                     path = self.bot_audio+filename

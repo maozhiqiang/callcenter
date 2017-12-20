@@ -90,6 +90,10 @@ def index2():
 def appLogin():
     name = request.form.get('username')
     pwd = request.form.get('password')
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    count = session.query(User).filter_by(id =2).delete()
+    print count
     if pwd == '123':
         return redirect(url_for('index2'))
     return redirect(url_for('loginIndex'))

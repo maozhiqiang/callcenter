@@ -1,29 +1,1928 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+    <list default="true" id="847edd05-a0c3-4ab0-bc38-b8191ca6de03" name="Default" comment="update app">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/audio/text.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/eval-52000-0.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/eval-52000-1.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/eval-52000-10.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/eval-52000-11.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/eval-52000-12.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/eval-52000-13.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/eval-52000-14.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/eval-52000-15.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/eval-52000-16.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/eval-52000-17.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/eval-52000-18.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/eval-52000-19.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/eval-52000-2.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/eval-52000-20.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/eval-52000-21.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/eval-52000-22.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/eval-52000-23.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/eval-52000-24.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/eval-52000-25.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/eval-52000-3.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/eval-52000-4.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/eval-52000-5.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/eval-52000-6.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/eval-52000-7.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/eval-52000-8.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/eval-52000-9.wav" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/model.ckpt-52000.data-00000-of-00001" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/model.ckpt-52000.index" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/model.ckpt-52000.meta" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/font/fontawesome-webfont-0.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/font/fontawesome-webfont-62877.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/font/fontawesome-webfont-62877.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/font/fontawesome-webfont-62877.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/font/glyphicons-regular-0.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/font/glyphicons-regular.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/font/glyphicons-regular.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/font/glyphicons-regular.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/font/glyphiconshalflings-regular-0.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/font/glyphiconshalflings-regular.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/font/glyphiconshalflings-regular.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/font/glyphiconshalflings-regular.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/arrows-active.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/arrows-normal.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/avatar.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/bg-input-focus.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/bg-input.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/bg-login.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/browser-chrome-big.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/browser-firefox-big.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/browser-ie.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/browser-opera.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/browser-safari.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/buttons.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/chat-left-metro.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/chat-left-metro@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/chat-left.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/chat-left@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/chat-right-metro.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/chat-right-metro@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/chat-right.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/chat-right@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/chosen-sprite.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/close-button-white.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/close-button.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/crop.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/dialogs.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/gallery/photo1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/gallery/photo10.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/gallery/photo11.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/gallery/photo12.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/gallery/photo13.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/gallery/photo2.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/gallery/photo3.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/gallery/photo4.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/gallery/photo5.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/gallery/photo6.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/gallery/photo7.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/gallery/photo8.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/gallery/photo9.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/glyphicons-halflings-white.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/glyphicons-halflings.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/glyphicons-white.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/glyphicons.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/glyphicons_halflings-white.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/glyphicons_halflings.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/icons-big.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/icons-small.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/iphone-style-checkboxes/off-63584.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/iphone-style-checkboxes/on-63584.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/iphone-style-checkboxes/slider_center-63584.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/iphone-style-checkboxes/slider_left-63584.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/iphone-style-checkboxes/slider_right-63584.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/progress.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/quicklook-bg.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/quicklook-icons.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/quote.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/resize.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/slider_r8.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/spinner-mini.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/sprite.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/timeline-bg.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/timeline-left-arrow.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/timeline-left-arrow@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/timeline-right-arrow.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/timeline-right-arrow@2x.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/toolbar.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/toolbar.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/ui-bg_flat_0_aaaaaa_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/ui-bg_flat_75_ffffff_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/ui-bg_glass_55_fbf9ee_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/ui-bg_glass_65_ffffff_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/ui-bg_glass_75_dadada_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/ui-bg_glass_75_e6e6e6_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/ui-bg_glass_95_fef1ec_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/ui-bg_highlight-soft_75_cccccc_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/ui-icons_222222_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/ui-icons_2e83ff_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/ui-icons_454545_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/ui-icons_888888_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/ui-icons_cd0a0a_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/uploadify-cancel.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/static/base/images/youpbx0.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/static/base/images/youpbx1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/static/base/images/youpbx2.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/locale/en/LC_MESSAGES/django.mo" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/locale/en/LC_MESSAGES/djangojs.mo" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/locale/zh_CN/LC_MESSAGES/django.mo" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/locale/zh_CN/LC_MESSAGES/djangojs.mo" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/img/social-icons-gray.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/img/social-icons.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-image-gallery/img/loading.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-modal/img/ajax-loader.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/font-awesome/fonts/FontAwesome.otf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/font-awesome/fonts/fontawesome-webfont.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/font-awesome/fonts/fontawesome-webfont.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/font-awesome/fonts/fontawesome-webfont.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/font-awesome/fonts/fontawesome-webfont.woff2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/select2/select2-spinner.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/select2/select2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/select2/select2x2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/app.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/flask_restart.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/hparams.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/logs-tacotron/checkpoint" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/models/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/models/helpers.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/models/modules.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/models/rnn_wrappers.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/models/tacotron.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/css/bootstrap-responsive.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/css/bootstrap-responsive.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/css/bootstrap.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/css/bootstrap.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/css/chosen.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/css/elfinder.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/css/elfinder.theme.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/css/font-awesome-ie7.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/css/font-awesome.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/css/fullcalendar.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/css/glyphicons.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/css/halflings.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/css/ie.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/css/ie9.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/css/jquery-ui-1.8.21.custom.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/css/jquery.cleditor.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/css/jquery.gritter.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/css/jquery.iphone.toggle.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/css/jquery.noty.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/css/noty_theme_default.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/css/style-forms.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/css/style-responsive.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/css/style.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/css/uniform.default.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/css/uploadify.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/font/glyphicons-regular.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/font/glyphiconshalflings-regular.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/glyphicons-white.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/glyphicons.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/glyphicons_halflings-white.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/img/glyphicons_halflings.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/bootstrap.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/bootstrap.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/counter.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/custom.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/excanvas.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/fullcalendar.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/jquery-1.9.1.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/jquery-migrate-1.0.0.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/jquery-ui-1.10.0.custom.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/jquery.chosen.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/jquery.cleditor.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/jquery.cookie.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/jquery.dataTables.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/jquery.elfinder.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/jquery.flot.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/jquery.flot.pie.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/jquery.flot.resize.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/jquery.flot.stack.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/jquery.gritter.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/jquery.imagesloaded.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/jquery.iphone.toggle.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/jquery.knob.modified.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/jquery.masonry.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/jquery.noty.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/jquery.raty.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/jquery.sparkline.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/jquery.ui.touch-punch.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/jquery.uniform.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/jquery.uploadify-3.1.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/modernizr.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/static/js/retina.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/synthesizer.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/templates/Tables.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/templates/calendar.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/templates/chart.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/templates/file-manager.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/templates/form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/templates/gallery.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/templates/icon.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/templates/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/templates/login.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/templates/messages.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/templates/submenu.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/templates/submenu2.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/templates/submenu3.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/templates/tasks.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/templates/typography.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/templates/ui.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/templates/voice.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/templates/widgets.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/tests/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/tests/cmudict_test.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/tests/numbers_test.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/tests/text_test.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/text/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/text/cleaners.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/text/cmudict.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/text/numbers.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/text/symbols.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/util/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/util/atc.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/util/audio.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/util/infolog.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/util/plot.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/uwsgi.ini" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/uwsgi.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlaskWebv2/voice_tool.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RabbtiMq_test/consumer.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RabbtiMq_test/consumer2.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RabbtiMq_test/producer.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RabbtiMq_test/producer2.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RabbtiMq_test/rabbtiMQ_test.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/admins/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/admins/netlist_admin.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/admins/number_admin.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/admins/route_admin.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/admins/sipinterface_admin.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/admins/trunk_admin.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/adminx.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/dashboards.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/fixtures/initial_data.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/models/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/models/context_models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/models/location_models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/models/media_models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/models/netlist_models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/models/number_models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/models/route_models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/models/sip_interface_models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/models/trunk_models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/pages/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/pages/add_media_form.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/pages/cmd_terminal_page.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/pages/edit_conf_page.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/pages/entry_real_info_page.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/pages/fs_conf_form.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/pages/fs_real_log_page.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/pages/new_module_form.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/pages/sip_interface_auto_conf_form.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/pages/sys_info_page.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/base/pages/time_zone_set_form.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/common.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/funcs/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/funcs/admins/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/funcs/admins/autoattendant_admin.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/funcs/admins/ringgroup_admin.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/funcs/adminx.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/funcs/models/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/funcs/models/autoattendant_models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/funcs/models/conference_models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/funcs/models/device_models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/funcs/models/ringgroup_models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/funcs/models/timeroutes_models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/funcs/models/voicemail_models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/init.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/settings.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/urls.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/apps/wsgi.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/config.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/manage.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/ctrl/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/ctrl/interface.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/ctrl/plivohelper.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/ctrl/routes.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/ctrl/templates/response_template.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/db/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/db/models/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/db/models/call_limit_model.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/db/models/core_model.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/db/models/fifo_model.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/db/models/sofia_reg_model.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/db/models/voicemail_default_model.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/db/operates/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/db/operates/channels_op.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/db/operates/plivo_call.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/db/operates/plivohelper.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/db/plivo_call.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/db/plivohelper.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/db/routes.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/db/templates/channels_index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/db/templates/hangup.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/gen_xml.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/init.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/rpc/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/rpc/cmd_demo.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/rpc/in_api.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/run_db.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/tpl/autoload_configs_acl.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/tpl/autoload_configs_conference.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/tpl/autoload_configs_locations.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/tpl/autoload_configs_odbc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/tpl/dialplan.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/tpl/dialplan/dialplan_extension_attendant.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/tpl/dialplan/dialplan_extension_conference.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/tpl/dialplan/dialplan_extension_device.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/tpl/dialplan/dialplan_extension_global.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/tpl/dialplan/dialplan_extension_ringgroup.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/tpl/dialplan/dialplan_extension_timeroutes.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/tpl/dialplan/dialplan_extension_trunkpattern.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/tpl/dialplan/dialplan_extension_voicemail.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/tpl/dialplan_public.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/tpl/directory.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/tpl/extensions/default_extension.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/tpl/extensions/public_did.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/tpl/ivr_menus.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/pbx/tpl/sip_profiles.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/core/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/core/errors.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/core/freeswitch/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/core/freeswitch/commands.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/core/freeswitch/eventsocket.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/core/freeswitch/eventtypes.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/core/freeswitch/inboundsocket.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/core/freeswitch/outboundsocket.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/core/freeswitch/transport.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/core/transport.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/rest/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/rest/freeswitch/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/rest/freeswitch/api.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/rest/freeswitch/apiserver.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/rest/freeswitch/cacheapi.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/rest/freeswitch/cacheapi_new.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/rest/freeswitch/cacheserver.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/rest/freeswitch/cacheurls.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/rest/freeswitch/elements.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/rest/freeswitch/exceptions.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/rest/freeswitch/helpers.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/rest/freeswitch/inboundsocket.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/rest/freeswitch/outboundserver.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/rest/freeswitch/outboundsocket.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/rest/freeswitch/urls.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/utils/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/utils/daemonize.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/utils/encode.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/plivo/utils/logger.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/requirements.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/run_db.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/adminx.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/core/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/core/form_fields.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/core/model_fields.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/core/qiniu_fields.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/core/storage_qiniu.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/core/structs.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/db/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/db/dunderkey.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/db/query.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/db/tests.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/defs.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/dutils.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/filters.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/initialize.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/layout.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/locale/en/LC_MESSAGES/django.po" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/locale/en/LC_MESSAGES/djangojs.po" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/locale/zh_CN/LC_MESSAGES/django.po" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/locale/zh_CN/LC_MESSAGES/djangojs.po" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/management/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/management/app_template/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/management/app_template/admins/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/management/app_template/adminx.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/management/app_template/models/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/management/commands/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/management/commands/newapp.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/manager.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/options.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/actions.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/aggregation.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/ajax.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/auth.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/batch.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/bookmark.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/chart.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/details.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/editable.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/export.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/filters.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/images.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/inline.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/language.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/layout.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/mobile.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/multiselect.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/passwords.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/portal.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/quickform.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/refresh.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/relate.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/relfield.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/social.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/sortable.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/themes.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/topnav.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/wizard.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/plugins/xversion.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/sites.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/component.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/css/themes/bootstrap-theme.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/css/themes/bootstrap-theme.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/css/themes/bootstrap-xadmin.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/css/xadmin.form.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/css/xadmin.main.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/css/xadmin.mobile.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/css/xadmin.page.dashboard.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/css/xadmin.plugin.aggregation.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/css/xadmin.plugin.formset.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/css/xadmin.plugin.quickfilter.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/css/xadmin.plugins.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/css/xadmin.plugins.social.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/css/xadmin.responsive.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/css/xadmin.widget.editable.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/css/xadmin.widget.select-related.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/css/xadmin.widget.select-transfer.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/js/jsi18n.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/js/xadmin.main.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/js/xadmin.page.dashboard.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/js/xadmin.page.form.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/js/xadmin.page.list.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/js/xadmin.plugin.actions.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/js/xadmin.plugin.batch.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/js/xadmin.plugin.bookmark.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/js/xadmin.plugin.charts.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/js/xadmin.plugin.details.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/js/xadmin.plugin.editable.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/js/xadmin.plugin.filters.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/js/xadmin.plugin.formset.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/js/xadmin.plugin.portal.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/js/xadmin.plugin.quick-form.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/js/xadmin.plugin.quickfilter.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/js/xadmin.plugin.refresh.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/js/xadmin.plugin.revision.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/js/xadmin.plugin.sortable.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/js/xadmin.plugin.themes.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/js/xadmin.responsive.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/js/xadmin.widget.RelatedObjectLookups.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/js/xadmin.widget.datetime.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/js/xadmin.widget.multiselect.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/js/xadmin.widget.select-transfer.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/js/xadmin.widget.select.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/autotype/index.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/css/datepicker.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.bg.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.ca.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.cs.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.da.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.de.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.el.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.es.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.fi.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.fr.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.he.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.hr.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.hu.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.id.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.is.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.it.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.ja.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.kr.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.lt.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.lv.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.ms.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.nb.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.nl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.pl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.pt-BR.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.pt.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.ro.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.rs-latin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.rs.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.ru.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.sk.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.sl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.sv.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.sw.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.th.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.tr.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.uk.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-TW.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-image-gallery/css/bootstrap-image-gallery.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-image-gallery/css/bootstrap-image-gallery.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-image-gallery/js/bootstrap-image-gallery.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-image-gallery/js/bootstrap-image-gallery.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-modal/css/bootstrap-modal.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-modal/js/bootstrap-modal.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-modal/js/bootstrap-modalmanager.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-multiselect/css/bootstrap-multiselect.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-multiselect/js/bootstrap-multiselect.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-timepicker/css/bootstrap-timepicker.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-timepicker/css/bootstrap-timepicker.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-timepicker/js/bootstrap-timepicker.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap-timepicker/js/bootstrap-timepicker.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap/css/bootstrap.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap/css/bootstrap.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap/js/bootstrap.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/bootstrap/js/bootstrap.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/flot/excanvas.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/flot/excanvas.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/flot/jquery.colorhelpers.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/flot/jquery.flot.aggregate.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/flot/jquery.flot.canvas.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/flot/jquery.flot.categories.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/flot/jquery.flot.crosshair.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/flot/jquery.flot.errorbars.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/flot/jquery.flot.fillbetween.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/flot/jquery.flot.image.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/flot/jquery.flot.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/flot/jquery.flot.navigate.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/flot/jquery.flot.pie.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/flot/jquery.flot.resize.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/flot/jquery.flot.selection.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/flot/jquery.flot.stack.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/flot/jquery.flot.symbol.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/flot/jquery.flot.threshold.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/flot/jquery.flot.time.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/font-awesome/css/font-awesome.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/font-awesome/css/font-awesome.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/font-awesome/fonts/fontawesome-webfont.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/jquery-ui/jquery.ui.core.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/jquery-ui/jquery.ui.core.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/jquery-ui/jquery.ui.effect.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/jquery-ui/jquery.ui.effect.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/jquery-ui/jquery.ui.mouse.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/jquery-ui/jquery.ui.mouse.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/jquery-ui/jquery.ui.sortable.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/jquery-ui/jquery.ui.sortable.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/jquery-ui/jquery.ui.widget.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/jquery-ui/jquery.ui.widget.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/jquery/jquery.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/jquery/jquery.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/load-image/load-image.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/load-image/load-image.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/select2/select2.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/select2/select2.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/select2/select2.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/select2/select2_locale_de.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/select2/select2_locale_es.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/select2/select2_locale_eu.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/select2/select2_locale_fr.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/select2/select2_locale_hr.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/select2/select2_locale_hu.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/select2/select2_locale_it.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/select2/select2_locale_nl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/select2/select2_locale_pt-BR.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/select2/select2_locale_pt-PT.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/select2/select2_locale_ro.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/select2/select2_locale_ru.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/select2/select2_locale_sk.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/select2/select2_locale_sv.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/select2/select2_locale_tr.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/select2/select2_locale_ua.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/select2/select2_locale_zh-CN.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/selectize/selectize.bootstrap3.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/selectize/selectize.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/selectize/selectize.default.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/selectize/selectize.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/selectize/selectize.legacy.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/selectize/selectize.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/snapjs/snap.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/snapjs/snap.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/static/xadmin/vendor/snapjs/snap.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/bootstrap3/field.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/404.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/500.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/auth/login.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/auth/login_social_block.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/auth/password_reset/complete.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/auth/password_reset/confirm.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/auth/password_reset/done.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/auth/password_reset/email.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/auth/password_reset/email_subject.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/auth/password_reset/form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/auth/user/add_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/auth/user/change_password.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/base.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/base_pure.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/base_site.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/base_site_noleft.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/blocks/comm.top.setlang.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/blocks/comm.top.theme.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/blocks/comm.top.topnav.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/blocks/form.results_bottom.actions.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/blocks/grid.results_bottom.actions.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/blocks/modal_list.left_navbar.quickfilter.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/blocks/model_form.before_fieldsets.wizard.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/blocks/model_form.submit_line.wizard.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/blocks/model_list.nav_form.search_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/blocks/model_list.nav_menu.bookmarks.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/blocks/model_list.nav_menu.filters.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/blocks/model_list.results_top.charts.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/blocks/model_list.results_top.date_hierarchy.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/blocks/model_list.top_toolbar.exports.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/blocks/model_list.top_toolbar.layouts.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/blocks/model_list.top_toolbar.refresh.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/edit_inline/accordion.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/edit_inline/base.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/edit_inline/blank.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/edit_inline/one.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/edit_inline/stacked.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/edit_inline/tab.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/edit_inline/tabular.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/filters/char.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/filters/checklist.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/filters/common.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/filters/date.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/filters/date_base.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/filters/fk_search.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/filters/list.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/filters/number.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/filters/quickfilter.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/filters/rel.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/forms/transfer.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/grids/thumbnails.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/includes/box.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/includes/pagination.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/includes/sitemenu_accordion.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/includes/sitemenu_accordion_init.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/includes/sitemenu_default.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/includes/submit_line.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/includes/toggle_back.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/includes/toggle_menu.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/layout/field_value.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/layout/field_value_td.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/layout/fieldset.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/layout/input_group.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/layout/td-field.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/views/app_index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/views/batch_change_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/views/dashboard.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/views/form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/views/form_action.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/views/grid.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/views/invalid_setup.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/views/logged_out.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/views/model_dashboard.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/views/model_delete_confirm.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/views/model_delete_selected_confirm.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/views/model_detail.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/views/model_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/views/model_form_action.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/views/model_history.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/views/page.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/views/quick_detail.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/views/quick_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/views/recover_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/views/recover_list.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/views/revision_diff.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/views/revision_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/widgets/addform.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/widgets/base.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/widgets/chart.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/widgets/list.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templates/xadmin/widgets/qbutton.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templatetags/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/templatetags/xadmin_tags.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/util.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/utils/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/utils/mail.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/vendors.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/views/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/views/action.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/views/action_delete.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/views/base.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/views/common.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/views/custom_form.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/views/custom_list.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/views/custom_page.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/views/dashboard.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/views/dashwidget.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/views/delete.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/views/detail.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/views/edit.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/views/form.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/views/grid.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/views/list.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/views/model_page.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/views/page.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/views/structs.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/views/website.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/widgets/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/widgets/base.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/widgets/relation.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/wizard/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/wizard/forms.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/wizard/legacy.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/wizard/storage/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/wizard/storage/base.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/wizard/storage/cookie.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/wizard/storage/exceptions.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/wizard/storage/session.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/wizard/utils.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/YouPBX/xadmin/wizard/views.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aicyber_maven_setting.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flask_orm/LICENSE.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flask_orm/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flask_orm/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flask_orm/manage.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flask_orm/requirements.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flask_orm/tests/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flask_orm/tests/conftest.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flask_orm/tests/controllers/test_main_controller.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flask_orm/tests/controllers/test_user_controller.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flask_orm/tests/models/test_user.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flask_orm/tests/test_login.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flask_orm/webapp/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flask_orm/webapp/controllers/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flask_orm/webapp/controllers/main.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flask_orm/webapp/controllers/user.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flask_orm/webapp/extensions.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flask_orm/webapp/models/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flask_orm/webapp/models/serialize.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flask_orm/webapp/models/user.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flask_orm/webapp/settings.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flask_orm/webapp/static/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flask_orm/webapp/static/style.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/log/RedisHandler.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/multiprocessing_test/Thread_test.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tools/XMLUtils.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tools/anlay_data.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tools/create_xml.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tools/dingding.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tools/update_xml.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/web_consumer_mq/__init__.py" afterPath="$PROJECT_DIR$/FlaskWebv1/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/app.iml" afterPath="$PROJECT_DIR$/.idea/app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/brings/app.py" afterPath="$PROJECT_DIR$/brings/app.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/brings/test/run.py" afterPath="$PROJECT_DIR$/brings/test/run.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/callapp_interrupt/RedisHandler.py" afterPath="$PROJECT_DIR$/callapp_interrupt/RedisHandler.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/callapp_server/Bot.py" afterPath="$PROJECT_DIR$/callapp_server/Bot.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/callapp_server/Config.py" afterPath="$PROJECT_DIR$/callapp_server/Config.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/callapp_server/WebAPI.py" afterPath="$PROJECT_DIR$/callapp_server/WebAPI.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fs_handler/fs_event_server.py" afterPath="$PROJECT_DIR$/fs_handler/fs_event_server.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/note.txt" afterPath="$PROJECT_DIR$/note.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/Singleton.py" afterPath="$PROJECT_DIR$/tools/Singleton.py" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/callcenter$consumer.coverage" NAME="consumer Coverage Results" MODIFIED="1513250088288" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/RabbtiMq_test" />
+    <SUITE FILE_PATH="coverage/callcenter$manage.coverage" NAME="manage Coverage Results" MODIFIED="1513581579360" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/YouPBX" />
+    <SUITE FILE_PATH="coverage/callcenter$SinoVoice.coverage" NAME="SinoVoice Coverage Results" MODIFIED="1513748030803" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/callapp_server" />
+    <SUITE FILE_PATH="coverage/callcenter$filters.coverage" NAME="filters Coverage Results" MODIFIED="1513574297642" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/YouPBX/xadmin" />
+    <SUITE FILE_PATH="coverage/callcenter$init.coverage" NAME="init Coverage Results" MODIFIED="1513595097127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/YouPBX/pbx" />
+    <SUITE FILE_PATH="coverage/callcenter$update_xml.coverage" NAME="update_xml Coverage Results" MODIFIED="1513763234673" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tools" />
+    <SUITE FILE_PATH="coverage/callcenter$fs_event_handler.coverage" NAME="fs_event_handler Coverage Results" MODIFIED="1513324523458" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/fs_handler_callback" />
+    <SUITE FILE_PATH="coverage/callcenter$Unittests_in_app_py.coverage" NAME="Unittests in app.py Coverage Results" MODIFIED="1513161535297" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/FlaskWebv2" />
+    <SUITE FILE_PATH="coverage/callcenter$inboundsocket.coverage" NAME="inboundsocket Coverage Results" MODIFIED="1513590421016" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/YouPBX/plivo/core/freeswitch" />
+    <SUITE FILE_PATH="coverage/callcenter$app.coverage" NAME="app Coverage Results" MODIFIED="1513223216257" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/FlaskWebv2" />
+    <SUITE FILE_PATH="coverage/callcenter$run_db.coverage" NAME="run_db Coverage Results" MODIFIED="1513573297647" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/YouPBX" />
+    <SUITE FILE_PATH="coverage/callcenter$producer.coverage" NAME="producer Coverage Results" MODIFIED="1513250111262" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/RabbtiMq_test" />
+    <SUITE FILE_PATH="coverage/callcenter$WebAPI__1_.coverage" NAME="WebAPI (1) Coverage Results" MODIFIED="1513742006841" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/callapp_local" />
+    <SUITE FILE_PATH="coverage/callcenter$FlowHandler.coverage" NAME="FlowHandler Coverage Results" MODIFIED="1513756748223" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/callapp_server" />
+    <SUITE FILE_PATH="coverage/callcenter$RedisHandler.coverage" NAME="RedisHandler Coverage Results" MODIFIED="1513235754862" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/callapp_server" />
+    <SUITE FILE_PATH="coverage/callcenter$create_xml.coverage" NAME="create_xml Coverage Results" MODIFIED="1513649175904" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tools" />
+    <SUITE FILE_PATH="coverage/callcenter$WebAPI.coverage" NAME="WebAPI Coverage Results" MODIFIED="1513747018994" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/callapp_server" />
+    <SUITE FILE_PATH="coverage/callcenter$daemonize.coverage" NAME="daemonize Coverage Results" MODIFIED="1513654363206" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/YouPBX/plivo/utils" />
+    <SUITE FILE_PATH="coverage/callcenter$Singleton.coverage" NAME="Singleton Coverage Results" MODIFIED="1513163154416" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tools" />
+    <SUITE FILE_PATH="coverage/callcenter$mail.coverage" NAME="mail Coverage Results" MODIFIED="1513591652391" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/YouPBX/xadmin/utils" />
+    <SUITE FILE_PATH="coverage/callcenter$models.coverage" NAME="models Coverage Results" MODIFIED="1513575723532" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/YouPBX/xadmin" />
+    <SUITE FILE_PATH="coverage/callcenter$gen_xml.coverage" NAME="gen_xml Coverage Results" MODIFIED="1513595064289" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/YouPBX/pbx" />
+    <SUITE FILE_PATH="coverage/callcenter$anlay_data.coverage" NAME="anlay_data Coverage Results" MODIFIED="1513753950229" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tools" />
+    <SUITE FILE_PATH="coverage/callcenter$settings.coverage" NAME="settings Coverage Results" MODIFIED="1513575834943" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/YouPBX/apps" />
+    <SUITE FILE_PATH="coverage/callcenter$in_api.coverage" NAME="in_api Coverage Results" MODIFIED="1513675819811" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/YouPBX/pbx/rpc" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="callcenter" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Bot.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/callapp_server/Bot.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-823">
+              <caret line="159" column="33" lean-forward="false" selection-start-line="159" selection-start-column="29" selection-end-line="159" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FlowHandler.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/callapp_server/FlowHandler.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="293">
+              <caret line="22" column="34" lean-forward="true" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Config.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/callapp_server/Config.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="13" column="24" lean-forward="false" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Config.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/callapp_local/Config.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="162">
+              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Config.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/callapp_interrupt/Config.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tools/config.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="378">
+              <caret line="48" column="50" lean-forward="false" selection-start-line="48" selection-start-column="39" selection-end-line="48" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="update_xml.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tools/update_xml.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="125" column="41" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="125" selection-end-column="41" />
+              <folding>
+                <element signature="e#259#274#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="XMLUtils.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tools/XMLUtils.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="401">
+              <caret line="112" column="26" lean-forward="true" selection-start-line="112" selection-start-column="26" selection-end-line="112" selection-end-column="26" />
+              <folding>
+                <element signature="e#156#171#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Flask_web/www/app.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="10" column="87" lean-forward="false" selection-start-line="10" selection-start-column="87" selection-end-line="10" selection-end-column="87" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="anlay_data.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tools/anlay_data.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="8" column="11" lean-forward="true" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>EXCHANGE</find>
+      <find>DEFAULT</find>
+      <find>DJANGO</find>
+      <find>RelatedObject</find>
+      <find>free</find>
+      <find>connect</find>
+      <find>ori</find>
+      <find>site</find>
+      <find>read_xml</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dynamics_xml" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/FlaskWebv2/tests/cmudict_test.py" />
+        <option value="$PROJECT_DIR$/FlaskWebv2/tests/numbers_test.py" />
+        <option value="$PROJECT_DIR$/FlaskWebv2/tests/text_test.py" />
+        <option value="$PROJECT_DIR$/FlaskWebv2/text/__init__.py" />
+        <option value="$PROJECT_DIR$/FlaskWebv2/text/symbols.py" />
+        <option value="$PROJECT_DIR$/FlaskWebv2/util/audio.py" />
+        <option value="$PROJECT_DIR$/FlaskWebv2/models/tacotron.py" />
+        <option value="$PROJECT_DIR$/FlaskWebv2/uwsgi.ini" />
+        <option value="$PROJECT_DIR$/FlaskWebv2/flask_restart.sh" />
+        <option value="$PROJECT_DIR$/tools/Singleton.py" />
+        <option value="$PROJECT_DIR$/FlaskWebv2/voice_tool.py" />
+        <option value="$PROJECT_DIR$/FlaskWebv2/app.py" />
+        <option value="$PROJECT_DIR$/FlaskWebv2/templates/voice.html" />
+        <option value="$PROJECT_DIR$/FlaskWebv2/synthesizer.py" />
+        <option value="$PROJECT_DIR$/callapp_server/rabbitMQ_produce.py" />
+        <option value="$PROJECT_DIR$/callapp_server/RedisHandler.py" />
+        <option value="$PROJECT_DIR$/RabbtiMq_test/consumer.py" />
+        <option value="$PROJECT_DIR$/RabbtiMq_test/producer.py" />
+        <option value="$PROJECT_DIR$/fs_handler_callback/fs_event_handler.py" />
+        <option value="$PROJECT_DIR$/fs_handler_callback/Config.py" />
+        <option value="$PROJECT_DIR$/work_logs/java/spring/springmvc.txt" />
+        <option value="$PROJECT_DIR$/YouPBX/apps/settings.py" />
+        <option value="$PROJECT_DIR$/YouPBX/xadmin/dutils.py" />
+        <option value="$PROJECT_DIR$/YouPBX/xadmin/models.py" />
+        <option value="$PROJECT_DIR$/YouPBX/apps/urls.py" />
+        <option value="$PROJECT_DIR$/YouPBX/plivo/core/freeswitch/eventsocket.py" />
+        <option value="$PROJECT_DIR$/YouPBX/plivo/core/freeswitch/transport.py" />
+        <option value="$PROJECT_DIR$/YouPBX/plivo/utils/logger.py" />
+        <option value="$PROJECT_DIR$/YouPBX/config.py" />
+        <option value="$PROJECT_DIR$/YouPBX/plivo/core/freeswitch/inboundsocket.py" />
+        <option value="$PROJECT_DIR$/YouPBX/apps/base/dashboards.py" />
+        <option value="$PROJECT_DIR$/tools/create_xml.py" />
+        <option value="$PROJECT_DIR$/YouPBX/pbx/rpc/in_api.py" />
+        <option value="$PROJECT_DIR$/work_logs/note.txt" />
+        <option value="$PROJECT_DIR$/callapp_server/WebAPI.py" />
+        <option value="$PROJECT_DIR$/tools/anlay_data.py" />
+        <option value="$PROJECT_DIR$/callapp_server/FlowHandler.py" />
+        <option value="$PROJECT_DIR$/callapp_server/Bot.py" />
+        <option value="$PROJECT_DIR$/mq_consumer/rabbtiMQ_consume.py" />
+        <option value="$PROJECT_DIR$/callapp_server/Config.py" />
+        <option value="$PROJECT_DIR$/tools/update_xml.py" />
+        <option value="$PROJECT_DIR$/tools/XMLUtils.py" />
+        <option value="$PROJECT_DIR$/Flask_web/www/app.py" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1431" />
+    <option name="y" value="-4" />
+    <option name="width" value="1855" />
+    <option name="height" value="1084" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="callcenter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="callcenter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="callcenter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="callcenter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Flask_web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="callcenter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="callcenter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Flask_web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/work_logs" />
+      <recent name="$PROJECT_DIR$/YouPBX" />
+      <recent name="$PROJECT_DIR$/FlaskWebv2" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.update_xml">
+    <configuration default="false" name="WebAPI" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python2.7" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/callapp_server" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="app" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/callapp_server/WebAPI.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="SinoVoice" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python2.7" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/callapp_server" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="app" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/callapp_server/SinoVoice.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="update_xml" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python2.7" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tools" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="app" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tools/update_xml.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="anlay_data" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python2.7" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tools" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="app" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tools/anlay_data.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="FlowHandler" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python2.7" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/callapp_server" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="app" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/callapp_server/FlowHandler.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="app" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="TARGET" value="" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
+      <node-interpreter value="project" />
+      <working-dir value="" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="app" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PyLettuceRunConfigurationType" factoryName="Lettuce">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="app" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python2.7" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="app" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python2.7" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="app" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <module name="app" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="app" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="app" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;.&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method />
+    </configuration>
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="Python.WebAPI" />
+      <item index="1" class="java.lang.String" itemvalue="Python.SinoVoice" />
+      <item index="2" class="java.lang.String" itemvalue="Python.update_xml" />
+      <item index="3" class="java.lang.String" itemvalue="Python.anlay_data" />
+      <item index="4" class="java.lang.String" itemvalue="Python.FlowHandler" />
+    </list>
+    <recent_temporary>
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python.update_xml" />
+        <item index="1" class="java.lang.String" itemvalue="Python.FlowHandler" />
+        <item index="2" class="java.lang.String" itemvalue="Python.anlay_data" />
+        <item index="3" class="java.lang.String" itemvalue="Python.SinoVoice" />
+        <item index="4" class="java.lang.String" itemvalue="Python.WebAPI" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+      <changelist id="847edd05-a0c3-4ab0-bc38-b8191ca6de03" name="Default" comment="" />
       <created>1501844501671</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1501844501671</updated>
     </task>
+    <task id="LOCAL-00001" summary="update app">
+      <created>1513235224947</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1513235224947</updated>
+    </task>
+    <task id="LOCAL-00002" summary="update app">
+      <created>1513306968380</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1513306968380</updated>
+    </task>
+    <task id="LOCAL-00003" summary="update app">
+      <created>1513324537327</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1513324537327</updated>
+    </task>
+    <task id="LOCAL-00004" summary="update app">
+      <created>1513396313706</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1513396313706</updated>
+    </task>
+    <task id="LOCAL-00005" summary="update app">
+      <created>1513750356337</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1513750356337</updated>
+    </task>
+    <task id="LOCAL-00006" summary="update app">
+      <created>1513754868628</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1513754868628</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="Unittests_in_app_py - 2017.12.13 at 18h 38m 55s.xml">
+      <configuration name="Unittests in app.py" configurationId="tests" />
+    </history-entry>
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1431" y="-4" width="1855" height="1084" extended-state="6" />
+    <layout>
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27578598" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26222685" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3319459" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="processedProjectFiles" value="true" />
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="update app" />
+    <option name="LAST_COMMIT_MESSAGE" value="update app" />
+  </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/callapp_server/FlowHandler.py</url>
+          <line>21</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tools/update_xml.py</url>
+          <line>135</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="17" />
+    </breakpoint-manager>
     <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/YouPBX/pbx/db/routes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-175">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/pbx/db/plivo_call.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1201">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/pbx/gen_xml.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="153" column="29" lean-forward="false" selection-start-line="153" selection-start-column="29" selection-end-line="153" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/pbx/init.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="110" column="25" lean-forward="false" selection-start-line="110" selection-start-column="25" selection-end-line="110" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/pbx/rpc/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/pbx/tpl/autoload_configs_acl.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/pbx/tpl/autoload_configs_conference.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/pbx/tpl/autoload_configs_locations.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/pbx/tpl/extensions/default_extension.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/pbx/tpl/extensions/public_did.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/pbx/tpl/ivr_menus.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/pbx/tpl/dialplan/dialplan_extension_conference.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/pbx/rpc/cmd_demo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="110" lean-forward="false" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="110" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/plivo/core/errors.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="6" lean-forward="false" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/pbx/db/models/sofia_reg_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1188">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/pbx/db/operates/channels_op.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="35" column="22" lean-forward="false" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/pbx/db/operates/plivo_call.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="738">
+          <caret line="65" column="23" lean-forward="true" selection-start-line="65" selection-start-column="23" selection-end-line="65" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/pbx/db/operates/plivohelper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1265">
+          <caret line="93" column="8" lean-forward="false" selection-start-line="93" selection-start-column="8" selection-end-line="93" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/pbx/db/plivohelper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3186">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/test.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/Manager.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/apps/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="19" column="42" lean-forward="false" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/xadmin/sites.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1026">
+          <caret line="69" column="8" lean-forward="false" selection-start-line="69" selection-start-column="8" selection-end-line="69" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/create_xml.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" column="21" lean-forward="false" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/pbx/tpl/sip_profiles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1332">
+          <caret line="74" column="34" lean-forward="false" selection-start-line="74" selection-start-column="29" selection-end-line="74" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/plivo/core/freeswitch/outboundsocket.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/plivo/core/freeswitch/inboundsocket.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="58" lean-forward="false" selection-start-line="11" selection-start-column="58" selection-end-line="11" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/plivo/core/freeswitch/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/plivo/core/freeswitch/commands.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2052">
+          <caret line="18" column="34" lean-forward="false" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/plivo/core/freeswitch/eventsocket.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="33" column="6" lean-forward="false" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/plivo/utils/daemonize.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2538">
+          <caret line="147" column="28" lean-forward="false" selection-start-line="147" selection-start-column="28" selection-end-line="147" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mq_consumer/Config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/YouPBX/pbx/rpc/in_api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1098">
+          <caret line="65" column="20" lean-forward="false" selection-start-line="65" selection-start-column="20" selection-end-line="65" selection-end-column="20" />
+          <folding>
+            <element signature="e#16#89#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/work_logs/note.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7866">
+          <caret line="437" column="20" lean-forward="false" selection-start-line="437" selection-start-column="20" selection-end-line="437" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/callapp_local/WebAPI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="12" column="47" lean-forward="false" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/callapp_server/WebAPI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="25" column="19" lean-forward="false" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
+          <folding>
+            <element signature="e#24#35#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/callapp_local/Bot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/callapp_server/SinoVoice.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="834">
+          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mq_consumer/rabbtiMQ_consume.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding>
+            <marker date="1513754864706" expanded="true" signature="871:1013" ph="INSERT INTO fs_call_replay... " />
+            <marker date="1513754864706" expanded="true" signature="1272:1333" ph="update fs_ca... " />
+            <marker date="1513754864706" expanded="true" signature="1488:1557" ph="update fs_ca... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/python2.7/xml/etree/ElementTree.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="748" column="0" lean-forward="false" selection-start-line="748" selection-start-column="0" selection-end-line="748" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/callapp_local/Config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/callapp_interrupt/Config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="48" column="50" lean-forward="false" selection-start-line="48" selection-start-column="39" selection-end-line="48" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/callapp_server/Config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="13" column="24" lean-forward="false" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/callapp_server/FlowHandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="293">
+          <caret line="22" column="34" lean-forward="true" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/anlay_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="11" lean-forward="true" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brings/uwsgi.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/callapp_server/Bot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-823">
+          <caret line="159" column="33" lean-forward="false" selection-start-line="159" selection-start-column="29" selection-end-line="159" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/update_xml.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="125" column="41" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="125" selection-end-column="41" />
+          <folding>
+            <element signature="e#259#274#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/XMLUtils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="112" column="26" lean-forward="true" selection-start-line="112" selection-start-column="26" selection-end-line="112" selection-end-column="26" />
+          <folding>
+            <element signature="e#156#171#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Flask_web/www/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="87" lean-forward="false" selection-start-line="10" selection-start-column="87" selection-end-line="10" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>
