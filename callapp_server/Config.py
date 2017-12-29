@@ -7,7 +7,8 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 
 #=================服务器 info=====================================
-server="http://118.190.166.165:10080/recordvoice"
+#server="http://118.190.166.165:10080/recordvoice"
+server=""
 server_url = ""
 #=====================Flow Config start==========================
 #start flow 117.50.8.27  106.75.61.164
@@ -47,9 +48,9 @@ rabbitmq_server = '127.0.0.1'
 rabbtimq_port = 5672
 rabbitmq_user = 'admin'
 rabbit_password = '123123'
-rabbtimq_queue = 'call_api'
+# rabbtimq_queue = 'call_api'
 rabbtimq_exchange = 'callexchange'
-#rabbtimq_queue = 'durable'
+rabbtimq_queue = 'durable'
 
 #======================xunfei asr ================================
 XUNFEI_URL = '117.121.21.146'
