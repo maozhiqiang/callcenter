@@ -22,8 +22,11 @@ def run_insert_sql(sql):
         conn = db_pool.getConn()
         cursor = conn.cursor()
         count = cursor.execute(sql, )
+        id = cursor.fetchone()[0]
+        print "ID of last record is ",id  # 最后插入行的主键ID
         conn.commit()
         db_pool.close(cursor, conn)
+        return id
     except Exception as e:
         logger.error('runsql exception error %s '%e)
 
@@ -55,6 +58,7 @@ def get_all_sql(sql):
     try:
         conn = db_pool.getConn()
         cursor = conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor)
+        # cursor = conn.cursor()
         count = cursor.execute(sql, )
         conn.commit()
         list = cursor.fetchall()  # 获取所有数据
