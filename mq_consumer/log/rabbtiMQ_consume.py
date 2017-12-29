@@ -1,13 +1,15 @@
 # -*- encoding: utf-8 -*-
 __author__ = 'Arvin wu'
-import pika
-import json
 import httplib
-import Config as conf
-# from DBPool import Postgresql_Pool as db_pool
-from LogUtils import Logger
-import DBHandler as db
+import json
 import sys
+
+import pika
+
+from mq_consumer.src import Config as conf, DBHandler as db
+# from DBPool import Postgresql_Pool as db_pool
+from mq_consumer.src.LogUtils import Logger
+
 reload(sys)
 sys.setdefaultencoding('utf-8')
 logger = Logger()

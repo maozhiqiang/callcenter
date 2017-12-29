@@ -9,7 +9,7 @@ try:
 except ImportError:
     codecs = None
 
-log_dir = "log"
+log_dir = "logs"
 log_name = "rabbitmq-log"
 
 _logger_init_lock = threading.Lock()

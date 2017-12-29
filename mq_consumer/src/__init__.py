@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time    : 17-12-29 上午10:53
+# @Time    : 17-12-29 上午11:03
 # @Author  : Arvin
 # @Site    : 
-# @File    : MQ_consume.py
+# @File    : __init__.py.py
 # @Software: PyCharm
