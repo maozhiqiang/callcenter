@@ -23,20 +23,24 @@ reload(redis)
 logger = Logger()
 
 def hangup_hook(session, what):
+    call_id = session.getVariable(b"call_id")
     user_id = session.getVariable(b"user_id")
     flow_id = session.getVariable(b"flow_id")
+    task_id = session.getVariable(b"task_id")
     number = session.getVariable(b"caller_id_number")
-    consoleLog("info", "hangup hook for %s  ____ user_id : %s!! \n\n" % (number,user_id))
-    statistical(user_id,flow_id,number)
+    consoleLog("info", "hangup hook for number_ %s ---- user_id_ : %s flow_id_ %s -----task_id_ %s !! \n\n" % (number,user_id,flow_id,task_id))
+    statistical(call_id,user_id,flow_id,number,task_id)
     return
 
-def statistical(user_id,flow_id,number):
+def statistical(call_id,user_id,flow_id,number,task_id):
     print 'statistical:(func).....user_id: %s..flow_id: %s...number: %s..' % (user_id,flow_id,number)
     objdata = {}
     objdata['mark'] = 'statistical'
+    objdata['call_id'] = call_id
     objdata['user_id'] = user_id
     objdata['flow_id'] = flow_id
     objdata['number'] = number
+    objdata['task_id'] = task_id
     jsonStr = json.dumps(objdata)
     # logger.info('------jsonstr-----%s'%jsonStr)
     rabbitmq.rabbitmqClint(jsonStr)
