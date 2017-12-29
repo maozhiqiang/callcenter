@@ -17,8 +17,8 @@ DATABASE_PASSWORD = "z8asuidn" #链接数据库服务器的密码，安装时设
 MQ_URL = '127.0.0.1'
 MQ_USERNAME = 'admin'
 MQ_PWD = '123123'
-# MQ_QUEUE = 'durable'
-MQ_QUEUE = 'call_api'
+MQ_QUEUE = 'durable'
+# MQ_QUEUE = 'call_api'
 MQ_exchange = 'callexchange'
 #MQ_exchange = 'callapp'
 

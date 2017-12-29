@@ -22,8 +22,8 @@ credentials = pika.PlainCredentials(conf.MQ_USERNAME,conf.MQ_PWD)
 connection = pika.BlockingConnection(pika.ConnectionParameters(conf.MQ_URL,5672,'/',credentials))
 channel = connection.channel()
 channel.exchange_declare(exchange='callexchange', exchange_type='direct')
-channel.queue_declare(queue='call_api',durable=True)
-channel.queue_bind(exchange='callexchange', queue='call_api')
+channel.queue_declare(queue=conf.MQ_QUEUE,durable=True)
+channel.queue_bind(exchange='callexchange', queue='durable')
 
 def callback(ch, method, properties, body):
     logger.info(" [x] Received %r\n\n" % body)
