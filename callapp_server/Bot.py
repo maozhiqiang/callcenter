@@ -23,9 +23,23 @@ reload(redis)
 logger = Logger()
 
 def hangup_hook(session, what):
+    user_id = session.getVariable(b"user_id")
+    flow_id = session.getVariable(b"flow_id")
     number = session.getVariable(b"caller_id_number")
-    consoleLog("info", "hangup hook for %s!! \n\n" % number)
+    consoleLog("info", "hangup hook for %s  ____ user_id : %s!! \n\n" % (number,user_id))
+    statistical(user_id,flow_id,number)
     return
+
+def statistical(user_id,flow_id,number):
+    print 'statistical:(func).....user_id: %s..flow_id: %s...number: %s..' % (user_id,flow_id,number)
+    objdata = {}
+    objdata['mark'] = 'statistical'
+    objdata['user_id'] = user_id
+    objdata['flow_id'] = flow_id
+    objdata['number'] = number
+    jsonStr = json.dumps(objdata)
+    # logger.info('------jsonstr-----%s'%jsonStr)
+    rabbitmq.rabbitmqClint(jsonStr)
 
 def input_callback(session, what, obj):
     if (what == "dtmf"):
