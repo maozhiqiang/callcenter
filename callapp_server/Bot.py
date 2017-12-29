@@ -157,10 +157,11 @@ class IVRBase(object):
                 text = ''.join(item['output'])
                 logger.error('flow return text %s' % text)
                 #新增 用户意向标签 需要存储数据库
-                user_label = item['user_label']
-                print  ' start.... user_label .... %s'%user_label
-                self.user_analysis(user_label)
-                print  ' end.... user_label .... %s' % user_label
+                if item.has_key('user_label'):
+                    user_label = item['user_label']
+                    print  ' start.... user_label .... %s'%user_label
+                    self.user_analysis(user_label)
+                    print  ' end.... user_label .... %s' % user_label
 
                 if item['output_resource'] != '':
                     filename = "{0}".format(item['output_resource'])
