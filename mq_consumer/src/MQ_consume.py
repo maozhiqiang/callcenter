@@ -10,8 +10,9 @@ import json
 import sys
 import pika
 import httplib
-from mq_consumer.src import Config as conf, DBHandler as db
-from mq_consumer.src.LogUtils import Logger
+import Config as conf, DBHandler as db
+from LogUtils import Logger
+
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -95,27 +96,27 @@ def httpseverclient(flow_id,sentences,user_id,number,task_id):
             httpClient.close()
     return result
 
-# channel.basic_consume(callback,queue=conf.MQ_QUEUE)
-# print(' [*] Waiting for messages. To exit press CTRL+C')
-# channel.start_consuming()
+channel.basic_consume(callback,queue=conf.MQ_QUEUE)
+print(' [*] Waiting for messages. To exit press CTRL+C')
+channel.start_consuming()
 #
-if __name__ == '__main__':
-    sql = "select fs_call.task_id,replay.text from fs_call " \
-          "left join fs_call_replay as replay on fs_call.id = replay.call_id " \
-          "where fs_call.id = 7 and replay.who = 'human' ORDER BY  replay.create_at"
-    print  sql
-    list_sentens = db.get_all_sql(sql)
-    list = []
-    for item in list_sentens:
-        print item.text
-        print item.task_id
-        list .append(item.text)
-    ll = []
-    ll.append('附近有医院吗')
-    ll.append('附近有学校吗')
-    httpseverclient('23e566219595a9cb92bc3e5a175dbd63',ll,1,'15900282168',5566)
-    # create_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-    # sql = "insert into fs_customer_label (number, label, create_at, user_id)VALUES (\'{0}\', \'{1}\', \'{2}\', \'{3}\') RETURNING id"
+# if __name__ == '__main__':
+#     sql = "select fs_call.task_id,replay.text from fs_call " \
+#           "left join fs_call_replay as replay on fs_call.id = replay.call_id " \
+#           "where fs_call.id = 7 and replay.who = 'human' ORDER BY  replay.create_at"
+#     print  sql
+#     list_sentens = db.get_all_sql(sql)
+#     list = []
+#     for item in list_sentens:
+#         print item.text
+#         print item.task_id
+#         list .append(item.text)
+#     ll = []
+#     ll.append('附近有医院吗')
+#     ll.append('附近有学校吗')
+#     httpseverclient('23e566219595a9cb92bc3e5a175dbd63',ll,1,'15900282168',5566)
+#     # create_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+#     # sql = "insert into fs_customer_label (number, label, create_at, user_id)VALUES (\'{0}\', \'{1}\', \'{2}\', \'{3}\') RETURNING id"
     #
     # id = db.run_insert_sql(sql.format('15900282168','qqq',create_at,1))
     # print id

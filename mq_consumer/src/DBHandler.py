@@ -10,8 +10,8 @@ import sys
 import psycopg2
 import psycopg2.extras
 
-from mq_consumer.src.DBPool import Postgresql_Pool as db_pool
-from mq_consumer.src.LogUtils import Logger
+from DBPool import Postgresql_Pool as db_pool
+from LogUtils import Logger
 
 reload(sys)
 sys.setdefaultencoding('utf-8')

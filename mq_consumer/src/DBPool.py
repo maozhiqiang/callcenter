@@ -2,7 +2,7 @@
 import psycopg2
 import psycopg2.extras
 
-import mq_consumer.src.Config as conf
+import Config as conf
 
 DATABASE_HOST = conf.DATABASE_HOST
 DATABASE_PORT = conf.DATABASE_PORT
@@ -10,7 +10,7 @@ DATABASE_NAME = conf.DATABASE_NAME
 DATABASE_USERNAME = conf.DATABASE_USERNAME
 DATABASE_PASSWORD = conf.DATABASE_PASSWORD
 from DBUtils.PooledDB import PooledDB
-from mq_consumer.src.LogUtils import Logger
+from LogUtils import Logger
 logger = Logger()
 
 class Postgresql_Pool(object):
