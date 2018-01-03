@@ -101,6 +101,7 @@ def httpseverclient(flow_id,sentences,user_id,number,task_id):
 channel.basic_consume(callback,queue=conf.MQ_QUEUE)
 print(' [*] Waiting for messages. To exit press CTRL+C')
 channel.start_consuming()
+print '[------------]'
 #
 # if __name__ == '__main__':
 #     sql = "select fs_call.task_id,replay.text from fs_call " \
