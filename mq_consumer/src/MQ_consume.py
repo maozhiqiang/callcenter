@@ -29,10 +29,10 @@ def callback(ch, method, properties, body):
     logger.info(" [x] Received %r\n\n" % body)
     dict = json.loads(body)
     if dict['mark'] == 'insert':
-        sql = 'INSERT INTO fs_call_replay(who, text, record_fpath, create_at, call_id,resp_param)VALUES (\'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\',\'{5}\')'.format(
+        sql = 'INSERT INTO fs_call_replay(who, text, record_fpath, create_at, call_id,resp_param)VALUES (\'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\',\'{5}\') RETURNING id'.format(
             dict['who'], dict['text'], dict['record_fpath'], dict['create_at'],dict['call_id'] , dict['jsonStr'])
         db.run_insert_sql(sql)
-        logger.info('run_insert_sql.....%s' % sql)
+        logger.info('******** run_insert_sql..*********...%s' % sql)
 
     elif dict['mark'] == 'user_label':
         sql =  " update fs_call set cust_tag = '{0}' where channal_uuid ='{1}' ".format(dict['user_label'],dict['channal_uuid'])
@@ -75,13 +75,15 @@ def httpseverclient(flow_id,sentences,user_id,number,task_id):
             sql_log_2 = "insert into fs_customer_label_log(user_input,similarity,create_at,key_word,label,user_word,flow_id,task_id) values (\'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\', \'{5}\', \'{6}\', \'{7}\') RETURNING id"
             if dict['successful'] and  len(dict['data'])> 0:
                 for item in dict['data']:
-                    print item['key_word']
                     label = item['label']
+                    logger.info(sql)
                     last_id = db.run_insert_sql(sql.format(number,label,create_at,user_id))
                     print '[ last_id ]----',last_id
                     if last_id == None:
+                        logger.info('-----------last_id == None')
                         db.run_insert_sql(sql_log_2.format(item['sentence'],item['similarity'],create_at,item['key_word'],item['label'],item['word'],flow_id,task_id))
                     else:
+                        logger.info('-----------last_id == %s'%last_id)
                         db.run_insert_sql(
                             sql_log_1.format(item['sentence'], item['similarity'], create_at, last_id, item['key_word'],
                                              item['label'], item['word'], flow_id, task_id))

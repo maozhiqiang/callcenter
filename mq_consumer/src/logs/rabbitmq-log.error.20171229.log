@@ -1,0 +1,110 @@
+2017-12-29 14:24:06,672 - LogUtils.py[line:120] - ERROR: runsql exception error insert or update on table "fs_customer_label" violates foreign key constraint "fs_customer_label_user_id_c890eae4_fk_fs_user_id"
+DETAIL:  Key (user_id)=(55655656) is not present in table "fs_user".
+ 
+2017-12-29 14:26:37,041 - LogUtils.py[line:120] - ERROR: runsql exception error duplicate key value violates unique constraint "fs_customer_label_user_id_number_label_b61f2da0_uniq"
+DETAIL:  Key (user_id, number, label)=(1, 15900282168, ceshi_label) already exists.
+ 
+2017-12-29 14:27:37,814 - LogUtils.py[line:120] - ERROR: runsql exception error duplicate key value violates unique constraint "fs_customer_label_user_id_number_label_b61f2da0_uniq"
+DETAIL:  Key (user_id, number, label)=(1, 15900282168, 666) already exists.
+ 
+2017-12-29 14:31:00,113 - LogUtils.py[line:120] - ERROR: runsql exception error duplicate key value violates unique constraint "fs_customer_label_user_id_number_label_b61f2da0_uniq"
+DETAIL:  Key (user_id, number, label)=(1, 15900282168, 111) already exists.
+ 
+2017-12-29 14:36:22,343 - LogUtils.py[line:120] - ERROR: runsql exception error duplicate key value violates unique constraint "fs_customer_label_user_id_number_label_b61f2da0_uniq"
+DETAIL:  Key (user_id, number, label)=(1, 15900282168, 111) already exists.
+ 
+2017-12-29 14:39:02,105 - LogUtils.py[line:120] - ERROR: runsql exception error cursor already closed 
+2017-12-29 14:39:11,655 - LogUtils.py[line:120] - ERROR: runsql exception error duplicate key value violates unique constraint "fs_customer_label_user_id_number_label_b61f2da0_uniq"
+DETAIL:  Key (user_id, number, label)=(1, 15900282168, qwqw) already exists.
+ 
+2017-12-29 14:44:02,655 - LogUtils.py[line:120] - ERROR: runsql exception error int() argument must be a string or a number, not 'tuple' 
+2017-12-29 14:45:04,792 - LogUtils.py[line:120] - ERROR: runsql exception error cursor already closed 
+2017-12-29 14:45:27,933 - LogUtils.py[line:120] - ERROR: runsql exception error duplicate key value violates unique constraint "fs_customer_label_user_id_number_label_b61f2da0_uniq"
+DETAIL:  Key (user_id, number, label)=(1, 15900282168, 12121) already exists.
+ 
+2017-12-29 14:45:33,417 - LogUtils.py[line:120] - ERROR: runsql exception error cursor already closed 
+2017-12-29 14:45:51,977 - LogUtils.py[line:120] - ERROR: runsql exception error cursor already closed 
+2017-12-29 14:47:20,073 - LogUtils.py[line:120] - ERROR: runsql exception error cursor already closed 
+2017-12-29 14:47:50,833 - LogUtils.py[line:120] - ERROR: runsql exception error 'NoneType' object has no attribute '__getitem__' 
+2017-12-29 14:48:58,913 - LogUtils.py[line:120] - ERROR: runsql exception error 'NoneType' object has no attribute '__getitem__' 
+2017-12-29 14:50:09,518 - LogUtils.py[line:120] - ERROR: runsql exception error duplicate key value violates unique constraint "fs_customer_label_user_id_number_label_b61f2da0_uniq"
+DETAIL:  Key (user_id, number, label)=(1, 15900282168, 111) already exists.
+ 
+2017-12-29 15:24:24,485 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "'医疗'"
+LINE 1: ...吗', '0.634035153165', '2017-12-29 15:24:00', '25' '医疗', '...
+                                                              ^
+ 
+2017-12-29 15:24:33,069 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "'学校'"
+LINE 1: ...'附近有学校吗', '1.0', '2017-12-29 15:24:00', '26' '学校', '...
+                                                              ^
+ 
+2017-12-29 15:25:02,187 - LogUtils.py[line:120] - ERROR: runsql exception error duplicate key value violates unique constraint "fs_customer_label_user_id_number_label_b61f2da0_uniq"
+DETAIL:  Key (user_id, number, label)=(1, 15900282168, 关注医疗) already exists.
+ 
+2017-12-29 15:25:02,244 - LogUtils.py[line:120] - ERROR: runsql exception error invalid input syntax for integer: "None"
+LINE 1: ...医院吗', '0.634035153165', '2017-12-29 15:25:02', 'None', '...
+                                                             ^
+ 
+2017-12-29 15:25:02,298 - LogUtils.py[line:120] - ERROR: runsql exception error duplicate key value violates unique constraint "fs_customer_label_user_id_number_label_b61f2da0_uniq"
+DETAIL:  Key (user_id, number, label)=(1, 15900282168, 关注教育) already exists.
+ 
+2017-12-29 15:25:02,354 - LogUtils.py[line:120] - ERROR: runsql exception error invalid input syntax for integer: "None"
+LINE 1: ...ues ('附近有学校吗', '1.0', '2017-12-29 15:25:02', 'None', '...
+                                                              ^
+ 
+2017-12-29 15:25:38,724 - LogUtils.py[line:120] - ERROR: runsql exception error duplicate key value violates unique constraint "fs_customer_label_user_id_number_label_b61f2da0_uniq"
+DETAIL:  Key (user_id, number, label)=(1, 15900282168, 关注医疗) already exists.
+ 
+2017-12-29 15:25:38,778 - LogUtils.py[line:120] - ERROR: runsql exception error invalid input syntax for integer: ""
+LINE 1: ...医院吗', '0.634035153165', '2017-12-29 15:25:38', '', '医疗'...
+                                                             ^
+ 
+2017-12-29 15:25:38,829 - LogUtils.py[line:120] - ERROR: runsql exception error duplicate key value violates unique constraint "fs_customer_label_user_id_number_label_b61f2da0_uniq"
+DETAIL:  Key (user_id, number, label)=(1, 15900282168, 关注教育) already exists.
+ 
+2017-12-29 15:25:38,881 - LogUtils.py[line:120] - ERROR: runsql exception error invalid input syntax for integer: ""
+LINE 1: ...es ('附近有学校吗', '1.0', '2017-12-29 15:25:38', '', '学校'...
+                                                             ^
+ 
+2017-12-29 15:27:35,697 - LogUtils.py[line:120] - ERROR: runsql exception error duplicate key value violates unique constraint "fs_customer_label_user_id_number_label_b61f2da0_uniq"
+DETAIL:  Key (user_id, number, label)=(1, 15900282168, 关注医疗) already exists.
+ 
+2017-12-29 15:27:35,755 - LogUtils.py[line:120] - ERROR: runsql exception error invalid input syntax for integer: "asdasdasdasdasd"
+LINE 1: ...疗', '医院', '23e566219595a9cb92bc3e5a175dbd63', 'asdasdasd...
+                                                            ^
+ 
+2017-12-29 15:27:35,815 - LogUtils.py[line:120] - ERROR: runsql exception error duplicate key value violates unique constraint "fs_customer_label_user_id_number_label_b61f2da0_uniq"
+DETAIL:  Key (user_id, number, label)=(1, 15900282168, 关注教育) already exists.
+ 
+2017-12-29 15:27:35,871 - LogUtils.py[line:120] - ERROR: runsql exception error invalid input syntax for integer: "asdasdasdasdasd"
+LINE 1: ...育', '学校', '23e566219595a9cb92bc3e5a175dbd63', 'asdasdasd...
+                                                            ^
+ 
+2017-12-29 15:28:08,929 - LogUtils.py[line:120] - ERROR: runsql exception error duplicate key value violates unique constraint "fs_customer_label_user_id_number_label_b61f2da0_uniq"
+DETAIL:  Key (user_id, number, label)=(1, 15900282168, 关注医疗) already exists.
+ 
+2017-12-29 15:28:08,977 - LogUtils.py[line:120] - ERROR: runsql exception error no results to fetch 
+2017-12-29 15:28:09,026 - LogUtils.py[line:120] - ERROR: runsql exception error duplicate key value violates unique constraint "fs_customer_label_user_id_number_label_b61f2da0_uniq"
+DETAIL:  Key (user_id, number, label)=(1, 15900282168, 关注教育) already exists.
+ 
+2017-12-29 15:28:09,074 - LogUtils.py[line:120] - ERROR: runsql exception error no results to fetch 
+2017-12-29 15:28:34,898 - LogUtils.py[line:120] - ERROR: runsql exception error duplicate key value violates unique constraint "fs_customer_label_user_id_number_label_b61f2da0_uniq"
+DETAIL:  Key (user_id, number, label)=(1, 15900282168, 关注医疗) already exists.
+ 
+2017-12-29 15:28:35,597 - LogUtils.py[line:120] - ERROR: runsql exception error no results to fetch 
+2017-12-29 15:28:35,652 - LogUtils.py[line:120] - ERROR: runsql exception error duplicate key value violates unique constraint "fs_customer_label_user_id_number_label_b61f2da0_uniq"
+DETAIL:  Key (user_id, number, label)=(1, 15900282168, 关注教育) already exists.
+ 
+2017-12-29 15:28:36,235 - LogUtils.py[line:120] - ERROR: runsql exception error no results to fetch 
+2017-12-29 15:29:02,502 - LogUtils.py[line:120] - ERROR: runsql exception error duplicate key value violates unique constraint "fs_customer_label_user_id_number_label_b61f2da0_uniq"
+DETAIL:  Key (user_id, number, label)=(1, 15900282168, 关注医疗) already exists.
+ 
+2017-12-29 15:29:14,548 - LogUtils.py[line:120] - ERROR: runsql exception error duplicate key value violates unique constraint "fs_customer_label_user_id_number_label_b61f2da0_uniq"
+DETAIL:  Key (user_id, number, label)=(1, 15900282168, 关注教育) already exists.
+ 
+2017-12-29 15:29:43,851 - LogUtils.py[line:120] - ERROR: runsql exception error duplicate key value violates unique constraint "fs_customer_label_user_id_number_label_b61f2da0_uniq"
+DETAIL:  Key (user_id, number, label)=(1, 15900282168, 关注医疗) already exists.
+ 
+2017-12-29 15:29:43,966 - LogUtils.py[line:120] - ERROR: runsql exception error duplicate key value violates unique constraint "fs_customer_label_user_id_number_label_b61f2da0_uniq"
+DETAIL:  Key (user_id, number, label)=(1, 15900282168, 关注教育) already exists.
+ 
