@@ -37,7 +37,7 @@ def callback(ch, method, properties, body):
     elif dict['mark'] == 'user_label':
         sql =  " update fs_call set cust_tag = '{0}' where channal_uuid ='{1}' ".format(dict['user_label'],dict['channal_uuid'])
         db.run_update_sql(sql)
-        print ' run_update_sql.........user_label'
+        logger.info(' run_update_sql.........user_label...%s'%sql)
     elif dict['mark'] == 'statistical':
         sql = "select replay.text from fs_call " \
               "left join fs_call_replay as replay on fs_call.id = replay.call_id " \
@@ -47,7 +47,7 @@ def callback(ch, method, properties, body):
         for item in result:
             sentences.append(item.text)
         print ' [ list_sentens ...%s ] '%sentences
-        httpseverclient(dict['flow_id'],sentences,dict['user_id'],dict['number'],dict['task_id'])
+        httpseverclient(dict['flow_id'],sentences,dict['number'],dict['task_id'])
     else:
         sql = "update fs_call set full_record_fpath ='{0}' where channal_uuid ='{1}'".format(dict['record_fpath'],dict['channal_uuid'] )
         db.run_update_sql(sql)
@@ -55,7 +55,7 @@ def callback(ch, method, properties, body):
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
 
-def httpseverclient(flow_id,sentences,user_id,number,task_id):
+def httpseverclient(flow_id,sentences,number,task_id):
     httpClient = None
     create_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     try:
@@ -68,25 +68,14 @@ def httpseverclient(flow_id,sentences,user_id,number,task_id):
         if response.status == 200:
             jsonStr = response.read()
             dict = json.loads(jsonStr)
-            result = dict
-            print dict
-            sql = "insert into fs_customer_label (number, label, create_at, user_id)VALUES (\'{0}\', \'{1}\', \'{2}\', \'{3}\') RETURNING id"
-            sql_log_1 = "insert into fs_customer_label_log(user_input,similarity,create_at,cust_label_id,key_word,label,user_word,flow_id,task_id) values (\'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\', \'{5}\', \'{6}\', \'{7}\', \'{8}\') RETURNING id"
-            sql_log_2 = "insert into fs_customer_label_log(user_input,similarity,create_at,key_word,label,user_word,flow_id,task_id) values (\'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\', \'{5}\', \'{6}\', \'{7}\') RETURNING id"
+            sql_update = " update fs_customer set label = array{0} where number = '{1}' "
+            sql_log = " insert into fs_customer_label_log(task_id,flow_id,user_input,user_word,key_word,label,similarity,create_at) values (\'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\', \'{5}\', \'{6}\', \'{7}\') RETURNING id"
+            labels = []
             if dict['successful'] and  len(dict['data'])> 0:
                 for item in dict['data']:
-                    label = item['label']
-                    logger.info(sql)
-                    last_id = db.run_insert_sql(sql.format(number,label,create_at,user_id))
-                    print '[ last_id ]----',last_id
-                    if last_id == None:
-                        logger.info('-----------last_id == None')
-                        db.run_insert_sql(sql_log_2.format(item['sentence'],item['similarity'],create_at,item['key_word'],item['label'],item['word'],flow_id,task_id))
-                    else:
-                        logger.info('-----------last_id == %s'%last_id)
-                        db.run_insert_sql(
-                            sql_log_1.format(item['sentence'], item['similarity'], create_at, last_id, item['key_word'],
-                                             item['label'], item['word'], flow_id, task_id))
+                    labels.append(item['label'])
+                    db.run_insert_sql(sql_log.format(task_id,flow_id,item['sentence'],item['word'],item['key_word'],item['label'], item['similarity'], create_at))
+                db.run_update_sql(sql_update.format(labels,number))
         else:
             result = {'successful': False, 'message': 'httpclient error'}
             logger.info('.......httpClient error status : %s' % response.status)
@@ -96,7 +85,7 @@ def httpseverclient(flow_id,sentences,user_id,number,task_id):
     finally:
         if httpClient:
             httpClient.close()
-    return result
+
 
 channel.basic_consume(callback,queue=conf.MQ_QUEUE)
 print(' [*] Waiting for messages. To exit press CTRL+C')
@@ -115,14 +104,9 @@ print '[------------]'
 #         print item.task_id
 #         list .append(item.text)
 #     ll = []
-#     ll.append('附近有医院吗')
-#     ll.append('附近有学校吗')
+#     ll.append(u'附近有医院吗')
+#     ll.append(u'附近有学校吗')
 #     httpseverclient('23e566219595a9cb92bc3e5a175dbd63',ll,1,'15900282168',5566)
-#     # create_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-#     # sql = "insert into fs_customer_label (number, label, create_at, user_id)VALUES (\'{0}\', \'{1}\', \'{2}\', \'{3}\') RETURNING id"
-    #
-    # id = db.run_insert_sql(sql.format('15900282168','qqq',create_at,1))
-    # print id
 
 
 
