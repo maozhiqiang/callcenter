@@ -17,17 +17,15 @@ import DBhandler as db
 from LogUtils import Logger
 
 logger = Logger()
-
+print '[ ===== conf.ESL_HOST =====]',conf.ESL_HOST
 con = ESL.ESLconnection(conf.ESL_HOST, conf.ESL_PORT, conf.ESL_PWD)
+print '****************', con.connected()
 _begin_time = time.time()
 _pid = multiprocessing.current_process().pid
 #atexit.register
 def bye():
     sec = time.time() - _begin_time
     print 'bye, program run %d second.' % sec
-
-#监听事件 create 时更新call_status = calling
-#update_call_sql = " update fs_call set call_status = 'calling' where channal_uuid = '{0}' "
 
 #监听事件 更新呼叫时间
 cc_sql = "update fs_call set call_at = '{0}',call_status = 'calling'  where channal_uuid ='{1}'"
@@ -103,53 +101,6 @@ def event_processor(event_queue):
         else:
             print '[ ****** current event is not use platform ******]'
 
-def is_valid_date(str):
-    '''判断是否是一个有效的日期字符串'''
-    try:
-        time.strptime(str, "%Y-%m-%d")
-        return True
-    except:
-        return False
-
-#重写扣费方法
-def deduction_fee(channal_uuid):
-    '''
-    挂机后 查询channal_uuid的数据,根据挂机时间- 接听时间，得到分钟数，不足一分钟，按一分钟算 
-    :param channal_uuid: 
-    :return: 
-    '''
-    #1、查询当前channal_uuid 的通话信息
-    try:
-        sql = chc_call_info.format(channal_uuid)
-        logger.info('----查询当前channal_uuid 的通话信息[ sql ] %s' % sql)
-        callInfo = db.get_one_sql(sql)
-        start_time = callInfo[0]
-        end_time = callInfo[1]
-        task_Id = callInfo[2]
-        user_Id = callInfo[3]
-        if is_valid_date(start_time) and is_valid_date(end_time):
-            logger.info('----task_Id %s-----user_Id %s------电话开始时间 %s------------结束时间 %s' % (
-            task_Id, user_Id, start_time, end_time))
-            diff_seconds = (end_time - start_time).seconds
-            minutes = 0
-            if diff_seconds % 60 == 0:
-                minutes = diff_seconds / 60
-            else:
-                minutes = diff_seconds / 60 + 1
-            logger.info('------------通话分钟数 %s' % minutes)
-            # 更新当前channal_uuid 的通话分钟数
-            sql_update = chc_call_update.format(minutes, channal_uuid)
-            logger.info('更新当通话分钟数  [ sql ] %s' % sql_update)
-            db.update_sql(sql_update)
-            # 更新当前用户的剩余分钟数
-            sql_user_update = chc_user_minute.format(minutes, user_Id)
-            logger.info('更新剩余分钟数  [ sql ] %s' % sql_user_update)
-            db.update_sql(sql_user_update)
-        else:
-            logger.info('----is_valid_date return [ False ] ')
-    except Exception as e:
-        logger.info('扣费 error %s '%e )
-
 def HttpClientPost(channal_uuid):
     try:
         import urllib
@@ -173,6 +124,7 @@ def event_listener(event_queue):
     :return:
     """
     # standard_event = "CHANNEL_CREATE CHANNEL_ANSWER CHANNEL_HANGUP CHANNEL_HANGUP_COMPLETE"
+    print '******888**********', con.connected()
     if con.connected:
         # print con.connected()
         # 只订阅通道事件
@@ -232,7 +184,7 @@ class QueueManager(managers.BaseManager):
     pass
 
 if __name__ == '__main__':
-
+    print '*******9999*********', con.connected()
     # 事件队列，event_listener与event_processor共享
     manager = multiprocessing.Manager()
     event_queue = manager.Queue()

@@ -20,17 +20,18 @@ class Proxy(object):
     def __init__(self, host):
         self.host_id = host.id
         self.line_name = host.line_name
-        self.province = host.province
-        self.city = host.city
-        self.ip = str(host.ip)
-        self.port = host.port
-        self.gateway = str(host.relay_account)
+        # self.province = host.province
+        # self.city = host.city
+        self.ip = str(host.gateway_ip)
+        self.port = 8021
+        self.gateway = str(host.gateway_name)
         print '[ gateway ----> %s ] '% self.gateway
-        self.password = str(host.relay_password)
+        self.password = 'Aicyber'
+        print '=======password=====',self.password
         self.line_max = host.line_num
         self.conn = ESL.ESLconnection(self.ip, self.port, self.password)
-        print '%s  conn.connected %s'%(self.ip,self.conn.connected)
-        conn_status = 'success' if self.conn.connected else 'fail'
+        print '%s  conn.connected %s'%(self.ip,self.conn.connected())
+        conn_status = 'success' if self.conn.connected() else 'fail'
         print('Connect fs host: %s at %s:%d，%s' % (self.password, self.ip, self.port, conn_status))
 
     def call(self, item):
@@ -40,7 +41,7 @@ class Proxy(object):
         number = str(item.cust_number)
         flow_id = str(item.flow_id)
         is_success = self.fs_api(uuid=uuid, number=number, task_id=task_id, flow_id=flow_id, call_id=call_id,
-                                 host_id=self.host_id, gateway=self.gateway)
+                                 host_id=self.host_id, gateway='sofia/gateway/{0}'.format(self.gateway))
         logger.error('[  call is_success = %s ]'%is_success)
 
     def fs_api(self, uuid, number, task_id, flow_id,call_id, host_id, gateway):
@@ -48,10 +49,12 @@ class Proxy(object):
             gateway = 'sofia/gateway/gw1'
         if self.conn.connected:
             channel_vars = 'ignore_early_media=true,absolute_codec_string=g729,' \
-                           'origination_uuid=%s,task_id=%s,flow_id=%s,call_id=%s,host_id=%s,is_test=%s' % \
+                           'origination_uuid=%s,task_id=%s,flow_id=%s,call_back=false,call_id=%s,host_id=%s,is_test=%s' % \
                            (uuid, task_id, flow_id,call_id, host_id, '1')
             command = "originate {%s}%s/%s &python(callappv2.Bot)" % (channel_vars, gateway, number)
             logger.error('Invoke fs api:\n%s' % command)
+            print '[********************************] ',self.ip
+            print '[********************************] ', self.conn.connected()
             self.conn.bgapi(command)
             try:
                time_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
@@ -119,12 +122,14 @@ class ProxyFactory(object):
         list_host_class =db.get_all_sql(get_host_sql)
         for host in list_host_class:#循环 host列表
             proxy = Proxy(host)
+            # print '[===current fs_server ==== ] ',proxy.ip
             self.proxy_list.append(proxy)
 
     def get_proxy(self, host_id):
         ps = []
         for proxy in self.proxy_list:
             if host_id == proxy.host_id:
+                print '[===current fs_server ==== ] ', proxy.ip
                 status = proxy.can_use()
                 ps.append(status)
                 if status == 'free':
