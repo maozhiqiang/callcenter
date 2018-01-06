@@ -47,7 +47,7 @@ def callback(ch, method, properties, body):
         for item in result:
             sentences.append(item.text)
         print ' [ list_sentens ...%s ] '%sentences
-        httpseverclient(dict['flow_id'],sentences,dict['number'],dict['task_id'])
+        httpseverclient(dict['flow_id'],sentences,dict['number'],dict['task_id'],dict['user_id'])
     else:
         sql = "update fs_call set full_record_fpath ='{0}' where channal_uuid ='{1}'".format(dict['record_fpath'],dict['channal_uuid'] )
         db.run_update_sql(sql)
@@ -55,8 +55,9 @@ def callback(ch, method, properties, body):
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
 
-def httpseverclient(flow_id,sentences,number,task_id):
+def httpseverclient(flow_id,sentences,number,task_id,user_id):
     httpClient = None
+    labels = []
     create_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     try:
         values = {'flow_id': flow_id, 'sentences': sentences}
@@ -68,14 +69,20 @@ def httpseverclient(flow_id,sentences,number,task_id):
         if response.status == 200:
             jsonStr = response.read()
             dict = json.loads(jsonStr)
-            sql_update = " update fs_customer set label = array{0} where number = '{1}' "
+            print '[ ==lables== dict ]',dict
+            sql_update = " update fs_customer set label = '{0}' where number = '{1}'  and user_id = {2} "
             sql_log = " insert into fs_customer_label_log(task_id,flow_id,user_input,user_word,key_word,label,similarity,create_at) values (\'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\', \'{5}\', \'{6}\', \'{7}\') RETURNING id"
-            labels = []
+            start_str = "{"
+            end_str = "}"
+            params = ""
             if dict['successful'] and  len(dict['data'])> 0:
                 for item in dict['data']:
-                    labels.append(item['label'])
+                    params=params+item['label']+','
+                    print sql_log.format(task_id,flow_id,item['sentence'],item['word'],item['key_word'],item['label'], item['similarity'], create_at)
                     db.run_insert_sql(sql_log.format(task_id,flow_id,item['sentence'],item['word'],item['key_word'],item['label'], item['similarity'], create_at))
-                db.run_update_sql(sql_update.format(labels,number))
+                long_str = start_str + params[:-1] + end_str
+                print sql_update.format(long_str,number,user_id)
+                db.run_update_sql(sql_update.format(long_str,number,user_id))
         else:
             result = {'successful': False, 'message': 'httpclient error'}
             logger.info('.......httpClient error status : %s' % response.status)
@@ -104,10 +111,10 @@ print '[------------]'
 #         print item.task_id
 #         list .append(item.text)
 #     ll = []
-#     ll.append(u'附近有医院吗')
-#     ll.append(u'附近有学校吗')
-#     httpseverclient('23e566219595a9cb92bc3e5a175dbd63',ll,1,'15900282168',5566)
+#     ll.append('附近有医院吗')
+#     ll.append('附近有学校吗')
+#     httpseverclient('23e566219595a9cb92bc3e5a175dbd63',ll,'15166636562',5566)
 
-
+    # print '\xe5\x85\xb3\xe6\xb3\xa8\xe5\x8c\xbb\xe7\x96\x97'
 
 
