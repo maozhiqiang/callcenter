@@ -21,9 +21,15 @@ logger = Logger()
 credentials = pika.PlainCredentials(conf.MQ_USERNAME,conf.MQ_PWD)
 connection = pika.BlockingConnection(pika.ConnectionParameters(conf.MQ_URL,5672,'/',credentials))
 channel = connection.channel()
-channel.exchange_declare(exchange='callexchange', exchange_type='direct')
+channel.exchange_declare(exchange=conf.MQ_exchange, exchange_type='direct')
 channel.queue_declare(queue=conf.MQ_QUEUE,durable=True)
-channel.queue_bind(exchange='callexchange', queue='durable')
+channel.queue_bind(exchange=conf.MQ_exchange, queue=conf.MQ_QUEUE)
+
+
+print '==============================================================\n'
+print '             rabbtiMQ server:  %s '%conf.MQ_URL
+print '             rabbtiMQ exchange:  %s '%conf.MQ_exchange
+print '             rabbtiMQ queue:  %s '%conf.MQ_QUEUE
 
 def callback(ch, method, properties, body):
     logger.info(" [x] Received %r\n\n" % body)
@@ -95,9 +101,11 @@ def httpseverclient(flow_id,sentences,number,task_id,user_id):
 
 
 channel.basic_consume(callback,queue=conf.MQ_QUEUE)
+print '\n==============================================================\n'
+print '               MQ_consume ....running.....                   '
+print '\n==============================================================\n'
 print(' [*] Waiting for messages. To exit press CTRL+C')
 channel.start_consuming()
-print '[------------]'
 #
 # if __name__ == '__main__':
 #     sql = "select fs_call.task_id,replay.text from fs_call " \
