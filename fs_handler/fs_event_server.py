@@ -124,7 +124,6 @@ def event_listener(event_queue):
     :return:
     """
     # standard_event = "CHANNEL_CREATE CHANNEL_ANSWER CHANNEL_HANGUP CHANNEL_HANGUP_COMPLETE"
-    print '******888**********', con.connected()
     if con.connected:
         # print con.connected()
         # 只订阅通道事件
@@ -143,7 +142,6 @@ def event_listener(event_queue):
                 dct['host_id'] = e.getHeader("variable_host_id")
                 dct['call_back'] = e.getHeader("variable_call_back")
                 # print '*********call_back is ************ %s' % dct['call_back']
-                # print 'test---------------event_name : %s\n\n'%e.getHeader("Event-Name")
                 if dct['event_name'] in ['CHANNEL_CREATE','CHANNEL_ANSWER', 'CHANNEL_HANGUP_COMPLETE'] and dct['call_back'] =='false':
                     dct['call_id'] = e.getHeader("variable_call_id")
                     dct['is_test'] = e.getHeader("variable_is_test")
@@ -157,7 +155,7 @@ def event_listener(event_queue):
                     continue
 
 
-    logger.error('.......esl connect error.......')
+    print '[.......esl connect error.......]'
     sys.exit(-1)
 
 def handler(signum, frame):
@@ -198,6 +196,5 @@ if __name__ == '__main__':
     proc_event_processor.start()
     print '[fs_event_server ....start.....]'
     while True:
-        # print '[fs_event_server ....start.....]'
         time.sleep(3)
 
