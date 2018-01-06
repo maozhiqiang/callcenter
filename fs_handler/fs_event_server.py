@@ -17,9 +17,9 @@ import DBhandler as db
 from LogUtils import Logger
 
 logger = Logger()
-print '[ ===== conf.ESL_HOST =====]',conf.ESL_HOST
+print '             freeswitch 服务器:  %s '%conf.ESL_HOST
 con = ESL.ESLconnection(conf.ESL_HOST, conf.ESL_PORT, conf.ESL_PWD)
-print '****************', con.connected()
+print '             freeswitch ESL 连接状态: %s '%('success' if con.connected() else 'fail')
 _begin_time = time.time()
 _pid = multiprocessing.current_process().pid
 #atexit.register
@@ -182,7 +182,6 @@ class QueueManager(managers.BaseManager):
     pass
 
 if __name__ == '__main__':
-    print '*******9999*********', con.connected()
     # 事件队列，event_listener与event_processor共享
     manager = multiprocessing.Manager()
     event_queue = manager.Queue()
@@ -194,7 +193,9 @@ if __name__ == '__main__':
     proc_event_processor = multiprocessing.Process(
         target=event_processor, name='event_processor', args=(event_queue,))
     proc_event_processor.start()
-    print '[fs_event_server ....start.....]'
+    print '\n==============================================================\n'
+    print '               fs_event_server ....running.....                   '
+    print '\n==============================================================\n'
     while True:
         time.sleep(3)
 

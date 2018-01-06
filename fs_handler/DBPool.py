@@ -12,7 +12,8 @@ DATABASE_PASSWORD = conf.DATABASE_PASSWORD
 from DBUtils.PooledDB import PooledDB
 from LogUtils import Logger
 logger = Logger()
-print '[--------db-host-----]',conf.DATABASE_HOST
+print '==============================================================\n'
+print '             数据库POSTGRESQL:  %s '%conf.DATABASE_HOST
 class Postgresql_Pool(object):
     """
        postgresql数据库对象，负责产生数据库连接 , 此类中的连接采用连接池实现获取连接对象：conn = postgresql.getConn()
