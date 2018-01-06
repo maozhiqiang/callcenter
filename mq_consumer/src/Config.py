@@ -7,7 +7,7 @@ flow_url = "semanteme-label/map-more.do"
 
 #=============DB config ===================================
 
-DATABASE_HOST = "118.190.166.165" #要链接的服务器的IP地址，local-IP
+DATABASE_HOST = "121.42.36.138" #要链接的服务器的IP地址，local-IP
 DATABASE_PORT = 5432 #postgresql端口号，安装postgresql时设置的，一般默认是5432
 DATABASE_NAME = "call_crm" #数据库名称
 DATABASE_USERNAME = "postgres" #用户名，这里的用户名也是在安装postgresql时设置的，一般默认postgres

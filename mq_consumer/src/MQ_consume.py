@@ -76,24 +76,32 @@ def httpseverclient(flow_id,sentences,number,task_id,user_id):
             jsonStr = response.read()
             dict = json.loads(jsonStr)
             print '[ ==lables== dict ]',dict
-            sql_update = " update fs_customer set label = '{0}' where number = '{1}'  and user_id = {2} "
+            sql_select = "select * from fs_customer where number = '{0}' and user_id = {1}"
+            sql_update = " update fs_customer set label = label || '{0}' where number = '{1}'  and user_id = {2} "
             sql_log = " insert into fs_customer_label_log(task_id,flow_id,user_input,user_word,key_word,label,similarity,create_at) values (\'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\', \'{5}\', \'{6}\', \'{7}\') RETURNING id"
-            start_str = "{"
-            end_str = "}"
-            params = ""
             if dict['successful'] and  len(dict['data'])> 0:
-                for item in dict['data']:
-                    params=params+item['label']+','
-                    print sql_log.format(task_id,flow_id,item['sentence'],item['word'],item['key_word'],item['label'], item['similarity'], create_at)
-                    db.run_insert_sql(sql_log.format(task_id,flow_id,item['sentence'],item['word'],item['key_word'],item['label'], item['similarity'], create_at))
-                long_str = start_str + params[:-1] + end_str
-                print sql_update.format(long_str,number,user_id)
-                db.run_update_sql(sql_update.format(long_str,number,user_id))
+                try:
+                    list_data = db.get_one_sql(sql_select.format(number, user_id))
+                    print '[******list_data*******]',sql_select.format(number, user_id)
+                    if list_data :
+                        for item in dict['data']:
+                            db.run_insert_sql(sql_log.format(task_id, flow_id, item['sentence'], item['word'], item['key_word'],item['label'], item['similarity'], create_at))
+                            print sql_log.format(task_id, flow_id, item['sentence'], item['word'], item['key_word'],params, item['similarity'], create_at)
+                            if item['label'] in list_data.label:
+                                print ' %s 在fs_consumer 的%s __ %s 中已经存在 '%(item['label'],number,user_id)
+                                continue
+                            else:
+                                params = "{" + item['label'] + '}'
+                                db.run_update_sql(sql_update.format(params, number, user_id))
+                                print '-------fs_consumer----label  ------',sql_update.format(params, number, user_id)
+
+                    else:
+                        print 'fs_consumer  中不存在 %s 记录'%number
+                except Exception as e :
+                        logger.info('exception ****%s'%e)
         else:
-            result = {'successful': False, 'message': 'httpclient error'}
             logger.info('.......httpClient error status : %s' % response.status)
     except Exception, e:
-        result = {'successful': False, 'message': 'httpclient exception'}
         logger.info('.......httpClient exception error  : %s' % e)
     finally:
         if httpClient:
@@ -108,9 +116,10 @@ print(' [*] Waiting for messages. To exit press CTRL+C')
 channel.start_consuming()
 #
 # if __name__ == '__main__':
+#
 #     sql = "select fs_call.task_id,replay.text from fs_call " \
 #           "left join fs_call_replay as replay on fs_call.id = replay.call_id " \
-#           "where fs_call.id = 7 and replay.who = 'human' ORDER BY  replay.create_at"
+#           "where fs_call.id = 28 and replay.who = 'human' ORDER BY  replay.create_at"
 #     print  sql
 #     list_sentens = db.get_all_sql(sql)
 #     list = []
@@ -121,8 +130,8 @@ channel.start_consuming()
 #     ll = []
 #     ll.append('附近有医院吗')
 #     ll.append('附近有学校吗')
-#     httpseverclient('23e566219595a9cb92bc3e5a175dbd63',ll,'15166636562',5566)
+#     httpseverclient('23e566219595a9cb92bc3e5a175dbd63',list,'15900282168',10,8)
 
-    # print '\xe5\x85\xb3\xe6\xb3\xa8\xe5\x8c\xbb\xe7\x96\x97'
+
 
 
