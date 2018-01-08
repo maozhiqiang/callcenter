@@ -16,10 +16,12 @@ from LogUtils import Logger
 import WebAPI as xunfei_asr
 from pydub import AudioSegment
 import SinoVoice as sino_asr
+import JoinAudio as VoiceTools
 reload(voice_api)
 reload(xunfei_asr)
 reload(sino_asr)
 reload(redis)
+reload(VoiceTools)
 logger = Logger()
 
 def hangup_hook(session, what):
@@ -63,6 +65,7 @@ class IVRBase(object):
         self.fs_call_id = session.getVariable(b"call_id")
         self.channal_uuid = session.getVariable(b"origination_uuid")
         self.caller_number = session.getVariable(b"caller_id_number")
+        self.voicesynthetic = session.getVariable(b"task_type")
         self.caller_in_wav = None
         self.caller_out_mp3 = None
         self.call_full_wav = None
@@ -174,12 +177,29 @@ class IVRBase(object):
             for item in dict['info']:
                 text = ''.join(item['output'])
                 logger.error('flow return text %s' % text)
-                #新增 用户意向标签 需要存储数据库
+                # 新增 用户意向标签 需要存储数据库
                 if item.has_key('user_label'):
                     user_label = item['user_label']
-                    print  ' start.... user_label .... %s'%user_label
+                    print  ' start.... user_label .... %s' % user_label
                     self.user_analysis(user_label)
                     print  ' end.... user_label .... %s' % user_label
+
+
+                if self.voicesynthetic == 'synthesis':
+                    print '--------开始进行 声音的拼接工作--------'
+                    #获取流程返回的文本，此时进行声音的拼接工作
+                    if item['output_resource'] != '':
+                        list_voices = item['output_resource']
+                        path = self.bot_audio + filename
+                        logger.info('-------------playback  %s' % filename)
+                    list_text = VoiceTools.vt.screen_str(text)
+
+
+
+
+                else:
+                    pass
+
 
                 if item['output_resource'] != '':
                     filename = "{0}".format(item['output_resource'])
@@ -292,7 +312,6 @@ class IVRBase(object):
         full_path = self.call_full_wav.format(self.__sessionId)
         self.session.setVariable("RECORD_STEREO", "true")
         self.session.execute("record_session", full_path)
-        #'/home/callcenter/recordvoice/{0}/all_audio/'
         realy_full_path = full_path.split('recordvoice')
         self.update_full_path(realy_full_path[1], self.channal_uuid)
         while self.session.ready():
