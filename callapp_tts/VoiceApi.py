@@ -75,11 +75,11 @@ bc = BaiduVoiceClient(cu_id='test_python',
 
 
 
-if __name__ == "__main__":
-    import  time
-    start = time.time()
-    s = "欢迎您的来电，呼叫人工请按 2，呼叫智能客服请按 3，重复收听请按 0!"
-    # r = bc.tts(s, '/tmp/11_test_tts.wav')
+# if __name__ == "__main__":
+#     import  time
+#     start = time.time()
+#     s = "欢迎您的来电，呼叫人工请按 2，呼叫智能客服请按 3，重复收听请按 0!"
+#     r = bc.tts(s, '/tmp/11_test_tts.wav')
 
     # #--------
     # import time
@@ -93,9 +93,9 @@ if __name__ == "__main__":
     #     print (end-start)
     # #--------
     #a-b
-    file = '/mnt/asr/asr/18522611368_in_5_20171101153938.wav'
-    r = bc.asr(file)
-    print r['result'][0]
-    end = time.time()
-    # print r
-    print (end - start)
+    # file = '/mnt/asr/asr/18522611368_in_5_20171101153938.wav'
+    # r = bc.asr(file)
+    # print r['result'][0]
+    # end = time.time()
+    # # print r
+    # print (end - start)
