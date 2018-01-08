@@ -6,6 +6,8 @@ sys.path.append('..')
 reload(sys)
 sys.setdefaultencoding('utf8')
 
+
+#测试-----------------------------------
 #=================服务器 info=====================================
 #server="http://118.190.166.165:10080/recordvoice"
 server=""
