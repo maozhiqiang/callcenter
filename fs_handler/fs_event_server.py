@@ -78,7 +78,7 @@ def event_processor(event_queue):
             elif event['event_name'] == 'CHANNEL_ANSWER':
                 sql = ca_sql.format(time_at, event['channal_uuid'])
                 logger.info('[sql]:.........CHANNEL_ANSWER...... %s' % sql)
-                db.run_sql(sql)
+                db.update_sql(sql)
 
             elif event['event_name'] == 'CHANNEL_HANGUP_COMPLETE':
                 task_id = event['task_id']
