@@ -200,56 +200,61 @@ class IVRBase(object):
                     user_label = item['user_label']
                     print  ' start.... user_label .... %s' % user_label
                     self.user_analysis(user_label)
+                #....................合成任务......start...............................'
                 if self.voicesynthetic == 'synthesis':
-                    list_voices = []# 人声集合
+                    # 人声集合
+                    list_voices = []
                     if item['output_resource'] != '':
                         for item in item['output_resource']:
                             path = self.bot_audio + item
                             list_voices.append(path)
                             logger.info('....flow return audio.... %s'%item)
                     list_text = VoiceTools.vt.screen_str(text)
-                    synthe_voices = []# 合成声音集合
+                    # 合成声音集合
+                    synthe_voices = []
                     if len(list_text):
-                        for items in list_text:
+                        for items in list_text:#item 为要合成的文本
                             md5_key = Md5Utils.get_md5_value(self.voice_type+items)
                             if redis.r.has_name(md5_key):
                                 filename = redis.r.hget(md5_key)
-                                print '[......redis...voice_path :  %s ]'%filename
+                                synthe_voices.append(filename)
+                            else:
+                                filename = VoiceTools.vt.httpClient(self.voice_type,items)
                                 synthe_voices.append(filename)
                     if  len(list_voices) and len(synthe_voices):
                         result_list = VoiceTools.vt.joinlist(list_voices,synthe_voices)
                         result_voice_path = VoiceTools.vt.voicesynthetic(self.flow_id,self.caller_number,result_list)
                         logger.info('.....result_voice.....%s'%result_voice_path)
+                        self.session.execute("playback", result_voice_path)#播放声音文件
+                        realy_file_path = result_voice_path.split('recordvoice')
+                        self.record_chat_run('bot', text, realy_file_path[1], create_at, self.fs_call_id, jsonStr)
                     else:
                         consoleLog("info", "***** 匹配声音有无，结束当前电话，请查询声音是否设置合理!!*****\n\n")
                         self.session.hangup()
-
-
+                #....................合成任务......end...............................'
                 else:
-                    pass
-
-                if item['output_resource'] != '':
-                    filename = "{0}".format(item['output_resource'])
-                    path = self.bot_audio+filename
-                    logger.info('-------------playback  %s' % filename)
-                    self.session.execute("playback", path)
-                    realy_file_path = path.split('recordvoice')
-                    self.record_chat_run('bot', text, realy_file_path[1], create_at, self.fs_call_id, jsonStr)
-                else:
-                    ss_flag = self.flow_id+'_'+text
-                    ss_key = Md5Utils.get_md5_value(ss_flag)
-                    if text == None:
-                        logger.info(' *********flow return  output is None *********')
-                        self.record_chat_run('bot', ' ', '', create_at, self.fs_call_id, jsonStr)
-                        self.bot_flow('')
-                    elif redis.r.has_name(ss_key):
-                        filename = redis.r.hget(ss_key)
-                        logger.info('...... get-cache ........%s' % filename)
-                        self.session.execute("playback", filename)
-                        realy_file_path = filename.split('recordvoice')
+                    if item['output_resource'] != '':
+                        filename = "{0}".format(item['output_resource'])
+                        path = self.bot_audio+filename
+                        logger.info('-------------playback  %s' % filename)
+                        self.session.execute("playback", path)
+                        realy_file_path = path.split('recordvoice')
                         self.record_chat_run('bot', text, realy_file_path[1], create_at, self.fs_call_id, jsonStr)
                     else:
-                        self.playback_status_voice(text, jsonStr)
+                        ss_flag = self.flow_id+'_'+text
+                        ss_key = Md5Utils.get_md5_value(ss_flag)
+                        if text == None:
+                            logger.info(' *********flow return  output is None *********')
+                            self.record_chat_run('bot', ' ', '', create_at, self.fs_call_id, jsonStr)
+                            self.bot_flow('')
+                        elif redis.r.has_name(ss_key):
+                            filename = redis.r.hget(ss_key)
+                            logger.info('...... get-cache ........%s' % filename)
+                            self.session.execute("playback", filename)
+                            realy_file_path = filename.split('recordvoice')
+                            self.record_chat_run('bot', text, realy_file_path[1], create_at, self.fs_call_id, jsonStr)
+                        else:
+                            self.playback_status_voice(text, jsonStr)
                 if item['session_end'] or item['flow_end']:
                     self.session.hangup()
         else:
