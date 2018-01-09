@@ -4,6 +4,7 @@ import os
 import wave
 import json
 import time
+import operator
 import Md5Utils
 import FlowHandler
 import datetime
@@ -17,6 +18,8 @@ import WebAPI as xunfei_asr
 from pydub import AudioSegment
 import SinoVoice as sino_asr
 import JoinAudio as VoiceTools
+import DBhandler as db
+
 reload(voice_api)
 reload(xunfei_asr)
 reload(sino_asr)
@@ -66,17 +69,32 @@ class IVRBase(object):
         self.channal_uuid = session.getVariable(b"origination_uuid")
         self.caller_number = session.getVariable(b"caller_id_number")
         self.voicesynthetic = session.getVariable(b"task_type")
+        self.task_id = session.getVariable(b"task_id")
         self.caller_in_wav = None
         self.caller_out_mp3 = None
         self.call_full_wav = None
         self.text = None
         self.record_fpath = None
         self.create_at = None
+        self.customer_info = None
+        self.voice_type = None
         self.human_audio = '/home/callcenter/recordvoice/{0}/human_audio/'
         self.all_audio = '/home/callcenter/recordvoice/{0}/all_audio/'
         self.bot_audio = '/home/callcenter/recordvoice/{0}/bot_audio/'
         self.closedFlow()
         self.init_file_path()
+        self.init_consumer_info()
+
+    def init_consumer_info(self):
+        if operator.eq(self.voicesynthetic,'synthesis'):
+            consoleLog("info", "current number_ %s ---- 是》》》》》合成任务《《《《《 !! \n\n" % (self.caller_number))
+            select_sql = " select * from fs_synthetic_task_info where number = '{0}'  and task_id = '{1}' "
+            print '[ ....init_consumer_info....:  %s]'%(select_sql.format(self.caller_number,self.task_id))
+            data = db.get_one_sql(select_sql.format(self.caller_number,self.task_id))
+            self.voice_type = data.voice_type
+            self.customer_info = data.info
+        else:
+            consoleLog("info", "current number_ %s ---- 是 》》》》普通任务《《《《《 !! \n\n" % (self.caller_number))
 
     def init_file_path(self):
         self.__sessionId = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
@@ -182,24 +200,33 @@ class IVRBase(object):
                     user_label = item['user_label']
                     print  ' start.... user_label .... %s' % user_label
                     self.user_analysis(user_label)
-                    print  ' end.... user_label .... %s' % user_label
-
-
                 if self.voicesynthetic == 'synthesis':
-                    print '--------开始进行 声音的拼接工作--------'
-                    #获取流程返回的文本，此时进行声音的拼接工作
+                    list_voices = []# 人声集合
                     if item['output_resource'] != '':
-                        list_voices = item['output_resource']
-                        path = self.bot_audio + filename
-                        logger.info('-------------playback  %s' % filename)
+                        for item in item['output_resource']:
+                            path = self.bot_audio + item
+                            list_voices.append(path)
+                            logger.info('....flow return audio.... %s'%item)
                     list_text = VoiceTools.vt.screen_str(text)
-
-
+                    synthe_voices = []# 合成声音集合
+                    if len(list_text):
+                        for items in list_text:
+                            md5_key = Md5Utils.get_md5_value(self.voice_type+items)
+                            if redis.r.has_name(md5_key):
+                                filename = redis.r.hget(md5_key)
+                                print '[......redis...voice_path :  %s ]'%filename
+                                synthe_voices.append(filename)
+                    if  len(list_voices) and len(synthe_voices):
+                        result_list = VoiceTools.vt.joinlist(list_voices,synthe_voices)
+                        result_voice_path = VoiceTools.vt.voicesynthetic(self.flow_id,self.caller_number,result_list)
+                        logger.info('.....result_voice.....%s'%result_voice_path)
+                    else:
+                        consoleLog("info", "***** 匹配声音有无，结束当前电话，请查询声音是否设置合理!!*****\n\n")
+                        self.session.hangup()
 
 
                 else:
                     pass
-
 
                 if item['output_resource'] != '':
                     filename = "{0}".format(item['output_resource'])
