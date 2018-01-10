@@ -72,7 +72,11 @@ class VoiceTools(object):
 
 vt = VoiceTools()
 if __name__ == '__main__':
-    print  vt.httpClient('xn','中信国际8989案例看价位')
+    import time
+    start = time.time()
+    print  vt.httpClient('xiaolin','中信案例看价位')
+    endt = time.time() - start
+    print endt
 
 
 
