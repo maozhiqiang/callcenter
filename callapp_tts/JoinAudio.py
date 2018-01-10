@@ -51,7 +51,7 @@ class VoiceTools(object):
 
     #截取指定字符串
     def screen_str(self,text):
-        pattern = r"#{(.+?)}#"
+        pattern = r"%{(.+?)}%"
         find_list = re.findall(pattern, text)
         return  find_list
 
