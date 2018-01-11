@@ -3,7 +3,6 @@
 import re
 import json
 import httplib
-import demjson
 import datetime
 from pydub import AudioSegment
 class VoiceTools(object):

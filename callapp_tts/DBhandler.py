@@ -82,6 +82,7 @@ if __name__ == '__main__':
     select_sql = " select * from fs_synthetic_task_info where number = '{0}'  and task_id = '{1}' "
     print '[ ....init_consumer_info....:  %s]' % (select_sql.format('18611889065', 1))
     data = get_one_sql(select_sql.format('18611889065', 1))
+    print '**-*-', data
     # print data.voice_type
     # for key,value in data.info.items():
     #     print key,value

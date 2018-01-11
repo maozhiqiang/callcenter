@@ -205,7 +205,7 @@ class IVRBase(object):
                     # 人声集合
                     list_voices = []
                     if item['output_resource'] != '':
-                        for item in item['output_resource']:
+                        for item in item['output_resource'].split(','):
                             path = self.bot_audio + item
                             list_voices.append(path)
                             logger.info('....flow return audio.... %s'%item)
