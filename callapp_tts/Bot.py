@@ -185,6 +185,7 @@ class IVRBase(object):
 
 
     def bot_flow(self, input):
+        print '******************',input
         startTime = time.time()
         create_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         dict = FlowHandler.flowHandler(input, self.caller_number, self.flow_id)
@@ -195,41 +196,51 @@ class IVRBase(object):
             for item in dict['info']:
                 text = ''.join(item['output'])
                 logger.error('flow return text %s' % text)
-                # 新增 用户意向标签 需要存储数据库
                 if item.has_key('user_label'):
                     user_label = item['user_label']
                     print  ' start.... user_label .... %s' % user_label
                     self.user_analysis(user_label)
                 #....................合成任务......start...............................'
                 if self.voicesynthetic == 'synthesis':
-                    # 人声集合
                     list_voices = []
                     if item['output_resource'] != '':
-                        for item in item['output_resource'].split(','):
-                            path = self.bot_audio + item
+                        for item_1 in item['output_resource'].split(','):
+                            path = self.bot_audio + item_1
                             list_voices.append(path)
-                            logger.info('....flow return audio.... %s'%item)
                     list_text = VoiceTools.vt.screen_str(text)
-                    # 合成声音集合
                     synthe_voices = []
                     if len(list_text):
                         for items in list_text:#item 为要合成的文本
-                            md5_key = Md5Utils.get_md5_value(self.voice_type+items)
+                            ss_name = None
+                            if self.customer_info.has_key(items):
+                                ss_name = self.customer_info[items]
+                            md5_key = Md5Utils.get_md5_value(self.voice_type+ss_name)
+                            print '[.......%s....]'%md5_key
                             if redis.r.has_name(md5_key):
                                 filename = redis.r.hget(md5_key)
                                 synthe_voices.append(filename)
                             else:
-                                filename = VoiceTools.vt.httpClient(self.voice_type,items)
+                                print '[----------not redis--------]'
+                                filename = VoiceTools.vt.httpClient(self.voice_type,ss_name)
                                 synthe_voices.append(filename)
                     if  len(list_voices) and len(synthe_voices):
                         result_list = VoiceTools.vt.joinlist(list_voices,synthe_voices)
-                        result_voice_path = VoiceTools.vt.voicesynthetic(self.flow_id,self.caller_number,result_list)
-                        logger.info('.....result_voice.....%s'%result_voice_path)
-                        self.session.execute("playback", result_voice_path)#播放声音文件
-                        realy_file_path = result_voice_path.split('recordvoice')
+                        return_data = VoiceTools.vt.voicesynthetic(self.flow_id,self.caller_number,result_list)
+                        if return_data['success']:
+                            self.session.execute("playback", return_data['path'])  # 播放声音文件
+                            realy_file_path = return_data['path'].split('recordvoice')
+                            self.record_chat_run('bot', text, realy_file_path[1], create_at, self.fs_call_id, jsonStr)
+                    elif len(list_voices) == 1 and len(synthe_voices) == 0:
+                        filename = "{0}".format(item['output_resource'])
+                        path = self.bot_audio + filename
+                        logger.info('-------------playback  %s' % filename)
+                        self.session.execute("playback", path)
+                        realy_file_path = path.split('recordvoice')
                         self.record_chat_run('bot', text, realy_file_path[1], create_at, self.fs_call_id, jsonStr)
                     else:
                         consoleLog("info", "***** 匹配声音有无，结束当前电话，请查询声音是否设置合理!!*****\n\n")
+                        self.session.hangup()
+                    if item['session_end'] or item['flow_end']:
                         self.session.hangup()
                 #....................合成任务......end...............................'
                 else:
@@ -255,8 +266,8 @@ class IVRBase(object):
                             self.record_chat_run('bot', text, realy_file_path[1], create_at, self.fs_call_id, jsonStr)
                         else:
                             self.playback_status_voice(text, jsonStr)
-                if item['session_end'] or item['flow_end']:
-                    self.session.hangup()
+                    if item['session_end'] or item['flow_end']:
+                        self.session.hangup()
         else:
             logger.info('error.......Flow error: err_no   %s'%jsonStr)
             self.session.hangup()
@@ -279,7 +290,9 @@ class IVRBase(object):
             self.session.hangup()
 
     def IVR_app(self):
+        print '[------------a4-------------]'
         while self.session.ready():
+            print '[------------a5-------------]'
             startTime = time.time()
             create_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
             filename = self.caller_in_wav.format(self.in_count, self.__sessionId)

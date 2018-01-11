@@ -65,7 +65,8 @@ if __name__ == '__main__':
     # print r.hget('uuid--2')
 
     print '==================================='
-    print r.hget('uuid--1')
+    print r.hget('d393fb096918823a90c9c4a8df20d47e')
+    print r.has_name('d393fb096918823a90c9c4a8df20d47e')
 
 
 

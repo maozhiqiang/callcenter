@@ -46,7 +46,7 @@ class VoiceTools(object):
             objdata['path'] = None
             objdata['success'] = False
             objdata['message'] = e.message
-        return  json.dumps(objdata)
+        return  objdata
 
     #截取指定字符串
     def screen_str(self,text):
@@ -63,7 +63,6 @@ class VoiceTools(object):
         if response.status == 200:
             json_data = response.read()
             dict = json.loads(json_data)
-            print '*********',dict
             return dict['data']['path']
         else:
             return None
@@ -72,23 +71,31 @@ class VoiceTools(object):
 vt = VoiceTools()
 if __name__ == '__main__':
     import time
-    start = time.time()
-    print  vt.httpClient('xiaolin','中信案例看价位')
-    endt = time.time() - start
-    print endt
+    import Md5Utils
+
+    # md5_key = Md5Utils.get_md5_value( + )
 
 
 
 
-#     import re
-#     str = '你好啊#{name}#,我是#{address}#'
+
+    # start = time.time()
+    # print  vt.httpClient('xiaolin','中信案例看价位')
+    # endt = time.time() - start
+    # print endt
+    #
+    #
+    #
+    #
+    # import re
+    # str = '你好啊%{name}%,我是%{address}%'
 #     ll = ['/mnt/vice_join/A1.wav','/mnt/vice_join/eval-400000-3.wav','/mnt/vice_join/eval-400000-5.wav']
 #     vt = VoiceTools()
 #     for num in range(3):
 #         result = vt.voicesynthetic("55667788","15900282168",ll)
 #
 #         print result
-    # print vt.screen_str(str)
+#     print vt.screen_str(str)
     # # vt.screen_str(str)
     # list1 = ['A','B','C','D','E']
     # list2 = ['1', '2', '3', '4']
