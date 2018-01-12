@@ -13,7 +13,7 @@ server_url = ""
 #=====================Flow Config start==========================
 #start flow 117.50.8.27  106.75.61.164
 flow_host = '117.50.8.27'
-flow_port = 8080
+flow_port = 80
 flow_url = "/flow/execute.do"
 #closeflow
 key = 'The nature of the polymer is currently a trade secret'
