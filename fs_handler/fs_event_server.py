@@ -142,7 +142,7 @@ def event_listener(event_queue):
                 dct['host_id'] = e.getHeader("variable_host_id")
                 dct['call_back'] = e.getHeader("variable_call_back")
                 # print '*********call_back is ************ %s' % dct['call_back']
-                if dct['event_name'] in ['CHANNEL_CREATE','CHANNEL_ANSWER', 'CHANNEL_HANGUP_COMPLETE'] and dct['call_back'] =='false':
+                if dct['event_name'] in ['CHANNEL_CREATE','CHANNEL_ANSWER', 'CHANNEL_HANGUP_COMPLETE'] and dct['call_back'] !=None:
                     dct['call_id'] = e.getHeader("variable_call_id")
                     dct['is_test'] = e.getHeader("variable_is_test")
                     if dct['event_name'] == 'CHANNEL_HANGUP_COMPLETE':
