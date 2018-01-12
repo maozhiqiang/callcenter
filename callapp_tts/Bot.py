@@ -91,8 +91,13 @@ class IVRBase(object):
             select_sql = " select * from fs_synthetic_task_info where number = '{0}'  and task_id = '{1}' "
             print '[ ....init_consumer_info....:  %s]'%(select_sql.format(self.caller_number,self.task_id))
             data = db.get_one_sql(select_sql.format(self.caller_number,self.task_id))
-            self.voice_type = data.voice_type
-            self.customer_info = data.info
+            print '[---sql----]',data
+            if data != None:
+                self.voice_type = data.voice_type
+                self.customer_info = data.info
+            else:
+
+                pass
         else:
             consoleLog("info", "current number_ %s ---- 是 》》》》普通任务《《《《《 !! \n\n" % (self.caller_number))
 
@@ -211,9 +216,11 @@ class IVRBase(object):
                     synthe_voices = []
                     if len(list_text):
                         for items in list_text:#item 为要合成的文本
+                            print ' 需要替换的变量',items
                             ss_name = None
                             if self.customer_info.has_key(items):
                                 ss_name = self.customer_info[items]
+                                print '[-----ss_name------]',ss_name
                             md5_key = Md5Utils.get_md5_value(self.voice_type+ss_name)
                             print '[.......%s....]'%md5_key
                             if redis.r.has_name(md5_key):
