@@ -10,7 +10,7 @@ starttime = datetime.datetime.now()
 #=====================Flow Config start===========================
 #start flow
 flow_host = '106.75.61.164'
-flow_port = 8080
+flow_port = 80
 flow_url = "/flow/execute.do"
 #closeflow
 key = 'The nature of the polymer is currently a trade secret'
