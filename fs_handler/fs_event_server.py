@@ -129,7 +129,6 @@ def event_listener(event_queue):
         # 只订阅通道事件
         con.events('plain', 'CHANNEL_CREATE CHANNEL_ANSWER CHANNEL_HANGUP_COMPLETE')
         while con.connected:
-            # 等待接收事件会阻塞进程，不用time.sleep
             e = con.recvEvent()
             # logger.info("----------event---------%s" % e.serialize('json'))
             if e:
@@ -141,7 +140,6 @@ def event_listener(event_queue):
                 dct['Channel-Call-State'] = e.getHeader("Channel-Call-State")
                 dct['host_id'] = e.getHeader("variable_host_id")
                 dct['call_back'] = e.getHeader("variable_call_back")
-                # print '*********call_back is ************ %s' % dct['call_back']
                 if dct['event_name'] in ['CHANNEL_CREATE','CHANNEL_ANSWER', 'CHANNEL_HANGUP_COMPLETE'] and dct['call_back'] !=None:
                     dct['call_id'] = e.getHeader("variable_call_id")
                     dct['is_test'] = e.getHeader("variable_is_test")
@@ -197,5 +195,5 @@ if __name__ == '__main__':
     print '               fs_event_server ....running.....                   '
     print '\n==============================================================\n'
     while True:
-        time.sleep(3)
+        time.sleep(1)
 
