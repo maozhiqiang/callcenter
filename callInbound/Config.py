@@ -9,7 +9,7 @@ sys.setdefaultencoding('utf8')
 starttime = datetime.datetime.now()
 #=====================Flow Config start===========================
 #start flow
-flow_host = '123.59.82.44'
+flow_host = '106.75.61.164'
 flow_port = 8080
 flow_url = "/flow/execute.do"
 #closeflow
@@ -18,7 +18,8 @@ flow_close_url = "/flow/close.do"
 
 
 #flow_id = '899f04f0fef39dab0fbf975d171856d6'
-flow_id = '49982f0966b9eb04f228a71b2c33fb23'
+#flow_id = '49982f0966b9eb04f228a71b2c33fb23'
+flow_id = '049567dff0e417d7383c2c76c6d43627'
 #=====================Baidu Asr start  ===========================
 
 

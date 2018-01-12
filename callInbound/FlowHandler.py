@@ -10,12 +10,15 @@ logger = Logger()
 #开始流程
 def flowHandler(input,userId,flowId=Config.flow_id):
     secret = md5.get_sha1_value(flowId + Config.key + userId)
+    print  Config.flow_id
     httpClient = None
     try:
         values = {'secret': secret, 'flow_id': flowId, 'user_id': userId, 'input': input}
         params = json.dumps(values)
         headers = {"Content-type": "application/json"}
+        print '-----0------Config.flow_host',Config.flow_host
         httpClient = httplib.HTTPConnection(Config.flow_host, Config.flow_port, timeout=30)
+        print '-----1------Config.flow_host', Config.flow_host
         httpClient.request("POST", Config.flow_url, params, headers)
         response = httpClient.getresponse()
         if response.status == 200:
