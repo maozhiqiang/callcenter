@@ -54,10 +54,15 @@ def callback(ch, method, properties, body):
             sentences.append(item.text)
         print ' [ list_sentens ...%s ] '%sentences
         httpseverclient(dict['flow_id'],sentences,dict['number'],dict['task_id'],dict['user_id'])
-    else:
+    elif dict['mark'] == 'update':
         sql = "update fs_call set full_record_fpath ='{0}' where channal_uuid ='{1}'".format(dict['record_fpath'],dict['channal_uuid'] )
         db.run_update_sql(sql)
         logger.info('run_update_sql.....%s' % sql)
+
+    elif dict['mark'] == 'event_sql':
+        sql = dict['sql_str']
+        logger.info('[ ----sql_str -----  %s]'%sql)
+        db.run_update_sql(sql)
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
 
@@ -107,14 +112,14 @@ def httpseverclient(flow_id,sentences,number,task_id,user_id):
         if httpClient:
             httpClient.close()
 
-
+#
 channel.basic_consume(callback,queue=conf.MQ_QUEUE)
 print '\n==============================================================\n'
 print '               MQ_consume ....running.....                   '
 print '\n==============================================================\n'
 print(' [*] Waiting for messages. To exit press CTRL+C')
 channel.start_consuming()
-#
+
 # if __name__ == '__main__':
 #
 #     sql = "select fs_call.task_id,replay.text from fs_call " \
@@ -123,14 +128,14 @@ channel.start_consuming()
 #     print  sql
 #     list_sentens = db.get_all_sql(sql)
 #     list = []
-#     for item in list_sentens:
-#         print item.text
-#         print item.task_id
-#         list .append(item.text)
+#     # for item in list_sentens:
+#     #     print item.text
+#     #     print item.task_id
+#     #     list .append(item.text)
 #     ll = []
 #     ll.append('附近有医院吗')
 #     ll.append('附近有学校吗')
-#     httpseverclient('23e566219595a9cb92bc3e5a175dbd63',list,'15900282168',10,8)
+#     httpseverclient('23e566219595a9cb92bc3e5a175dbd63',ll,'15900282168',10,8)
 
 
 

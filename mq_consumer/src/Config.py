@@ -2,8 +2,8 @@
 # -*- encoding: utf-8 -*-
 #============== statistical  统计 ==========================
 flow_host = '117.50.8.27'
-flow_port = 8080
-flow_url = "semanteme-label/map-more.do"
+flow_port = 80
+flow_url = "/semanteme-label/map-more.do"
 
 #=============DB config ===================================
 
@@ -14,7 +14,7 @@ DATABASE_USERNAME = "postgres" #用户名，这里的用户名也是在安装pos
 DATABASE_PASSWORD = "z8asuidn" #链接数据库服务器的密码，安装时设置，安装完毕后可以修改的
 
 #==================RabbtiMq ===============================
-MQ_URL = '121.42.31.97'
+MQ_URL = '127.0.0.17'
 MQ_USERNAME = 'admin'
 MQ_PWD = '123123'
 MQ_QUEUE = 'durable'
