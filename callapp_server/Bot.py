@@ -5,6 +5,7 @@ import wave
 import json
 import time
 import Md5Utils
+import operator
 import FlowHandler
 import datetime
 import Config as conf
@@ -16,10 +17,13 @@ from LogUtils import Logger
 import WebAPI as xunfei_asr
 from pydub import AudioSegment
 import SinoVoice as sino_asr
+import JoinAudio as VoiceTools
+import DBhandler as db
 reload(voice_api)
 reload(xunfei_asr)
 reload(sino_asr)
 reload(redis)
+reload(VoiceTools)
 logger = Logger()
 
 def hangup_hook(session, what):
@@ -63,6 +67,8 @@ class IVRBase(object):
         self.fs_call_id = session.getVariable(b"call_id")
         self.channal_uuid = session.getVariable(b"origination_uuid")
         self.caller_number = session.getVariable(b"caller_id_number")
+        self.voicesynthetic = session.getVariable(b"task_type")
+        self.task_id = session.getVariable(b"task_id")
         self.caller_in_wav = None
         self.caller_out_mp3 = None
         self.call_full_wav = None
@@ -74,6 +80,22 @@ class IVRBase(object):
         self.bot_audio = '/home/callcenter/recordvoice/{0}/bot_audio/'
         self.closedFlow()
         self.init_file_path()
+
+    def init_consumer_info(self):
+        if operator.eq(self.voicesynthetic,'synthesis'):
+            consoleLog("info", "current number_ %s ---- 是》》》》》合成任务《《《《《 !! \n\n" % (self.caller_number))
+            select_sql = " select * from fs_synthetic_task_info where number = '{0}'  and task_id = '{1}' "
+            print '[ ....init_consumer_info....:  %s]'%(select_sql.format(self.caller_number,self.task_id))
+            data = db.get_one_sql(select_sql.format(self.caller_number,self.task_id))
+            print '[---sql----]',data
+            if data != None:
+                self.voice_type = data.voice_type
+                self.customer_info = data.info
+            else:
+
+                pass
+        else:
+            consoleLog("info", "current number_ %s ---- 是 》》》》普通任务《《《《《 !! \n\n" % (self.caller_number))
 
     def init_file_path(self):
         self.__sessionId = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
@@ -174,13 +196,56 @@ class IVRBase(object):
             for item in dict['info']:
                 text = ''.join(item['output'])
                 logger.error('flow return text %s' % text)
-                #新增 用户意向标签 需要存储数据库
+                #============================新增 用户意向标签 需要存储数据库========================================'
                 if item.has_key('user_label'):
                     user_label = item['user_label']
                     print  ' start.... user_label .... %s'%user_label
                     self.user_analysis(user_label)
-                    print  ' end.... user_label .... %s' % user_label
-
+                # ============================.合成任务......start========================================'
+                if self.voicesynthetic == 'synthesis':
+                    list_voices = []
+                    if item['output_resource'] != '':
+                        for item_1 in item['output_resource'].split(','):
+                            path = self.bot_audio + item_1
+                            list_voices.append(path)
+                    list_text = VoiceTools.vt.screen_str(text)
+                    synthe_voices = []
+                    if len(list_text):
+                        for items in list_text:  # item 为要合成的文本
+                            print ' 需要替换的变量', items
+                            ss_name = None
+                            if self.customer_info.has_key(items):
+                                ss_name = self.customer_info[items]
+                                print '[-----ss_name------]', ss_name
+                            md5_key = Md5Utils.get_md5_value(self.voice_type + ss_name)
+                            print '[.......%s....]' % md5_key
+                            if redis.r.has_name(md5_key):
+                                filename = redis.r.hget(md5_key)
+                                synthe_voices.append(filename)
+                            else:
+                                print '[----------not redis--------]'
+                                filename = VoiceTools.vt.httpClient(self.voice_type, ss_name)
+                                synthe_voices.append(filename)
+                    if len(list_voices) and len(synthe_voices):
+                        result_list = VoiceTools.vt.joinlist(list_voices, synthe_voices)
+                        return_data = VoiceTools.vt.voicesynthetic(self.flow_id, self.caller_number, result_list)
+                        if return_data['success']:
+                            self.session.execute("playback", return_data['path'])  # 播放声音文件
+                            realy_file_path = return_data['path'].split('recordvoice')
+                            self.record_chat_run('bot', text, realy_file_path[1], create_at, self.fs_call_id, jsonStr)
+                    elif len(list_voices) == 1 and len(synthe_voices) == 0:
+                        filename = "{0}".format(item['output_resource'])
+                        path = self.bot_audio + filename
+                        logger.info('-------------playback  %s' % filename)
+                        self.session.execute("playback", path)
+                        realy_file_path = path.split('recordvoice')
+                        self.record_chat_run('bot', text, realy_file_path[1], create_at, self.fs_call_id, jsonStr)
+                    else:
+                        consoleLog("info", "***** 匹配声音有无，结束当前电话，请查询声音是否设置合理!!*****\n\n")
+                        self.session.hangup()
+                    if item['session_end'] or item['flow_end']:
+                        self.session.hangup()
+                        # ============================.合成任务......end========================================'
                 if item['output_resource'] != '':
                     filename = "{0}".format(item['output_resource'])
                     path = self.bot_audio+filename

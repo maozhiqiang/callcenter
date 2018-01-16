@@ -2,7 +2,7 @@
 import psycopg2
 import psycopg2.extras
 #import Config as conf
-import  tools.config as conf
+import  Config as conf
 DATABASE_HOST = conf.POSTGRESQL_HOST
 DATABASE_PORT = conf.POSTGRESQL_PORT
 DATABASE_NAME = conf.POSTGRESQL_NAME
@@ -10,6 +10,7 @@ DATABASE_USERNAME = conf.POSTGRESQL_USERNAME
 DATABASE_PASSWORD = conf.POSTGRESQL_PASSWORD
 from DBUtils.PooledDB import PooledDB
 
+print '[   postgresql：  %s ]'%conf.POSTGRESQL_HOST
 class Postgresql_Pool(object):
     """
        postgresql数据库对象，负责产生数据库连接 , 此类中的连接采用连接池实现获取连接对象：conn = postgresql.getConn()
