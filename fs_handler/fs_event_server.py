@@ -72,7 +72,7 @@ def event_processor(event_queue):
                 # db.update_sql(sql)
                 ms_data['mark'] = 'event_sql'
                 ms_data['sql_str'] = sql
-                mqClient.mq.MQHandler.publish(ms_data)
+                mqClient.mq.publish(ms_data)
 
                 #更新fs_host 线路数+1
                 host_sql = chc_update_line.format(event['host_id'])
@@ -80,7 +80,7 @@ def event_processor(event_queue):
                 # db.update_sql(host_sql)
                 ms_data['mark'] = 'event_sql'
                 ms_data['sql_str'] = host_sql
-                mqClient.mq.MQHandler.publish(json.dumps(ms_data))
+                mqClient.mq.publish(ms_data)
 
             elif event['event_name'] == 'CHANNEL_ANSWER':
                 sql = ca_sql.format(time_at, event['channal_uuid'])
@@ -88,7 +88,7 @@ def event_processor(event_queue):
                 # db.run_sql(sql)
                 ms_data['mark'] = 'event_sql'
                 ms_data['sql_str'] = sql
-                mqClient.mq.MQHandler.publish(json.dumps(ms_data))
+                mqClient.mq.publish(ms_data)
 
             elif event['event_name'] == 'CHANNEL_HANGUP_COMPLETE':
                 task_id = event['task_id']
@@ -102,20 +102,21 @@ def event_processor(event_queue):
                         # db.update_sql(sql)
                         ms_data['mark'] = 'event_sql'
                         ms_data['sql_str'] = sql
-                        mqClient.mq.MQHandler.publish(json.dumps(ms_data))
+                        mqClient.mq.publish(ms_data)
 
                         sql2 = chc_host_sql.format(int(host_id))
                         logger.info('[ sql2 :----> fs_host line_use - 1 ]%s ' % sql2)
                         # db.update_sql(sql2)
                         ms_data['mark'] = 'event_sql'
                         ms_data['sql_str'] = sql2
-                        mqClient.mq.MQHandler.publish(json.dumps(ms_data))
+                        mqClient.mq.publish(ms_data)
 
                         sql3 = chc_sql.format('finish', time_at, event['Channel-Call-State'],event['Hangup-Cause'], event['channal_uuid'])
                         logger.info('[sql3 :..........CHANNEL_HANGUP_COMPLETE....... ]%s' % sql3)
                         # db.update_sql(sql3)
                         ms_data['mark'] = 'event_sql'
                         ms_data['sql_str'] = sql3
+                        mqClient.mq.publish(ms_data)
                         HttpClientPost(event['channal_uuid'])
                     except Exception as e:
                         logger.info('hangup_complete execute sql error %s ' % e)

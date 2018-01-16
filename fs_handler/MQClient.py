@@ -34,7 +34,7 @@ class MQHandler(object):
 
     def get_channel(self):
         channel = self.get_conn().channel()
-        channel.exchange_declare(exchange=self.exchange,type='direct')
+        channel.exchange_declare(exchange=self.exchange, exchange_type='direct')
         channel.queue_declare(queue=self.rout_key,durable=True)
         channel.queue_bind(exchange=self.exchange, queue=self.rout_key)
         return channel
@@ -52,16 +52,16 @@ class MQHandler(object):
         print 'sssssss',json.dumps(ms_data)
         self.close_conn()
 mq = MQHandler(MQConstant.MQ_NAME,MQConstant.MQ_PWD,MQConstant.MQ_HOST,MQConstant.MQ_PORT,MQConstant.MQ_EXCHANGE,MQConstant.MQ_QUEUE)
-# data = {}
-# if __name__ == '__main__':
-#     # mq = MQHandler(MQConstant.MQ_NAME,MQConstant.MQ_PWD,MQConstant.MQ_HOST,MQConstant.MQ_PORT,MQConstant.MQ_EXCHANGE,MQConstant.MQ_QUEUE)
-#
-#     data['mark'] = 'sql_insert'
-#     data['sql_str'] = 'select * from fs_call'
-#     mq.publish(data)
-#     print data
-#     data['mark'] = 'sql_insert_111111'
-#     data['sql_str'] = 'select * from fs_call WHERE  task_id = 5566'
-#     print data
-#     mq.publish(data)
+
+if __name__ == '__main__':
+    # mq = MQHandler(MQConstant.MQ_NAME,MQConstant.MQ_PWD,MQConstant.MQ_HOST,MQConstant.MQ_PORT,MQConstant.MQ_EXCHANGE,MQConstant.MQ_QUEUE)
+    data = {}
+    data['mark'] = 'sql_insert'
+    data['sql_str'] = 'select * from fs_call'
+    mq.publish(data)
+    print data
+    data['mark'] = 'sql_insert_111111'
+    data['sql_str'] = 'select * from fs_call WHERE  task_id = 5566'
+    print data
+    mq.publish(data)
 
