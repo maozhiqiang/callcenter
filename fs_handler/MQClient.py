@@ -29,10 +29,7 @@ class MQHandler(object):
 
     def get_conn(self):
         credentials = pika.PlainCredentials(self.username, self.password)
-        print '----%s------%s---'%(self.host,self.port)
-
         conn = pika.BlockingConnection(pika.ConnectionParameters(self.host, self.port, '/', credentials))
-        print conn
         return conn
 
     def get_channel(self):
@@ -52,12 +49,19 @@ class MQHandler(object):
             body=json.dumps(ms_data),
             properties=pika.BasicProperties(content_type=self.content_type)
         )
+        print 'sssssss',json.dumps(ms_data)
         self.close_conn()
 mq = MQHandler(MQConstant.MQ_NAME,MQConstant.MQ_PWD,MQConstant.MQ_HOST,MQConstant.MQ_PORT,MQConstant.MQ_EXCHANGE,MQConstant.MQ_QUEUE)
-if __name__ == '__main__':
-    # mq = MQHandler(MQConstant.MQ_NAME,MQConstant.MQ_PWD,MQConstant.MQ_HOST,MQConstant.MQ_PORT,MQConstant.MQ_EXCHANGE,MQConstant.MQ_QUEUE)
-    data = {}
-    data['mark'] = 'sql_insert'
-    data['sql_str'] = 'select * from fs_call'
-    mq.publish(data)
+# data = {}
+# if __name__ == '__main__':
+#     # mq = MQHandler(MQConstant.MQ_NAME,MQConstant.MQ_PWD,MQConstant.MQ_HOST,MQConstant.MQ_PORT,MQConstant.MQ_EXCHANGE,MQConstant.MQ_QUEUE)
+#
+#     data['mark'] = 'sql_insert'
+#     data['sql_str'] = 'select * from fs_call'
+#     mq.publish(data)
+#     print data
+#     data['mark'] = 'sql_insert_111111'
+#     data['sql_str'] = 'select * from fs_call WHERE  task_id = 5566'
+#     print data
+#     mq.publish(data)
 

@@ -22,7 +22,7 @@ queue_authkey = 'aicyberqueue'
 
 #====================ESL  Config==================
 
-ESL_HOST = '121.42.31.97'#121.42.31.97
+ESL_HOST = '127.0.0.1'#121.42.31.97
 ESL_PORT = 8021
 ESL_PWD = 'Aicyber'
 

@@ -15,7 +15,9 @@ from multiprocessing import managers
 #from DBPool import Postgresql_Pool as db_pool
 import DBhandler as db
 from LogUtils import Logger
+import MQClient as mqClient
 
+reload(mqClient)
 logger = Logger()
 print '             freeswitch 服务器:  %s '%conf.ESL_HOST
 con = ESL.ESLconnection(conf.ESL_HOST, conf.ESL_PORT, conf.ESL_PWD)
@@ -55,7 +57,7 @@ chc_user_minute = " update fs_user set call_minute = call_minute - {0} where id 
 #============================update fs_event_sql===============================================
 #fs_task 电话挂机时 fs_task call_finish +1
 fs_task_sql = ' update fs_task set call_finish = call_finish + 1  where id = {0} '
-
+import json
 def event_processor(event_queue):
     """事件处理进程，消费者"""
     while 1:
@@ -63,20 +65,30 @@ def event_processor(event_queue):
         event = event_queue.get()
         time_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         if event['host_id']!= None :
-            pass
+            ms_data = {}
             if event['event_name'] == 'CHANNEL_CREATE':
                 sql = cc_sql.format(time_at, event['channal_uuid'])
                 logger.info('[sql]:........CHANNEL_CREATE........ %s'%sql)
-                db.update_sql(sql)
+                # db.update_sql(sql)
+                ms_data['mark'] = 'event_sql'
+                ms_data['sql_str'] = sql
+                mqClient.mq.MQHandler.publish(ms_data)
+
                 #更新fs_host 线路数+1
                 host_sql = chc_update_line.format(event['host_id'])
                 logger.info('[sql]:........CHANNEL_CREATE.. table...host line+1...... %s' % host_sql)
-                db.update_sql(host_sql)
+                # db.update_sql(host_sql)
+                ms_data['mark'] = 'event_sql'
+                ms_data['sql_str'] = host_sql
+                mqClient.mq.MQHandler.publish(json.dumps(ms_data))
 
             elif event['event_name'] == 'CHANNEL_ANSWER':
                 sql = ca_sql.format(time_at, event['channal_uuid'])
                 logger.info('[sql]:.........CHANNEL_ANSWER...... %s' % sql)
-                db.run_sql(sql)
+                # db.run_sql(sql)
+                ms_data['mark'] = 'event_sql'
+                ms_data['sql_str'] = sql
+                mqClient.mq.MQHandler.publish(json.dumps(ms_data))
 
             elif event['event_name'] == 'CHANNEL_HANGUP_COMPLETE':
                 task_id = event['task_id']
@@ -87,20 +99,29 @@ def event_processor(event_queue):
                     try:
                         sql = fs_task_sql.format(int(task_id))
                         logger.info('[ sql1 :----> call hangup_complete execute] :%s ' % sql)
-                        db.update_sql(sql)
+                        # db.update_sql(sql)
+                        ms_data['mark'] = 'event_sql'
+                        ms_data['sql_str'] = sql
+                        mqClient.mq.MQHandler.publish(json.dumps(ms_data))
+
                         sql2 = chc_host_sql.format(int(host_id))
                         logger.info('[ sql2 :----> fs_host line_use - 1 ]%s ' % sql2)
-                        db.update_sql(sql2)
-                        sql3 = chc_sql.format('finish', time_at, event['Channel-Call-State'],
-                                             event['Hangup-Cause'], event['channal_uuid'])
+                        # db.update_sql(sql2)
+                        ms_data['mark'] = 'event_sql'
+                        ms_data['sql_str'] = sql2
+                        mqClient.mq.MQHandler.publish(json.dumps(ms_data))
+
+                        sql3 = chc_sql.format('finish', time_at, event['Channel-Call-State'],event['Hangup-Cause'], event['channal_uuid'])
                         logger.info('[sql3 :..........CHANNEL_HANGUP_COMPLETE....... ]%s' % sql3)
-                        db.update_sql(sql3)
+                        # db.update_sql(sql3)
+                        ms_data['mark'] = 'event_sql'
+                        ms_data['sql_str'] = sql3
                         HttpClientPost(event['channal_uuid'])
                     except Exception as e:
                         logger.info('hangup_complete execute sql error %s ' % e)
         else:
             print '[ ****** current event is not use platform ******]'
-
+#扣费接口
 def HttpClientPost(channal_uuid):
     try:
         import urllib
@@ -133,7 +154,7 @@ def event_listener(event_queue):
             # logger.info("----------event---------%s" % e.serialize('json'))
             if e:
                 # dict是python保留字，不要做变量名
-                dct = dict()
+                dct = {}
                 dct['event_name'] = e.getHeader("Event-Name")
                 dct['channal_uuid'] = e.getHeader("unique-id")
                 dct['call_number'] = e.getHeader("Caller-Destination-Number")
