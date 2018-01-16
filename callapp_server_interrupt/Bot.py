@@ -13,8 +13,10 @@ import RedisHandler as redis
 from freeswitch import *
 from LogUtils import Logger
 import WebAPI as xunfei_asr
+import SinoVoice as sino_asr
 from pydub import AudioSegment
 
+reload(sino_asr)
 reload(voice_api)
 reload(xunfei_asr)
 reload(redis)
@@ -22,9 +24,27 @@ reload(redis)
 logger = Logger()
 
 def hangup_hook(session, what):
+    call_id = session.getVariable(b"call_id")
+    user_id = session.getVariable(b"user_id")
+    flow_id = session.getVariable(b"flow_id")
+    task_id = session.getVariable(b"task_id")
     number = session.getVariable(b"caller_id_number")
-    consoleLog("info", "hangup hook for %s!! \n\n" % number)
+    consoleLog("info", "hangup hook for number_ %s ---- user_id_ : %s flow_id_ %s -----task_id_ %s !! \n\n" % (number,user_id,flow_id,task_id))
+    statistical(call_id,user_id,flow_id,number,task_id)
     return
+
+def statistical(call_id,user_id,flow_id,number,task_id):
+    print 'statistical:(func).....user_id: %s..flow_id: %s...number: %s..' % (user_id,flow_id,number)
+    objdata = {}
+    objdata['mark'] = 'statistical'
+    objdata['call_id'] = call_id
+    objdata['user_id'] = user_id
+    objdata['flow_id'] = flow_id
+    objdata['number'] = number
+    objdata['task_id'] = task_id
+    jsonStr = json.dumps(objdata)
+    # logger.info('------jsonstr-----%s'%jsonStr)
+    rabbitmq.rabbitmqClint(jsonStr)
 
 def input_callback(session, what, obj):
     if (what == "dtmf"):
@@ -137,12 +157,20 @@ class IVRBase(object):
         # logger.info('------jsonstr-----%s' % jsonStr)
         rabbitmq.rabbitmqClint(jsonStr)
 
+    def user_analysis(self,user_label):
+        print '-----user_analysis -------user_label  %s'%user_label
+        objdata = {}
+        objdata['mark'] = 'user_label'
+        objdata['user_label'] = user_label
+        objdata['channal_uuid'] = self.channal_uuid
+        jsonStr = json.dumps(objdata)
+        # logger.info('------jsonstr-----%s'%jsonStr)
+        rabbitmq.rabbitmqClint(jsonStr)
+
     def bot_flow(self, input):
-        print '---------2--------------------'
         startTime = time.time()
         create_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         dict = FlowHandler.flowHandler(input, self.caller_number, self.flow_id)
-        print '---------3--------------------'
         endTime = time.time()
         logger.error('Flow time .........: %s'%(endTime - startTime))
         jsonStr = json.dumps(dict)
@@ -150,6 +178,15 @@ class IVRBase(object):
             for item in dict['info']:
                 text = ''.join(item['output'])
                 logger.error('flow return text %s' % text)
+
+                # =====================新增 用户意向标签 需要存储数据库=====================================
+                if item.has_key('user_label'):
+                    user_label = item['user_label']
+                    print  ' start.... user_label .... %s'%user_label
+                    self.user_analysis(user_label)
+                    print  ' end.... user_label .... %s' % user_label
+                #==========================================================
+
                 if item['output_resource'] != '':
                     filename = "{0}".format(item['output_resource'])
                     path = self.bot_audio+filename
@@ -223,29 +260,51 @@ class IVRBase(object):
                 logger.error('......... self.is_hangup is True .........')
                 self.session.hangup()
 #--------------------------------xunfei   asr --------------------------------------------
+            # if cmp(flag, 'true') != 0:
+            #     startTime = time.time()
+            #     info = xunfei_asr.vc.getText(filename)
+            #     endTime = time.time()
+            #     logger.error("xunfei asr time  : %s " % (endTime - startTime))
+            #     if info['ret'] == 0:
+            #         input = ''.join(info['result'])
+            #         logger.error('xunfei asr result ---%s ' % input)
+            #         realy_file_path = filename.split('recordvoice')
+            #         self.record_chat_run('human', input, realy_file_path[1], create_at, self.fs_call_id, json.dumps(info))
+            #         self.bot_flow(input)#需要返回文本信息
+            #     else:
+            #         realy_file_path = filename.split('recordvoice')
+            #         self.record_chat_run('human', '', realy_file_path[1], create_at, self.fs_call_id,json.dumps(info))
+            #         self.bot_flow('')  # 需要返回文本信息
+            #         logger.info("......xunfei  asr ....error...........%s"%json.dumps(info))
+            # else:
+            #     logger.info('vad......没有检测到声音')
+            #     self.record_chat_run('human', '', '', create_at, self.fs_call_id, 'vad 没有检测到声音')
+            #     self.bot_flow('')  # 需要返回文本信息
+
             if cmp(flag, 'true') != 0:
                 startTime = time.time()
-                info = xunfei_asr.vc.getText(filename)
+                info = sino_asr.trans.asr_text(filename)
                 endTime = time.time()
-                logger.error("xunfei asr time  : %s " % (endTime - startTime))
+                logger.error("sino_asr asr time  : %s " % (endTime - startTime))
                 if info['ret'] == 0:
                     input = ''.join(info['result'])
-                    logger.error('xunfei asr result ---%s ' % input)
+                    logger.error('sino_asr asr result ---%s ' % input)
                     realy_file_path = filename.split('recordvoice')
-                    self.record_chat_run('human', input, realy_file_path[1], create_at, self.fs_call_id, json.dumps(info))
-                    self.bot_flow(input)#需要返回文本信息
+                    self.record_chat_run('human', input, realy_file_path[1], create_at, self.fs_call_id,
+                                         json.dumps(info))
+                    self.bot_flow(input)  # 需要返回文本信息
                 else:
                     realy_file_path = filename.split('recordvoice')
-                    self.record_chat_run('human', '', realy_file_path[1], create_at, self.fs_call_id,json.dumps(info))
+                    self.record_chat_run('human', '', realy_file_path[1], create_at, self.fs_call_id,
+                                         json.dumps(info))
                     self.bot_flow('')  # 需要返回文本信息
-                    logger.info("......xunfei  asr ....error...........%s"%json.dumps(info))
+                    logger.error("......sino_asr  asr ....is ERROR...........%s" % json.dumps(info))
             else:
-                logger.info('vad......没有检测到声音')
+                logger.error('vad......没有检测到声音')
                 self.record_chat_run('human', '', '', create_at, self.fs_call_id, 'vad 没有检测到声音')
                 self.bot_flow('')  # 需要返回文本信息
 
     def run(self):
-        print '---------0--------------------'
         self.session.answer()
         self.session.setVariable("set_audio_level", "write +2")
         self.caller_in_wav = self.human_audio+'%s_in_{0}_{1}.wav' % self.caller_number
@@ -254,11 +313,9 @@ class IVRBase(object):
         full_path = self.call_full_wav.format(self.__sessionId)
         self.session.setVariable("RECORD_STEREO", "true")
         self.session.execute("record_session", full_path)
-        #'/home/callcenter/recordvoice/{0}/all_audio/'
         realy_full_path = full_path.split('recordvoice')
         self.update_full_path(realy_full_path[1], self.channal_uuid)
         while self.session.ready():
-            print '---------1--------------------'
             self.bot_flow('你好')
             # self.IVR_app()
 
