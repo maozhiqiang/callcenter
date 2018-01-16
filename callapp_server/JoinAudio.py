@@ -4,13 +4,15 @@ import re
 import json
 import httplib
 import datetime
+import Config as conf
 from pydub import AudioSegment
 class VoiceTools(object):
     def __init__(self):
         self.index = 0
         self.rootPath = '/home/callcenter/recordvoice/{0}/bot_audio/{1}_out_{2}_{3}.wav'
         self.__sessionId = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
-        self.url = 'http://106.75.96.130:8090/synthesis'
+        # self.url = 'http://106.75.96.130:8090/synthesis'
+        self.url = conf.VOICE_URL
         self.headers = {"Content-type": "application/json", "Accept": "text/json"}
         self.conn = httplib.HTTPConnection('106.75.96.130:8090')
 

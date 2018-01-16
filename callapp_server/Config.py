@@ -55,3 +55,15 @@ rabbtimq_queue = 'durable'
 #======================xunfei asr ================================
 XUNFEI_URL = '117.121.21.146'
 #XUNFEI_URL = 'openapi.openspeech.cn'
+
+#======================声音合成 ===================================
+VOICE_URL = 'http://106.75.96.130:8090/synthesis'
+VOICE_PORT = 8089
+VOICE_HOST= '106.75.96.130'
+VOICE_CONN = '106.75.96.130:8089'
+
+
+
+
+
+
