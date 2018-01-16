@@ -53,8 +53,9 @@ class MQHandler(object):
             properties=pika.BasicProperties(content_type=self.content_type)
         )
         self.close_conn()
+mq = MQHandler(MQConstant.MQ_NAME,MQConstant.MQ_PWD,MQConstant.MQ_HOST,MQConstant.MQ_PORT,MQConstant.MQ_EXCHANGE,MQConstant.MQ_QUEUE)
 if __name__ == '__main__':
-    mq = MQHandler(MQConstant.MQ_NAME,MQConstant.MQ_PWD,MQConstant.MQ_HOST,MQConstant.MQ_PORT,MQConstant.MQ_EXCHANGE,MQConstant.MQ_QUEUE)
+    # mq = MQHandler(MQConstant.MQ_NAME,MQConstant.MQ_PWD,MQConstant.MQ_HOST,MQConstant.MQ_PORT,MQConstant.MQ_EXCHANGE,MQConstant.MQ_QUEUE)
     data = {}
     data['mark'] = 'sql_insert'
     data['sql_str'] = 'select * from fs_call'
