@@ -92,8 +92,8 @@ class IVRBase(object):
                 self.voice_type = data.voice_type
                 self.customer_info = data.info
             else:
-
-                pass
+                consoleLog("info", "current number_ %s ---- 是》》》》》合成任务,任务中没有此电话信息《《《《《 !! \n\n" % (self.caller_number))
+                self.session.hangup()
         else:
             consoleLog("info", "current number_ %s ---- 是 》》》》普通任务《《《《《 !! \n\n" % (self.caller_number))
 
