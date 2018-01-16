@@ -14,7 +14,7 @@ class VoiceTools(object):
         # self.url = 'http://106.75.96.130:8090/synthesis'
         self.url = conf.VOICE_URL
         self.headers = {"Content-type": "application/json", "Accept": "text/json"}
-        self.conn = httplib.HTTPConnection('106.75.96.130:8090')
+        self.conn = httplib.HTTPConnection(conf.VOICE_CONN)
 
     #list 交叉拼接
     def joinlist(self,list1,list2):
