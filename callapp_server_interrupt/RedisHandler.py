@@ -3,48 +3,20 @@
 import redis
 import Config as conf
 class RedisClient(object):
-    """Simple Queue with Redis Backend"""
-
     def __init__(self, name, namespace='aicyber', **redis_kwargs):
-        """The default connection parameters are: host='localhost', port=6379, db=0"""
         self.__db = redis.Redis(**redis_kwargs)
-        # self.__db.flushdb()
+        #self.__db.flushdb()
         self.key = '%s:%s' % (namespace, name)
         print '...redis...key: %s' % self.key
 
     def qsize(self):
-        """Return the approximate size of the queue."""
         return self.__db.llen(self.key)
 
     def empty(self):
-        """Return True if the queue is empty, False otherwise."""
         return self.qsize() == 0
 
     def put(self, item):
-        """Put item into the queue."""
         self.__db.rpush(self.key, item)
-#=======================setcache=============================
-    """
-            Set the value at key ``name`` to ``value``
-
-            ``ex`` sets an expire flag on key ``name`` for ``ex`` seconds.
-
-            ``px`` sets an expire flag on key ``name`` for ``px`` milliseconds.
-
-            ``nx`` if set to True, set the value at key ``name`` to ``value`` if it
-                does not already exist.
-
-            ``xx`` if set to True, set the value at key ``name`` to ``value`` if it
-                already exists.
-            """
-    #set(self, name, value, ex=None, px=None, nx=False, xx=False)
-    def setCache(self,name,value):
-        self.__db.setex()
-
-    # def getCache(self,name):
-    #     self.__db.get(s)
-
-# ===========================================================================
 
     def has_name(self,name):
         return self.__db.hexists(self.key,name)
@@ -69,50 +41,22 @@ class RedisClient(object):
         for k, v in dict.items():
             self.__db.hdel(self.key, k)
 # ===========================================================================
-
-    def get(self, block=True, timeout=None):
-        """Remove and return an item from the queue.
-
-        If optional args block is true and timeout is None (the default), block
-        if necessary until an item is available."""
-        if block:
-            item = self.__db.blpop(self.key, timeout=timeout)
-        else:
-            item = self.__db.lpop(self.key)
-        if item:
-            item = item[1]
-        return item
-
-    def delete_key(self):
-        self.__db.delete(self.key)
-
-    def get_nowait(self):
-        """Equivalent to get(False)."""
-        return self.get(False)
-
-    def remove_value_lrem(self, value):
-        """ 从队列中删除指定的value"""
-        print '....................remove: %s' % value
-        return self.__db.lrem(self.key, value)
-
-    def get_value_list(self, queueSize):
-        item_list = self.__db.lrange(self.key, 0, queueSize)
-        return item_list
 print '---REDIS_DB---',conf.REDIS_DB
-r = RedisClient(conf.REDIS_DB, host=conf.REDIS_HOST, password='aicyber', port=conf.REDIS_PORT, db=0)
+print '---redis_host--',conf.REDIS_HOST
+r = RedisClient(conf.REDIS_DB, host=conf.REDIS_HOST, password=conf.REDIS_PWD, port=conf.REDIS_PORT, db=0)
 if __name__ == '__main__':
 
 
-    # r.hset('uuid--0','15900282168')
-    # r.hset('uuid--1', '18002017665')
-    # r.hset('uuid--2', '13022297501')
-    # # #
-    # # print redis.hgetall()
+    r.hset('uuid--0','15900282168')
+    r.hset('uuid--1', '18002017665')
+    r.hset('uuid--2', '13022297501')
     # #
-    # map = r.hgetall()
-    # print type(map), map
-    # for k, v in map.items():
-    #     print k, v
+    # print redis.hgetall()
+    # #
+    map = r.hgetall()
+    print type(map), map
+    for k, v in map.items():
+        print k, v
     #     # redis.hremove(k)
     #
     #     # print redis.hgetall()
@@ -121,10 +65,7 @@ if __name__ == '__main__':
     # print r.hget('uuid--2')
 
     print '==================================='
-
-    # r.setCache('name','value132')
-    print r.hget('name')
-
+    print r.hget('uuid--1')
 
 
 

@@ -4,6 +4,7 @@ import os
 import wave
 import json
 import time
+import operator
 import Md5Utils
 import FlowHandler
 import datetime
@@ -15,12 +16,14 @@ from LogUtils import Logger
 import WebAPI as xunfei_asr
 import SinoVoice as sino_asr
 from pydub import AudioSegment
+import JoinAudio as VoiceTools
+import DBhandler as db
 
 reload(sino_asr)
 reload(voice_api)
 reload(xunfei_asr)
 reload(redis)
-
+reload(VoiceTools)
 logger = Logger()
 
 def hangup_hook(session, what):
@@ -64,6 +67,8 @@ class IVRBase(object):
         self.fs_call_id = session.getVariable(b"call_id")
         self.channal_uuid = session.getVariable(b"origination_uuid")
         self.caller_number = session.getVariable(b"caller_id_number")
+        self.voicesynthetic = session.getVariable(b"task_type")
+        self.task_id = session.getVariable(b"task_id")
         self.caller_in_wav = None
         self.caller_out_mp3 = None
         self.call_full_wav = None
@@ -77,6 +82,22 @@ class IVRBase(object):
         self.playbackaudio = None
         self.closedFlow()
         self.init_file_path()
+
+    def init_consumer_info(self):
+        if operator.eq(self.voicesynthetic,'synthesis'):
+            consoleLog("info", "current number_ %s ---- 是》》》》》合成任务《《《《《 !! \n\n" % (self.caller_number))
+            select_sql = " select * from fs_synthetic_task_info where number = '{0}'  and task_id = '{1}' "
+            print '[ ....init_consumer_info....:  %s]'%(select_sql.format(self.caller_number,self.task_id))
+            data = db.get_one_sql(select_sql.format(self.caller_number,self.task_id))
+            print '[---sql----]',data
+            if data != None:
+                self.voice_type = data.voice_type
+                self.customer_info = data.info
+            else:
+                consoleLog("info", "current number_ %s ---- 是》》》》》合成任务,任务中没有此电话信息《《《《《 !! \n\n" % (self.caller_number))
+                self.session.hangup()
+        else:
+            consoleLog("info", "current number_ %s ---- 是 》》》》普通任务《《《《《 !! \n\n" % (self.caller_number))
 
     def init_file_path(self):
         self.__sessionId = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
@@ -178,43 +199,87 @@ class IVRBase(object):
             for item in dict['info']:
                 text = ''.join(item['output'])
                 logger.error('flow return text %s' % text)
-
                 # =====================新增 用户意向标签 需要存储数据库=====================================
                 if item.has_key('user_label'):
                     user_label = item['user_label']
                     print  ' start.... user_label .... %s'%user_label
                     self.user_analysis(user_label)
-                    print  ' end.... user_label .... %s' % user_label
-                #==========================================================
-
-                if item['output_resource'] != '':
-                    filename = "{0}".format(item['output_resource'])
-                    path = self.bot_audio+filename
-                    logger.info('-------------playback  %s' % filename)
-                    self.playbackaudio = path # 放音文件路径
-                    realy_file_path = path.split('recordvoice')
-                    self.record_chat_run('bot', text, realy_file_path[1], create_at, self.fs_call_id, jsonStr)
-                    if item['session_end'] or item['flow_end']:
-                        self.is_hangup = True
-                    self.IVR_app()
-                else:
-                    ss_flag = self.flow_id+'_'+text
-                    ss_key = Md5Utils.get_md5_value(ss_flag)
-                    if item['session_end'] or item['flow_end']:
-                        self.is_hangup = True
-                    if text == None:
-                        self.record_chat_run('bot', '', '', create_at, self.fs_call_id, jsonStr)
-                        self.bot_flow('')
-                        logger.error('flow return  output is None ')
-                    elif redis.r.has_name(ss_key):
-                        filename = redis.r.hget(ss_key)
-                        logger.info('...... get-cache ........%s' % filename)
-                        self.playbackaudio = filename # 放音文件路径
-                        realy_file_path = filename.split('recordvoice')
+                # ============================.合成任务......start========================================'
+                if self.voicesynthetic == 'synthesis':
+                    list_voices = []
+                    if item['output_resource'] != '':
+                        for item_1 in item['output_resource'].split(','):
+                            path = self.bot_audio + item_1
+                            list_voices.append(path)
+                    list_text = VoiceTools.vt.screen_str(text)
+                    synthe_voices = []
+                    if len(list_text):
+                        for items in list_text:  # item 为要合成的文本
+                            ss_name = None
+                            if self.customer_info.has_key(items):
+                                ss_name = self.customer_info[items]
+                            md5_key = Md5Utils.get_md5_value(self.voice_type + ss_name)
+                            if redis.r.has_name(md5_key):
+                                filename = redis.r.hget(md5_key)
+                                synthe_voices.append(filename)
+                            else:
+                                filename = VoiceTools.vt.httpClient(self.voice_type, ss_name)
+                                synthe_voices.append(filename)
+                    logger.info('[====list_voices: %s====synthe_voices: %s]'%(list_voices,synthe_voices))
+                    if len(list_voices) and len(synthe_voices):
+                        result_list = VoiceTools.vt.joinlist(list_voices, synthe_voices)
+                        return_data = VoiceTools.vt.voicesynthetic(self.flow_id, self.caller_number, result_list)
+                        if return_data['success']:
+                            self.playbackaudio = return_data['path']  # 放音文件路径
+                            realy_file_path = return_data['path'].split('recordvoice')
+                            self.record_chat_run('bot', text, realy_file_path[1], create_at, self.fs_call_id,jsonStr)
+                            if item['session_end'] or item['flow_end']:
+                                self.is_hangup = True
+                            self.IVR_app()
+                    elif len(list_voices) == 1 and len(synthe_voices) == 0:
+                        filename = "{0}".format(item['output_resource'])
+                        path = self.bot_audio + filename
+                        logger.info('-------------playback  %s' % filename)
+                        self.playbackaudio = path  # 放音文件路径
+                        # self.session.execute("playback", path)
+                        realy_file_path = path.split('recordvoice')
                         self.record_chat_run('bot', text, realy_file_path[1], create_at, self.fs_call_id, jsonStr)
+                        if item['session_end'] or item['flow_end']:
+                            self.is_hangup = True
                         self.IVR_app()
                     else:
-                        self.playback_status_voice(text, jsonStr)
+                        consoleLog("info", "***** 匹配声音有无，结束当前电话，请查询声音是否设置合理!!*****\n\n")
+                        self.session.hangup()
+                # ============================ .普通任务 staring  ========================================'
+                else:
+                    if item['output_resource'] != '':
+                        filename = "{0}".format(item['output_resource'])
+                        path = self.bot_audio+filename
+                        logger.info('-------------playback  %s' % filename)
+                        self.playbackaudio = path # 放音文件路径
+                        realy_file_path = path.split('recordvoice')
+                        self.record_chat_run('bot', text, realy_file_path[1], create_at, self.fs_call_id, jsonStr)
+                        if item['session_end'] or item['flow_end']:
+                            self.is_hangup = True
+                        self.IVR_app()
+                    else:
+                        ss_flag = self.flow_id+'_'+text
+                        ss_key = Md5Utils.get_md5_value(ss_flag)
+                        if item['session_end'] or item['flow_end']:
+                            self.is_hangup = True
+                        if text == None:
+                            self.record_chat_run('bot', '', '', create_at, self.fs_call_id, jsonStr)
+                            self.bot_flow('')
+                            logger.error('flow return  output is None ')
+                        elif redis.r.has_name(ss_key):
+                            filename = redis.r.hget(ss_key)
+                            logger.info('...... get-cache ........%s' % filename)
+                            self.playbackaudio = filename # 放音文件路径
+                            realy_file_path = filename.split('recordvoice')
+                            self.record_chat_run('bot', text, realy_file_path[1], create_at, self.fs_call_id, jsonStr)
+                            self.IVR_app()
+                        else:
+                            self.playback_status_voice(text, jsonStr)
         else:
             logger.info('error.......Flow error: err_no   %s'%jsonStr)
             self.session.hangup()
@@ -253,56 +318,32 @@ class IVRBase(object):
                 logger.error("vad  time  : %s " % (endTime - startTime))
             except Exception as e:
                 consoleLog("info", "error is : "+e.message+" \n")
-
             flag = self.session.getVariable(b"vad_timeout")
             logger.error('record file .....%s' % filename)
             if self.is_hangup :
                 logger.error('......... self.is_hangup is True .........')
                 self.session.hangup()
-#--------------------------------xunfei   asr --------------------------------------------
-            # if cmp(flag, 'true') != 0:
-            #     startTime = time.time()
-            #     info = xunfei_asr.vc.getText(filename)
-            #     endTime = time.time()
-            #     logger.error("xunfei asr time  : %s " % (endTime - startTime))
-            #     if info['ret'] == 0:
-            #         input = ''.join(info['result'])
-            #         logger.error('xunfei asr result ---%s ' % input)
-            #         realy_file_path = filename.split('recordvoice')
-            #         self.record_chat_run('human', input, realy_file_path[1], create_at, self.fs_call_id, json.dumps(info))
-            #         self.bot_flow(input)#需要返回文本信息
-            #     else:
-            #         realy_file_path = filename.split('recordvoice')
-            #         self.record_chat_run('human', '', realy_file_path[1], create_at, self.fs_call_id,json.dumps(info))
-            #         self.bot_flow('')  # 需要返回文本信息
-            #         logger.info("......xunfei  asr ....error...........%s"%json.dumps(info))
-            # else:
-            #     logger.info('vad......没有检测到声音')
-            #     self.record_chat_run('human', '', '', create_at, self.fs_call_id, 'vad 没有检测到声音')
-            #     self.bot_flow('')  # 需要返回文本信息
-
-            if cmp(flag, 'true') != 0:
-                startTime = time.time()
-                info = sino_asr.trans.asr_text(filename)
-                endTime = time.time()
-                logger.error("sino_asr asr time  : %s " % (endTime - startTime))
-                if info['ret'] == 0:
-                    input = ''.join(info['result'])
-                    logger.error('sino_asr asr result ---%s ' % input)
-                    realy_file_path = filename.split('recordvoice')
-                    self.record_chat_run('human', input, realy_file_path[1], create_at, self.fs_call_id,
-                                         json.dumps(info))
-                    self.bot_flow(input)  # 需要返回文本信息
-                else:
-                    realy_file_path = filename.split('recordvoice')
-                    self.record_chat_run('human', '', realy_file_path[1], create_at, self.fs_call_id,
-                                         json.dumps(info))
-                    self.bot_flow('')  # 需要返回文本信息
-                    logger.error("......sino_asr  asr ....is ERROR...........%s" % json.dumps(info))
             else:
-                logger.error('vad......没有检测到声音')
-                self.record_chat_run('human', '', '', create_at, self.fs_call_id, 'vad 没有检测到声音')
-                self.bot_flow('')  # 需要返回文本信息
+                if cmp(flag, 'true') != 0:
+                    startTime = time.time()
+                    info = sino_asr.trans.asr_text(filename)
+                    endTime = time.time()
+                    logger.error("sino_asr asr time  : %s " % (endTime - startTime))
+                    if info['ret'] == 0:
+                        input = ''.join(info['result'])
+                        logger.error('sino_asr asr result ---%s ' % input)
+                        realy_file_path = filename.split('recordvoice')
+                        self.record_chat_run('human', input, realy_file_path[1], create_at, self.fs_call_id,json.dumps(info))
+                        self.bot_flow(input)  # 需要返回文本信息
+                    else:
+                        realy_file_path = filename.split('recordvoice')
+                        self.record_chat_run('human', '', realy_file_path[1], create_at, self.fs_call_id,json.dumps(info))
+                        self.bot_flow('')  # 需要返回文本信息
+                        logger.error("......sino_asr  asr ....is ERROR...........%s" % json.dumps(info))
+                else:
+                    logger.error('vad......没有检测到声音')
+                    self.record_chat_run('human', '', '', create_at, self.fs_call_id, 'vad 没有检测到声音')
+                    self.bot_flow('')  # 需要返回文本信息
 
     def run(self):
         self.session.answer()
