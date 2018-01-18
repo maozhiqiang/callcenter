@@ -38,22 +38,28 @@ class Proxy(object):
         number = str(item.cust_number)
         flow_id = str(item.flow_id)
         user_id = item.user_id
+        is_interrupt = item.is_interrupt
         is_success = self.fs_api(uuid=uuid, number=number, task_id=task_id, flow_id=flow_id,call_id=call_id,
-                                 host_id=self.host_id,gateway='sofia/gateway/{0}'.format(self.gateway),user_id = user_id)
+                                 host_id=self.host_id,gateway='sofia/gateway/{0}'.format(self.gateway),user_id = user_id,is_interrupt=is_interrupt)
         logger.error('[  call is_success = %s ]'%is_success)
 
-    def fs_api(self, uuid, number, task_id, flow_id,call_id, host_id, gateway,user_id):
+    def fs_api(self, uuid, number, task_id, flow_id,call_id, host_id, gateway,user_id,is_interrupt):
         if not gateway:
             gateway = 'sofia/gateway/gw1'
         if self.conn.connected:
             channel_vars = 'ignore_early_media=true,absolute_codec_string=g729,' \
                            'origination_uuid=%s,task_id=%s,flow_id=%s,call_back=false,call_id=%s,host_id=%s,is_test=%s,user_id=%s' % \
                            (uuid, task_id, flow_id,call_id, host_id, '1',user_id)
-            command = "originate {%s}%s/%s &python(callappv2.Bot)" % (channel_vars, gateway, number)
+            logger.info('[-------is_interrupt: %s----]' % is_interrupt)
+            if is_interrupt:
+                command = "originate {%s}%s/%s &python(callappv3.Bot)" % (channel_vars, gateway, number)
+            else:
+                command = "originate {%s}%s/%s &python(callappv2.Bot)" % (channel_vars, gateway, number)
             logger.error('Invoke fs api:\n%s' % command)
             print '[********************************] ',self.ip
             print '[********************************] ', self.conn.connected()
-            self.conn.bgapi(command)
+            ss = self.conn.bgapi(command)
+            logger.info('***bgapi return ** %s\n\n'% ss.serialize('json'))
             try:
                time_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
                db.update_sql(update_call_sql.format(time_at,uuid))
