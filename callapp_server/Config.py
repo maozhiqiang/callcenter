@@ -12,7 +12,7 @@ server=""
 server_url = ""
 #=====================Flow Config start==========================
 #start flow 117.50.8.27  106.75.61.164
-flow_host = '117.50.8.27'
+flow_host = '192.168.2.172'
 flow_port = 80
 flow_url = "/flow/execute.do"
 #closeflow
@@ -31,20 +31,20 @@ REDIS_PORT = 6379
 #REDIS_HOST = '10.165.51.223'#'121.42.36.138'
 # REDIS_HOST = '10.31.92.12'#''118.190.166.134
 # REDIS_HOST = 'r-2zed20375a600494.redis.rds.aliyuncs.com' #'aliyun'
-REDIS_HOST = '121.42.36.138' #'aliyun'
-REDIS_PWD = 'aicyber'
+REDIS_HOST = 'r-2zedef66ce0a0124.redis.rds.aliyuncs.com' #'aliyun'
+REDIS_PWD = 'MyAicyber201415926'
 
 
 #======================postgresql================================
 #POSTGRESQL_HOST = "192.168.0.183" #要链接的服务器的IP地址，local-IP
-POSTGRESQL_HOST = "10.165.51.223" #要链接的服务器的IP地址，Server-IP 138 web
-POSTGRESQL_PORT = 5432 #postgresql端口号，安装postgresql时设置的，一般默认是5432
-POSTGRESQL_NAME = "postgres" #数据库名称
+POSTGRESQL_HOST = "rm-2zeeq8wu95hbrl2gm.pg.rds.aliyuncs.com" #要链接的服务器的IP地址，Server-IP 138 web
+POSTGRESQL_PORT = 3433 #postgresql端口号，安装postgresql时设置的，一般默认是5432
+POSTGRESQL_NAME = "call_crm" #数据库名称
 POSTGRESQL_USERNAME = "postgres" #用户名，这里的用户名也是在安装postgresql时设置的，一般默认postgres
-POSTGRESQL_PASSWORD = "z8asuidn" #链接数据库服务器的密码，安装时设置，安装完毕后可以修改的
+POSTGRESQL_PASSWORD = "Z8asuidn" #链接数据库服务器的密码，安装时设置，安装完毕后可以修改的
 
 #====================rebbitmq=====================================
-rabbitmq_server = '127.0.0.1'
+rabbitmq_server = '192.168.2.179'
 rabbtimq_port = 5672
 rabbitmq_user = 'admin'
 rabbit_password = '123123'
@@ -57,10 +57,10 @@ XUNFEI_URL = '117.121.21.146'
 #XUNFEI_URL = 'openapi.openspeech.cn'
 
 #======================声音合成 ===================================
-VOICE_URL = 'http://106.75.96.130:8090/synthesis'
+VOICE_URL = 'http://47.94.156.150:8090/synthesis'
 VOICE_PORT = 8089
-VOICE_HOST= '106.75.96.130'
-VOICE_CONN = '106.75.96.130:8089'
+VOICE_HOST= '47.94.156.150'
+VOICE_CONN = '47.94.156.150:8089'
 
 
 

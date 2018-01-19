@@ -74,8 +74,9 @@ class IVRBase(object):
         self.call_full_wav = None
         self.text = None
         self.record_fpath = None
-        self.customer_info = None
         self.create_at = None
+        self.customer_info = None
+        self.voice_type = None
         self.human_audio = '/home/callcenter/recordvoice/{0}/human_audio/'
         self.all_audio = '/home/callcenter/recordvoice/{0}/all_audio/'
         self.bot_audio = '/home/callcenter/recordvoice/{0}/bot_audio/'
@@ -96,7 +97,7 @@ class IVRBase(object):
                 consoleLog("info", "current number_ %s ---- 是》》》》》合成任务,任务中没有此电话信息《《《《《 !! \n\n" % (self.caller_number))
                 self.session.hangup()
         else:
-            consoleLog("info", "current number_ %s ---- 是 》》》》普通任务《《《《《 !! \n\n" % (self.caller_number))
+            print "info", "current number_ %s ---- 是 》》》》普通任务《《《《《 !! \n\n" % (self.caller_number)
 
     def init_file_path(self):
         self.__sessionId = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
