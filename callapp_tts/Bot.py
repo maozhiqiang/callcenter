@@ -96,8 +96,8 @@ class IVRBase(object):
                 self.voice_type = data.voice_type
                 self.customer_info = data.info
             else:
-
-                pass
+                consoleLog("info", "current number_ %s ---- 是》》》》》合成任务,任务中没有此电话信息《《《《《 !! \n\n" % (self.caller_number))
+                self.session.hangup()
         else:
             consoleLog("info", "current number_ %s ---- 是 》》》》普通任务《《《《《 !! \n\n" % (self.caller_number))
 
@@ -117,7 +117,7 @@ class IVRBase(object):
 
     def closedFlow(self):
         try:
-            print '---caller_number---*%s*flow_id*%s***channal_uuid**%s-----'%(self.caller_number,self.flow_id, self.channal_uuid)
+            logger.info('---caller_number: %s----flow_id:  %s-----channal_uuid: %s-----'%(self.caller_number,self.flow_id, self.channal_uuid))
             FlowHandler.closeFlow(self.caller_number,self.flow_id, self.channal_uuid)
             consoleLog("info", "*****FlowHandler.closeFlow!!*****\n\n")
         except Exception as e:
@@ -190,7 +190,6 @@ class IVRBase(object):
 
 
     def bot_flow(self, input):
-        print '******************',input
         startTime = time.time()
         create_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         dict = FlowHandler.flowHandler(input, self.caller_number, self.flow_id)
@@ -205,7 +204,7 @@ class IVRBase(object):
                     user_label = item['user_label']
                     print  ' start.... user_label .... %s' % user_label
                     self.user_analysis(user_label)
-                #....................合成任务......start...............................'
+                #============================.合成任务......start========================================'
                 if self.voicesynthetic == 'synthesis':
                     list_voices = []
                     if item['output_resource'] != '':
@@ -249,7 +248,7 @@ class IVRBase(object):
                         self.session.hangup()
                     if item['session_end'] or item['flow_end']:
                         self.session.hangup()
-                #....................合成任务......end...............................'
+                # ============================.合成任务......end========================================'
                 else:
                     if item['output_resource'] != '':
                         filename = "{0}".format(item['output_resource'])
@@ -297,9 +296,7 @@ class IVRBase(object):
             self.session.hangup()
 
     def IVR_app(self):
-        print '[------------a4-------------]'
         while self.session.ready():
-            print '[------------a5-------------]'
             startTime = time.time()
             create_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
             filename = self.caller_in_wav.format(self.in_count, self.__sessionId)
