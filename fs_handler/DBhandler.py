@@ -61,7 +61,7 @@ def is_valid_date(str):
     return True
   except:
     return False
-if __name__ == '__main__':
+# if __name__ == '__main__':
     # # sql = "select * from fs_call where channal_uuid = 'b86e58df-3af7-40d4-be71-3c934a95e9fe'"
     # sql = "select  fs_call.answer_at,fs_call.finish_at,fs_call.task_id,task.user_id " \
     #       "from fs_call left join fs_task as task on fs_call.task_id = task.id " \
@@ -69,17 +69,19 @@ if __name__ == '__main__':
     # sql =  " update fs_user set call_minute = call_minute - {0} where id = {1} "
     # sql = sql.format(1,12)
     # info = update_sql(sql)
-    # print info
+    # # print info
+    # #
+    # sql = 'select * from fs_host where id = 2  and  state in (1,2)'
+    # result = get_one_sql(sql)
+    # print result
+    # # result = get_all_sql(sql)
+    # print  len(result)
     #
-    sql = 'select * from fs_host'
-    result = get_all_sql(sql)
-    print  len(result)
-
-    for item in result:
-        print item.city
-        print 50*'--'
-        # for key in item.items():
-        #     print key[0]+':'+str(key[1])
+    # for item in result:
+    #     print item.city
+    #     print 50*'--'
+    #     # for key in item.items():
+    #     #     print key[0]+':'+str(key[1])
 
 
 
