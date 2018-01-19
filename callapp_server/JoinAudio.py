@@ -71,18 +71,20 @@ class VoiceTools(object):
 
 
 vt = VoiceTools()
-if __name__ == '__main__':
-    import time
-    import Md5Utils
+# if __name__ == '__main__':
+#     import time
+#     import Md5Utils
 
     # md5_key = Md5Utils.get_md5_value( + )
 
 
 
-
-
+    #
+    # ll = [u'/home/callcenter/recordvoice/510128e9637e26a06e58f9dc263b7f9b/bot_audio/3.wav']
+    # lk = ['/home/callcenter/recordvoice/tts_wavs/c391cf0035c5634baa828f974c047d9d.wav']
+    # print vt .joinlist(ll,lk)
     # start = time.time()
-    print  vt.httpClient('xiaolin','中信案例看价位')
+    # print  vt.httpClient('xiaolin','中信案例看价位')
     # endt = time.time() - start
     # print endt
     #
