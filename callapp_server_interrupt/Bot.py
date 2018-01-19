@@ -84,6 +84,7 @@ class IVRBase(object):
         self.playbackaudio = None
         self.closedFlow()
         self.init_file_path()
+        self.init_consumer_info()
 
     def init_consumer_info(self):
         if operator.eq(self.voicesynthetic,'synthesis'):
