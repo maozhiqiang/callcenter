@@ -74,6 +74,7 @@ class IVRBase(object):
         self.call_full_wav = None
         self.text = None
         self.record_fpath = None
+        self.customer_info = None
         self.create_at = None
         self.human_audio = '/home/callcenter/recordvoice/{0}/human_audio/'
         self.all_audio = '/home/callcenter/recordvoice/{0}/all_audio/'
@@ -124,6 +125,7 @@ class IVRBase(object):
     def get_voice_wav(self, text, filename):
         r = voice_api.bc.tts(text, filename)
         if r == 0:
+            print '---------converTowav------------'
             wavfilename = self.converTowav(filename)
             return wavfilename
         else:
