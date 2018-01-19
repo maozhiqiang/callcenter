@@ -82,6 +82,7 @@ class IVRBase(object):
         self.bot_audio = '/home/callcenter/recordvoice/{0}/bot_audio/'
         self.closedFlow()
         self.init_file_path()
+        self.init_consumer_info()
 
     def init_consumer_info(self):
         if operator.eq(self.voicesynthetic,'synthesis'):
