@@ -9,7 +9,7 @@ import DBhandler as db
 from LogUtils import Logger
 
 logger = Logger()
-get_host_sql = " select * from fs_host  where state = 1"
+get_host_sql = " select * from fs_host  where state in [1,2] "
 get_call_sql = " select * from view_call_running "
 get_free_line_sql = " select (line_num-line_use) as rec from fs_host where id ={0} "
 chc_host_sql = " update fs_host set line_use = line_use + 1 where id = {0}"
