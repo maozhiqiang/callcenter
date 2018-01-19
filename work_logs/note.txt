@@ -1,0 +1,558 @@
+
+#===========================ucloud账号=====================================
+8406152@qq.com
+wcn810714
+#=========================================================================
+freeswitch 配置多用户
+
+#===========================网易云音乐=======================================
+netease-cloud-music
+============================阿里云服务器配置=================================
+带宽=包长度×每秒包数
+　　=包长度×（1/打包周期）
+　　=（Ethernet头+IP头+UDP头+RTP头+有效载荷）×（1/打包周期）
+　　=（208bit +160bit+64bit+96bit +有效载荷）×（1/打包周期）
+　　=（528bit+（打包周期(秒)×每秒的比特数））×（1/打包周期）
+　　=( 528 / 打包周期 ) + 每秒比特数
+　　按照上面的计算公式：
+　　G711：20ms打包，带宽为 ( 528/20 + 64) Kbit/s=90.4 Kbit/s
+　　G729：20ms打包，带宽为 ( 528/20 + 8 ) Kbit/s= 34.4 Kbit/s
+　　G723：5.3k，30ms打包，带宽为 ( 528/30 + 5.3 ) Kbit/s=22.9 Kbit/s
+
+  G711 实际占用带宽 每线90.4kbit/s 100线并发占用 9Mbps
+　　G729 实际占用带宽 每线34.4kbit/s 100线并发占用 3.4Mbps
+　　G723 实际占用带宽 每线22.9kbit/s 100线并发占用 2.2Mbps
+
+=====================================freeswitch ==========================================
+CPU： 1核    内存：2 GB
+1Mbps
+121.42.31.97(公)
+10.163.250.207(内)
+--------------------------------------------------------------------------------------
+=====================================web  服务器==========================================
+121.42.36.138
+root
+ubuntu330M
+
+callcenter 远程连接密码228996s
+
+121.42.36.138(公)
+10.165.51.223(内)
+
+============================ 中继网关========================================
+开启sip ：sofia global siptrace on
+
+SIP :115.29.208.158  端口5060  账号 28554400 密码293695jqrcs
+originate {ignore_early_media=true,origination_uuid=2d7b70fe-0771-430b-83fe-95cdd70f0b1b}sofia/gateway/gw1/15900282168 &python(callappv2.Bot)
+
+=====G729======
+originate {ignore_early_media=true,origination_uuid=3440b382-4a8d-4615-beaf-432c892a602f}sofia/gateway/gw1/18688867981 &python(callappv2.Bot)
+
+======================================redis 安装===================================
+1\ sudo wget http://download.redis.io/releases/redis-3.2.6.tar.gz
+sudo tar -zxvf redis-3.2.6.tar.gz
+会在当前目录下生成文件夹redis-3.2.6，我把它移动到了/usr/redis目录下：
+sudo apt-get install gcc
+sudo make
+sudo make install
+会安装到目录/usr/local/bin下：
+
+现在进入先前解压后得到的文件夹（我的在/usr/redis），
+复制配置文件redis.conf到/etc/redis/下，并用vi命令编辑该文件，
+将“daemonize no”修改为“daemonize yes”，即设置成作为后台进程运行，修改完成后保存退出。
+现在进入先前解压后得到的文件夹（我的在/usr/redis），复制配置文件redis.conf到/etc/redis/下，并用vi命令编辑该文件，将“daemonize no”修改为“daemonize yes”，即设置成作为后台进程运行，修改完成后保存退出。
+进入到/usr/local/bin目录下，执行命令：（默认端口6379）
+redis-server /etc/redis/redis.conf
+redis-cli -p 6379
+然后执行命令ping，若输出为pong，则证明服务成功启动
+修改Redis的配置
+使用Redis的访问账号
+默认情况下，访问Redis服务器是不需要密码的，为了增加安全性我们需要设置Redis服务器的访问密码。设置访问密码为redisredis。
+用vi打开Redis服务器的配置文件redis.conf
+
+~sudo vi /etc/redis/redis.conf
+
+#取消注释requirepass
+requirepass redisredis
+让Redis服务器被远程访问
+默认情况下，Redis服务器不允许远程访问，只允许本机访问，所以我们需要设置打开远程访问的功能。
+用vi打开Redis服务器的配置文件redis.conf
+~ sudo vi /etc/redis/redis.conf
+#注释bind
+#bind 127.0.0.1
+
+修改后，重启Redis服务器。
+~ sudo /etc/init.d/redis-server restart
+Stopping redis-server: redis-server.
+Starting redis-server: redis-server.
+
+
+/etc/init.d/redis-server stop
+/etc/init.d/redis-server start
+/etc/init.d/redis-server restart
+
+
+sudo redis-server /etc/redis.conf
+未使用密码登陆Redis服务器
+~ redis-cli
+redis 127.0.0.1:6379> keys *
+(error) ERR operation not permitted
+
+发现可以登陆，但无法执行命令了。
+登陆Redis服务器，输入密码
+~  redis-cli -a redisredis
+redis 127.0.0.1:6379> keys *
+登陆后，一切正常。
+====================================redis ====================================================
+
+=====================================rabbitMQ =====================
+sudo pip install pika
+启动rabbitmq web服务：
+2.远程访问rabbitmq:自己增加一个用户，步骤如下：
+l1.  创建一个admin用户：sudo rabbitmqctl add_user admin 123123
+l2.  设置该用户为administrator角色：sudo rabbitmqctl set_user_tags admin administrator
+l3.  设置权限：sudo rabbitmqctl  set_permissions  -p  '/'  admin '.' '.' '.'
+l4.  重启rabbitmq服务：sudo service rabbitmq-server restart
+之后就能用admin用户远程连接rabbitmq server了。
+
+sudo apt-get install rabbitmq-server
+
+chkconfig rabbitmq-server on
+service rabbitmq-server stop/start
+
+
+#systemctl status rabbitmq-server.service 查看mq 错误code
+显示队列：rabbitmqctl list_queues
+
+启动：sudo rabbitmq-server start
+关闭： sudo rabbitmq-server stop
+重启： sudo rabbitmq-server restart
+查看状态：sudo rabbitmqctl status
+
+==================================Djangoweb================================================
+在写 Fabric 脚本之前，我们先来回顾一下当我们在本地开发环境下更新了代码后，在服务器上的整个部署过程。
+远程连接服务器。
+进入项目根目录，从远程仓库拉取最新的代码。
+如果项目引入了新的依赖，需要执行 pip install -r requirement.txt 安装最新依赖。
+如果修改或新增了项目静态文件，需要执行 python manage.py collectstatic 收集静态文件。
+如果数据库发生了变化，需要执行 python manage.py migrate 迁移数据库。
+重启 Nginx 和 Gunicorn 使改动生效。
+整个过程就是这样，把每一步操作翻译成 Fabric 对应的脚本代码，这样一个自动化部署脚本就完成了。
+
+以树的形式展示文件目录：tree |grep -v default
+admin
+djanfo_10244587
+
+1- django-admin.py startproject mysite2
+2- cd mysite2
+   python manage.py startapp blog
+3- python manage.py migrate
+   python manage.py makemigrations
+
+4- app更新
+   python manage.py makemigrations blog
+   python manage.py migrate
+5- 起动django
+	python manage.py runserver
+
+6- uwsgi 服务部署project
+	uwsgi --http :8000 --module djangoweb.wsgi
+
+	uwsgi --http 127.0.0.1:8000 --chdir /mnt/gitwork/djangoweb --module wsgi_app --chmod-socket=666
+
+	uwsgi --ini my.ini
+
+7 nginx 起动、停止、重启
+	sudo ./nginx  -s start
+	sudo ./nginx  -s stop
+	sudo ./nginx  -s reload
+121.42.31.97   nginx  重启命令
+
+/usr/local/nginx/sbin# ./nginx
+
+
+
+==============================maven=======================
+
+执行maven编译：mvn install -Dmaven.test.skip=true
+
+sofia status profile internal reg
+bgapi originate {sip_invite_req_uri=sip:15900282168@36.106.189.170}user/1019 &&python(callappv2.Bot)
+
+
+<gateway name="gw1"/>
+        <param name="realm" value="115.29.208.158"/>
+        <param name="register-proxy" value="115.29.208.158"/>
+        <param name="username" value="28554400"/>
+        <param name="password" value="293695jqrcs"/>
+        <param name="register" value="true"/>
+        <param name="outbound-proxy" value="115.29.208.158"/>
+        <param name="expire-seconds" value="60"/>
+</gateway>
+
+<include>
+  <gateway name="gw1">
+        <param name="realm" value="115.29.208.158"/>
+        <param name="register" value="115.29.208.158"/>
+        <param name="username" value="28554400"/>
+        <param name="password" value="293695jqrcs"/>
+       <!--  <param name="realm" value="180.213.164.153"/>
+        <param name="proxy" value="180.213.164.153"/> -->
+  </gateway>
+</include>
+
+403744
+
+
+532615
+
+通过cat /etc/ssh/sshd_config 查看
+
+/etc/ssh/sshd_config
+PasswordAuthentication no
+# 说明：该参数默认启用，默认值为 yes
+如果需要修改相关策略配置，在继续之前建议进行文件备份。
+使用vi 
+等编辑器，将参数值设置为 yes
+或者整个删除或注释（在最开头添加 # 号）整行配置。比如：
+# PasswordAuthentication no
+使用如下指令重启SSH 服务
+/bin/systemctl restart sshd.service
+再次尝试登录服务器
+
+
+
+daiwei@aicyber.com
+daiwei198229
+
+28554401 293695jqrcs 中继线
+
+115.29.208.158  账号28554401--28554404 密码 293695jqrcs
+
+sofia profile external rescan reloadxml
+
+freeswitch -nonat -nc
+
+fs_cli -p Aicyber
+
+fs_cli -H 127.0.0.1 -P 8021
+=============================解锁被封IP================================
+ sudo fail2ban-client status sshd
+ sudo fail2ban-client set sshd unbanip 192.168.0.113
+
+===============================================================
+安装pydub
+sudo pip install pydub
+sudo apt-add-repository ppa:mc3man/trusty-media
+sudo apt-get update
+sudo apt-get install ffmpeg
+sudo apt-get install python-psycopg2
+
+#ubuntu  菜单栏变换位置
+  gsettings set com.canonical.Unity.Launcher launcher-position Bottom
+
+=================鼎鼎gateway=========================================
+
+<param name="realm" value="47.89.38.48:2221"/>
+<param name="register" value="false"/>
+
+#===================================nfs===ntfyk4tx================================
+step 1: sudo apt-get install nfs-kernel-server
+
+step 2:sudo nano /etc/exports
+	---->add---->
+	/home/callcenter/recordvois *(rw,sync,no_root_squash,no_subtree_check)
+step 3 :
+	sudo service rpcbind restart restart
+	sudo service nfs-server start
+	sudo service nfs-server status
+
+	sudo /etc/init.d/rpcbind restart
+	sudo /etc/init.d/nfs-kernel-server restart
+	showmount -e​
+
+step 4 :
+	子机上执行 sudo apt-get install nfs-common
+
+step 5 ：
+
+	sudo mount -t nfs 121.42.36.138:/home/callcenter/recordvoice /home/callcenter/recordvoice/    flowId/bot_audio/1.wav
+
+	***.***.***.***是NFS服务器的IP地
+
+ntfyk4tx
+
+=======================================================同步
+ssh -o StrictHostKeyChecking=no -o TCPKeepAlive=yes -o ServerAliveInterval=15 -o ServerAliveCountMax=3 -N -f -R 8000:localhost:8000 -l root 121.42.31.97 "uptime"
+
+ssh aicyber@IP
+密码 Aicyber2@17
+===================================压力测试======================================
+使用ab命令
+get请求---
+ab -n 1000 -c 300 http://xxxxxx/xxxxxx/xxxxx/api_test1/  表示请求1000次，并发量是300
+post 请求--
+ab -n 1 -c 1 -p f:/postdata.txt -T application/x-www-form-urlencoded "http://127.0.0.1/abpost"
+
+参数详解：
+-n 测试会话中所执行的请求个数,默认仅执行一个请求
+-c 一次产生的请求个数,即同一时间发出多少个请求,默认为一次一个
+-t 测试所进行的最大秒数,默认为无时间限制....其内部隐含值是[-n 50000],它可以使对服务器的测试限制在一个固定的总时间以内
+-p 包含了需要POST的数据的文件
+-T POST数据所使用的Content-type头信息
+-v 设置显示信息的详细程度
+-w 以HTML表格的形式输出结果,默认是白色背景的两列宽度的一张表
+-i 以HTML表格的形式输出结果,默认是白色背景的两列宽度的一张表
+-x 设置<table>属性的字符串,此属性被填入<table 这里>
+-y 设置<tr>属性的字符串
+-z 设置<td>属性的字符串
+-C 对请求附加一个Cookie行，其典型形式是name=value的参数对,此参数可以重复
+-H 对请求附加额外的头信息,此参数的典型形式是一个有效的头信息行,其中包含了以冒号分隔的字段和值的对(如"Accept-Encoding: zip/zop;8bit")
+-A HTTP验证,用冒号:分隔传递用户名及密码
+-P 无论服务器是否需要(即是否发送了401认证需求代码),此字符串都会被发送
+-X 对请求使用代理服务器
+-V 显示版本号并退出
+-k 启用HTTP KeepAlive功能,即在一个HTTP会话中执行多个请求,默认为不启用KeepAlive功能
+-d 不显示"percentage served within XX [ms] table"的消息(为以前的版本提供支持)
+-S 不显示中值和标准背离值,且均值和中值为标准背离值的1到2倍时,也不显示警告或出错信息,默认会显示最小值/均值/最大值等(为以前的版本提供支持)
+-g 把所有测试结果写入一个'gnuplot'或者TSV(以Tab分隔的)文件
+-e 产生一个以逗号分隔的(CSV)文件,其中包含了处理每个相应百分比的请求所需要(从1%到100%)的相应百分比的(以微妙为单位)时间
+-h 显示使用方法
+-k 发送keep-alive指令到服务器端
+=============================================================================================================================================
+
+
+select * from fs_call where call_status = 'calltry' and task_id =118;
+
+update fs_call set call_status = 'wait' where task_id = 118 and call_status = 'calltry'
+
+select * from fs_call where task_id = 123 limit 500
+
+============================最新技术===========================================================================================================
+kafka
+dubbo
+rest
+Solr
+============================ubuntu postgresql================================================================================================
+ucloud freeswitch : 106.75.47.65  ubuntu   ubuntu330M/aicyber123456
+
+postgresql: psql -U root -h 10.9.90.133 call  password:z8asuidnaicyber
+
+
+
+nexus 117.50.9.78
+
+#===================================VAD  参数说明==========================================================================================
+5 参数修改说明
+
+cmd = "200 600 {0} 6000 10000 100".format(filename)
+
+<min_speak_ms> <min_pause_ms> <recordfile> [<max_waiting_ms>] [max_recording_ms] [playfile] [play_retry]
+min_speak_ms  检测到声音多久就认为开始说话
+min_pause_ms 检测到静音多久就认为说话停止
+recordfile 录音文件名
+max_waiting_ms 最大等待时间，就是多久没检测到声音就退出。
+max_recording_ms 最大录音长途
+playfile 放音文件，不需要放音可以不设置这个参数。
+play_retry 重播次数， 不重播设置0
+
+通道变量
+vad_param_error 参数错误，最少需要 <min_speak_ms> <min_pause_ms> <recordfile> 3个参数
+vad_max_recording_time 录音时间超过 max_recording_ms ，说话还没停止。
+vad_timeout 等待超过 max_waiting_ms  还没开始说话
+vad_createrecordfile_error 创建录音文件失败
+
+#===============================宁波 中继线============================================================================================
+
+全国         01011028  VITEST    121.43.157.110  5060  30线
+南京线打江苏  02511028  VITEST    121.43.157.110  5060   30线
+sip:28554400@115.29.208.158:5060      REGED
+sip:28554401@115.29.208.158:6060      REGED
+sip:28554402@115.29.208.158:5060      REGED
+sip:28554403@115.29.208.158:5060      REGED
+sip:28554404@115.29.208.158:5060      REGED
+
+#================================韵声科技 中继线=======================================================================================
+AI-TEST AI-TEST-2017  221.239.37.51 5060
+
+#================================文源通信 中继线=======================================================================================
+WYTX22000107000 77KDMk4X  221.122.101.27 5060
+
+#================================深思维 中继线=======================================================================================
+
+
+
+#=================================freeswitch  高并发session=================================================================================================
+/usr/local/freeswitch/conf/autoload_configs/switch.conf.xml
+
+param name="sessions-per-second" value="30"/>  把30 改成1000
+
+
+
+#==============================nexus=========
+http://117.50.9.78:8081/nexus
+
+
+
+用户名：postgres
+密码：Z8asuidn
+
+端口号：3433
+rm-2zeeq8wu95hbrl2gm.pg.rds.aliyuncs.com
+
+
+#====================阿里云 api   freeswitch=============
+ssh root@39.106.166.177
+ubuntu330M
+
+
+RabbitMQ
+MQ并不是python内置的模块，而是一个需要你额外安装（ubunto可直接apt-get其余请自行百度。）的程序，安装完毕后可通过python中内置的pika模块来调用MQ发送或接收队列请求。接下来我们就看几种python调用MQ的模式（作者自定义中文形象的模式名称）与方法。
+
+ RabbitMQ设置远程链接账号密码
+启动rabbitmq web服务：
+2.远程访问rabbitmq:自己增加一个用户，步骤如下：
+l1.  创建一个admin用户：sudo rabbitmqctl add_user admin 123123
+l2.  设置该用户为administrator角色：sudo rabbitmqctl set_user_tags admin administrator
+l3.  设置权限：sudo rabbitmqctl  set_permissions  -p  '/'  admin '.' '.' '.'
+l4.  重启rabbitmq服务：sudo service rabbitmq-server restart
+之后就能用admin用户远程连接rabbitmq server了。
+
+
+originate {ignore_early_media=true,absolute_codec_string=g729,origination_uuid=c7be8d01-06c8-4598-9799-676acf976690,call_id=4,host_id=1,flow_id=f2d8d40117c3259e1325e938e1be5625,user_id=2,replace_data=,call_back=true}sofia/gateway/gw7/18522611368 &python(callappv2.Bot)
+
+
+
+sofia status profile internal reg
+
+
+sofia  status gateway gw1
+sofia profile internal rescan
+重新读取网关 可以先删除
+sofia profile external killgw gw1
+sofia profile external rescan
+指定某个网关立即向外注册或注销
+sofia profile external register gw1
+sofia profile external unregister gw1
+
+开启sip
+sofia profile internal siptrace on
+开启全局
+sofia global siptrace on
+sofia global siptrace on/off
+
+
+
+配置座席生效 reloadxml   fifo reparse
+
+
+
+
+动态添加座席
+fifo_member add user/1007
+fifo_member add user/1008
+
+删除座席
+fifo_member del user/1007
+
+
+
+postgresql   外网地址：rm-2zeeq8wu95hbrl2gmho.pg.rds.aliyuncs.com
+                       端口    ：3432
+                       用户名：postgres
+                       密码：Z8asuidn
+
+
+
+
+
+
+线路状态(0已禁用/1已启用/2正常/3异常)
+
+
+http://www.arterbang.com/platform/index.html#/survey
+wehelp 111111
+
+
+
+
+
+
+http://118.190.166.165:8080/static/dist/index.html
+
+单机：114.215.68.77:2202
+
+
+
+富力新城：139
+中昂：140
+鸿坤理想城：141
+新城樾风华:142
+141 142
+
+select * from fs_call  where task_id = 141  and call_status = 'calling'
+        update fs_call set call_status = null where task_id = 141 and call_status = 'calling'
+
+    select * from view_call_running
+
+    select * fs_task
+
+
+#========================================================================================================================
+                                                    阿里云 新环境
+                                         39.107.68.62    22    ubuntu330M
+                                         39.107.66.250   22    ubuntu330M
+辛诚：  101.200.182.141  Zhongshang2016
+
+freeswitch : 主  39.107.68.62        192.168.2.175(私有)
+             副  39.107.66.250        192.168.2.180(私有)
+
+web ：        39.107.68.127        192.168.2.173(私有)
+
+tomcat语料： 47.94.214.130        192.168.2.177(私有)
+
+runcall  : 39.107.70.84        192.168.2.178(私有)
+
+rabbitmq: 39.106.181.60    192.168.2.179(私有)
+
+nginx:    39.106.216.205    192.168.2.176(私有)
+
+neo4j  :   39.106.209.8        192.168.2.174(私有)
+
+flow :  39.107.69.88        192.168.2.172
+
+ann: 39.107.99.8         192.168.2.182
+
+redis: r-2zedef66ce0a0124.redis.rds.aliyuncs.com 密码：MyAicyber201415926
+
+mysql:
+内网地址:rm-2ze1kn468f78qv005.mysql.rds.aliyuncs.com	内网端口:3306
+外网地址:rm-2ze1kn468f78qv005jo.mysql.rds.aliyuncs.com	外网端口:3306
+
+用户名：aicyber
+密码：Aicyber201415926
+
+
+postgresql:
+内网地址:rm-2zeeq8wu95hbrl2gm.pg.rds.aliyuncs.com	内网端口:3433
+外网地址:rm-2zeeq8wu95hbrl2gmho.pg.rds.aliyuncs.com	外网端口:3432
+用户名：postgres
+密码：Z8asuidn
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

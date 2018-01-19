@@ -1,0 +1,64 @@
+
+===========================maven 安装=================================
+1、 下载
+    wget http://download.sonatype.com/nexus/oss/nexus-2.10.0-02-bundle.tar.gz
+2、 解压tar
+    tar zxvf nexus-2.10.0-02-bundle.tar.gz
+3、 修改配置文件nexus-2.12.0-01/conf/nexus.properties
+    # Sonatype Nexus
+    # ==============
+    # This is the most basic configuration of Nexus.
+
+
+    # Jetty section 端口默认为8081,可根据实际需要改为其他的。nexus-webapp-context-path=/nexus 可改为 nexus-webapp-context-path=/ ## 访问时直接ip:port（如 127.0.0.1:8081）即可访问。不改动情况下 ip:port/nexus（127.0.0.1:8081/nexus）访问。其他无须改动。
+    application-port=8081
+    application-host=0.0.0.0
+    nexus-webapp=${bundleBasedir}/nexus
+    nexus-webapp-context-path=/nexus
+
+
+    # Nexus section
+    nexus-work=${bundleBasedir}/../sonatype-work/nexus
+    runtime=${bundleBasedir}/nexus/WEB-INF
+
+4、修改配置文件  /home/nexus/nexus-2.12.0-01/bin/nexus
+
+    #-----------------------------------------------------------------------------
+    # These settings can be modified to fit the needs of your application
+
+
+    # Set this to the root of the Nexus installation
+    NEXUS_HOME="/home/nexus/nexus-2.12.0-01"
+
+
+    # If specified, the Wrapper will be run as the specified user.
+
+
+    # IMPORTANT - Make sure that the user has the required privileges to write into the Nexus installation directory.
+
+
+    # NOTE - This will set the user which is used to run the Wrapper as well as
+    #  the JVM and is not useful in situations where a privileged resource or
+    #  port needs to be allocated prior to the user being changed.
+    RUN_AS_USER=root
+
+5、修改配置文件 nexus-2.12.0-01/bin/jsw/conf/wrapper.conf
+   #把下面 wrapper.java.command=java 改为 wrapper.java.command=/usr/local/jdk1.8.0/bin/java 即可
+    #/usr/local/jdk1.8.0/bin/java为java的实际路径
+    # Set the JVM executable
+    # (modify this to absolute path if you need a Java that is not on the OS path)
+    wrapper.java.command=/usr/local/jdk1.8.0/bin/java
+
+
+6、添加用户和组
+    root@server:/home/nexus# groupadd nexus
+    root@server:/home/nexus# useradd nexus -g nexus -d /home/nexus -s /bin/sh
+    root@server:/home/nexus# chown -R nexus: /home/nexus/
+7、启动 nexus
+
+    root@server:/home/nexus# ./nexus-2.12.0-01/bin/nexus start
+    ****************************************
+    WARNING - NOT RECOMMENDED TO RUN AS ROOT
+    ****************************************
+    Starting Nexus OSS..
+    Started Nexus OSS.
