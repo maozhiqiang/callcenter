@@ -12,9 +12,9 @@ class VoiceTools(object):
         self.rootPath = '/home/callcenter/recordvoice/{0}/bot_audio/{1}_out_{2}_{3}.wav'
         self.__sessionId = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
         # self.url = 'http://106.75.96.130:8090/synthesis'
-        self.url = conf.VOICE_URL
+        self.url = 'http://192.168.1.181:8090/synthesis'
         self.headers = {"Content-type": "application/json", "Accept": "text/json"}
-        self.conn = httplib.HTTPConnection(conf.VOICE_CONN)
+        self.conn = httplib.HTTPConnection('192.168.2.181:8090')
 
     #list 交叉拼接
     def joinlist(self,list1,list2):
@@ -82,7 +82,7 @@ if __name__ == '__main__':
 
 
     # start = time.time()
-    # print  vt.httpClient('xiaolin','中信案例看价位')
+    print  vt.httpClient('xiaolin','中信案例看价位')
     # endt = time.time() - start
     # print endt
     #

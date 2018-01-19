@@ -57,10 +57,10 @@ XUNFEI_URL = '117.121.21.146'
 #XUNFEI_URL = 'openapi.openspeech.cn'
 
 #======================声音合成 ===================================
-VOICE_URL = 'http://47.94.156.150:8090/synthesis'
+VOICE_URL = 'http://192.168.2.181:8090/synthesis'
 VOICE_PORT = 8089
-VOICE_HOST= '47.94.156.150'
-VOICE_CONN = '47.94.156.150:8089'
+VOICE_HOST= '192.168.2.181'
+VOICE_CONN = '192.168.2.181:8090'
 
 
 
