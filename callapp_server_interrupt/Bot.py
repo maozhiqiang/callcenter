@@ -76,6 +76,8 @@ class IVRBase(object):
         self.is_hangup = False
         self.record_fpath = None
         self.create_at = None
+        self.customer_info = None
+        self.voice_type = None
         self.human_audio = '/home/callcenter/recordvoice/{0}/human_audio/'
         self.all_audio = '/home/callcenter/recordvoice/{0}/all_audio/'
         self.bot_audio = '/home/callcenter/recordvoice/{0}/bot_audio/'

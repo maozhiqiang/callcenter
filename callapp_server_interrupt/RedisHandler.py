@@ -41,31 +41,31 @@ class RedisClient(object):
         for k, v in dict.items():
             self.__db.hdel(self.key, k)
 # ===========================================================================
-print '---REDIS_DB---',conf.REDIS_DB
-print '---redis_host--',conf.REDIS_HOST
+# print '---REDIS_DB---',conf.REDIS_DB
+# print '---redis_host--',conf.REDIS_HOST
 r = RedisClient(conf.REDIS_DB, host=conf.REDIS_HOST, password=conf.REDIS_PWD, port=conf.REDIS_PORT, db=0)
-if __name__ == '__main__':
-
-
-    r.hset('uuid--0','15900282168')
-    r.hset('uuid--1', '18002017665')
-    r.hset('uuid--2', '13022297501')
-    # #
-    # print redis.hgetall()
-    # #
-    map = r.hgetall()
-    print type(map), map
-    for k, v in map.items():
-        print k, v
-    #     # redis.hremove(k)
-    #
-    #     # print redis.hgetall()
-    #     # print redis.hsize()
-    # print r.has_name('uuid--2')
-    # print r.hget('uuid--2')
-
-    print '==================================='
-    print r.hget('uuid--1')
+# if __name__ == '__main__':
+#
+#
+#     r.hset('uuid--0','15900282168')
+#     r.hset('uuid--1', '18002017665')
+#     r.hset('uuid--2', '13022297501')
+#     # #
+#     # print redis.hgetall()
+#     # #
+#     map = r.hgetall()
+#     print type(map), map
+#     for k, v in map.items():
+#         print k, v
+#     #     # redis.hremove(k)
+#     #
+#     #     # print redis.hgetall()
+#     #     # print redis.hsize()
+#     # print r.has_name('uuid--2')
+#     # print r.hget('uuid--2')
+#
+#     print '==================================='
+#     print r.hget('uuid--1')
 
 
 
