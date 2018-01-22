@@ -16,12 +16,15 @@ chc_host_sql = " update fs_host set line_use = line_use + 1 where id = {0}"
 update_call_sql = " update fs_call set call_status = 'trying' , queue_at = '{0}'  where channal_uuid = '{1}' "
 ahq_host_sql = " select * from fs_host where id = {0}  and  state in (1,2) "
 
+tenant_host_sql = " select * from fs_host where tenant_id = {0}  and  state in (1,2)"
+
 # 呼叫管理
 class CallManager(object):
     #初始化，加载host
     def __init__(self):
         self.list_num = 0
         self.flg = True
+        self.mark = False
     #执行轮询进程，获取要拨打的电话号码
     def process(self):
         if self.flg:
@@ -30,29 +33,48 @@ class CallManager(object):
             self.list_num = len(list_call_number)
             if len(list_call_number) > 0:
                 self.flg = False
-                logger.debug('[ %s   list_call_number count is ....%s.....flg....%s]'%(time_at,self.list_num,self.flg))
+                logger.info('[ %s   list_call_number count is ....%s.....flg....%s]'%(time_at,self.list_num,self.flg))
             for item in list_call_number:
                 self.list_num = self.list_num-1
                 print ('[ for in -- self.list_num is ].....%s'%self.list_num)
-                host_id = item.host_id
-                self.prepare_call(item,host_id)
+                tenant_id = item.tenant_id
+                print '...tenant_id...',tenant_id
+                is_interrupt = item.is_interrupt
+                list_host = db.get_all_sql(tenant_host_sql.format(tenant_id))
+                print '...list_host...', list_host
+                if list_host != None :
+                    for line in list_host:
+                        #如果是可打断
+                        if is_interrupt and line.is_interrupt  and int(line.line_num - line.line_use)>0:
+                            self.prepare_call(item, line.id)
+                            break
+                        elif is_interrupt != True  and int(line.line_num - line.line_use)>0:
+                            self.prepare_call(item, line.id)
+                            break
+                        else:
+                            continue
             self.flg = True
 
     def prepare_call(self, item, host_id):
         #这里修改成 每次根据host_id 查询host数据,判断线路是否可用
-        host = db.get_one_sql(ahq_host_sql.format(host_id))
-        if host:
-            conn = ESL.ESLconnection(host.gateway_ip, 8021, 'Aicyber')
-            if conn.connected():
-                num = db.get_one_sql(get_free_line_sql.format(host_id))
-                if num <=0:#没有可用线路数
-                    logger.info('没有可用线路了excute [sql]: %s __ rresult: %s]\n\n'%(get_free_line_sql.format(host_id),num))
-                    return False
-                else:#有富余线路数,执行拨打电话
-                    self.calling(item,host,conn)
-            else:
-                conn_status = 'success' if conn.connected() else 'fail'
-                print('Connect fs host: %s:%d  status = %s' % (host.gateway_ip, 8021, conn_status))
+        print '....host_id------,',host_id
+        try:
+            host = db.get_one_sql(ahq_host_sql.format(host_id))
+            if host:
+                conn = ESL.ESLconnection(host.gateway_ip, 8021, 'Aicyber')
+                if conn.connected():
+                    num = db.get_one_sql(get_free_line_sql.format(host_id))
+                    if num <= 0:  # 没有可用线路数
+                        logger.info(
+                            '没有可用线路了excute [sql]: %s __ rresult: %s]\n\n' % (get_free_line_sql.format(host_id), num))
+                        return False
+                    else:  # 有富余线路数,执行拨打电话
+                        self.calling(item, host, conn)
+                else:
+                    conn_status = 'success' if conn.connected() else 'fail'
+                    print('Connect fs host: %s:%d  status = %s' % (host.gateway_ip, 8021, conn_status))
+        except Exception as e:
+            print e
 
     def calling(self, item,host,conn):
         if not host.gateway_name:
@@ -61,8 +83,8 @@ class CallManager(object):
             gateway = 'sofia/gateway/{0}'.format(host.gateway_name)
         if conn.connected:
             channel_vars = 'ignore_early_media=true,absolute_codec_string=g729,' \
-                           'origination_uuid=%s,task_id=%s,flow_id=%s,call_back=false,call_id=%s,host_id=%s,is_test=%s,user_id=%s' % \
-                           (str(item.channal_uuid),item.task_id, str(item.flow_id),item.id,host.id, '1',item.user_id)
+                           'origination_uuid=%s,task_id=%s,flow_id=%s,call_back=false,call_id=%s,host_id=%s,is_test=%s,user_id=%s,task_type=%s' % \
+                           (str(item.channal_uuid),item.task_id, str(item.flow_id),item.id,host.id, '1',item.user_id,item.task_type)
             logger.info('[-------is_interrupt: %s----]' % item.is_interrupt)
             if item.is_interrupt:
                 command = "originate {%s}%s/%s &python(callappv3.Bot)" % (channel_vars, gateway, str(item.cust_number))

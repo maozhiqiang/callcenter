@@ -61,8 +61,8 @@ def is_valid_date(str):
     return True
   except:
     return False
-# if __name__ == '__main__':
-    # # sql = "select * from fs_call where channal_uuid = 'b86e58df-3af7-40d4-be71-3c934a95e9fe'"
+if __name__ == '__main__':
+    sql = "select * from fs_call where channal_uuid = 'b86e58df-3af7-40d4-be71-3c934a95e9fe'"
     # sql = "select  fs_call.answer_at,fs_call.finish_at,fs_call.task_id,task.user_id " \
     #       "from fs_call left join fs_task as task on fs_call.task_id = task.id " \
     #       "where channal_uuid = 'b86e58df-3af7-40d4-be71-3c934a95e9fe'"
