@@ -221,6 +221,11 @@ class IVRBase(object):
                             if self.customer_info.has_key(items):
                                 ss_name = self.customer_info[items]
                                 print '[-----ss_name------]', ss_name
+                            else:
+                                consoleLog("info", "current number_ %s 》》》》》合成任务,查询数据库中没有此变量%s《《《《《 !! \n\n" % (
+                                self.caller_number,items))
+                                self.session.hangup()
+                                return
                             md5_key = Md5Utils.get_md5_value(self.voice_type + ss_name)
                             print '[.......%s....]' % md5_key
                             if redis.r.has_name(md5_key):
@@ -238,8 +243,10 @@ class IVRBase(object):
                         return_data = VoiceTools.vt.voicesynthetic(self.flow_id, self.caller_number, result_list)
                         # print '[*****2******]', return_data
                         if return_data['success']:
+                            print '*********************%s'%return_data['path']
                             self.session.execute("playback", return_data['path'])  # 播放声音文件
                             realy_file_path = return_data['path'].split('recordvoice')
+                            #/home/callcenter/recordvoice/0127a3343a50c2c40ffb25c68e460dc2/bot_audio/1.wav
                             self.record_chat_run('bot', text, realy_file_path[1], create_at, self.fs_call_id, jsonStr)
                     elif len(list_voices) == 1 and len(synthe_voices) == 0:
                         filename = "{0}".format(item['output_resource'])
