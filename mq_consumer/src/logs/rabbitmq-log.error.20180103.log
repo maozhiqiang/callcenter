@@ -1,0 +1,69 @@
+2018-01-03 13:51:40,083 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "["
+LINE 1:  update fs_customer set label = [5, 6, 7, 8] where number = ...
+                                        ^
+ 
+2018-01-03 13:52:19,551 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "["
+LINE 1:  update fs_customer set label = [5, 6, 7, 8] where number = ...
+                                        ^
+ 
+2018-01-03 13:52:47,877 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "["
+LINE 1:  update fs_customer set label = [5, 6, 7, 8] where number = ...
+                                        ^
+ 
+2018-01-03 13:55:05,403 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "["
+LINE 1:  update fs_customer set label = set([8, 9, 5, 6, 7]) where n...
+                                            ^
+ 
+2018-01-03 13:55:29,733 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "["
+LINE 1:  update fs_customer set label = set(['5', '6']) where number...
+                                            ^
+ 
+2018-01-03 13:57:50,563 - LogUtils.py[line:120] - ERROR: runsql exception error column "label" is of type character varying[] but expression is of type record
+LINE 1:  update fs_customer set label = ('6', '5') where number = '1...
+                                        ^
+HINT:  You will need to rewrite or cast the expression.
+ 
+2018-01-03 14:01:06,461 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "{"
+LINE 1:  update fs_customer set label = {99,66} where number = '1313...
+                                        ^
+ 
+2018-01-03 14:01:20,507 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "["
+LINE 1:  update fs_customer set label = set([66, 99]) where number =...
+                                            ^
+ 
+2018-01-03 14:10:36,609 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "["
+LINE 1:  update fs_customer set label = [1, 2] where number = '13132...
+                                        ^
+ 
+2018-01-03 14:10:57,918 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "{"
+LINE 1:  update fs_customer set label = {1,2} where number = '131322...
+                                        ^
+ 
+2018-01-03 14:12:31,669 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "["
+LINE 1:  update fs_customer set label = [1 2] where number = '131322...
+                                        ^
+ 
+2018-01-03 14:13:01,617 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "["
+LINE 1:  update fs_customer set label = [[1 2]
+                                        ^
+ 
+2018-01-03 14:13:25,769 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "["
+LINE 1:  update fs_customer set label = [['123' '2312']] where numbe...
+                                        ^
+ 
+2018-01-03 14:13:45,130 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "["
+LINE 1:  update fs_customer set label = [array(['123', '2312'], 
+                                        ^
+ 
+2018-01-03 14:14:37,022 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "["
+LINE 1:  update fs_customer set label = ['123', '2312'] where number...
+                                        ^
+ 
+2018-01-03 15:11:13,572 - LogUtils.py[line:120] - ERROR: runsql exception error type "u" does not exist
+LINE 1:  update fs_customer set label = array[u'\u5173\u6ce8\u533b\u...
+                                              ^
+ 
+2018-01-03 15:12:03,461 - LogUtils.py[line:120] - ERROR: runsql exception error type "u" does not exist
+LINE 1:  update fs_customer set label = array[u'\u5173\u6ce8\u533b\u...
+                                              ^
+ 

@@ -52,7 +52,7 @@ def callback(ch, method, properties, body):
         sentences = []
         for item in result:
             sentences.append(item.text)
-        print ' [ list_sentens ...%s ] '%sentences
+        logger.info(' [ list_sentens ...%s ] '%sentences)
         httpseverclient(dict['flow_id'],sentences,dict['number'],dict['task_id'],dict['user_id'])
     elif dict['mark'] == 'update':
         sql = "update fs_call set full_record_fpath ='{0}' where channal_uuid ='{1}'".format(dict['record_fpath'],dict['channal_uuid'] )
@@ -87,18 +87,20 @@ def httpseverclient(flow_id,sentences,number,task_id,user_id):
             if dict['successful'] and  len(dict['data'])> 0:
                 try:
                     list_data = db.get_one_sql(sql_select.format(number, user_id))
-                    print '[******list_data*******]',sql_select.format(number, user_id)
+                    logger.info('[******list_data: %s *******]'% sql_select.format(number, user_id))
                     if list_data :
                         for item in dict['data']:
                             db.run_insert_sql(sql_log.format(task_id, flow_id, item['sentence'], item['word'], item['key_word'],item['label'], item['similarity'], create_at))
                             print sql_log.format(task_id, flow_id, item['sentence'], item['word'], item['key_word'],params, item['similarity'], create_at)
                             if item['label'] in list_data.label:
-                                print ' %s 在fs_consumer 的%s __ %s 中已经存在 '%(item['label'],number,user_id)
+                                # print ' %s 在fs_consumer 的%s __ %s 中已经存在 '%(item['label'],number,user_id)
+                                logger.info(' %s 在fs_consumer 的%s __ %s 中已经存在 '%(item['label'],number,user_id))
                                 continue
                             else:
                                 params = "{" + item['label'] + '}'
                                 db.run_update_sql(sql_update.format(params, number, user_id))
-                                print '-------fs_consumer----label  ------',sql_update.format(params, number, user_id)
+                                logger.info('-------fs_consumer----label  ------%s'% sql_update.format(params, number, user_id))
+                                # print '-------fs_consumer----label  ------',sql_update.format(params, number, user_id)
 
                     else:
                         print 'fs_consumer  中不存在 %s 记录'%number
@@ -112,7 +114,7 @@ def httpseverclient(flow_id,sentences,number,task_id,user_id):
         if httpClient:
             httpClient.close()
 
-#
+
 channel.basic_consume(callback,queue=conf.MQ_QUEUE)
 print '\n==============================================================\n'
 print '               MQ_consume ....running.....                   '
@@ -121,21 +123,26 @@ print(' [*] Waiting for messages. To exit press CTRL+C')
 channel.start_consuming()
 
 # if __name__ == '__main__':
-#
-#     sql = "select fs_call.task_id,replay.text from fs_call " \
-#           "left join fs_call_replay as replay on fs_call.id = replay.call_id " \
-#           "where fs_call.id = 28 and replay.who = 'human' ORDER BY  replay.create_at"
-#     print  sql
-#     list_sentens = db.get_all_sql(sql)
-#     list = []
-#     # for item in list_sentens:
-#     #     print item.text
-#     #     print item.task_id
-#     #     list .append(item.text)
-#     ll = []
-#     ll.append('附近有医院吗')
-#     ll.append('附近有学校吗')
-#     httpseverclient('23e566219595a9cb92bc3e5a175dbd63',ll,'15900282168',10,8)
+
+    # sql = "select fs_call.task_id,replay.text from fs_call " \
+    #       "left join fs_call_replay as replay on fs_call.id = replay.call_id " \
+    #       "where fs_call.id = 28 and replay.who = 'human' ORDER BY  replay.create_at"
+    # print  sql
+    # list_sentens = db.get_all_sql(sql)
+    # list = []
+    # # for item in list_sentens:
+    # #     print item.text
+    # #     print item.task_id
+    # #     list .append(item.text)
+    # ll = []
+    # ll.append('附近有医院吗')
+    # ll.append('附近有学校吗')
+    # # httpseverclient('23e566219595a9cb92bc3e5a175dbd63',ll,'15900282168',10,8)
+    # json_str = '{"sql_str": "update fs_call set call_at = \'2018-01-18 17:57:04\',call_status = \'calling\'  where channal_uuid =\'751107a8-e65a-4bc4-84d2-87d1d8f85743\'", "mark": "event_sql"}'
+    # dct = json.loads(json_str)
+    # print type(dct)
+    # print dct['mark']
+    # print dct['sql_str']
 
 
 

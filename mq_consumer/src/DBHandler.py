@@ -54,7 +54,7 @@ def get_one_sql(sql):
         print   ("  get_one_sql ...except error %s" % e.message)
 
 def get_all_sql(sql):
-    #logger.info('[get_all_sql]....%s' % sql)
+    logger.info('[get_all_sql]....%s' % sql)
     try:
         conn = db_pool.getConn()
         cursor = conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor)

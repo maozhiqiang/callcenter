@@ -1,0 +1,118 @@
+2018-01-03 13:51:39,764 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 13:51:40,083 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "["
+LINE 1:  update fs_customer set label = [5, 6, 7, 8] where number = ...
+                                        ^
+ 
+2018-01-03 13:52:19,260 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 13:52:19,551 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "["
+LINE 1:  update fs_customer set label = [5, 6, 7, 8] where number = ...
+                                        ^
+ 
+2018-01-03 13:52:47,608 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 13:52:47,877 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "["
+LINE 1:  update fs_customer set label = [5, 6, 7, 8] where number = ...
+                                        ^
+ 
+2018-01-03 13:53:56,815 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 13:53:57,138 - LogUtils.py[line:112] - INFO: postgresql connect.....closed!!!
+2018-01-03 13:54:38,286 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 13:54:38,530 - LogUtils.py[line:112] - INFO: postgresql connect.....closed!!!
+2018-01-03 13:55:05,134 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 13:55:05,403 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "["
+LINE 1:  update fs_customer set label = set([8, 9, 5, 6, 7]) where n...
+                                            ^
+ 
+2018-01-03 13:55:05,425 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 13:55:05,472 - LogUtils.py[line:112] - INFO: postgresql connect.....closed!!!
+2018-01-03 13:55:29,464 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 13:55:29,733 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "["
+LINE 1:  update fs_customer set label = set(['5', '6']) where number...
+                                            ^
+ 
+2018-01-03 13:55:29,754 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 13:55:29,800 - LogUtils.py[line:112] - INFO: postgresql connect.....closed!!!
+2018-01-03 13:57:50,348 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 13:57:50,563 - LogUtils.py[line:120] - ERROR: runsql exception error column "label" is of type character varying[] but expression is of type record
+LINE 1:  update fs_customer set label = ('6', '5') where number = '1...
+                                        ^
+HINT:  You will need to rewrite or cast the expression.
+ 
+2018-01-03 13:57:50,577 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 13:57:50,624 - LogUtils.py[line:112] - INFO: postgresql connect.....closed!!!
+2018-01-03 14:01:06,236 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 14:01:06,461 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "{"
+LINE 1:  update fs_customer set label = {99,66} where number = '1313...
+                                        ^
+ 
+2018-01-03 14:01:06,476 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 14:01:06,524 - LogUtils.py[line:112] - INFO: postgresql connect.....closed!!!
+2018-01-03 14:01:20,290 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 14:01:20,507 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "["
+LINE 1:  update fs_customer set label = set([66, 99]) where number =...
+                                            ^
+ 
+2018-01-03 14:01:20,521 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 14:01:20,568 - LogUtils.py[line:112] - INFO: postgresql connect.....closed!!!
+2018-01-03 14:10:36,389 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 14:10:36,609 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "["
+LINE 1:  update fs_customer set label = [1, 2] where number = '13132...
+                                        ^
+ 
+2018-01-03 14:10:57,701 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 14:10:57,918 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "{"
+LINE 1:  update fs_customer set label = {1,2} where number = '131322...
+                                        ^
+ 
+2018-01-03 14:12:31,433 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 14:12:31,669 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "["
+LINE 1:  update fs_customer set label = [1 2] where number = '131322...
+                                        ^
+ 
+2018-01-03 14:13:01,337 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 14:13:01,617 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "["
+LINE 1:  update fs_customer set label = [[1 2]
+                                        ^
+ 
+2018-01-03 14:13:25,558 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 14:13:25,769 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "["
+LINE 1:  update fs_customer set label = [['123' '2312']] where numbe...
+                                        ^
+ 
+2018-01-03 14:13:44,911 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 14:13:45,130 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "["
+LINE 1:  update fs_customer set label = [array(['123', '2312'], 
+                                        ^
+ 
+2018-01-03 14:14:36,812 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 14:14:37,022 - LogUtils.py[line:120] - ERROR: runsql exception error syntax error at or near "["
+LINE 1:  update fs_customer set label = ['123', '2312'] where number...
+                                        ^
+ 
+2018-01-03 14:15:20,119 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 14:15:20,376 - LogUtils.py[line:112] - INFO: postgresql connect.....closed!!!
+2018-01-03 14:15:36,828 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 14:15:37,166 - LogUtils.py[line:112] - INFO: postgresql connect.....closed!!!
+2018-01-03 14:15:37,166 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 14:15:37,232 - LogUtils.py[line:112] - INFO: postgresql connect.....closed!!!
+2018-01-03 15:11:13,055 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 15:11:13,340 - LogUtils.py[line:112] - INFO: postgresql connect.....closed!!!
+2018-01-03 15:11:13,415 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 15:11:13,482 - LogUtils.py[line:112] - INFO: postgresql connect.....closed!!!
+2018-01-03 15:11:13,482 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 15:11:13,528 - LogUtils.py[line:112] - INFO: postgresql connect.....closed!!!
+2018-01-03 15:11:13,528 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 15:11:13,572 - LogUtils.py[line:120] - ERROR: runsql exception error type "u" does not exist
+LINE 1:  update fs_customer set label = array[u'\u5173\u6ce8\u533b\u...
+                                              ^
+ 
+2018-01-03 15:12:03,019 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 15:12:03,258 - LogUtils.py[line:112] - INFO: postgresql connect.....closed!!!
+2018-01-03 15:12:03,335 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 15:12:03,383 - LogUtils.py[line:112] - INFO: postgresql connect.....closed!!!
+2018-01-03 15:12:03,384 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 15:12:03,429 - LogUtils.py[line:112] - INFO: postgresql connect.....closed!!!
+2018-01-03 15:12:03,429 - LogUtils.py[line:112] - INFO: postgresql connect host .....   118.190.166.165
+2018-01-03 15:12:03,461 - LogUtils.py[line:120] - ERROR: runsql exception error type "u" does not exist
+LINE 1:  update fs_customer set label = array[u'\u5173\u6ce8\u533b\u...
+                                              ^
+ 
