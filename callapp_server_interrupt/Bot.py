@@ -221,6 +221,10 @@ class IVRBase(object):
                             ss_name = None
                             if self.customer_info.has_key(items):
                                 ss_name = self.customer_info[items]
+                            else:
+                                consoleLog("info", "current number_ %s 》》》》》合成任务,查询数据库中没有此变量%s《《《《《 !! \n\n" % (
+                                self.caller_number,items))
+                                self.session.hangup()
                             md5_key = Md5Utils.get_md5_value(self.voice_type + ss_name)
                             if redis.r.has_name(md5_key):
                                 filename = redis.r.hget(md5_key)
