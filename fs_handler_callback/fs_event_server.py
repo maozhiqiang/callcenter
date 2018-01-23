@@ -5,39 +5,25 @@
 2.此进程运行在各fs主机上，监听通道事件并处理，跟远程队列服务通信，及数据库访问
 """
 import ESL
-import atexit
 import signal
 import sys
 import time
 import json
 import datetime
 from datetime import date
-import urllib2
+
+from callback import call_api
 import Config as conf
 import multiprocessing
 from multiprocessing import managers
-#from DBPool import Postgresql_Pool as db_pool
-import DBhandler as db
 from LogUtils import Logger
-
+import MQClient as mqClient
+reload(mqClient)
 logger = Logger()
 
 con = ESL.ESLconnection(conf.ESL_HOST, conf.ESL_PORT, conf.ESL_PWD)
 _begin_time = time.time()
 _pid = multiprocessing.current_process().pid
-
-
-
-class DateEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, datetime.datetime):
-            return obj.strftime('%Y-%m-%d %H:%M:%S')
-        elif isinstance(obj, date):
-            return obj.strftime("%Y-%m-%d")
-        elif isinstance(obj,time):
-            return obj.strftime("%H:%M:%S")
-        else:
-            return json.JSONEncoder.default(self, obj)
 
 #atexit.register
 def bye():
@@ -80,23 +66,35 @@ fs_task_sql = ' update fs_task set call_finish = call_finish + 1  where id = {0}
 
 def event_processor(event_queue):
     """事件处理进程，消费者"""
-    while 1:
+    while True:
         # 读队列会阻塞进程
         event = event_queue.get()
         time_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-        if event['call_back'] != None:
+        if event['call_back'] != None and event['host_id']!= None:
+            ms_data = {}
             if event['event_name'] == 'CHANNEL_CREATE':
                 sql = cc_sql.format(time_at, event['channal_uuid'])
                 logger.info('[sql]:........CHANNEL_CREATE........ %s' % sql)
-                db.update_sql(sql)
+                # db.update_sql(sql)
+                ms_data['mark'] = 'event_sql'
+                ms_data['sql_str'] = sql
+                mqClient.mq.publish(ms_data)
+
                 #更新fs_host 线路数+1
                 host_sql = chc_update_line.format(event['host_id'])
                 logger.info('[sql]:........CHANNEL_CREATE.. table...host line+1...... %s' % host_sql)
-                db.update_sql(host_sql)
+                # db.update_sql(host_sql)
+                ms_data['mark'] = 'event_sql'
+                ms_data['sql_str'] = host_sql
+                mqClient.mq.publish(ms_data)
+
             elif event['event_name'] == 'CHANNEL_ANSWER':
                 sql = ca_sql.format(time_at, event['channal_uuid'])
                 logger.info('[sql]:.........CHANNEL_ANSWER...... %s' % sql)
-                db.run_sql(sql)
+                # db.run_sql(sql)
+                ms_data['mark'] = 'event_sql'
+                ms_data['sql_str'] = sql
+                mqClient.mq.publish(ms_data)
             elif event['event_name'] == 'CHANNEL_HANGUP_COMPLETE':
                 call_back = event['call_back']
                 host_id = event['host_id']
@@ -108,157 +106,26 @@ def event_processor(event_queue):
                     try:
                         sql2 = chc_host_sql.format(int(host_id))
                         logger.info('[ sql2 :----> fs_host line_use - 1 ]%s ' % sql2)
-                        db.update_sql(sql2)
-                        sql3 = chc_sql.format('finish', time_at, event['Channel-Call-State'],
-                                              event['Hangup-Cause'], event['channal_uuid'])
+                        # db.update_sql(sql2)
+                        ms_data['mark'] = 'event_sql'
+                        ms_data['sql_str'] = sql2
+                        mqClient.mq.publish(ms_data)
+
+                        sql3 = chc_sql.format('finish', time_at, event['Channel-Call-State'],event['Hangup-Cause'], event['channal_uuid'])
                         logger.info('[sql3 :..........CHANNEL_HANGUP_COMPLETE....... ]%s' % sql3)
-                        db.update_sql(sql3)
+                        # db.update_sql(sql3)
+                        ms_data['mark'] = 'event_sql'
+                        ms_data['sql_str'] = sql3
+                        mqClient.mq.publish(ms_data)
                         # 回调函数
-                        callback_aliyun(event['channal_uuid'], user_id, call_id)
+                        callback = call_api(event['channal_uuid'], user_id, call_id)
+                        callback.call_back_process()
                     except Exception as e:
                         logger.info('hangup_complete execute sql error %s ' % e)
         else:
             print '[ ***** curent event is not platform ***** ]'
 
-#-----------------------fs_handler_callback---------------------------------------
-
-fs_callback_sql =  " select * from fs_call where channal_uuid ='{0}' "
-fs_callback_sqllist = " select who,text,record_fpath,create_at from fs_call_replay " \
-                      " where call_id = {0} ORDER BY create_at "
-
-fs_callback_host = " select * from fs_user where id  =  {0} "
-
-fs_update_call_callback = "update fs_call set is_callback = {0} , callback_ct = callback_ct + 1  ,callback_at = '{1}'  where channal_uuid = '{2}' "
-def callback_aliyun(channal_uuid,user_id,call_id):
-    data_obj = {}
-    success = True
-    callback_url = None
-    error = None
-    print '[ ------0--------]'
-    try:
-        # 拿call 信息
-        ss_sql = fs_callback_sql.format(channal_uuid)
-        call_info = db.get_one_sql(ss_sql)
-        print '[ ------1--------%s ]'%call_info
-    except Exception as e:
-        success = False
-        print 'callback_sql1 error .....%s'%e.message
-        error = 'sql except %s ' % e.message
-    try:
-        # 拿replay 分段信息
-        item_sql = fs_callback_sqllist.format(call_id)
-        item_info = db.get_all_sql(item_sql)
-        print '[ ------2--------%s ]' % item_info
-    except Exception as e:
-        success = False
-        print 'callback_sql2 error .....%s' % e.message
-        error = 'sql except %s '%e.message
-
-    try:
-        # 拿host callback_url信息
-        host_sql = fs_callback_host.format(user_id)
-        host_info = db.get_one_sql(host_sql)
-        print '[ ------3-`-------%s ]' % host_info
-        callback_url = host_info['callback_url']
-    except Exception as e:
-        success = False
-        print 'callback_sql3 error .....%s' % e.message
-        error = 'sql except %s ' % e.message
-
-
-    params = {"call": call_info, "call_item": item_info}
-    data_obj['success'] = success
-    data_obj['data'] = params
-    data_obj['error'] =error
-    logger.info('body_data------->%s'%json.dumps(data_obj,cls=DateEncoder))
-    time_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-    try:
-        req = urllib2.Request(callback_url, json.dumps(data_obj,cls=DateEncoder))  # 需要是json格式的参数
-        req.add_header('Content-Type', 'application/json')  # 要非常注意这行代码的写法
-        response = urllib2.urlopen(req)
-        result = json.loads(response.read())
-        print result
-        print '[------result -----]',result['status']
-        if result['status'] == 0:
-            update_sql = fs_update_call_callback.format(True,time_at,channal_uuid)
-            logger.info('[ ------- sql_update_callback ------- is %s]'%update_sql)
-            db.update_sql(update_sql)
-        else:
-            update_sql = fs_update_call_callback.format(False, time_at, channal_uuid)
-            logger.info('[ ------- sql_update_callback ------- is %s]' % update_sql)
-            db.update_sql(update_sql)
-    except Exception, e:
-        print e
-
-def is_valid_date(str):
-    '''判断是否是一个有效的日期字符串'''
-    try:
-        time.strptime(str, "%Y-%m-%d")
-        return True
-    except:
-        return False
-
-#重写扣费方法
-def deduction_fee(channal_uuid):
-    '''
-    挂机后 查询channal_uuid的数据,根据挂机时间- 接听时间，得到分钟数，不足一分钟，按一分钟算 
-    :param channal_uuid: 
-    :return: 
-    '''
-    #1、查询当前channal_uuid 的通话信息
-    try:
-        sql = chc_call_info.format(channal_uuid)
-        logger.info('----查询当前channal_uuid 的通话信息[ sql ] %s' % sql)
-        callInfo = db.get_one_sql(sql)
-        start_time = callInfo[0]
-        end_time = callInfo[1]
-        task_Id = callInfo[2]
-        user_Id = callInfo[3]
-        if is_valid_date(start_time) and is_valid_date(end_time):
-            logger.info('----task_Id %s-----user_Id %s------电话开始时间 %s------------结束时间 %s' % (
-            task_Id, user_Id, start_time, end_time))
-            diff_seconds = (end_time - start_time).seconds
-            minutes = 0
-            if diff_seconds % 60 == 0:
-                minutes = diff_seconds / 60
-            else:
-                minutes = diff_seconds / 60 + 1
-            logger.info('------------通话分钟数 %s' % minutes)
-            # 更新当前channal_uuid 的通话分钟数
-            sql_update = chc_call_update.format(minutes, channal_uuid)
-            logger.info('更新当通话分钟数  [ sql ] %s' % sql_update)
-            db.update_sql(sql_update)
-            # 更新当前用户的剩余分钟数
-            sql_user_update = chc_user_minute.format(minutes, user_Id)
-            logger.info('更新剩余分钟数  [ sql ] %s' % sql_user_update)
-            db.update_sql(sql_user_update)
-        else:
-            logger.info('----is_valid_date return [ False ] ')
-    except Exception as e:
-        logger.info('扣费 error %s '%e )
-
-def HttpClientPost(channal_uuid):
-    try:
-        import urllib
-        import urllib2
-        url = conf.server_url
-        req = urllib2.Request(url)
-        data = {'channal_uuid': channal_uuid}
-        data = urllib.urlencode(data)
-        opener = urllib2.build_opener(urllib2.HTTPCookieProcessor())
-        response = opener.open(req, data)
-        logger.info('...............Bill result..... %s '%response.read())
-        return response.read()
-    except Exception as err:
-        logger.error(" api/finance/minute/update/ .....error ...%s"%err)
-        return None
-
-
 def event_listener(event_queue):
-    """事件监听进程，收到事件后将事件加入队列，生成者
-    :param call_list:
-    :return:
-    """
     # standard_event = "CHANNEL_CREATE CHANNEL_ANSWER CHANNEL_HANGUP CHANNEL_HANGUP_COMPLETE"
     if con.connected:
         # print con.connected()
@@ -277,7 +144,7 @@ def event_listener(event_queue):
                 dct['Channel-Call-State'] = e.getHeader("Channel-Call-State")
                 dct['host_id'] = e.getHeader("variable_host_id")
                 dct['call_back'] = e.getHeader("variable_call_back")
-                if dct['event_name'] in ['CHANNEL_CREATE','CHANNEL_ANSWER', 'CHANNEL_HANGUP_COMPLETE'] and dct['call_back'] =='true':
+                if dct['event_name'] in ['CHANNEL_CREATE','CHANNEL_ANSWER', 'CHANNEL_HANGUP_COMPLETE'] and dct['call_back'] !=None:
                     dct['call_id'] = e.getHeader("variable_call_id")
                     dct['is_test'] = e.getHeader("variable_is_test")
                     dct['user_id'] = e.getHeader("variable_user_id")
@@ -289,31 +156,17 @@ def event_listener(event_queue):
                                 (dct['event_name'], dct['channal_uuid'], dct['call_number']))
                 if dct['channal_uuid'] == None:
                     continue
-
-
-    logger.error('.......esl connect error.......')
+    print '.......esl connect error.......'
     sys.exit(-1)
 
 def handler(signum, frame):
     pid = multiprocessing.current_process().pid
     if _pid == pid:
         print "\nsubprocess will exit, please wait..."
-
-    # if pid == proc_call_sender.pid:
-    #     # 子进程退出时，释放传参时代入的额外资源，如db connection pool
-    #     pass
-    #
-    # if pid == proc_event_listener.pid:
-    #     pass
-    #
-    # if pid == proc_event_processor.pid:
-    #     pass
-
     time.sleep(2)
     sys.exit(-1)
 
 signal.signal(signal.SIGINT, handler)
-
 class QueueManager(managers.BaseManager):
     pass
 
@@ -332,6 +185,5 @@ if __name__ == '__main__':
     proc_event_processor.start()
     print '[fs_event_server ....start.....]'
     while True:
-        # print '[fs_event_server ....start.....]'
         time.sleep(3)
 

@@ -71,13 +71,20 @@ if __name__ == '__main__':
     # info = update_sql(sql)
     # print info
     #
-    sql = 'select * from fs_user where id  =  2'
+    list_item = []
+    sql = 'select who,text,record_fpath,create_at from fs_call_replay  where call_id = 1 ORDER BY create_at'
     result = get_all_sql(sql)
-    # print  result
-
+    print  type(result)
+    import Config as conf
     for item in result:
-        print item['callback_url']
+        print item['record_fpath']
         print 50*'--'
+        ss = conf.playbaclaudio+item['record_fpath']
+        print ss
+        item['record_fpath'] = ss
+        print 50 * '***'
+        print "***%s**\n\n"%item['record_fpath']
+    print result
         # for key in item.items():
         #     print key[0]+':'+str(key[1])
 

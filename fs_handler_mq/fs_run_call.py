@@ -9,7 +9,7 @@ import DBhandler as db
 from LogUtils import Logger
 
 logger = Logger()
-get_host_sql = " select * from fs_host  where state = 1"
+get_host_sql = " select * from fs_host "
 get_call_sql = " select * from view_call_running "
 get_free_line_sql = " select (line_num-line_use) as rec from fs_host where id ={0} "
 chc_host_sql = " update fs_host set line_use = line_use + 1 where id = {0}"
@@ -48,11 +48,12 @@ class Proxy(object):
             gateway = 'sofia/gateway/gw1'
         if self.conn.connected:
             channel_vars = 'ignore_early_media=true,absolute_codec_string=g729,' \
-                           'origination_uuid=%s,task_id=%s,flow_id=%s,call_id=%s,call_back=true,host_id=%s,is_test=%s' % \
+                           'origination_uuid=%s,task_id=%s,flow_id=%s,call_id=%s,host_id=%s,is_test=%s' % \
                            (uuid, task_id, flow_id,call_id, host_id, '1')
             command = "originate {%s}%s/%s &python(callappv2.Bot)" % (channel_vars, gateway, number)
             logger.error('Invoke fs api:\n%s' % command)
-            self.conn.bgapi(command)
+            ss = self.conn.bgapi(command)
+	    print '--------------------------------------------------------', ss.serialize('json')
             try:
                time_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
                db.update_sql(update_call_sql.format(time_at,uuid))
