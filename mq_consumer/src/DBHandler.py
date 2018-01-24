@@ -18,6 +18,7 @@ sys.setdefaultencoding('utf-8')
 logger = Logger()
 
 def run_insert_sql(sql):
+    logger.debug('------run_insert_sql: %s'%sql)
     try:
         conn = db_pool.getConn()
         cursor = conn.cursor()
@@ -25,17 +26,20 @@ def run_insert_sql(sql):
         id = cursor.fetchone()[0]
         print "ID of last record is ",id  # 最后插入行的主键ID
         conn.commit()
+        logger.debug('------run_insert_sql finish: %s' % sql)
         db_pool.close(cursor, conn)
         return id
     except Exception as e:
         logger.error('runsql exception error %s '%e)
 
 def run_update_sql(sql):
+    logger.debug('\n\n------run_update_sql: %s' % sql)
     try:
         conn = db_pool.getConn()
         cursor = conn.cursor()
         count = cursor.execute(sql, )
         conn.commit()
+        logger.debug('------run_update_sql finish: %s' % sql)
         db_pool.close(cursor, conn)
     except Exception as e:
         logger.error('runsql exception error %s '%e)

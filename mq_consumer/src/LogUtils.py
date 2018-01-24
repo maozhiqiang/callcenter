@@ -69,7 +69,7 @@ class Logger(object):
         self.log_dir = log_dir
         self.log_name = log_name
 
-        self.is_debug = False
+        self.is_debug = True
         self.is_info = True
         self.is_warn = True
         self.is_error = True
@@ -137,4 +137,4 @@ def error(msg):
 if __name__ == '__main__':
     logger = Logger()
     sss= '99999999999999wqeqweqweqwe999'
-    logger.info("................"+sss)
+    logger.debug("................"+sss)
