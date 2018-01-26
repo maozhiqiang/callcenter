@@ -1,0 +1,145 @@
+新添加集群服务器
+    一、安装freeswitch
+    ============================freeswitch 下载地址:==================================
+    git clone https://freeswitch.org/stash/scm/fs/freeswitch.git
+    git clone -b v1.6 https://freeswitch.org/stash/scm/fs/freeswitch.git
+
+    =============================freeswitch 依赖======================================
+    sudo apt-get     install python-devel  swig python-ESL
+    sudo apt-get     install libshout3-dev install libmpg123-dev install libmp3lame-dev libsndfile-dev
+    sudo apt-get     install autoconf automake devscripts libopus-dev
+    sudo apt-get     install libvorbis0a libogg0 libogg-dev libvorbis-dev
+    sudo apt-get     install gawk g++ git-core 'libjpeg-dev|libjpeg62-turbo-dev'
+    sudo apt-get     install libncurses5-dev 'libtool-bin|libtool' make python-dev gawk pkg-config libtiff5-dev libperl-dev libgdbm-dev libdb-dev gettext
+    sudo apt-get     install libssl-dev libcurl4-openssl-dev libpcre3-dev libspeex-dev libspeexdsp-dev libsqlite3-dev libedit-dev libldns-dev libpq-dev
+
+    step 1: 更新ubuntu源========================================
+
+    # deb cdrom:[Ubuntu 16.04 LTS _Xenial Xerus_ - Release amd64 (20160420.1)]/ xenial main restricted
+    deb-src http://archive.ubuntu.com/ubuntu xenial main restricted #Added by software-properties
+    deb http://mirrors.aliyun.com/ubuntu/ xenial main restricted
+    deb-src http://mirrors.aliyun.com/ubuntu/ xenial main restricted multiverse universe #Added by software-properties
+    deb http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted
+    deb-src http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted multiverse universe #Added by software-properties
+    deb http://mirrors.aliyun.com/ubuntu/ xenial universe
+    deb http://mirrors.aliyun.com/ubuntu/ xenial-updates universe
+    deb http://mirrors.aliyun.com/ubuntu/ xenial multiverse
+    deb http://mirrors.aliyun.com/ubuntu/ xenial-updates multiverse
+    deb http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse
+    deb-src http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse #Added by software-properties
+    deb http://archive.canonical.com/ubuntu xenial partner
+    deb-src http://archive.canonical.com/ubuntu xenial partner
+    deb http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted
+    deb-src http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted multiverse universe #Added by software-properties
+    deb http://mirrors.aliyun.com/ubuntu/ xenial-security universe
+    deb http://mirrors.aliyun.com/ubuntu/ xenial-security multiverse
+
+    sudo apt-get update
+    sudo apt-get upgrade
+
+    step 2 =============================freeswitch 安装：===================================
+
+    vim modules.conf
+    打开注释 formats/mod_shout  、 languages/mod_python
+    注释掉 languages/mod_lua
+
+    sudo ./bootstrap.sh -j
+    ./configure --with-python=/usr/bin/python2.7
+
+    sudo make
+    sudo make install
+    #安装声音包
+    sudo make sounds-install
+    sudo make moh-install
+    sudo make uhd-sounds-install
+    sudo make uhd-moh-install
+
+    step 3 ===============================建立软链接=======================================
+
+    sudo ln -sf /usr/local/freeswitch/bin/freeswitch /usr/local/bin/
+    sudo ln -sf /usr/local/freeswitch/bin/fs_cli /usr/local/bin/
+
+    step 4 =============================配置mod_python======================================
+    #打开文件 conf/autoload_configs/modules.conf.xml
+    #打开注释
+    <load module="mod_python"/>
+    <load module="mod_shout"/>
+
+    step 5 =============================配置acl 访问白名单========================================
+    /usr/local/freeswitch/conf/autoload_configs/acl.conf.xml
+    编辑acl.conf.xml
+
+    <list name="domains" default="deny">
+      <!-- domain= is special it scans the domain from the directory to build t$
+      <node type="allow" domain="$${domain}"/>
+      <!-- use cidr= if you wish to allow ip ranges to this domains acl. -->
+      <!-- <node type="allow" cidr="192.168.0.0/24"/> -->
+           <node type="allow" cidr="192.168.0.112/24"/>
+           <node type="allow" cidr="192.168.0.50/24"/>
+       ==================这里添加 本机ip   127.0.0.1 ========================
+       ==================这里添加 本机内网ip   ========================
+       ==================这里添加 本机外网ip   ========================
+       ==================这里添加  runcall  内外网Ip========================
+           <node type="allow" cidr="192.168.2.178/24"/>
+           <node type="allow" cidr="39.107.70.84/24"/>
+    </list>
+     step 6 =============================配置ESL==================================================
+     打开 /usr/local/freeswitch/conf/autoload_configs#
+     编辑 event_socket.conf.xml
+
+     <configuration name="event_socket.conf" description="Socket Client">
+          <settings>
+                <param name="nat-map" value="false"/>
+                #ip 统一为0.0.0.0
+                <param name="listen-ip" value="0.0.0.0"/>
+                #端口号 默认8021
+                <param name="listen-port" value="8021"/>
+                #密码统一Aicyber
+                <param name="password" value="Aicyber"/>
+                #允许acl白名单内的IP 访问
+                <param name="apply-inbound-acl" value="domains"/>
+                <!--<param name="apply-inbound-acl" value="loopback.auto"/>-->
+                <!--<param name="stop-on-bind-error" value="true"/>-->
+          </settings>
+    </configuration>
+
+    step 6 =============================配置vad  g729==================================================
+    把mod_vad.so   和mod_G729.so   放到/usr/local/freeswitch/mod目录下，并给可执行权限
+
+    step 7 =============================配置网关==================================================
+    在/usr/local/freeswitch/conf/sip_profiles/external 目录下上传网关模板gw1.xml（这个模板在动态生成xml时会用到）
+
+    step 7 =======================手动添加freeswitch网关配置========================
+    <include>
+      <gateway name="gw1"><!----PSTN ---->
+            <param name="realm" value="192.168.0.153"/>
+            <param name="register" value="false"/>
+      </gateway>
+    </include>
+    #-------------------- 云上中继网关------------------------------------
+    <include>
+          <gateway name="trunk_60_4">
+                <param name="username" value="minxin" />
+                <param name="password" value="10244587" />
+                <param name="real" value="aicyber.7766.org" />
+                <param name="proxy" value="aicyber.7766.org:5060" />
+                <param name="register" value="true" />
+                <param name="expire-seconds" value="60" />
+                <param name="retry-seconds" value="60" />
+        </gateway>
+    </include>
+    2、部署外乎服务
+    step 1
+        在/usr/local/freeswitch/scripts/目录下上传 callappv2（普通服务） 、callappv3（打断服务）、fs_handler(监听服务)
+        服务依赖包
+        pip install pydub
+        apt-get install ffmpeg
+        apt-get install DBUtils
+        apt-get install pika
+
+        更改配置文件
+
+    2、创建/mnt/gitwork路径 ，上传Flask_web （动态生成xml服务），
+       起动Flask_web 项目 sh /mnt/gitwork/Flask_web/flask_restart.sh
+
+
