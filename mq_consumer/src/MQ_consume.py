@@ -69,7 +69,6 @@ def callback(ch, method, properties, body):
 
 def httpseverclient(flow_id,sentences,number,task_id,user_id):
     httpClient = None
-    labels = []
     create_at = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     try:
         values = {'flow_id': flow_id, 'sentences': sentences}
@@ -85,28 +84,26 @@ def httpseverclient(flow_id,sentences,number,task_id,user_id):
             sql_select = "select * from fs_customer where number = '{0}' and user_id = {1}"
             sql_update = " update fs_customer set label = label || '{0}' where number = '{1}'  and user_id = {2} "
             sql_log = " insert into fs_customer_label_log(task_id,flow_id,user_input,user_word,key_word,label,similarity,create_at) values (\'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\', \'{5}\', \'{6}\', \'{7}\') RETURNING id"
-            if dict['successful'] and  len(dict['data'])> 0:
+            if dict['successful'] and len(dict['data']) > 0:
                 try:
-                    list_data = db.get_one_sql(sql_select.format(number, user_id))
-                    logger.info('[******list_data: %s *******]'% sql_select.format(number, user_id))
-                    if list_data :
-                        for item in dict['data']:
-                            db.run_insert_sql(sql_log.format(task_id, flow_id, item['sentence'], item['word'], item['key_word'],item['label'], item['similarity'], create_at))
-                            print sql_log.format(task_id, flow_id, item['sentence'], item['word'], item['key_word'],params, item['similarity'], create_at)
+                    for item in dict['data']:
+                        list_data = db.get_one_sql(sql_select.format(number, user_id))
+                        db.run_insert_sql(
+                            sql_log.format(task_id, flow_id, item['sentence'], item['word'], item['key_word'],
+                                           item['label'], item['similarity'], create_at))
+                        if list_data:
                             if item['label'] in list_data.label:
-                                # print ' %s 在fs_consumer 的%s __ %s 中已经存在 '%(item['label'],number,user_id)
-                                logger.info(' %s 在fs_consumer 的%s __ %s 中已经存在 '%(item['label'],number,user_id))
+                                logger.info(' %s 在fs_consumer 的%s __ %s 中已经存在 ' % (item['label'], number, user_id))
                                 continue
                             else:
                                 params = "{" + item['label'] + '}'
                                 db.run_update_sql(sql_update.format(params, number, user_id))
-                                logger.info('-------fs_consumer----label  ------%s'% sql_update.format(params, number, user_id))
-                                # print '-------fs_consumer----label  ------',sql_update.format(params, number, user_id)
-
-                    else:
-                        print 'fs_consumer  中不存在 %s 记录'%number
-                except Exception as e :
-                        logger.info('exception ****%s'%e)
+                                logger.info('-------fs_consumer----label  ------%s' % sql_update.format(params, number,
+                                                                                                        user_id))
+                        else:
+                            logger.info('fs_consumer  中不存在 %s 记录' % number)
+                except Exception as e:
+                    logger.info('exception ****%s' % e)
         else:
             logger.info('.......httpClient error status : %s' % response.status)
     except Exception, e:
