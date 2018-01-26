@@ -32,7 +32,7 @@ print '             rabbtiMQ exchange:  %s '%conf.MQ_exchange
 print '             rabbtiMQ queue:  %s '%conf.MQ_QUEUE
 
 def callback(ch, method, properties, body):
-    logger.info(" [x] Received %r\n\n" % body)
+    print (" [x] Received %r\n\n" % body)
     dict = json.loads(body)
     if dict['mark'] == 'insert':
         sql = 'INSERT INTO fs_call_replay(who, text, record_fpath, create_at, call_id,resp_param)VALUES (\'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\',\'{5}\') RETURNING id'.format(
@@ -81,7 +81,7 @@ def httpseverclient(flow_id,sentences,number,task_id,user_id):
         if response.status == 200:
             jsonStr = response.read()
             dict = json.loads(jsonStr)
-            print '[ ==lables== dict ]',dict
+            logger.info('[ ==lables== %s ]'%dict)
             sql_select = "select * from fs_customer where number = '{0}' and user_id = {1}"
             sql_update = " update fs_customer set label = label || '{0}' where number = '{1}'  and user_id = {2} "
             sql_log = " insert into fs_customer_label_log(task_id,flow_id,user_input,user_word,key_word,label,similarity,create_at) values (\'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\', \'{5}\', \'{6}\', \'{7}\') RETURNING id"
