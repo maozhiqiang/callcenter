@@ -14,7 +14,7 @@ DATABASE_USERNAME = "postgres" #用户名，这里的用户名也是在安装pos
 DATABASE_PASSWORD = "Z8asuidn" #链接数据库服务器的密码，安装时设置，安装完毕后可以修改的
 
 #==================RabbtiMq ===============================
-MQ_URL = '127.0.0.17'
+MQ_URL = '127.0.0.1'
 MQ_USERNAME = 'admin'
 MQ_PWD = '123123'
 MQ_QUEUE = 'durable'
