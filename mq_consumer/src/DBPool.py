@@ -21,14 +21,19 @@ class Postgresql_Pool(object):
     # 连接池对象
     __pool = None
 
+    def __init__(self):
+        # 数据库构造函数，从连接池中取出连接，并生成操作游标
+        self._conn = Postgresql_Pool.getConn()
+        self._cursor = self._conn.cursor()
+
     @staticmethod
     def getConn():
         """
         @summary: 静态方法，从连接池中取出连接
         @return MySQLdb.connection
         """
-        logger.info('postgresql connect host .....   %s'%DATABASE_HOST)
         if Postgresql_Pool.__pool is None:
+            logger.info('postgresql connect host .....   %s' % DATABASE_HOST)
             Postgresql_Pool.__pool = PooledDB(creator=psycopg2, mincached=2, maxcached=5,
                                         host=DATABASE_HOST, port=DATABASE_PORT, user=DATABASE_USERNAME,
                                               password=DATABASE_PASSWORD,
@@ -44,8 +49,11 @@ class Postgresql_Pool(object):
         cursor.close()
         conn.close()
 
-if __name__ == '__main__':
-    obj = Postgresql_Pool.getConn()
+# if __name__ == '__main__':
+#     for uu in range(5):
+#         print '------------'
+#
+#         obj = Postgresql_Pool.getConn()
 
 
 

@@ -70,3 +70,10 @@ def get_all_sql(sql):
         return list
     except Exception as e:
         print ("  get_all_sql ...except error %s" % e.message)
+
+if __name__ == '__main__':
+    sql = "select * from fs_call limit 5"
+    for num in range(5):
+        result = get_all_sql(sql)
+        print result
+        print '\n\n\n\n\n'
